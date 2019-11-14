@@ -25,7 +25,9 @@ var EmployeeHome = React.createClass({
         helpers.getAnnouncements().then(function(response) {
           this.setState({
             title: response.data[response.data.length -1].title,
-            content: response.data[response.data.length -1].content
+            content: response.data[response.data.length -1].content,
+            date: response.data[response.data.length -1].date,
+            username: response.data[response.data.length - 1].username
           });
         }.bind(this));
     },
@@ -33,7 +35,7 @@ var EmployeeHome = React.createClass({
     render: function() {
         return (
             <div>
-                <AnnouncementsView title={this.state.title} content={this.state.content}/>
+                <AnnouncementsView title={this.state.title} content={this.state.content} date={this.state.date} username={this.state.username}/>
                 <ScheduleView />
             </div>
         );

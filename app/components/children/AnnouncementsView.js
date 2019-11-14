@@ -1,7 +1,7 @@
 var React = require("react");
 
 var AnnouncementsView = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="card-panel">
                 <div className="row">
@@ -13,8 +13,9 @@ var AnnouncementsView = React.createClass({
                     <div className="col s12">
                         {/* <h5>{this.state.title}</h5> */}
                         <h5>{this.props.title}</h5>
-                        <p>asd {this.props.content}</p>
-                        <p>Posted at {this.props.date}</p>
+                        <p>{this.props.content}</p>
+                        <p>Posted at: {this.props.date}</p>
+                        <p>Posted from: {this.props.username}</p>
                         {/* <p>{this.state.content}</p> */}
                     </div>
                 </div>

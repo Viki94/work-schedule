@@ -10,6 +10,14 @@ var AnnouncementsBuild = React.createClass({
         };
     },
 
+    componentDidMount: function() {
+        helpers.getCurrentUser().then(function(response) {
+           if (response !== this.state.username) {
+             this.setState({ username: response.data.username });
+           }
+         }.bind(this));
+     },
+
     // componentDidMount: function() {
     //     this.getAnnouncements();
     // },
@@ -27,7 +35,7 @@ var AnnouncementsBuild = React.createClass({
     addAnnouncements: function(event) {
         event.preventDefault(event);
         debugger
-        helpers.addAnnouncements(this.state.title, this.state.content, new Date().toLocaleString()).then(function(response) {
+        helpers.addAnnouncements(this.state.title, this.state.content, new Date().toLocaleString(), this.state.username ).then(function(response) {
             this.clearStates();
         }.bind(this));
         Materialize.toast('Announcement added', 3000);

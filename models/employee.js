@@ -8,28 +8,16 @@ var EmployeeSchema = new Schema({
     lastName: {
         type: String
     },
-    addressOne: {
-        type: String
-    },
-    addressTwo: {
+    address: {
         type: String
     },
     city: {
-        type: String
-    },
-    state: {
-        type: String
-    },
-    zip: {
         type: String
     },
     email: {
         type: String
     },
     phone: {
-        type: String
-    },
-    phoneType: {
         type: String
     },
     active: {

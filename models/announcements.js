@@ -11,6 +11,9 @@ var AnnouncementSchema = new Schema({
   date: {
     type: String,
   },
+  username: {
+    type: String,
+  },
   active: {
       type: Number,
       default: 1

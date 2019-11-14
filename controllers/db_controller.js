@@ -73,14 +73,10 @@
     employee.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      addressOne: req.body.addressOne,
-      addressTwo: req.body.addressTwo,
+      address: req.body.address,
       city: req.body.city,
-      state: req.body.state,
-      zip: req.body.zip,
       email: req.body.email,
-      phone: req.body.phone,
-      phoneType: req.body.phoneType
+      phone: req.body.phone
     }, function(err,doc) {
       if (err) {
         console.log(err);
@@ -96,14 +92,10 @@
      employee.findOneAndUpdate({ "_id": req.params.id }, {
          firstName: req.body.firstName,
          lastName: req.body.lastName,
-         addressOne: req.body.addressOne,
-         addressTwo: req.body.addressTwo,
+         address: req.body.address,
          city: req.body.city,
-         state: req.body.state,
-         zip: req.body.zip,
          email: req.body.email,
-         phone: req.body.phone,
-         phoneType: req.body.phoneType
+         phone: req.body.phone
      }, function(err) {
          if (err) {
              console.log(err);
@@ -153,8 +145,8 @@
 
 //Getting announcements from the database
     router.get("/getAnnouncements", function(req, res) {
+      debugger
       announcements.find({ "active": 1 }).exec(function(err, doc) {
-        debugger
         if (err) {
           console.log(err);
         }
@@ -170,7 +162,8 @@
       announcements.create({
         title: req.body.title,
         content: req.body.content,
-        date: req.body.date
+        date: req.body.date,
+        username: req.body.username
       }, function(err, doc) {
         if (err) {
           console.log(err);

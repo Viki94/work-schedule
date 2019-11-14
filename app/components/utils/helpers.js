@@ -2,11 +2,11 @@ var axios = require("axios");
 
 var helper = {
 
-  getAllEmployees: function() {
+  getAllEmployees: function () {
     return axios.get("/getAllEmployees");
   },
 
-  getCurrentUser: function() {
+  getCurrentUser: function () {
     return axios.get("/user");
   },
 
@@ -14,18 +14,18 @@ var helper = {
   //   return axios.get("/register");
   // },
 
-  getEmployee: function(id) {
+  getEmployee: function (id) {
     return axios.get("/getEmployee/" + id);
   },
 
-  getEmpSchedules:function() {
+  getEmpSchedules: function () {
     return axios.get('/getEmpSchedules')
-    .then(function(response){
+      .then(function (response) {
         return response;
-    })
+      })
   },
 
-  addEmpSchedule:function(emp_id, firstName, lastName) {
+  addEmpSchedule: function (emp_id, firstName, lastName) {
     return axios.post('/addEmpSchedule', {
       emp_id: emp_id,
       firstName: firstName,
@@ -33,68 +33,60 @@ var helper = {
     });
   },
 
-  updateEmpSchedule: function(empSchedule) {
+  updateEmpSchedule: function (empSchedule) {
     return axios.put('/updateSchedule/' + empSchedule._id, {
       employeeSchedule: empSchedule
     });
   },
 
-  addEmployee: function(firstName, lastName, addressOne, addressTwo, city, state, zip, email, phone, phoneType) {
+  addEmployee: function (firstName, lastName, address, city, email, phone) {
     return axios.post("/addEmployee", {
-        firstName: firstName,
-        lastName: lastName,
-        addressOne: addressOne,
-        addressTwo: addressTwo,
-        city: city,
-        state: state,
-        zip: zip,
-        email: email,
-        phone: phone,
-        phoneType: phoneType });
+      firstName: firstName,
+      lastName: lastName,
+      address: address,
+      city: city,
+      email: email,
+      phone: phone
+    });
   },
 
-  updateEmployee: function(id, firstName, lastName, addressOne, addressTwo, city, state, zip, email, phone, phoneType) {
-       return axios.put("/updateEmployee/" + id, {
-           firstName: firstName,
-           lastName: lastName,
-           addressOne: addressOne,
-           addressTwo: addressTwo,
-           city: city,
-           state: state,
-           zip: zip,
-           email: email,
-           phone: phone,
-           phoneType: phoneType
-       });
+  updateEmployee: function (id, firstName, lastName, address, city, email, phone) {
+    return axios.put("/updateEmployee/" + id, {
+      firstName: firstName,
+      lastName: lastName,
+      address: address,
+      city: city,
+      email: email,
+      phone: phone
+    });
   },
 
-  updateEmpName: function(emp_id, firstName, lastName)  {
+  updateEmpName: function (emp_id, firstName, lastName) {
     return axios.put("/updateEmpName/" + emp_id, {
-        firstName: firstName,
-        lastName: lastName
-       });
+      firstName: firstName,
+      lastName: lastName
+    });
   },
 
-  removeEmployee: function(id) {
+  removeEmployee: function (id) {
     return axios.put("/removeEmployee/" + id);
   },
 
-  removeEmpSchedule: function(emp_id) {
+  removeEmpSchedule: function (emp_id) {
     return axios.put("/removeEmpSchedule/" + emp_id);
   },
 
-  getAnnouncements: function() {
+  getAnnouncements: function () {
     return axios.get("/getAnnouncements");
   },
 
-  addAnnouncements: function(title, content, date) {
-    debugger
-    console.log(date)
+  addAnnouncements: function (title, content, date, username) {
     return axios.post("/addAnnouncements", {
-        title: title,
-        content: content,
-        date: date
-      });
+      title: title,
+      content: content,
+      date: date,
+      username: username
+    });
   }
 };
 

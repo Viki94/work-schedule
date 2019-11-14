@@ -1,11 +1,11 @@
 var React = require("react");
 var helpers = require("../utils/helpers");
-var ScheduleView =  require("./ScheduleView");
-var AnnouncementsBuild =  require("./AnnouncementsBuild");
-var AnnouncementsView =  require("./AnnouncementsView");
+var ScheduleView = require("./ScheduleView");
+var AnnouncementsBuild = require("./AnnouncementsBuild");
+var AnnouncementsView = require("./AnnouncementsView");
 
 var ManagerHome = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             title: "",
             content: "",
@@ -13,9 +13,8 @@ var ManagerHome = React.createClass({
         };
     },
 
-    componentDidMount: function() {
+    componentDidMount: function () {
         this.getAnnouncements();
-        console.log(this.getAnnouncements());
     },
 
     // componentDidUpdate: function(prevState) {
@@ -24,25 +23,24 @@ var ManagerHome = React.createClass({
     //     }
     // },
 
-    getAnnouncements: function() {
-        helpers.getAnnouncements().then(function(response) {
-            debugger
-            console.log(response.data[response.data.length -1].date)
-          this.setState({
-            title: response.data[response.data.length -1].title,
-            content: response.data[response.data.length -1].content,
-            date: response.data[response.data.length -1].date
-          });
+    getAnnouncements: function () {
+        helpers.getAnnouncements().then(function (response) {
+            this.setState({
+                title: response.data[response.data.length - 1].title,
+                content: response.data[response.data.length - 1].content,
+                date: response.data[response.data.length - 1].date,
+                username: response.data[response.data.length - 1].username,
+            });
         }.bind(this));
     },
 
-    render: function() {
+    render: function () {
         return (
             <div>
                 <ScheduleView />
                 <div className="row">
                     <div className="col m6">
-                        <AnnouncementsView title={this.state.title} content={this.state.content}/>
+                        <AnnouncementsView title={this.state.title} content={this.state.content} date={this.state.date} username={this.state.username} />
                     </div>
                     <div className="col m6">
                         <AnnouncementsBuild />

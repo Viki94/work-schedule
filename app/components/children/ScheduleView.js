@@ -1,23 +1,24 @@
 var React = require("react");
 var helpers = require("../utils/helpers");
+var ExportScheduleToExcelFile = require("./ExportScheduleToExcelFile");
 
 var ScheduleView = React.createClass({
 
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             empSchedules: [],
         };
     },
 
-    componentDidMount: function() {
-        helpers.getEmpSchedules().then(function(response) {
+    componentDidMount: function () {
+        helpers.getEmpSchedules().then(function (response) {
             if (response !== this.state.empSchedules) {
                 this.setState({ empSchedules: response.data });
             }
         }.bind(this));
     },
 
-    render: function() {
+    render: function () {
         return (
             <div className="row">
                 <div className="col s12">
@@ -37,38 +38,40 @@ var ScheduleView = React.createClass({
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.empSchedules.map(function(schedules, i) {
-                                return (
-                                    <tr key={i}>
-                                        <td className="fullName">
-                                            {schedules.firstName} {schedules.lastName}
-                                        </td>
-                                        <td className="schedule">
-                                            {schedules.monday}
-                                        </td>
-                                        <td>
-                                            {schedules.tuesday}
-                                        </td>
-                                        <td>
-                                            {schedules.wednesday}
-                                        </td>
-                                        <td>
-                                            {schedules.thursday}
-                                        </td>
-                                        <td>
-                                            {schedules.friday}
-                                        </td>
-                                        <td>
-                                            {schedules.saturday}
-                                        </td>
-                                        <td>
-                                            {schedules.sunday}
-                                        </td>
-                                    </tr>
-                                );
-                            }, this)}
+                                {this.state.empSchedules.map(function (schedules, i) {
+                                    return (
+                                        <tr key={i}>
+                                            <td className="fullName">
+                                                {schedules.firstName} {schedules.lastName}
+                                            </td>
+                                            <td className="schedule">
+                                                {schedules.monday}
+                                            </td>
+                                            <td>
+                                                {schedules.tuesday}
+                                            </td>
+                                            <td>
+                                                {schedules.wednesday}
+                                            </td>
+                                            <td>
+                                                {schedules.thursday}
+                                            </td>
+                                            <td>
+                                                {schedules.friday}
+                                            </td>
+                                            <td>
+                                                {schedules.saturday}
+                                            </td>
+                                            <td>
+                                                {schedules.sunday}
+                                            </td>
+                                        </tr>
+                                    );
+                                }, this)}
                             </tbody>
                         </table>
+                        
+                        <ExportScheduleToExcelFile empSchedules={this.state.empSchedules}/>
                     </div>
                 </div>
             </div>
