@@ -142,7 +142,7 @@ var ManagerEmployeeAll = React.createClass({
                                     <strong>New Employee<i className="material-icons right">add</i></strong>
                                 </td>
                             </tr>
-                            {this.state.allEmployees.map(function (ManagerEmployeeAll, i) {
+                            {this.state.allEmployees.map((ManagerEmployeeAll, i) => {
                                 return (
                                     <tr key={i}>
                                         <td onClick={this.clickEmployee} id={this.state.allEmployees[i]._id}>

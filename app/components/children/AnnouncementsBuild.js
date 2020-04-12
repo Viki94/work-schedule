@@ -34,7 +34,6 @@ var AnnouncementsBuild = React.createClass({
 
     addAnnouncements: function(event) {
         event.preventDefault(event);
-        debugger
         helpers.addAnnouncements(this.state.title, this.state.content, new Date().toLocaleString(), this.state.username ).then(function(response) {
             this.clearStates();
         }.bind(this));

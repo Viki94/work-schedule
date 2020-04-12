@@ -145,7 +145,6 @@
 
 //Getting announcements from the database
     router.get("/getAnnouncements", function(req, res) {
-      debugger
       announcements.find({ "active": 1 }).exec(function(err, doc) {
         if (err) {
           console.log(err);
@@ -158,7 +157,6 @@
 
 //Put announcements to database
     router.post("/addAnnouncements", function(req, res) {
-      debugger
       announcements.create({
         title: req.body.title,
         content: req.body.content,

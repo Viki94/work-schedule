@@ -7,9 +7,7 @@ var AnnouncementsView = require("./AnnouncementsView");
 var ManagerHome = React.createClass({
     getInitialState: function () {
         return {
-            title: "",
-            content: "",
-            date: new Date().toLocaleDateString()
+            allAnnouncements: []
         };
     },
 
@@ -17,20 +15,10 @@ var ManagerHome = React.createClass({
         this.getAnnouncements();
     },
 
-    // componentDidUpdate: function(prevState) {
-    //     if (prevState.title !== this.state.title || prevState.content !== this.state.content) {
-    //         this.getAnnouncements();
-    //     }
-    // },
-
     getAnnouncements: function () {
         helpers.getAnnouncements().then(function (response) {
-            this.setState({
-                title: response.data[response.data.length - 1].title,
-                content: response.data[response.data.length - 1].content,
-                date: response.data[response.data.length - 1].date,
-                username: response.data[response.data.length - 1].username,
-            });
+            this.setState({ allAnnouncements: response.data });
+            this.activeButtons();
         }.bind(this));
     },
 
@@ -40,7 +28,7 @@ var ManagerHome = React.createClass({
                 <ScheduleView />
                 <div className="row">
                     <div className="col m6">
-                        <AnnouncementsView title={this.state.title} content={this.state.content} date={this.state.date} username={this.state.username} />
+                        <AnnouncementsView allAnnouncements={this.state.allAnnouncements} />
                     </div>
                     <div className="col m6">
                         <AnnouncementsBuild />

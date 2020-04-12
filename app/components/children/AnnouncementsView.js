@@ -9,16 +9,19 @@ var AnnouncementsView = React.createClass({
                         <h5>Latest announcement</h5>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col s12">
-                        {/* <h5>{this.state.title}</h5> */}
-                        <h5>{this.props.title}</h5>
-                        <p>{this.props.content}</p>
-                        <p>Posted at: {this.props.date}</p>
-                        <p>Posted from: {this.props.username}</p>
-                        {/* <p>{this.state.content}</p> */}
-                    </div>
-                </div>
+                {this.props.allAnnouncements.map((announcement, i) => {
+                    return (
+                        <div key={i} className="row">
+                            <div className="col s12">
+                                <h5>{announcement.title}</h5>
+                                <p>{announcement.content}</p>
+                                <p>Posted at: {announcement.date}</p>
+                                <p>Posted from: {announcement.username}</p>
+                            </div>
+                        </div>
+                    );
+                }, this)}
+
             </div>
         );
     }
