@@ -4,26 +4,25 @@ var helpers = require("../utils/helpers");
 var AnnouncementsView = React.createClass({
     getInitialState: function () {
         return {
-            allAnnouncements: [],
             selectedAnnouncement: "",
             announcementId: ""
         };
     },
 
-    componentDidMount: function () {
-        this.getAnnouncements();
-    },
-
     getAnnouncements: function () {
         helpers.getAnnouncements().then(function (response) {
-            this.setState({ allAnnouncements: response.data });
+            this.setState({ allAnnouncements: response.data }, function () {
+                if (this.props.isAdmin) {
+                    this.props.getUpdatedAnnouncements(this.state.allAnnouncements);
+                }
+            });
         }.bind(this));
     },
 
     handleRemoveAnnouncement: function (event) {
         this.setState({ selectedAnnouncement: event.target.id }, function () {
-            for (var i = 0; i < this.state.allAnnouncements.length; i++) {
-                if (this.state.allAnnouncements[i]._id == this.state.selectedAnnouncement) {
+            for (var i = 0; i < this.props.allAnnouncements.length; i++) {
+                if (this.props.allAnnouncements[i]._id == this.state.selectedAnnouncement) {
                     this.setState({
                         announcementId: this.state.selectedAnnouncement
                     }, function () {
@@ -45,10 +44,10 @@ var AnnouncementsView = React.createClass({
             <div className="card-panel">
                 <div className="row">
                     <div className="col s12">
-                        <h5>Latest announcement</h5>
+                        <h5>Latest announcements</h5>
                     </div>
                 </div>
-                {this.state.allAnnouncements.map((announcement, i) => {
+                {this.props.allAnnouncements.map((announcement, i) => {
                     if (i < 5) {
                         return (
                             <div key={i} className="row">

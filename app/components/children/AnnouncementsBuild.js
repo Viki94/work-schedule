@@ -8,7 +8,7 @@ var AnnouncementsBuild = React.createClass({
             content: "",
             date: new Date().toLocaleDateString(),
             allAnnouncements: [],
-            announcementId:  ""
+            announcementId: ""
         };
     },
 
@@ -18,8 +18,6 @@ var AnnouncementsBuild = React.createClass({
                 this.setState({ username: response.data.username });
             }
         }.bind(this));
-
-        this.getAnnouncements();
     },
 
     handleAnnouncementBuild(event) {
@@ -28,7 +26,11 @@ var AnnouncementsBuild = React.createClass({
 
     getAnnouncements: function () {
         helpers.getAnnouncements().then(function (response) {
-            this.setState({ allAnnouncements: response.data });
+            this.setState({ allAnnouncements: response.data }, function () {
+                if (this.props.isAdmin) {
+                    this.props.getUpdatedAnnouncements(this.state.allAnnouncements);
+                }
+            });
         }.bind(this));
     },
 
@@ -36,10 +38,10 @@ var AnnouncementsBuild = React.createClass({
         event.preventDefault(event);
         helpers.addAnnouncements(this.state.title, this.state.content, new Date().toLocaleString(), this.state.username).then(function (response) {
             this.state.announcementId = response.data._id;
+            this.getAnnouncements();
             this.clearStates();
         }.bind(this));
 
-        this.getAnnouncements();
         Materialize.toast('Announcement added', 3000);
         this.clearForm();
     },
