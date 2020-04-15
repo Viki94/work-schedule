@@ -145,7 +145,7 @@ router.put("/removeEmpSchedule/:emp_id", function (req, res) {
 
 //Getting announcements from the database
 router.get("/getAnnouncements", function (req, res) {
-  announcements.find({ "active": 1 }).sort({ "date": -1 }).exec(function (err, doc) {
+  announcements.find({ "active": 1 }).sort({ "date": -1 }).limit(5).exec(function (err, doc) {
     if (err) {
       console.log(err);
     }

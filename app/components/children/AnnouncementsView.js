@@ -48,32 +48,30 @@ var AnnouncementsView = React.createClass({
                     </div>
                 </div>
                 {this.props.allAnnouncements.map((announcement, i) => {
-                    if (i < 5) {
-                        return (
-                            <div key={i} className="row">
-                                <div className="col s12">
-                                    <h5>{announcement.title}</h5>
-                                    <p>{announcement.content}</p>
-                                    <p>Posted at: {announcement.date}</p>
-                                    <p>Posted from: {announcement.username}</p>
-                                </div>
-                                {(() => {
-                                    if (this.props.isAdmin) {
-                                        return (
-                                            <div className="col s12">
-                                                <a id={announcement._id}
-                                                    className="btn btn-large waves-effect waves-light red accent-3 fullWidth"
-                                                    onClick={this.handleRemoveAnnouncement}
-                                                >Remove
-                                                    <i className="material-icons right">person_outline</i>
-                                                </a>
-                                            </div>
-                                        )
-                                    }
-                                })()}
+                    return (
+                        <div key={i} className="row">
+                            <div className="col s12">
+                                <h5>{announcement.title}</h5>
+                                <p>{announcement.content}</p>
+                                <p>Posted at: {announcement.date}</p>
+                                <p>Posted from: {announcement.username}</p>
                             </div>
-                        );
-                    }
+                            {(() => {
+                                if (this.props.isAdmin) {
+                                    return (
+                                        <div className="col s12">
+                                            <a id={announcement._id}
+                                                className="btn btn-large waves-effect waves-light red accent-3 fullWidth"
+                                                onClick={this.handleRemoveAnnouncement}
+                                            >Remove
+                                                    <i className="material-icons right">person_outline</i>
+                                            </a>
+                                        </div>
+                                    )
+                                }
+                            })()}
+                        </div>
+                    );
                 }, this)}
 
             </div>
