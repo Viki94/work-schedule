@@ -87,6 +87,10 @@ var helper = {
       date: date,
       username: username
     });
+  },
+
+  removeAnnouncement: function (id) {
+    return axios.put("/removeAnnouncement/" + id);
   }
 };
 

@@ -56,7 +56,7 @@ class Login extends React.Component {
                             </div>
                             <div className="row">
                                 <div className="col s12">
-                                    <button className="btn waves-effect waves-light btn-large blue accent-3 loginButtons" type="submit" value="Submit" name="action">Login<i className="material-icons right">send</i></button>
+                                    <button className="btn waves-effect waves-light btn-large blue accent-3 fullWidth" type="submit" value="Submit" name="action">Login<i className="material-icons right">send</i></button>
                                 </div>
                             </div>
                             <div className="row">
@@ -66,10 +66,10 @@ class Login extends React.Component {
                             </div>
                             <div className="row">
                                 <div className="col s6">
-                                    <a id="google" className="btn waves-effect waves-light btn-large loginButtons" href="/auth/google"><i className="fa fa-google"></i></a>
+                                    <a id="google" className="btn waves-effect waves-light btn-large fullWidth" href="/auth/google"><i className="fa fa-google"></i></a>
                                 </div>
                                 <div className="col s6">
-                                    <a id="linkedin" className="btn waves-effect waves-light btn-large loginButtons" href="/auth/linkedin"><i className="fa fa-linkedin"></i></a>
+                                    <a id="linkedin" className="btn waves-effect waves-light btn-large fullWidth" href="/auth/linkedin"><i className="fa fa-linkedin"></i></a>
                                 </div>
                             </div>
                             <div className="divider"></div>
@@ -81,7 +81,7 @@ class Login extends React.Component {
                             </div>
                             <div className="row">
                                 <div className="col s12">
-                                    <a className="btn waves-effect waves-light btn-large green accent-3 loginButtons" href="/register">Register<i className="material-icons right">person_add</i></a>
+                                    <a className="btn waves-effect waves-light btn-large green accent-3 fullWidth" href="/register">Register<i className="material-icons right">person_add</i></a>
                                 </div>
                             </div>
                         </form>
