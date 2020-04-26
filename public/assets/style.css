@@ -48,3 +48,21 @@
 	margin-left: 15px;
 	margin-bottom: -10px;
 }
+
+.activeLang {
+	border: 1px solid black;
+}
+
+.width-100 {
+	width: 100px;
+}
+
+.width-120 {
+	width: 120px;
+}
+
+.mobile-flags {
+	display: block;
+	padding-left: 48px;
+	height: 40px;
+}

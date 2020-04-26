@@ -1,6 +1,7 @@
 var React = require("react");
 var helpers = require("../utils/helpers");
 var ExportScheduleToExcelFile = require("./ExportScheduleToExcelFile");
+var Translate = require("react-translate-component");
 
 var ManagerSchedulesCreate = React.createClass({
 
@@ -92,19 +93,18 @@ var ManagerSchedulesCreate = React.createClass({
             <div className="row">
                 <div className="col m12" >
                     <div className="section">
-                        <h5>Schedule Editor</h5>
-
+                        <Translate component="h5" content="scheduleEditor" />
                         <table className="highlight">
                             <thead>
                                 <tr>
-                                    <th data-field="name">Name</th>
-                                    <th data-field="name">Mon</th>
-                                    <th data-field="name">Tues</th>
-                                    <th data-field="name">Wed</th>
-                                    <th data-field="name">Thurs</th>
-                                    <th data-field="name">Fri</th>
-                                    <th data-field="name">Sat</th>
-                                    <th data-field="name">Sun</th>
+                                    <th data-field="name"><Translate content="name" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.monday" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.tuesday" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.wednesday" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.thursday" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.friday" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.saturday" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.sunday" /></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -150,10 +150,10 @@ var ManagerSchedulesCreate = React.createClass({
                                                 </div>
                                             </td>
                                             <td>
-                                                <button id={i} className="addSchedule" onClick={this.handleUpdateEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Add</button>
+                                                <button id={i} className="addSchedule" onClick={this.handleUpdateEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3"><Translate content="buttons.add" /></button>
                                             </td>
                                             <td>
-                                                <button id={i} className="clearSchedule" onClick={this.handleClearEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Clear</button>
+                                                <button id={i} className="clearSchedule" onClick={this.handleClearEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3"><Translate content="buttons.clear" /></button>
                                             </td>
 
                                         </tr>
@@ -161,7 +161,7 @@ var ManagerSchedulesCreate = React.createClass({
                                 }, this)}
                             </tbody>
                         </table>
-                        <ExportScheduleToExcelFile empSchedules={this.state.empSchedules}/>
+                        <ExportScheduleToExcelFile empSchedules={this.state.empSchedules} />
                     </div>
                 </div>
             </div>

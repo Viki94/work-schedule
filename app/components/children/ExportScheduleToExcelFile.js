@@ -1,5 +1,6 @@
 var React = require("react");
 var ExportJsonExcel = require('js-export-excel')
+var Translate = require("react-translate-component");
 
 var ExportScheduleToExcelFile = React.createClass({
     handleExportEmpSchedule: function () {
@@ -35,7 +36,7 @@ var ExportScheduleToExcelFile = React.createClass({
 
     render: function () {
         return (
-            <button className="exportSchedule" onClick={this.handleExportEmpSchedule} className="btn btn-small waves-effect waves-light green accent-3">Export file</button>
+            <button className="exportSchedule" onClick={this.handleExportEmpSchedule} className="btn btn-small waves-effect waves-light green accent-3"><Translate content="buttons.downloadFile" /></button>
         );
     }
 });

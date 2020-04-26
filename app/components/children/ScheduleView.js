@@ -1,6 +1,7 @@
 var React = require("react");
 var helpers = require("../utils/helpers");
 var ExportScheduleToExcelFile = require("./ExportScheduleToExcelFile");
+var Translate = require("react-translate-component");
 
 var ScheduleView = React.createClass({
 
@@ -23,18 +24,18 @@ var ScheduleView = React.createClass({
             <div className="row">
                 <div className="col s12">
                     <div className="section">
-                        <h5>Week at a glance</h5>
+                        <Translate component="h5" content="weekOverview" />
                         <table className="bordered highlight">
                             <thead>
                                 <tr>
-                                    <th data-field="name">Name</th>
-                                    <th data-field="name">Mon</th>
-                                    <th data-field="name">Tues</th>
-                                    <th data-field="name">Wed</th>
-                                    <th data-field="name">Thurs</th>
-                                    <th data-field="name">Fri</th>
-                                    <th data-field="name">Sat</th>
-                                    <th data-field="name">Sun</th>
+                                    <th data-field="name"><Translate content="name" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.monday" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.tuesday" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.wednesday" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.thursday" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.friday" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.saturday" /></th>
+                                    <th data-field="name"><Translate content="dayOfWeeks.sunday" /></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,8 +71,8 @@ var ScheduleView = React.createClass({
                                 }, this)}
                             </tbody>
                         </table>
-                        
-                        <ExportScheduleToExcelFile empSchedules={this.state.empSchedules}/>
+
+                        <ExportScheduleToExcelFile empSchedules={this.state.empSchedules} />
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 var React = require("react");
 var helpers = require("../utils/helpers");
+var Translate = require("react-translate-component");
 
 var AnnouncementsView = React.createClass({
     getInitialState: function () {
@@ -44,7 +45,7 @@ var AnnouncementsView = React.createClass({
             <div className="card-panel">
                 <div className="row">
                     <div className="col s12">
-                        <h5>Latest announcements</h5>
+                        <h5><Translate content="announcements.latestAnnouncements" /></h5>
                     </div>
                 </div>
                 {this.props.allAnnouncements.map((announcement, i) => {
@@ -53,8 +54,8 @@ var AnnouncementsView = React.createClass({
                             <div className="col s12">
                                 <h5>{announcement.title}</h5>
                                 <p>{announcement.content}</p>
-                                <p>Posted at: {announcement.date}</p>
-                                <p>Posted from: {announcement.username}</p>
+                                <p><Translate content="announcements.postedAt" />: {announcement.date}</p>
+                                <p><Translate content="announcements.postedFrom" />: {announcement.username}</p>
                             </div>
                             {(() => {
                                 if (this.props.isAdmin) {
@@ -63,8 +64,9 @@ var AnnouncementsView = React.createClass({
                                             <a id={announcement._id}
                                                 className="btn btn-large waves-effect waves-light red accent-3 fullWidth"
                                                 onClick={this.handleRemoveAnnouncement}
-                                            >Remove
-                                                    <i className="material-icons right">person_outline</i>
+                                            >
+                                                <Translate content="buttons.remove" />
+                                                <i className="material-icons right">delete_forever</i>
                                             </a>
                                         </div>
                                     )

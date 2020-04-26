@@ -1,5 +1,6 @@
 var React = require("react");
 var helpers = require("../utils/helpers");
+var Translate = require("react-translate-component");
 
 var ManagerEmployeeAll = React.createClass({
     getInitialState: function () {
@@ -133,13 +134,13 @@ var ManagerEmployeeAll = React.createClass({
                     <table className="highlight" id="allEmployees">
                         <thead>
                             <tr>
-                                <th data-field="name">Employees</th>
+                                <th data-field="name"><Translate content="employees.employee" /></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td id="newEmployee" onClick={this.newEmployee}>
-                                    <strong>New Employee<i className="material-icons right">add</i></strong>
+                                    <strong><Translate content="employees.newEmployee" /><i className="material-icons right">add</i></strong>
                                 </td>
                             </tr>
                             {this.state.allEmployees.map((ManagerEmployeeAll, i) => {
@@ -159,87 +160,93 @@ var ManagerEmployeeAll = React.createClass({
                         <form className="col m12" onSubmit={this.handleAddForm}>
                             <div className="row">
                                 <div className="input-field col m6 s12">
-                                    <input
-                                        placeholder="First Name"
-                                        name="firstName"
+                                    <Translate
+                                        component="input"
                                         type="text"
+                                        name="firstName"
                                         className="validate"
                                         value={this.state.firstName}
                                         onChange={this.handleUserChange}
-                                        required />
+                                        required
+                                        attributes={{ placeholder: 'employee.firstName' }} />
                                 </div>
                                 <div className="input-field col m6 s12">
-                                    <input
-                                        placeholder="Last Name"
-                                        name="lastName"
+                                    <Translate
+                                        component="input"
                                         type="text"
+                                        name="lastName"
                                         className="validate"
                                         value={this.state.lastName}
                                         onChange={this.handleUserChange}
-                                        required />
+                                        required
+                                        attributes={{ placeholder: 'employee.lastName' }} />
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="input-field col m12 s12">
-                                    <input
-                                        placeholder="Address"
-                                        name="address"
+                                    <Translate
+                                        component="input"
                                         type="text"
+                                        name="address"
                                         className="validate"
                                         value={this.state.address}
                                         onChange={this.handleUserChange}
-                                        required />
+                                        required
+                                        attributes={{ placeholder: 'employee.address' }} />
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="input-field col m12 s12">
-                                    <input
-                                        placeholder="City"
-                                        name="city"
+                                    <Translate
+                                        component="input"
                                         type="text"
+                                        name="city"
                                         className="validate"
                                         value={this.state.city}
                                         onChange={this.handleUserChange}
-                                        required />
+                                        required
+                                        attributes={{ placeholder: 'employee.city' }} />
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="input-field col m12 s12">
-                                    <input
-                                        placeholder="Email"
+                                    <Translate
+                                        component="input"
+                                        type="text"
                                         name="email"
-                                        type="email"
                                         className="validate"
                                         value={this.state.email}
                                         onChange={this.handleUserChange}
-                                        required />
+                                        required
+                                        attributes={{ placeholder: 'employee.email' }} />
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="input-field col m12 s12">
-                                    <input
-                                        placeholder="Phone"
+                                    <Translate
+                                        component="input"
+                                        type="text"
                                         name="phone"
-                                        type="number"
                                         className="validate"
                                         value={this.state.phone}
                                         onChange={this.handleUserChange}
-                                        required />
+                                        required
+                                        attributes={{ placeholder: 'employee.phone' }} />
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col s4">
-                                    <button id="addEmployee" className="btn btn-large waves-effect waves-light green accent-3" type="submit" value="Submit">Add
+                                    <button id="addEmployee" className="btn btn-large waves-effect waves-light green accent-3" type="submit" value="Submit"><Translate content="buttons.add" />
                                         <i className="material-icons right">person_add</i>
                                     </button>
                                 </div>
                                 <div className="col s4">
-                                    <a id="updateEmployee" className="btn btn-large waves-effect waves-light blue accent-3" onClick={this.handleUpdateForm}>Update
+                                    <a id="updateEmployee" className="btn btn-large waves-effect waves-light blue accent-3" onClick={this.handleUpdateForm}><Translate content="buttons.update" />
                                         <i className="material-icons right">edit</i>
                                     </a>
                                 </div>
                                 <div className="col s4">
-                                    <a id="removeEmployee" className="btn btn-large waves-effect waves-light red accent-3" onClick={this.handleRemoveForm}>Remove
+                                    <a id="removeEmployee" className="btn btn-large waves-effect waves-light red accent-3" onClick={this.handleRemoveForm}><Translate content="buttons.remove" />
                                         <i className="material-icons right">person_outline</i>
                                     </a>
                                 </div>

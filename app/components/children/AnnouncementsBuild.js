@@ -1,5 +1,6 @@
 var React = require("react");
 var helpers = require("../utils/helpers");
+var Translate = require("react-translate-component");
 
 var AnnouncementsBuild = React.createClass({
     getInitialState: function () {
@@ -62,38 +63,39 @@ var AnnouncementsBuild = React.createClass({
             <div className="card-panel">
                 <div className="row">
                     <div className="col s12">
-                        <h5>Make an announcement</h5>
+                        <h5><Translate content="announcements.makeAnAnnouncement" /></h5>
                     </div>
                 </div>
                 <form onSubmit={this.addAnnouncements}>
                     <div className="row">
                         <div className="input-field col s12">
-                            <input
-                                placeholder="Title"
-                                id="title"
+                            <Translate
+                                component="input"
                                 type="text"
+                                id="title"
                                 className="validate"
                                 value={this.state.title}
                                 onChange={this.handleAnnouncementBuild}
-                                required />
+                                required
+                                attributes={{ placeholder: 'announcements.title' }} />
                         </div>
                     </div>
                     <div className="row">
                         <div className="input-field col s12">
-                            <textarea
-                                placeholder="Announcement"
-                                id="content"
+                            <Translate
+                                component="textarea"
                                 type="text"
+                                id="content"
                                 className="materialize-textarea"
                                 value={this.state.content}
                                 onChange={this.handleAnnouncementBuild}
-                                required>
-                            </textarea>
+                                required
+                                attributes={{ placeholder: 'announcements.makeAnAnnouncement' }} />
                         </div>
                     </div>
                     <div className="row">
                         <div className="col s12">
-                            <button className="btn waves-effect waves-light btn-large green accent-3 fullWidth" type="submit" value="Submit" name="action">Submit<i className="material-icons right">add</i></button>
+                            <button className="btn waves-effect waves-light btn-large green accent-3 fullWidth" type="submit" value="Submit" name="action"><Translate content="buttons.create" /><i className="material-icons right">add</i></button>
                         </div>
                     </div>
                 </form>
