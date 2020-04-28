@@ -91,7 +91,24 @@ var helper = {
 
   removeAnnouncement: function (id) {
     return axios.put("/removeAnnouncement/" + id);
-  }
+  },
+
+  getScheduleRequestChanges: function () {
+    return axios.get("/getScheduleRequestChanges");
+  },
+
+  addScheduleRequestChange: function (title, content, date, username) {
+    return axios.post("/addScheduleRequestChange", {
+      title: title,
+      content: content,
+      date: date,
+      username: username
+    });
+  },
+
+  removeScheduleRequestChange: function (id) {
+    return axios.put("/removeScheduleRequestChange/" + id);
+  },
 };
 
 module.exports = helper;

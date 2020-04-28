@@ -34,7 +34,7 @@ var ManagerHome = React.createClass({
                         <AnnouncementsView getUpdatedAnnouncements={this.getUpdatedAnnouncements} allAnnouncements={this.state.allAnnouncements} isAdmin={true} />
                     </div>
                     <div className="col m6 fullWidth">
-                        <AnnouncementsBuild getUpdatedAnnouncements={this.getUpdatedAnnouncements} allAnnouncements={this.state.allAnnouncements} isAdmin={true}/>
+                        <AnnouncementsBuild getUpdatedAnnouncements={this.getUpdatedAnnouncements} allAnnouncements={this.state.allAnnouncements} isAdmin={true} />
                     </div>
                 </div>
             </div>

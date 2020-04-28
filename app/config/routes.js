@@ -18,21 +18,24 @@ var ManagerSchedulesCreate = require("../components/children/ManagerSchedulesCre
 // employee components
 var Employee = require("../components/Employee");
 var EmployeeHome = require("../components/children/EmployeeHome");
+var ScheduleRequestChange = require("../components/children/ScheduleRequestChange");
 
 module.exports = (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
-        <Route path="login" component={Login} />
-        <Route path="register" component={Register} />
-        <IndexRoute component={Login} />
-        <Route path="manager" component={Manager}>
-            <Route path="employeeAll" component={ManagerEmployeeAll} />
-            <Route path="schedulesCreate" component={ManagerSchedulesCreate} />
-            <IndexRoute component={ManagerHome} />
-        </Route>
-        <Route path="employee" component={Employee}>
-            <IndexRoute component={EmployeeHome} />
-        </Route>
+      <Route path="login" component={Login} />
+      <Route path="register" component={Register} />
+      <IndexRoute component={Login} />
+      <Route path="manager" component={Manager}>
+        <Route path="employeeAll" component={ManagerEmployeeAll} />
+        <Route path="schedulesCreate" component={ManagerSchedulesCreate} />
+        <Route path="scheduleRequestChange" component={ScheduleRequestChange} isAdmin={true} />
+        <IndexRoute component={ManagerHome} />
+      </Route>
+      <Route path="employee" component={Employee}>
+        <Route path="scheduleRequestChange" component={ScheduleRequestChange} isAdmin={false} />
+        <IndexRoute component={EmployeeHome} />
+      </Route>
     </Route>
   </Router>
 );

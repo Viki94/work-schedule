@@ -60,7 +60,8 @@ var Manager = React.createClass({
                         <ul className="right hide-on-med-and-down">
                             <li><a className="black-text" href="/manager/employeeAll"><Translate content="navMenu.employeeManagement" /><i className="material-icons right">group</i></a></li>
                             <li><a className="black-text" href="/manager/schedulesCreate"><Translate content="navMenu.schedules" /><i className="material-icons right">access_time</i></a></li>
-                            <li><a className="dropdown-button black-text width-100" href="#" data-activates="langDropdown" data-beloworigin="true" data-hover="true"><Translate content="navMenu.language" /></a></li>
+                            <li><a className="black-text" href="/manager/scheduleRequestChange"><i className="material-icons right">sms</i><Translate content="navMenu.request" /></a></li>
+                            <li><a className="dropdown-button black-text width-120" href="#" data-activates="langDropdown" data-beloworigin="true" data-hover="true"><i className="material-icons right">language</i><Translate content="navMenu.language" /></a></li>
                             <li><a className="dropdown-button black-text width-120" href="#" data-activates="dropdown1" data-beloworigin="true" data-hover="true">{this.state.username}<img className="circle circle-small" src={this.state.picture} /></a></li>
                         </ul>
                         <ul id="slide-out" className="side-nav collapsible">
@@ -76,6 +77,7 @@ var Manager = React.createClass({
                             </li>
                             <li><a href="/manager/employeeAll" className="black-text"><i className="material-icons">group</i><Translate content="navMenu.employeeManagement" /></a></li>
                             <li><a href="/manager/schedulesCreate" className="black-text"><i className="material-icons">access_time</i><Translate content="navMenu.schedules" /></a></li>
+                            <li><a href="/manager/scheduleRequestChange" className="black-text"><i className="material-icons">sms</i><Translate content="navMenu.request" /></a></li>
                             <li>
                                 <a href="#" className="collapsible-header black-text">
                                     <i className="material-icons">language</i><Translate content="navMenu.language" />

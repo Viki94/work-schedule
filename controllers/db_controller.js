@@ -6,6 +6,7 @@ var path = require("path");
 var employee = require("../models/employee");
 var EmployeeSchedule = require("../models/employeeSchedule");
 var announcements = require("../models/announcements")
+var scheduleRequestChange = require("../models/scheduleRequestChange")
 
 //Getting Employees from the database
 router.get("/getAllEmployees", function (req, res) {
@@ -183,6 +184,48 @@ router.put("/removeAnnouncement/:id", function (req, res) {
       }
     })
 });
+
+//Getting schedule request changes from the database
+router.get("/getScheduleRequestChanges", function (req, res) {
+  scheduleRequestChange.find({ "active": 1 }).sort({ "date": -1 }).limit(5).exec(function (err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+//Put schedule request changes to database
+router.post("/addScheduleRequestChange", function (req, res) {
+  scheduleRequestChange.create({
+    title: req.body.title,
+    content: req.body.content,
+    date: req.body.date,
+    username: req.body.username
+  }, function (err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+// "Remove" existing schedule request change
+router.put("/removeScheduleRequestChange/:id", function (req, res) {
+  scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "active": 0 })
+    .exec(function (err, doc) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(doc);
+      }
+    })
+});
+
 
 
 module.exports = router;

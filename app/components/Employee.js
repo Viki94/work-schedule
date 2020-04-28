@@ -58,7 +58,8 @@ var Employee = React.createClass({
                         <a href="/employee" className="brand-logo blue-text text-darken-1"><img id="logo" src="/assets/images/logo.png" /><span className="hide-on-med-and-down">Schedulr</span></a>
                         <a href="/" data-activates="slide-out" className="button-collapse blue-text text-darken-1"><i className="material-icons">menu</i></a>
                         <ul className="right hide-on-med-and-down">
-                            <li><a className="dropdown-button black-text width-100" href="#" data-activates="langDropdown" data-beloworigin="true" data-hover="true"><Translate content="navMenu.language" /></a></li>
+                            <li><a className="black-text" href="/employee/scheduleRequestChange"><i className="material-icons right">sms</i><Translate content="navMenu.request" /></a></li>
+                            <li><a className="dropdown-button black-text width-120" href="#" data-activates="langDropdown" data-beloworigin="true" data-hover="true"><i className="material-icons right">language</i><Translate content="navMenu.language" /></a></li>
                             <li><a className="dropdown-button black-text width-120" href="#" data-activates="dropdown1" data-beloworigin="true" data-hover="true">{this.state.username}<img className="circle circle-small" src={this.state.picture} /></a></li>
                         </ul>
                         <ul id="slide-out" className="side-nav collapsible">
@@ -72,6 +73,7 @@ var Employee = React.createClass({
                                     <a><span className="white-text name">{this.state.username}</span></a>
                                 </div>
                             </li>
+                            <li><a href="/employee/scheduleRequestChange" className="black-text"><i className="material-icons">sms</i><Translate content="navMenu.request" /></a></li>
                             <li>
                                 <a href="#" className="collapsible-header black-text">
                                     <i className="material-icons">language</i><Translate content="navMenu.language" />

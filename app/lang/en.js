@@ -17,7 +17,8 @@ module.exports = {
     employeeManagement: 'Employee management',
     schedules: 'Schedules',
     logout: 'Logout',
-    language: 'Language'
+    language: 'Language',
+    request: 'Requests'
   },
   employees: {
     employee: 'Employees',

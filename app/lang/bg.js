@@ -17,7 +17,8 @@ module.exports = {
     employeeManagement: 'Управление на служителите',
     schedules: 'Графици',
     logout: 'Изход',
-    language: 'Език'
+    language: 'Език',
+    request: 'Заявки'
   },
 
   employees: {
