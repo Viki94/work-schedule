@@ -57,7 +57,19 @@ module.exports = {
     content: 'Content',
     latestAnnouncements: 'Latest announcements',
     postedAt: 'Posted at',
-    postedFrom: 'Posted from'
+    postedFrom: 'Posted from',
+    selectAnnouncementCount: 'Select announcement count',
+    all: 'All'
+  },
+  requests: {
+    makeARequest: 'Make a request',
+    title: 'Title',
+    content: 'Content',
+    latestRequests: 'Latest requests',
+    postedAt: 'Posted at',
+    postedFrom: 'Posted from',
+    selectRequestCount: 'Select request count',
+    all: 'All'
   },
   schedule: 'Shedule',
   scheduleEditor: 'Schedule Editor',

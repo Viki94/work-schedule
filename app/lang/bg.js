@@ -59,7 +59,19 @@ module.exports = {
     content: 'Съдържание',
     latestAnnouncements: 'Последни анонси',
     postedAt: 'Публикувано в',
-    postedFrom: 'Публикувано от'
+    postedFrom: 'Публикувано от',
+    selectAnnouncementCount: 'Изберете брои анонси',
+    all: 'Всички'
+  },
+  requests: {
+    makeARequest: 'Напишете заявка',
+    title: 'Заглавие',
+    content: 'Съдържание',
+    latestRequests: 'Последни заявки',
+    postedAt: 'Публикувано в',
+    postedFrom: 'Публикувано от',
+    selectRequestCount: 'Изберете брои заявки',
+    all: 'Всички'
   },
   schedule: 'График',
   scheduleEditor: 'Редакция на график',

@@ -145,8 +145,8 @@ router.put("/removeEmpSchedule/:emp_id", function (req, res) {
 });
 
 //Getting announcements from the database
-router.get("/getAnnouncements", function (req, res) {
-  announcements.find({ "active": 1 }).sort({ "date": -1 }).limit(5).exec(function (err, doc) {
+router.get("/getAnnouncements/:announcementsCount", function (req, res) {
+  announcements.find({ "active": 1 }).sort({ "date": -1 }).limit(Number(req.params.announcementsCount)).exec(function (err, doc) {
     if (err) {
       console.log(err);
     }
@@ -186,8 +186,8 @@ router.put("/removeAnnouncement/:id", function (req, res) {
 });
 
 //Getting schedule request changes from the database
-router.get("/getScheduleRequestChanges", function (req, res) {
-  scheduleRequestChange.find({ "active": 1 }).sort({ "date": -1 }).limit(5).exec(function (err, doc) {
+router.get("/getScheduleRequestChanges/:requestCount", function (req, res) {
+  scheduleRequestChange.find({ "active": 1 }).sort({ "date": -1 }).limit(Number(req.params.requestCount)).exec(function (err, doc) {
     if (err) {
       console.log(err);
     }

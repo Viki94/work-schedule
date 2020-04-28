@@ -7,6 +7,7 @@ var EmployeeHome = React.createClass({
     getInitialState: function () {
         return {
             allAnnouncements: [],
+            announcementsCount: 5
         };
     },
 
@@ -15,16 +16,22 @@ var EmployeeHome = React.createClass({
     },
 
     getAnnouncements: function () {
-        helpers.getAnnouncements().then(function (response) {
+        helpers.getAnnouncements(this.state.announcementsCount).then(function (response) {
             this.setState({ allAnnouncements: response.data });
         }.bind(this));
+    },
+
+    updatedAnnouncementsCount: function (count) {
+        this.setState({ announcementsCount: count }, function () {
+            this.getAnnouncements();
+        });
     },
 
     render: function () {
         return (
             <div>
                 <ScheduleView />
-                <AnnouncementsView allAnnouncements={this.state.allAnnouncements} isAdmin={false} />
+                <AnnouncementsView updatedAnnouncementsCount={this.updatedAnnouncementsCount} allAnnouncements={this.state.allAnnouncements} isAdmin={false} />
             </div>
         );
     }

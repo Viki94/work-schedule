@@ -9,7 +9,8 @@ var ScheduleRequestChange = React.createClass({
             content: "",
             allScheduleRequestChanges: [],
             scheduleRequestChangeId: "",
-            selectedScheduleRequestChange: ""
+            selectedScheduleRequestChange: "",
+            scheduleRequestsCount: 5
         };
     },
 
@@ -21,14 +22,26 @@ var ScheduleRequestChange = React.createClass({
         }.bind(this));
 
         this.getScheduleRequestChanges();
+
+        $("#scheduleRequestCount").on('change', function (event) {
+            this.setState({ scheduleRequestsCount: event.target.value }, function () {
+                this.getScheduleRequestChanges();
+            });
+        }.bind(this))
     },
 
     handleScheduleRequestChange(event) {
         this.setState({ [event.target.id]: event.target.value });
     },
 
+    onRequestsCountChange(count) {
+        this.setState({ scheduleRequestsCount: count }, function () {
+            this.getScheduleRequestChanges();
+        });
+    },
+
     getScheduleRequestChanges: function () {
-        helpers.getScheduleRequestChanges().then(function (response) {
+        helpers.getScheduleRequestChanges(this.state.scheduleRequestsCount).then(function (response) {
             this.setState({ allScheduleRequestChanges: response.data }, function () {
                 // if (this.props.isAdmin) {
                 //     this.props.getUpdatedScheduleRequestChanges(this.state.allScheduleRequestChanges);
@@ -90,7 +103,7 @@ var ScheduleRequestChange = React.createClass({
                             <div className="card-panel">
                                 <div className="row">
                                     <div className="col s12">
-                                        <h5><Translate content="announcements.makeAnAnnouncement" /></h5>
+                                        <h5><Translate content="requests.makeARequest" /></h5>
                                     </div>
                                 </div>
                                 <form onSubmit={this.addScheduleRequestChange}>
@@ -104,7 +117,7 @@ var ScheduleRequestChange = React.createClass({
                                                 value={this.state.title}
                                                 onChange={this.handleScheduleRequestChange}
                                                 required
-                                                attributes={{ placeholder: 'announcements.title' }} />
+                                                attributes={{ placeholder: 'requests.title' }} />
                                         </div>
                                     </div>
                                     <div className="row">
@@ -117,7 +130,7 @@ var ScheduleRequestChange = React.createClass({
                                                 value={this.state.content}
                                                 onChange={this.handleScheduleRequestChange}
                                                 required
-                                                attributes={{ placeholder: 'announcements.makeAnAnnouncement' }} />
+                                                attributes={{ placeholder: 'requests.makeARequest' }} />
                                         </div>
                                     </div>
                                     <div className="row">
@@ -133,8 +146,17 @@ var ScheduleRequestChange = React.createClass({
                 <div className="card-panel">
                     <div className="row">
                         <div className="col s12">
-                            <h5><Translate content="announcements.latestAnnouncements" /></h5>
+                            <h5><Translate content="requests.latestRequests" /></h5>
                         </div>
+                    </div>
+                    <div className="input-field col s12">
+                        <div><Translate content="requests.selectRequestCount" /></div>
+                        <select id="scheduleRequestCount">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="0"><Translate content="requests.all" /></option>
+                        </select>
                     </div>
                     {this.state.allScheduleRequestChanges.map((scheduleRequestChange, i) => {
                         return (
@@ -142,8 +164,8 @@ var ScheduleRequestChange = React.createClass({
                                 <div className="col s12">
                                     <h5>{scheduleRequestChange.title}</h5>
                                     <p>{scheduleRequestChange.content}</p>
-                                    <p><Translate content="announcements.postedAt" />: {scheduleRequestChange.date}</p>
-                                    <p><Translate content="announcements.postedFrom" />: {scheduleRequestChange.username}</p>
+                                    <p><Translate content="requests.postedAt" />: {scheduleRequestChange.date}</p>
+                                    <p><Translate content="requests.postedFrom" />: {scheduleRequestChange.username}</p>
                                 </div>
                                 {(() => {
                                     if (!this.props.route.isAdmin) {

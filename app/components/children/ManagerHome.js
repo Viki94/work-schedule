@@ -8,6 +8,7 @@ var ManagerHome = React.createClass({
     getInitialState: function () {
         return {
             allAnnouncements: [],
+            announcementsCount: 5
         };
     },
 
@@ -16,7 +17,7 @@ var ManagerHome = React.createClass({
     },
 
     getAnnouncements: function () {
-        helpers.getAnnouncements().then(function (response) {
+        helpers.getAnnouncements(this.state.announcementsCount).then(function (response) {
             this.setState({ allAnnouncements: response.data });
         }.bind(this));
     },
@@ -25,13 +26,19 @@ var ManagerHome = React.createClass({
         this.setState({ allAnnouncements: updatedAnnouncements })
     },
 
+    updatedAnnouncementsCount: function (count) {
+        this.setState({ announcementsCount: count }, function(){
+            this.getAnnouncements();
+        });
+    },
+
     render: function () {
         return (
             <div>
                 <ScheduleView />
                 <div className="row">
                     <div className="col m6">
-                        <AnnouncementsView getUpdatedAnnouncements={this.getUpdatedAnnouncements} allAnnouncements={this.state.allAnnouncements} isAdmin={true} />
+                        <AnnouncementsView getUpdatedAnnouncements={this.getUpdatedAnnouncements} updatedAnnouncementsCount={this.updatedAnnouncementsCount} allAnnouncements={this.state.allAnnouncements} isAdmin={true} />
                     </div>
                     <div className="col m6 fullWidth">
                         <AnnouncementsBuild getUpdatedAnnouncements={this.getUpdatedAnnouncements} allAnnouncements={this.state.allAnnouncements} isAdmin={true} />

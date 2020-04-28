@@ -76,8 +76,8 @@ var helper = {
     return axios.put("/removeEmpSchedule/" + emp_id);
   },
 
-  getAnnouncements: function () {
-    return axios.get("/getAnnouncements");
+  getAnnouncements: function (announcementCount) {
+    return axios.get("/getAnnouncements/" + announcementCount);
   },
 
   addAnnouncements: function (title, content, date, username) {
@@ -93,8 +93,8 @@ var helper = {
     return axios.put("/removeAnnouncement/" + id);
   },
 
-  getScheduleRequestChanges: function () {
-    return axios.get("/getScheduleRequestChanges");
+  getScheduleRequestChanges: function (requestCount) {
+    return axios.get("/getScheduleRequestChanges/" + requestCount);
   },
 
   addScheduleRequestChange: function (title, content, date, username) {
