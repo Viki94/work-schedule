@@ -2,32 +2,33 @@ var React = require("react");
 var helpers = require("../utils/helpers");
 var Translate = require("react-translate-component");
 
-var AnnouncementsView = React.createClass({
-    getInitialState: function () {
-        return {
+class AnnouncementsView extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             selectedAnnouncement: "",
             announcementId: "",
             announcementsCount: 5,
             allAnnouncements: [],
             isAdmin: false
-        };
-    },
+        }
 
-    componentDidMount: function () {
+        this.handleRemoveAnnouncement = this.handleRemoveAnnouncement.bind(this);
+    }
 
+    componentDidMount() {
         $("#announcementsCount").on('change', function (event) {
-
             this.setState({ announcementsCount: event.target.value }, function () {
                 this.props.updatedAnnouncementsCount(this.state.announcementsCount);
                 this.props.getUpdatedAnnouncements(this.state.allAnnouncements);
             });
         }.bind(this))
-    },
+    }
 
-    handleRemoveAnnouncement: function (event) {
+    handleRemoveAnnouncement(event) {
         this.setState({ selectedAnnouncement: event.target.id }, function () {
-            for (var i = 0; i < this.state.allAnnouncements.length; i++) {
-                if (this.state.allAnnouncements[i]._id == this.state.selectedAnnouncement) {
+            for (var i = 0; i < this.props.allAnnouncements.length; i++) {
+                if (this.props.allAnnouncements[i]._id == this.state.selectedAnnouncement) {
                     this.setState({
                         announcementId: this.state.selectedAnnouncement
                     }, function () {
@@ -37,14 +38,16 @@ var AnnouncementsView = React.createClass({
                         }.bind(this));
 
                         Materialize.toast("Announcement removed", 3000);
-                        this.props.getUpdatedAnnouncements(this.state.allAnnouncements);
+                        
+                        var updated = this.props.getAnnouncements()
+                        this.props.getUpdatedAnnouncements(updated);
                     });
                 }
             }
         });
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div className="card-panel">
                 <div className="row">
@@ -92,6 +95,6 @@ var AnnouncementsView = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = AnnouncementsView;

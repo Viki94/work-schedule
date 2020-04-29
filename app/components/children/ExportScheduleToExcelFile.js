@@ -2,8 +2,14 @@ var React = require("react");
 var ExportJsonExcel = require('js-export-excel')
 var Translate = require("react-translate-component");
 
-var ExportScheduleToExcelFile = React.createClass({
-    handleExportEmpSchedule: function () {
+class ExportScheduleToExcelFile extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.handleExportEmpSchedule = this.handleExportEmpSchedule.bind(this);
+    }
+
+    handleExportEmpSchedule() {
         if (this.props.empSchedules !== "") {
             let employeeSchedule = this.props.empSchedules.map((empSchedule) => {
                 var employee = {};
@@ -32,13 +38,13 @@ var ExportScheduleToExcelFile = React.createClass({
 
         var toExcel = new ExportJsonExcel(option);
         toExcel.saveExcel();
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <button className="exportSchedule" onClick={this.handleExportEmpSchedule} className="btn btn-small waves-effect waves-light green accent-3"><Translate content="buttons.downloadFile" /><i className="material-icons right">file_download</i></button>
         );
     }
-});
+}
 
 module.exports = ExportScheduleToExcelFile;

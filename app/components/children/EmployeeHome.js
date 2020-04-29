@@ -3,31 +3,35 @@ var helpers = require("../utils/helpers");
 var ScheduleView = require("./ScheduleView");
 var AnnouncementsView = require("./AnnouncementsView");
 
-var EmployeeHome = React.createClass({
-    getInitialState: function () {
-        return {
+class EmployeeHome extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             allAnnouncements: [],
             announcementsCount: 5
-        };
-    },
+        }
 
-    componentDidMount: function () {
+        this.getAnnouncements = this.getAnnouncements.bind(this);
+        this.updatedAnnouncementsCount = this.updatedAnnouncementsCount.bind(this);
+    }
+
+    componentDidMount() {
         this.getAnnouncements();
-    },
+    }
 
-    getAnnouncements: function () {
+    getAnnouncements() {
         helpers.getAnnouncements(this.state.announcementsCount).then(function (response) {
             this.setState({ allAnnouncements: response.data });
         }.bind(this));
-    },
+    }
 
-    updatedAnnouncementsCount: function (count) {
+    updatedAnnouncementsCount(count) {
         this.setState({ announcementsCount: count }, function () {
             this.getAnnouncements();
         });
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div>
                 <ScheduleView />
@@ -35,6 +39,6 @@ var EmployeeHome = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = EmployeeHome;

@@ -3,23 +3,23 @@ var helpers = require("../utils/helpers");
 var ExportScheduleToExcelFile = require("./ExportScheduleToExcelFile");
 var Translate = require("react-translate-component");
 
-var ScheduleView = React.createClass({
+class ScheduleView extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            empSchedules: []
+        }
+    }
 
-    getInitialState: function () {
-        return {
-            empSchedules: [],
-        };
-    },
-
-    componentDidMount: function () {
+    componentDidMount() {
         helpers.getEmpSchedules().then(function (response) {
             if (response !== this.state.empSchedules) {
                 this.setState({ empSchedules: response.data });
             }
         }.bind(this));
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div className="row">
                 <div className="col s12">
@@ -78,6 +78,6 @@ var ScheduleView = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = ScheduleView;

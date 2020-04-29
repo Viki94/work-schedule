@@ -2,29 +2,36 @@ var React = require("react");
 var helpers = require("../utils/helpers");
 var Translate = require("react-translate-component");
 
-var AnnouncementsBuild = React.createClass({
-    getInitialState: function () {
-        return {
+class AnnouncementsBuild extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             title: "",
             content: "",
             allAnnouncements: [],
             announcementId: ""
-        };
-    },
+        }
 
-    componentDidMount: function () {
+        this.handleAnnouncementBuild = this.handleAnnouncementBuild.bind(this);
+        this.getAnnouncements = this.getAnnouncements.bind(this);
+        this.addAnnouncements = this.addAnnouncements.bind(this);
+        this.clearForm = this.clearForm.bind(this);
+        this.clearStates = this.clearStates.bind(this);
+    }
+
+    componentDidMount() {
         helpers.getCurrentUser().then(function (response) {
             if (response !== this.state.username) {
                 this.setState({ username: response.data.username });
             }
         }.bind(this));
-    },
+    }
 
     handleAnnouncementBuild(event) {
         this.setState({ [event.target.id]: event.target.value });
-    },
+    }
 
-    getAnnouncements: function () {
+    getAnnouncements() {
         helpers.getAnnouncements().then(function (response) {
             this.setState({ allAnnouncements: response.data }, function () {
                 if (this.props.isAdmin) {
@@ -32,9 +39,9 @@ var AnnouncementsBuild = React.createClass({
                 }
             });
         }.bind(this));
-    },
+    }
 
-    addAnnouncements: function (event) {
+    addAnnouncements(event) {
         event.preventDefault(event);
         helpers.addAnnouncements(this.state.title, this.state.content, new Date().toUTCString(), this.state.username).then(function (response) {
             this.state.announcementId = response.data._id;
@@ -44,21 +51,21 @@ var AnnouncementsBuild = React.createClass({
 
         Materialize.toast('Announcement added', 3000);
         this.clearForm();
-    },
+    }
 
-    clearForm: function () {
+    clearForm() {
         var elements = document.getElementsByTagName("input");
         for (var i = 0; i < elements.length; i++) {
             elements[i].value = "";
             elements[i].classList.remove("valid");
         };
-    },
+    }
 
-    clearStates: function () {
+    clearStates() {
         this.setState({ title: "", content: "" });
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div className="card-panel">
                 <div className="row">
@@ -102,6 +109,6 @@ var AnnouncementsBuild = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = AnnouncementsBuild;

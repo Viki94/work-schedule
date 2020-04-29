@@ -2,9 +2,10 @@ var React = require("react");
 var helpers = require("../utils/helpers");
 var Translate = require("react-translate-component");
 
-var ManagerEmployeeAll = React.createClass({
-    getInitialState: function () {
-        return {
+class ManagerEmployeeAll extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             firstName: "",
             lastName: "",
             address: "",
@@ -14,27 +15,38 @@ var ManagerEmployeeAll = React.createClass({
             allEmployees: [],
             selectedEmployee: "",
             emp_id: ""
-        };
-    },
+        }
 
-    componentDidMount: function () {
+        this.getEmployees = this.getEmployees.bind(this);
+        this.handleUserChange = this.handleUserChange.bind(this);
+        this.handleAddForm = this.handleAddForm.bind(this);
+        this.handleUpdateForm = this.handleUpdateForm.bind(this);
+        this.handleRemoveForm = this.handleRemoveForm.bind(this);
+        this.clickEmployee = this.clickEmployee.bind(this);
+        this.newEmployee = this.newEmployee.bind(this);
+        this.clearForm = this.clearForm.bind(this);
+        this.clearStates = this.clearStates.bind(this);
+        this.activeButtons = this.activeButtons.bind(this);
+    }
+
+    componentDidMount() {
         this.getEmployees();
-    },
+    }
 
-    getEmployees: function () {
+    getEmployees() {
         helpers.getAllEmployees().then(function (response) {
             if (response !== this.state.allEmployees) {
                 this.setState({ allEmployees: response.data });
                 this.activeButtons();
             }
         }.bind(this));
-    },
+    }
 
     handleUserChange(event) {
         this.setState({ [event.target.name]: event.target.value });
-    },
+    }
 
-    handleAddForm: function (event) {
+    handleAddForm(event) {
         event.preventDefault();
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.address, this.state.city, this.state.email, this.state.phone).then(function (response) {
             this.state.emp_id = response.data._id;
@@ -47,9 +59,9 @@ var ManagerEmployeeAll = React.createClass({
         Materialize.toast('Employee added', 3000);
         this.clearForm();
         this.getEmployees();
-    },
+    }
 
-    handleUpdateForm: function (event) {
+    handleUpdateForm(event) {
         event.preventDefault();
         helpers.updateEmployee(this.state.selectedEmployee, this.state.firstName, this.state.lastName, this.state.address, this.state.city, this.state.email, this.state.phone).then(function (response) {
         }.bind(this));
@@ -60,9 +72,9 @@ var ManagerEmployeeAll = React.createClass({
         Materialize.toast("Employee updated", 3000);
         this.clearForm();
         this.getEmployees();
-    },
+    }
 
-    handleRemoveForm: function (event) {
+    handleRemoveForm(event) {
         event.preventDefault();
         helpers.removeEmployee(this.state.selectedEmployee).then(function (response) {
         }.bind(this));
@@ -72,9 +84,9 @@ var ManagerEmployeeAll = React.createClass({
         Materialize.toast("Employee removed", 3000);
         this.clearForm();
         this.getEmployees();
-    },
+    }
 
-    clickEmployee: function (event) {
+    clickEmployee(event) {
         this.setState({ selectedEmployee: event.target.id }, function () {
             for (var i = 0; i < this.state.allEmployees.length; i++) {
                 if (this.state.allEmployees[i]._id == this.state.selectedEmployee) {
@@ -91,15 +103,15 @@ var ManagerEmployeeAll = React.createClass({
                 }
             }
         });
-    },
+    }
 
-    newEmployee: function () {
+    newEmployee() {
         this.clearForm();
         this.clearStates();
         this.activeButtons();
-    },
+    }
 
-    clearForm: function () {
+    clearForm() {
         var elements = document.getElementsByTagName("input");
         for (var i = 0; i < elements.length; i++) {
             if ((elements[i].type == "text") || (elements[i].type == "number") || (elements[i].type == "email")) {
@@ -108,13 +120,13 @@ var ManagerEmployeeAll = React.createClass({
             }
         };
         this.getEmployees();
-    },
+    }
 
-    clearStates: function () {
+    clearStates() {
         this.setState({ firstName: "", lastName: "", address: "", city: "", email: "", phone: "", selectedEmployee: "" });
-    },
+    }
 
-    activeButtons: function () {
+    activeButtons() {
         // don't allow updating or removing on empty form
         if (this.state.selectedEmployee == "") {
             document.getElementById("addEmployee").className = "btn btn-large waves-effect waves-light green accent-3";
@@ -125,9 +137,9 @@ var ManagerEmployeeAll = React.createClass({
             document.getElementById("updateEmployee").className = "btn btn-large waves-effect waves-light blue accent-3";
             document.getElementById("removeEmployee").className = "btn btn-large waves-effect waves-light red accent-3";
         }
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div className="row">
                 <div className="col m3">
@@ -257,6 +269,6 @@ var ManagerEmployeeAll = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = ManagerEmployeeAll;

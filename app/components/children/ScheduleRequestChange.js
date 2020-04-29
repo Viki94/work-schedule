@@ -2,19 +2,28 @@ var React = require("react");
 var helpers = require("../utils/helpers");
 var Translate = require("react-translate-component");
 
-var ScheduleRequestChange = React.createClass({
-    getInitialState: function () {
-        return {
+class ScheduleRequestChange extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             title: "",
             content: "",
             allScheduleRequestChanges: [],
             scheduleRequestChangeId: "",
             selectedScheduleRequestChange: "",
             scheduleRequestsCount: 5
-        };
-    },
+        }
 
-    componentDidMount: function () {
+        this.handleScheduleRequestChange = this.handleScheduleRequestChange.bind(this);
+        this.onRequestsCountChange = this.onRequestsCountChange.bind(this);
+        this.getScheduleRequestChanges = this.getScheduleRequestChanges.bind(this);
+        this.addScheduleRequestChange = this.addScheduleRequestChange.bind(this);
+        this.handleRemoveScheduleRequestChange = this.handleRemoveScheduleRequestChange.bind(this);
+        this.clearForm = this.clearForm.bind(this);
+        this.clearStates = this.clearStates.bind(this);
+    }
+
+    componentDidMount() {
         helpers.getCurrentUser().then(function (response) {
             if (response !== this.state.username) {
                 this.setState({ username: response.data.username });
@@ -28,19 +37,19 @@ var ScheduleRequestChange = React.createClass({
                 this.getScheduleRequestChanges();
             });
         }.bind(this))
-    },
+    }
 
     handleScheduleRequestChange(event) {
         this.setState({ [event.target.id]: event.target.value });
-    },
+    }
 
     onRequestsCountChange(count) {
         this.setState({ scheduleRequestsCount: count }, function () {
             this.getScheduleRequestChanges();
         });
-    },
+    }
 
-    getScheduleRequestChanges: function () {
+    getScheduleRequestChanges() {
         helpers.getScheduleRequestChanges(this.state.scheduleRequestsCount).then(function (response) {
             this.setState({ allScheduleRequestChanges: response.data }, function () {
                 // if (this.props.isAdmin) {
@@ -48,9 +57,9 @@ var ScheduleRequestChange = React.createClass({
                 // }
             });
         }.bind(this));
-    },
+    }
 
-    addScheduleRequestChange: function (event) {
+    addScheduleRequestChange(event) {
         event.preventDefault(event);
         helpers.addScheduleRequestChange(this.state.title, this.state.content, new Date().toUTCString(), this.state.username).then(function (response) {
             this.state.scheduleRequestChangeId = response.data._id;
@@ -60,9 +69,9 @@ var ScheduleRequestChange = React.createClass({
 
         Materialize.toast('Schedule request change added', 3000);
         this.clearForm();
-    },
+    }
 
-    handleRemoveScheduleRequestChange: function (event) {
+    handleRemoveScheduleRequestChange(event) {
         this.setState({ selectedScheduleRequestChange: event.target.id }, function () {
             for (var i = 0; i < this.state.allScheduleRequestChanges.length; i++) {
                 if (this.state.allScheduleRequestChanges[i]._id == this.state.selectedScheduleRequestChange) {
@@ -80,21 +89,21 @@ var ScheduleRequestChange = React.createClass({
                 }
             }
         });
-    },
+    }
 
-    clearForm: function () {
+    clearForm() {
         var elements = document.getElementsByTagName("input");
         for (var i = 0; i < elements.length; i++) {
             elements[i].value = "";
             elements[i].classList.remove("valid");
         };
-    },
+    }
 
-    clearStates: function () {
+    clearStates() {
         this.setState({ title: "", content: "" });
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div>
                 {(() => {
@@ -189,6 +198,6 @@ var ScheduleRequestChange = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = ScheduleRequestChange;

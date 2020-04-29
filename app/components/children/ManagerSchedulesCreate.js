@@ -3,10 +3,10 @@ var helpers = require("../utils/helpers");
 var ExportScheduleToExcelFile = require("./ExportScheduleToExcelFile");
 var Translate = require("react-translate-component");
 
-var ManagerSchedulesCreate = React.createClass({
-
-    getInitialState: function () {
-        return {
+class ManagerSchedulesCreate extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             firstName: "",
             lastName: "",
             monday: "",
@@ -18,19 +18,24 @@ var ManagerSchedulesCreate = React.createClass({
             sunday: "",
             selectedEmpId: "",
             selectedEmpSchedule: "",
-            empSchedules: [],
-        };
-    },
+            empSchedules: []
+        }
 
-    componentDidMount: function () {
+        this.handleUserChange = this.handleUserChange.bind(this);
+        this.handleUpdateEmpSchedule = this.handleUpdateEmpSchedule.bind(this);
+        this.handleClearEmpSchedule = this.handleClearEmpSchedule.bind(this);
+        this.clearStates = this.clearStates.bind(this);
+    }
+
+    componentDidMount() {
         helpers.getEmpSchedules().then(function (response) {
             if (response !== this.state.empSchedules) {
                 this.setState({ empSchedules: response.data });
             }
         }.bind(this));
-    },
+    }
 
-    handleUserChange: function (index, event) {
+    handleUserChange(index, event) {
         let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, j) => {
             if (index === j) {
                 //index is the index of the currently selected employee
@@ -43,9 +48,9 @@ var ManagerSchedulesCreate = React.createClass({
         });
 
         this.setState({ empSchedules: updatedEmpSchedules });
-    },
+    }
 
-    handleUpdateEmpSchedule: function (event) {
+    handleUpdateEmpSchedule(event) {
         var saveButtonBlue = document.getElementById(event);
         saveButtonBlue.innerHTML = "Add";
         saveButtonBlue.className = "btn btn-small waves-effect waves-light green accent-3";
@@ -57,9 +62,9 @@ var ManagerSchedulesCreate = React.createClass({
                 this.clearStates();
             }.bind(this));
         }
-    },
+    }
 
-    handleClearEmpSchedule: function (i, event) {
+    handleClearEmpSchedule(i, event) {
         // i is the index of the currently selected employee
         event.preventDefault();
 
@@ -81,13 +86,13 @@ var ManagerSchedulesCreate = React.createClass({
             return empSchedule;
         });
         this.setState({ empSchedules: updatedEmpSchedules });
-    },
+    }
 
-    clearStates: function () {
+    clearStates() {
         this.setState({ firstName: "", lastName: "", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "", saturday: "", sunday: "", emp_id: "", selectedEmpSchedule: "", selectedEmpId: "" });
-    },
+    }
 
-    render: function () {
+    render() {
         return (
 
             <div className="row">
@@ -168,6 +173,6 @@ var ManagerSchedulesCreate = React.createClass({
 
         );
     }
-});
+}
 
 module.exports = ManagerSchedulesCreate;

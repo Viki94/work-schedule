@@ -1,14 +1,7 @@
 var React = require("react");
-var helpers = require("../utils/helpers");
 
 var counterpart = require("counterpart");
 var Translate = require("react-translate-component");
-var bg = require('../../lang/bg');
-var en = require('../../lang/en');
-
-counterpart.registerTranslations('bg', bg);
-counterpart.registerTranslations('en', en);
-counterpart.setLocale('bg');
 
 class Register extends React.Component {
     constructor(props) {
@@ -40,7 +33,7 @@ class Register extends React.Component {
     onLangChange(selectedLanguage) {
         $('.langContainer').find('img').removeClass('activeLang');
         $('.' + selectedLanguage).addClass('activeLang');
-        this.setState({ lang: selectedLanguage });
+        // this.setState({ lang: selectedLanguage });
         counterpart.setLocale(selectedLanguage);
     }
 

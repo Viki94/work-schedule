@@ -4,41 +4,46 @@ var ScheduleView = require("./ScheduleView");
 var AnnouncementsBuild = require("./AnnouncementsBuild");
 var AnnouncementsView = require("./AnnouncementsView");
 
-var ManagerHome = React.createClass({
-    getInitialState: function () {
-        return {
+class ManagerHome extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             allAnnouncements: [],
             announcementsCount: 5
-        };
-    },
+        }
 
-    componentDidMount: function () {
+        this.getAnnouncements = this.getAnnouncements.bind(this);
+        this.getUpdatedAnnouncements = this.getUpdatedAnnouncements.bind(this);
+        this.updatedAnnouncementsCount = this.updatedAnnouncementsCount.bind(this);
+    }
+
+    componentDidMount() {
         this.getAnnouncements();
-    },
+    }
 
-    getAnnouncements: function () {
+    getAnnouncements() {
         helpers.getAnnouncements(this.state.announcementsCount).then(function (response) {
             this.setState({ allAnnouncements: response.data });
         }.bind(this));
-    },
+    }
 
-    getUpdatedAnnouncements: function (updatedAnnouncements) {
+    getUpdatedAnnouncements(updatedAnnouncements) {
         this.setState({ allAnnouncements: updatedAnnouncements })
-    },
+    }
 
-    updatedAnnouncementsCount: function (count) {
-        this.setState({ announcementsCount: count }, function(){
+    updatedAnnouncementsCount(count) {
+        this.setState({ announcementsCount: count }, function () {
             this.getAnnouncements();
         });
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div>
                 <ScheduleView />
                 <div className="row">
                     <div className="col m6">
-                        <AnnouncementsView getUpdatedAnnouncements={this.getUpdatedAnnouncements} updatedAnnouncementsCount={this.updatedAnnouncementsCount} allAnnouncements={this.state.allAnnouncements} isAdmin={true} />
+                        <AnnouncementsView getUpdatedAnnouncements={this.getUpdatedAnnouncements} getAnnouncements={this.getAnnouncements} updatedAnnouncementsCount={this.updatedAnnouncementsCount} allAnnouncements={this.state.allAnnouncements} isAdmin={true} />
                     </div>
                     <div className="col m6 fullWidth">
                         <AnnouncementsBuild getUpdatedAnnouncements={this.getUpdatedAnnouncements} allAnnouncements={this.state.allAnnouncements} isAdmin={true} />
@@ -47,6 +52,6 @@ var ManagerHome = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = ManagerHome;
