@@ -1,23 +1,23 @@
-var React = require("react");
-var helpers = require("../utils/helpers");
-var ExportScheduleToExcelFile = require("./ExportScheduleToExcelFile");
-var Translate = require("react-translate-component");
+import React, { Component } from 'react';
+import helpers from '../utils/helpers';
+import Translate from 'react-translate-component';
+import ExportScheduleToExcelFile from './ExportScheduleToExcelFile';
 
-class ManagerSchedulesCreate extends React.Component {
+class ManagerSchedulesCreate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: "",
-            lastName: "",
-            monday: "",
-            tuesday: "",
-            wednesday: "",
-            thursday: "",
-            friday: "",
-            saturday: "",
-            sunday: "",
-            selectedEmpId: "",
-            selectedEmpSchedule: "",
+            firstName: '',
+            lastName: '',
+            monday: '',
+            tuesday: '',
+            wednesday: '',
+            thursday: '',
+            friday: '',
+            saturday: '',
+            sunday: '',
+            selectedEmpId: '',
+            selectedEmpSchedule: '',
             empSchedules: []
         }
 

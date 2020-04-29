@@ -1,8 +1,8 @@
-var React = require("react");
-var ExportJsonExcel = require('js-export-excel')
-var Translate = require("react-translate-component");
+import React, { Component } from 'react';
+import Translate from 'react-translate-component';
+import ExportJsonExcel from 'js-export-excel';
 
-class ExportScheduleToExcelFile extends React.Component {
+class ExportScheduleToExcelFile extends Component {
     constructor(props) {
         super(props);
 

@@ -1,9 +1,9 @@
-var React = require("react");
-var helpers = require("../utils/helpers");
-var ExportScheduleToExcelFile = require("./ExportScheduleToExcelFile");
-var Translate = require("react-translate-component");
+import React, { Component } from 'react';
+import helpers from '../utils/helpers';
+import Translate from 'react-translate-component';
+import ExportScheduleToExcelFile from './ExportScheduleToExcelFile';
 
-class ScheduleView extends React.Component {
+class ScheduleView extends Component {
     constructor(props) {
         super(props);
         this.state = {

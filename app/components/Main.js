@@ -1,13 +1,17 @@
-var React = require("react");
-var counterpart = require("counterpart");
-var bg = require('../lang/bg');
-var en = require('../lang/en');
+import React, { Component } from 'react';
+import counterpart from 'counterpart';
+import * as bg from '../lang/bg';
+import * as en from '../lang/en';
 
 counterpart.registerTranslations('bg', bg);
 counterpart.registerTranslations('en', en);
-counterpart.setLocale('bg');
 
-class Main extends React.Component {
+class Main extends Component {
+    componentDidMount() {
+        var currentLang = localStorage.getItem('lang') || 'bg';
+        counterpart.setLocale(currentLang);
+    }
+
     render() {
         return (
             <div>

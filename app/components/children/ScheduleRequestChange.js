@@ -1,16 +1,16 @@
-var React = require("react");
-var helpers = require("../utils/helpers");
-var Translate = require("react-translate-component");
+import React, { Component } from 'react';
+import helpers from '../utils/helpers';
+import Translate from 'react-translate-component';
 
-class ScheduleRequestChange extends React.Component {
+class ScheduleRequestChange extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "",
-            content: "",
+            title: '',
+            content: '',
             allScheduleRequestChanges: [],
-            scheduleRequestChangeId: "",
-            selectedScheduleRequestChange: "",
+            scheduleRequestChangeId: '',
+            selectedScheduleRequestChange: '',
             scheduleRequestsCount: 5
         }
 

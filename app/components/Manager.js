@@ -1,22 +1,21 @@
-var React = require("react");
-var helpers = require("./utils/helpers");
+import React, { Component } from 'react';
+import helpers from './utils/helpers';
+import Translate from 'react-translate-component';
+import counterpart from 'counterpart';
 
-var counterpart = require("counterpart");
-var Translate = require("react-translate-component");
-
-class Manager extends React.Component {
+class Manager extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
-            picture: "",
-            // lang: "bg"
+            username: '',
+            picture: ''
         }
 
         this.onLangChange = this.onLangChange.bind(this);
     }
 
-    componentDidMount () {
+    componentDidMount() {
+        localStorage.getItem('lang')
         helpers.getCurrentUser().then(function (response) {
             if (response !== this.state.username) {
                 this.setState({ picture: response.data.picture, username: response.data.username });
@@ -24,14 +23,15 @@ class Manager extends React.Component {
         }.bind(this));
     }
 
-    onLangChange (selectedLanguage) {
+    onLangChange(selectedLanguage) {
         $('.langContainer').find('img').removeClass('activeLang');
         $('.' + selectedLanguage).addClass('activeLang');
-        // this.setState({ lang: selectedLanguage });
+
+        localStorage.setItem('lang', selectedLanguage);
         counterpart.setLocale(selectedLanguage);
     }
 
-    render () {
+    render() {
         return (
             <div>
                 <ul id="dropdown1" className="dropdown-content">

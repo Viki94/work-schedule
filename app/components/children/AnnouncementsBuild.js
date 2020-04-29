@@ -1,15 +1,15 @@
-var React = require("react");
-var helpers = require("../utils/helpers");
-var Translate = require("react-translate-component");
+import React, { Component } from 'react';
+import helpers from '../utils/helpers';
+import Translate from 'react-translate-component';
 
-class AnnouncementsBuild extends React.Component {
+class AnnouncementsBuild extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "",
-            content: "",
+            title: '',
+            content: '',
             allAnnouncements: [],
-            announcementId: ""
+            announcementId: ''
         }
 
         this.handleAnnouncementBuild = this.handleAnnouncementBuild.bind(this);

@@ -1,10 +1,10 @@
-var React = require("react");
-var helpers = require("../utils/helpers");
-var ScheduleView = require("./ScheduleView");
-var AnnouncementsBuild = require("./AnnouncementsBuild");
-var AnnouncementsView = require("./AnnouncementsView");
+import React, { Component } from 'react';
+import helpers from '../utils/helpers';
+import ScheduleView from './ScheduleView';
+import AnnouncementsBuild from './AnnouncementsBuild';
+import AnnouncementsView from './AnnouncementsView';
 
-class ManagerHome extends React.Component {
+class ManagerHome extends Component {
     constructor(props) {
         super(props);
         this.state = {

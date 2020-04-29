@@ -1,17 +1,16 @@
-var React = require("react");
+import React, { Component } from 'react';
+import Translate from 'react-translate-component';
+import counterpart from 'counterpart';
 
-var counterpart = require("counterpart");
-var Translate = require("react-translate-component");
-
-class Register extends React.Component {
+class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
-            password: "",
-            email: "",
-            passwordConfirmation: "",
-            error: ""
+            username: '',
+            password: '',
+            email: '',
+            passwordConfirmation: '',
+            error: ''
         }
 
         this.handleUserChange = this.handleUserChange.bind(this);
@@ -33,7 +32,8 @@ class Register extends React.Component {
     onLangChange(selectedLanguage) {
         $('.langContainer').find('img').removeClass('activeLang');
         $('.' + selectedLanguage).addClass('activeLang');
-        // this.setState({ lang: selectedLanguage });
+
+        localStorage.setItem('lang', selectedLanguage);
         counterpart.setLocale(selectedLanguage);
     }
 

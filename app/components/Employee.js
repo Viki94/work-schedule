@@ -1,16 +1,14 @@
-var React = require("react");
-var helpers = require("./utils/helpers");
+import React, { Component } from 'react';
+import helpers from './utils/helpers';
+import Translate from 'react-translate-component';
+import counterpart from 'counterpart';
 
-var counterpart = require("counterpart");
-var Translate = require("react-translate-component");
-
-class Employee extends React.Component {
+class Employee extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
-            picture: "",
-            // lang: "bg"
+            username: '',
+            picture: ''
         }
 
         this.onLangChange = this.onLangChange.bind(this);
@@ -27,7 +25,8 @@ class Employee extends React.Component {
     onLangChange(selectedLanguage) {
         $('.langContainer').find('img').removeClass('activeLang');
         $('.' + selectedLanguage).addClass('activeLang');
-        // this.setState({ lang: selectedLanguage });
+
+        localStorage.setItem('lang', selectedLanguage);
         counterpart.setLocale(selectedLanguage);
     }
 
