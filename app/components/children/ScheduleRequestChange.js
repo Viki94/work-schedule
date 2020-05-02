@@ -161,10 +161,10 @@ class ScheduleRequestChange extends Component {
                     <div className="input-field col s12">
                         <div><Translate content="requests.selectRequestCount" /></div>
                         <select id="scheduleRequestCount">
-                            <option value="5">5</option>
+                            <option value="5" defaultValue="5" >5</option>
                             <option value="10">10</option>
                             <option value="20">20</option>
-                            <option value="0"><Translate content="requests.all" /></option>
+                            <Translate component="option" content="requests.all" value="0" />
                         </select>
                     </div>
                     {this.state.allScheduleRequestChanges.map((scheduleRequestChange, i) => {

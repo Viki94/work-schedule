@@ -38,7 +38,7 @@ class AnnouncementsView extends Component {
                         }.bind(this));
 
                         Materialize.toast("Announcement removed", 3000);
-                        
+
                         var updated = this.props.getAnnouncements()
                         this.props.getUpdatedAnnouncements(updated);
                     });
@@ -58,10 +58,10 @@ class AnnouncementsView extends Component {
                 <div className="input-field col s12">
                     <div><Translate content="announcements.selectAnnouncementCount" /></div>
                     <select id="announcementsCount">
-                        <option value="5">5</option>
+                        <option value="5" defaultValue="5" >5</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
-                        <option value="0"><Translate content="announcements.all" /></option>
+                        <Translate component="option" content="announcements.all" value="0" />
                     </select>
                 </div>
                 {this.props.allAnnouncements.map((announcement, i) => {

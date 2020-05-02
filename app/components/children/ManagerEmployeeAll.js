@@ -27,6 +27,7 @@ class ManagerEmployeeAll extends Component {
         this.clearForm = this.clearForm.bind(this);
         this.clearStates = this.clearStates.bind(this);
         this.activeButtons = this.activeButtons.bind(this);
+        this.handleFileChosen = this.handleFileChosen.bind(this);
     }
 
     componentDidMount() {
@@ -137,6 +138,50 @@ class ManagerEmployeeAll extends Component {
             document.getElementById("updateEmployee").className = "btn btn-large waves-effect waves-light blue accent-3";
             document.getElementById("removeEmployee").className = "btn btn-large waves-effect waves-light red accent-3";
         }
+    }
+
+    handleFileChosen(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+            var resultText = event.target.result;
+            var allDataFromFile = resultText.split(/\r?\n/);
+            var allEmpoyees = [];
+
+            allDataFromFile.forEach(item => {
+                var dataForCurrentEmpoyee = item.split(/,/);
+                var currentEmployee = {
+                    firstName: dataForCurrentEmpoyee[0],
+                    lastName: dataForCurrentEmpoyee[1],
+                    address: dataForCurrentEmpoyee[2],
+                    city: dataForCurrentEmpoyee[3],
+                    email: dataForCurrentEmpoyee[4],
+                    phone: dataForCurrentEmpoyee[5]
+                }
+
+                allEmpoyees.push(currentEmployee);
+            });
+
+            if (allEmpoyees.length) {
+                debugger
+                for (let i = 0; i < allEmpoyees.length; i++) {
+                    helpers.addEmployee(allEmpoyees[i].firstName, allEmpoyees[i].lastName, allEmpoyees[i].address, allEmpoyees[i].city, allEmpoyees[i].email, allEmpoyees[i].phone).then(function (response) {
+                        this.state.emp_id = response.data._id;
+
+                        helpers.addEmpSchedule(this.state.emp_id, allEmpoyees[i].firstName, allEmpoyees[i].lastName).then(function (response) {
+                            this.clearStates();
+                        }.bind(this));
+
+                    }.bind(this));
+                }
+
+                Materialize.toast(`Added ${allEmpoyees.length} empoyees`, 3000);
+                this.getEmployees();
+            }
+        }.bind(this);
+
+        reader.readAsText(file);
     }
 
     render() {
@@ -261,6 +306,20 @@ class ManagerEmployeeAll extends Component {
                                     <a id="removeEmployee" className="btn btn-large waves-effect waves-light red accent-3" onClick={this.handleRemoveForm}><Translate content="buttons.remove" />
                                         <i className="material-icons right">person_outline</i>
                                     </a>
+                                </div>
+                            </div>
+                        </form>
+                        <form id="addManyEmployeesForm" action="#">
+                            <div className="file-field input-field">
+                                <div className="btn">
+                                    <span>File</span>
+                                    <input type="file"
+                                        name="input-file"
+                                        accept={['.json', '.csv']}
+                                        onChange={this.handleFileChosen} />
+                                </div>
+                                <div className="file-path-wrapper">
+                                    <input className="file-path validate" type="text" />
                                 </div>
                             </div>
                         </form>

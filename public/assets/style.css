@@ -39,10 +39,6 @@
 	font-size: 175px;
 }
 
-/*#announcementBuilder {
-	padding: 10px;
-}*/
-
 .circle-small {
 	height: 30px;
 	margin-left: 15px;
@@ -53,8 +49,8 @@
 	border: 1px solid black;
 }
 
-.width-100 {
-	width: 100px;
+.width-140 {
+	width: 140px;
 }
 
 .width-120 {
@@ -65,4 +61,8 @@
 	display: block;
 	padding-left: 48px;
 	height: 40px;
+}
+
+#addManyEmployeesForm {
+	clear: both;
 }
