@@ -66,3 +66,12 @@
 #addManyEmployeesForm {
 	clear: both;
 }
+
+#addManyEmployeesForm .file-path  {
+	margin-top: 11px;
+}
+
+#addManyEmployeesForm .customHeight {
+	height: 54px;
+	line-height: 54px;
+}

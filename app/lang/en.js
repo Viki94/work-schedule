@@ -40,7 +40,9 @@ module.exports = {
     downloadFile: 'Download file',
     create: 'Create',
     login: 'Login',
-    register: 'Register'
+    register: 'Register',
+    chooseFile: 'Choose file',
+    uploadFile: 'Upload file'
   },
   dayOfWeeks: {
     monday: 'Mon',

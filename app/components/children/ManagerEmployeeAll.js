@@ -28,6 +28,7 @@ class ManagerEmployeeAll extends Component {
         this.clearStates = this.clearStates.bind(this);
         this.activeButtons = this.activeButtons.bind(this);
         this.handleFileChosen = this.handleFileChosen.bind(this);
+        this.handleFileUpload = this.handleFileUpload.bind(this);
     }
 
     componentDidMount() {
@@ -100,6 +101,7 @@ class ManagerEmployeeAll extends Component {
                         phone: this.state.allEmployees[i].phone,
                         emp_id: this.state.selectedEmployee
                     });
+
                     this.activeButtons();
                 }
             }
@@ -120,6 +122,7 @@ class ManagerEmployeeAll extends Component {
                 elements[i].classList.remove("valid");
             }
         };
+
         this.getEmployees();
     }
 
@@ -128,7 +131,6 @@ class ManagerEmployeeAll extends Component {
     }
 
     activeButtons() {
-        // don't allow updating or removing on empty form
         if (this.state.selectedEmployee == "") {
             document.getElementById("addEmployee").className = "btn btn-large waves-effect waves-light green accent-3";
             document.getElementById("updateEmployee").className += " disabled";
@@ -141,7 +143,13 @@ class ManagerEmployeeAll extends Component {
     }
 
     handleFileChosen(event) {
-        var file = event.target.files[0];
+        document.getElementById("uploadFile").className = "btn btn-large waves-effect waves-light teal lighten-1";
+    }
+
+    handleFileUpload(event) {
+        event.preventDefault();
+
+        var file = event.target[0].files[0];
         var reader = new FileReader();
 
         reader.onload = function (event) {
@@ -164,13 +172,15 @@ class ManagerEmployeeAll extends Component {
             });
 
             if (allEmpoyees.length) {
-                debugger
                 for (let i = 0; i < allEmpoyees.length; i++) {
                     helpers.addEmployee(allEmpoyees[i].firstName, allEmpoyees[i].lastName, allEmpoyees[i].address, allEmpoyees[i].city, allEmpoyees[i].email, allEmpoyees[i].phone).then(function (response) {
                         this.state.emp_id = response.data._id;
 
                         helpers.addEmpSchedule(this.state.emp_id, allEmpoyees[i].firstName, allEmpoyees[i].lastName).then(function (response) {
                             this.clearStates();
+                            $('#inputFile, .file-path').val('');
+                            document.getElementById("uploadFile").className += " disabled";
+
                         }.bind(this));
 
                     }.bind(this));
@@ -309,17 +319,29 @@ class ManagerEmployeeAll extends Component {
                                 </div>
                             </div>
                         </form>
-                        <form id="addManyEmployeesForm" action="#">
-                            <div className="file-field input-field">
-                                <div className="btn">
-                                    <span>File</span>
-                                    <input type="file"
-                                        name="input-file"
-                                        accept={['.json', '.csv']}
-                                        onChange={this.handleFileChosen} />
+                        <form onSubmit={this.handleFileUpload} id="addManyEmployeesForm" action="#">
+                            <div className="row">
+                                <div className="col s8">
+                                    <div className="file-field">
+                                        <div className="btn btn-large waves-effect waves-light teal lighten-1 right customHeight">
+                                            <Translate content="buttons.chooseFile" />
+                                            <input
+                                                id="inputFile"
+                                                type="file"
+                                                name="input-file"
+                                                accept={['.csv']}
+                                                onChange={this.handleFileChosen} />
+                                            <i className="material-icons right">attach_file</i>
+                                        </div>
+                                        <div className="file-path-wrapper">
+                                            <input className="file-path validate" type="text" />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="file-path-wrapper">
-                                    <input className="file-path validate" type="text" />
+                                <div className="col s4">
+                                    <button id="uploadFile" className="btn btn-large waves-effect waves-light teal lighten-1 disabled" type="submit" value="Submit"><Translate content="buttons.uploadFile" />
+                                        <i className="material-icons right">file_upload</i>
+                                    </button>
                                 </div>
                             </div>
                         </form>
