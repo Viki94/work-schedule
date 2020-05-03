@@ -115,6 +115,10 @@ var helper = {
       approved: approved
     });
   },
+
+  filterScheduleRequestChanges: function (filterValue) {
+    return axios.get("/filterScheduleRequestChanges/" + filterValue);
+  },
 };
 
 module.exports = helper;

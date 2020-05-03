@@ -12,7 +12,8 @@ class ScheduleRequestChange extends Component {
             scheduleRequestChangeId: '',
             selectedScheduleRequestChange: '',
             scheduleRequestsCount: 5,
-            selectedScheduleRequestId: ''
+            selectedScheduleRequestId: '',
+            filterValue: 0
         }
 
         this.handleScheduleRequestChange = this.handleScheduleRequestChange.bind(this);
@@ -33,9 +34,24 @@ class ScheduleRequestChange extends Component {
         }.bind(this));
 
         this.getScheduleRequestChanges();
+
         $("#scheduleRequestCount").on('change', function (event) {
             this.setState({ scheduleRequestsCount: event.target.value }, function () {
                 this.getScheduleRequestChanges();
+            });
+        }.bind(this))
+
+        $("#scheduleRequestFilter").on('change', function (event) {
+            this.setState({ filterValue: event.target.value }, function () {
+                if (this.state.filterValue === '0') {
+                    this.getScheduleRequestChanges();
+                }
+                else {
+                    helpers.filterScheduleRequestChanges(this.state.filterValue).then(function (response) {
+                        this.setState({ allScheduleRequestChanges: response.data }, function () {
+                        });
+                    }.bind(this));
+                }
             });
         }.bind(this))
     }
@@ -189,6 +205,15 @@ class ScheduleRequestChange extends Component {
                             <Translate component="option" content="requests.all" value="0" />
                         </select>
                     </div>
+                    <hr />
+                    <div className="input-field col s12">
+                        <div><Translate content="requests.filterRequests" /></div>
+                        <select id="scheduleRequestFilter">
+                            <Translate component="option" content="requests.all" value="0" defaultValue="0" />
+                            <Translate component="option" content="requests.approved" value="1" />
+                            <Translate component="option" content="requests.refused" value="2" />
+                        </select>
+                    </div>
                     {this.state.allScheduleRequestChanges.map((scheduleRequestChange, i) => {
                         return (
                             <div key={i} className="row">
@@ -202,16 +227,16 @@ class ScheduleRequestChange extends Component {
                                     if (this.props.route.isAdmin) {
                                         return (
                                             <div>
-                                                <div className="col s6">
-                                                    <button
-                                                        className="btn btn-large waves-effect waves-light green accent-3 approve"
+                                                <div className="col s6 center">
+                                                    <button id="approveRequest"
+                                                        className="btn btn-large waves-effect waves-light green accent-3"
                                                         onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "approve")}><Translate content="buttons.approve" />
                                                         <i className="material-icons right">event_available</i>
                                                     </button>
                                                 </div>
-                                                <div className="col s6">
-                                                    <button
-                                                        className="btn btn-large waves-effect waves-light red accent-3 refuse"
+                                                <div className="col s6 center">
+                                                    <button id="refuseRequest"
+                                                        className="btn btn-large waves-effect waves-light red accent-3"
                                                         onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "refuse")}><Translate content="buttons.refuse" />
                                                         <i className="material-icons right">event_busy</i>
                                                     </button>

@@ -238,6 +238,17 @@ router.put("/updateScheduleRequestChange/:id", function (req, res) {
     })
 });
 
+// Fileter schedule request changes from the database
+router.get("/filterScheduleRequestChanges/:filterValue", function (req, res) {
+  scheduleRequestChange.find({ "active": 1, "approved": Number(req.params.filterValue) }).exec(function (err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
 
 
 module.exports = router;

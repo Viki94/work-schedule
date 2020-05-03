@@ -75,7 +75,10 @@ module.exports = {
     postedAt: 'Публикувано в',
     postedFrom: 'Публикувано от',
     selectRequestCount: 'Изберете брои заявки',
-    all: 'Всички'
+    all: 'Всички',
+    filterRequests: 'Филтритайте заявките',
+    approved: 'Одобрени',
+    refused: 'Отказани'
   },
   schedule: 'График',
   scheduleEditor: 'Редакция на график',

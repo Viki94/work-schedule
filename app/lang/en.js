@@ -73,7 +73,10 @@ module.exports = {
     postedAt: 'Posted at',
     postedFrom: 'Posted from',
     selectRequestCount: 'Select request count',
-    all: 'All'
+    all: 'All',
+    filterRequests: 'Filter requests',
+    approved: 'Approved',
+    refused: 'Refused'
   },
   schedule: 'Shedule',
   scheduleEditor: 'Schedule Editor',
