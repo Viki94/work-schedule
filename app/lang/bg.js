@@ -44,7 +44,9 @@ module.exports = {
     login: 'Влизане',
     register: 'Регистрация',
     chooseFile: 'Избор на файл',
-    uploadFile: 'Качи файл'
+    uploadFile: 'Качи файл',
+    approve: 'Одобри',
+    refuse: 'Откажи'
   },
   dayOfWeeks: {
     monday: 'Пн',

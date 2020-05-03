@@ -226,6 +226,18 @@ router.put("/removeScheduleRequestChange/:id", function (req, res) {
     })
 });
 
+// Update existing schedule request change
+router.put("/updateScheduleRequestChange/:id", function (req, res) {
+  scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "approved": req.body.approved })
+    .exec(function (err, doc) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(doc);
+      }
+    })
+});
+
 
 
 module.exports = router;

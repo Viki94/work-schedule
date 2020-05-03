@@ -11,7 +11,8 @@ class ScheduleRequestChange extends Component {
             allScheduleRequestChanges: [],
             scheduleRequestChangeId: '',
             selectedScheduleRequestChange: '',
-            scheduleRequestsCount: 5
+            scheduleRequestsCount: 5,
+            selectedScheduleRequestId: ''
         }
 
         this.handleScheduleRequestChange = this.handleScheduleRequestChange.bind(this);
@@ -21,6 +22,7 @@ class ScheduleRequestChange extends Component {
         this.handleRemoveScheduleRequestChange = this.handleRemoveScheduleRequestChange.bind(this);
         this.clearForm = this.clearForm.bind(this);
         this.clearStates = this.clearStates.bind(this);
+        this.handleScheduleRequest = this.handleScheduleRequest.bind(this);
     }
 
     componentDidMount() {
@@ -31,7 +33,6 @@ class ScheduleRequestChange extends Component {
         }.bind(this));
 
         this.getScheduleRequestChanges();
-
         $("#scheduleRequestCount").on('change', function (event) {
             this.setState({ scheduleRequestsCount: event.target.value }, function () {
                 this.getScheduleRequestChanges();
@@ -101,6 +102,27 @@ class ScheduleRequestChange extends Component {
 
     clearStates() {
         this.setState({ title: "", content: "" });
+    }
+
+    handleScheduleRequest(scheduleRequestId, clickedButton) {
+        const approvedValue = 1;
+        const refusedValue = 2;
+        let clickedButtonValue = approvedValue;
+        if (clickedButton === 'refuse') {
+            clickedButtonValue = refusedValue;
+        }
+
+        this.setState({ selectedScheduleRequestId: scheduleRequestId }, function () {
+            for (let i = 0; i < this.state.allScheduleRequestChanges.length; i++) {
+                if (this.state.allScheduleRequestChanges[i]._id == this.state.selectedScheduleRequestId) {
+                    helpers.updateScheduleRequestChange(this.state.selectedScheduleRequestId, clickedButtonValue).then(function (response) {
+                    }.bind(this));
+
+                    Materialize.toast("Schedule request change updated", 3000);
+                    this.getScheduleRequestChanges();
+                }
+            }
+        });
     }
 
     render() {
@@ -177,7 +199,27 @@ class ScheduleRequestChange extends Component {
                                     <p><Translate content="requests.postedFrom" />: {scheduleRequestChange.username}</p>
                                 </div>
                                 {(() => {
-                                    if (!this.props.route.isAdmin) {
+                                    if (this.props.route.isAdmin) {
+                                        return (
+                                            <div>
+                                                <div className="col s6">
+                                                    <button
+                                                        className="btn btn-large waves-effect waves-light green accent-3 approve"
+                                                        onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "approve")}><Translate content="buttons.approve" />
+                                                        <i className="material-icons right">event_available</i>
+                                                    </button>
+                                                </div>
+                                                <div className="col s6">
+                                                    <button
+                                                        className="btn btn-large waves-effect waves-light red accent-3 refuse"
+                                                        onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "refuse")}><Translate content="buttons.refuse" />
+                                                        <i className="material-icons right">event_busy</i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                    else {
                                         return (
                                             <div className="col s12">
                                                 <a id={scheduleRequestChange._id}

@@ -109,6 +109,12 @@ var helper = {
   removeScheduleRequestChange: function (id) {
     return axios.put("/removeScheduleRequestChange/" + id);
   },
+
+  updateScheduleRequestChange: function (id, approved) {
+    return axios.put("/updateScheduleRequestChange/" + id, {
+      approved: approved
+    });
+  },
 };
 
 module.exports = helper;

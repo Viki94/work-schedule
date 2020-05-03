@@ -42,7 +42,9 @@ module.exports = {
     login: 'Login',
     register: 'Register',
     chooseFile: 'Choose file',
-    uploadFile: 'Upload file'
+    uploadFile: 'Upload file',
+    approve: 'Approve',
+    refuse: 'Refuse'
   },
   dayOfWeeks: {
     monday: 'Mon',
