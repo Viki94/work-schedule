@@ -197,6 +197,17 @@ router.get("/getScheduleRequestChanges/:requestCount", function (req, res) {
   });
 });
 
+router.get("/getScheduleRequestChangesForNotAdminUser/:requestCount/:username", function (req, res) {
+  scheduleRequestChange.find({ "active": 1, "username": req.params.username }).sort({ "date": -1 }).limit(Number(req.params.requestCount)).exec(function (err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
 //Put schedule request changes to database
 router.post("/addScheduleRequestChange", function (req, res) {
   scheduleRequestChange.create({
@@ -250,5 +261,15 @@ router.get("/filterScheduleRequestChanges/:filterValue", function (req, res) {
   });
 });
 
+router.get("/filterScheduleRequestChangesForNotAdminUser/:filterValue/:username", function (req, res) {
+  scheduleRequestChange.find({ "active": 1, "approved": Number(req.params.filterValue), "username": req.params.username }).exec(function (err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
 
 module.exports = router;

@@ -76,7 +76,8 @@ module.exports = {
     all: 'All',
     filterRequests: 'Filter requests',
     approved: 'Approved',
-    refused: 'Refused'
+    refused: 'Refused',
+    notClassified : 'Not classified'
   },
   schedule: 'Shedule',
   scheduleEditor: 'Schedule Editor',

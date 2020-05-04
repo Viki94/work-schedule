@@ -31,9 +31,10 @@ class ScheduleRequestChange extends Component {
             if (response !== this.state.username) {
                 this.setState({ username: response.data.username });
             }
+
+            this.getScheduleRequestChanges();
         }.bind(this));
 
-        this.getScheduleRequestChanges();
 
         $("#scheduleRequestCount").on('change', function (event) {
             this.setState({ scheduleRequestsCount: event.target.value }, function () {
@@ -43,14 +44,22 @@ class ScheduleRequestChange extends Component {
 
         $("#scheduleRequestFilter").on('change', function (event) {
             this.setState({ filterValue: event.target.value }, function () {
-                if (this.state.filterValue === '0') {
+                if (this.state.filterValue === '4') {
                     this.getScheduleRequestChanges();
                 }
                 else {
-                    helpers.filterScheduleRequestChanges(this.state.filterValue).then(function (response) {
-                        this.setState({ allScheduleRequestChanges: response.data }, function () {
-                        });
-                    }.bind(this));
+                    if (this.props.route.isAdmin) {
+                        helpers.filterScheduleRequestChanges(this.state.filterValue).then(function (response) {
+                            this.setState({ allScheduleRequestChanges: response.data }, function () {
+                            });
+                        }.bind(this));
+                    }
+                    else {
+                        helpers.filterScheduleRequestChangesForNotAdminUser(this.state.filterValue, this.state.username).then(function (response) {
+                            this.setState({ allScheduleRequestChanges: response.data }, function () {
+                            });
+                        }.bind(this));
+                    }
                 }
             });
         }.bind(this))
@@ -67,13 +76,17 @@ class ScheduleRequestChange extends Component {
     }
 
     getScheduleRequestChanges() {
-        helpers.getScheduleRequestChanges(this.state.scheduleRequestsCount).then(function (response) {
-            this.setState({ allScheduleRequestChanges: response.data }, function () {
-                // if (this.props.isAdmin) {
-                //     this.props.getUpdatedScheduleRequestChanges(this.state.allScheduleRequestChanges);
-                // }
-            });
-        }.bind(this));
+        if (this.props.route.isAdmin) {
+            helpers.getScheduleRequestChanges(this.state.scheduleRequestsCount).then(function (response) {
+                this.setState({ allScheduleRequestChanges: response.data });
+            }.bind(this));
+
+        }
+        else {
+            helpers.getScheduleRequestChangesForNotAdminUser(this.state.scheduleRequestsCount, this.state.username).then(function (response) {
+                this.setState({ allScheduleRequestChanges: response.data });
+            }.bind(this));
+        }
     }
 
     addScheduleRequestChange(event) {
@@ -209,7 +222,8 @@ class ScheduleRequestChange extends Component {
                     <div className="input-field col s12">
                         <div><Translate content="requests.filterRequests" /></div>
                         <select id="scheduleRequestFilter">
-                            <Translate component="option" content="requests.all" value="0" defaultValue="0" />
+                            <Translate component="option" content="requests.all" value="4" defaultValue="4" />
+                            <Translate component="option" content="requests.notClassified" value="0" />
                             <Translate component="option" content="requests.approved" value="1" />
                             <Translate component="option" content="requests.refused" value="2" />
                         </select>
@@ -229,14 +243,14 @@ class ScheduleRequestChange extends Component {
                                             <div>
                                                 <div className="col s6 center">
                                                     <button id="approveRequest"
-                                                        className="btn btn-large waves-effect waves-light green accent-3"
+                                                        className={"btn btn-large waves-effect waves-light green accent-3 " + (scheduleRequestChange.approved == 1 ? 'disabled' : '')}
                                                         onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "approve")}><Translate content="buttons.approve" />
                                                         <i className="material-icons right">event_available</i>
                                                     </button>
                                                 </div>
                                                 <div className="col s6 center">
                                                     <button id="refuseRequest"
-                                                        className="btn btn-large waves-effect waves-light red accent-3"
+                                                        className={"btn btn-large waves-effect waves-light red accent-3 " + (scheduleRequestChange.approved == 2 ? 'disabled' : '')}
                                                         onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "refuse")}><Translate content="buttons.refuse" />
                                                         <i className="material-icons right">event_busy</i>
                                                     </button>

@@ -78,7 +78,8 @@ module.exports = {
     all: 'Всички',
     filterRequests: 'Филтритайте заявките',
     approved: 'Одобрени',
-    refused: 'Отказани'
+    refused: 'Отказани',
+    notClassified : 'Без класификация'
   },
   schedule: 'График',
   scheduleEditor: 'Редакция на график',

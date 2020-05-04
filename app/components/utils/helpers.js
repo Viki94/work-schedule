@@ -97,6 +97,10 @@ var helper = {
     return axios.get("/getScheduleRequestChanges/" + requestCount);
   },
 
+  getScheduleRequestChangesForNotAdminUser: function (requestCount, username) {
+    return axios.get("/getScheduleRequestChangesForNotAdminUser/" + requestCount + "/" + username);
+  },
+
   addScheduleRequestChange: function (title, content, date, username) {
     return axios.post("/addScheduleRequestChange", {
       title: title,
@@ -118,6 +122,10 @@ var helper = {
 
   filterScheduleRequestChanges: function (filterValue) {
     return axios.get("/filterScheduleRequestChanges/" + filterValue);
+  },
+
+  filterScheduleRequestChangesForNotAdminUser: function (filterValue, username) {
+    return axios.get("/filterScheduleRequestChangesForNotAdminUser/" + filterValue + "/" + username);
   },
 };
 
