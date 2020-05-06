@@ -3,28 +3,19 @@ import helpers from '../utils/helpers';
 import Translate from 'react-translate-component';
 import ExportScheduleToExcelFile from './ExportScheduleToExcelFile';
 
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { InputText } from 'primereact/inputtext';
+
 class ManagerSchedulesCreate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
-            monday: '',
-            tuesday: '',
-            wednesday: '',
-            thursday: '',
-            friday: '',
-            saturday: '',
-            sunday: '',
-            selectedEmpId: '',
-            selectedEmpSchedule: '',
             empSchedules: []
         }
 
-        this.handleUserChange = this.handleUserChange.bind(this);
-        this.handleUpdateEmpSchedule = this.handleUpdateEmpSchedule.bind(this);
-        this.handleClearEmpSchedule = this.handleClearEmpSchedule.bind(this);
-        this.clearStates = this.clearStates.bind(this);
+        this.scheduleEditor = this.scheduleEditor.bind(this);
+        this.onEditorValueChange = this.onEditorValueChange.bind(this);
     }
 
     componentDidMount() {
@@ -35,61 +26,23 @@ class ManagerSchedulesCreate extends Component {
         }.bind(this));
     }
 
-    handleUserChange(index, event) {
-        let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, j) => {
-            if (index === j) {
-                //index is the index of the currently selected employee
-                empSchedule[event.target.name] = event.target.value;
-                this.setState({ selectedEmpSchedule: empSchedule });
-                this.setState({ selectedEmpId: empSchedule._id });
-            }
-
-            return empSchedule;
-        });
-
-        this.setState({ empSchedules: updatedEmpSchedules });
-    }
-
-    handleUpdateEmpSchedule(event) {
-        var saveButtonBlue = document.getElementById(event);
-        saveButtonBlue.innerHTML = "Add";
-        saveButtonBlue.className = "btn btn-small waves-effect waves-light green accent-3";
-
-        if (this.state.selectedEmpSchedule !== "") {
-            helpers.updateEmpSchedule(this.state.selectedEmpSchedule).then(function (response) {
-                var empName = this.state.selectedEmpSchedule.firstName + " " + this.state.selectedEmpSchedule.lastName + "'s ";
-                Materialize.toast(empName + "schedule updated", 2000);
-                this.clearStates();
+    handleSaveEmpSchedule(event) {
+        this.state.empSchedules.map((empSchedule) => {
+            helpers.updateEmpSchedule(empSchedule).then(function (response) {
             }.bind(this));
-        }
+        })
+
+        Materialize.toast("The schedule was updated", 3000);
     }
 
-    handleClearEmpSchedule(i, event) {
-        // i is the index of the currently selected employee
-        event.preventDefault();
-
-        let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, j) => {
-            if (i === j) {
-                var saveButton = document.getElementById(i);
-                saveButton.innerHTML = "save";
-                saveButton.className = "btn btn-small waves-effect waves-light blue accent-3";
-
-                empSchedule.monday = "";
-                empSchedule.tuesday = "";
-                empSchedule.wednesday = "";
-                empSchedule.thursday = "";
-                empSchedule.friday = "";
-                empSchedule.saturday = "";
-                empSchedule.sunday = "";
-                this.state.selectedEmpSchedule = empSchedule;
-            }
-            return empSchedule;
-        });
-        this.setState({ empSchedules: updatedEmpSchedules });
+    onEditorValueChange(props, value) {
+        let updatedSchedules = [...this.state.empSchedules];
+        updatedSchedules[props.rowIndex][props.field] = value;
+        this.setState({ empSchedules: updatedSchedules });
     }
 
-    clearStates() {
-        this.setState({ firstName: "", lastName: "", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "", saturday: "", sunday: "", emp_id: "", selectedEmpSchedule: "", selectedEmpId: "" });
+    scheduleEditor(props) {
+        return <InputText type="text" value={this.state.empSchedules[props.rowIndex][props.field]} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
     }
 
     render() {
@@ -99,73 +52,19 @@ class ManagerSchedulesCreate extends Component {
                 <div className="col m12" >
                     <div className="section">
                         <Translate component="h5" content="scheduleEditor" />
-                        <table className="highlight">
-                            <thead>
-                                <tr>
-                                    <th data-field="name"><Translate content="name" /></th>
-                                    <th data-field="name"><Translate content="dayOfWeeks.monday" /></th>
-                                    <th data-field="name"><Translate content="dayOfWeeks.tuesday" /></th>
-                                    <th data-field="name"><Translate content="dayOfWeeks.wednesday" /></th>
-                                    <th data-field="name"><Translate content="dayOfWeeks.thursday" /></th>
-                                    <th data-field="name"><Translate content="dayOfWeeks.friday" /></th>
-                                    <th data-field="name"><Translate content="dayOfWeeks.saturday" /></th>
-                                    <th data-field="name"><Translate content="dayOfWeeks.sunday" /></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.state.empSchedules.map(function (schedules, i) {
-                                    return (
-                                        <tr key={i}>
-                                            <td className="fullName" id={this.state.empSchedules[i]._id}>
-                                                {schedules.firstName} {schedules.lastName}
-                                            </td>
-                                            <td className="">
-                                                <div className="input-field schedule">
-                                                    <input className="browser-default" name="monday" value={schedules.monday} onChange={this.handleUserChange.bind(this, i)} />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="input-field schedule">
-                                                    <input className="browser-default" name="tuesday" value={schedules.tuesday} onChange={this.handleUserChange.bind(this, i)} />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="input-field schedule">
-                                                    <input className="browser-default" name="wednesday" value={schedules.wednesday} onChange={this.handleUserChange.bind(this, i)} />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="input-field schedule">
-                                                    <input className="browser-default" name="thursday" value={schedules.thursday} onChange={this.handleUserChange.bind(this, i)} />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="input-field schedule">
-                                                    <input className="browser-default" name="friday" value={schedules.friday} onChange={this.handleUserChange.bind(this, i)} />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="input-field schedule">
-                                                    <input className="browser-default" name="saturday" value={schedules.saturday} onChange={this.handleUserChange.bind(this, i)} />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="input-field schedule">
-                                                    <input className="browser-default" name="sunday" value={schedules.sunday} onChange={this.handleUserChange.bind(this, i)} />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <button id={i} className="addSchedule" onClick={this.handleUpdateEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3"><Translate content="buttons.add" /></button>
-                                            </td>
-                                            <td>
-                                                <button id={i} className="clearSchedule" onClick={this.handleClearEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3"><Translate content="buttons.clear" /></button>
-                                            </td>
+                        <DataTable value={this.state.empSchedules} paginator={true} rows={3} first={this.state.first} onPage={(e) => this.setState({ first: e.first })} sortMode="multiple" responsive={true}>
+                            <Column field='firstName' header={<Translate content="employee.firstName" />} sortable={true} />
+                            <Column field='lastName' header={<Translate content="employee.lastName" />} sortable={true} />
+                            <Column field='monday' header={<Translate content="dayOfWeeks.monday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='tuesday' header={<Translate content="dayOfWeeks.tuesday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='wednesday' header={<Translate content="dayOfWeeks.wednesday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='thursday' header={<Translate content="dayOfWeeks.thursday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='friday' header={<Translate content="dayOfWeeks.friday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='saturday' header={<Translate content="dayOfWeeks.saturday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='sunday' header={<Translate content="dayOfWeeks.sunday" />} sortable={true} editor={this.scheduleEditor} />
+                        </DataTable>
+                        <button className="addSchedule" onClick={this.handleSaveEmpSchedule.bind(this)} className="btn btn-small waves-effect waves-light green accent-3"><Translate content="buttons.add" /></button>
 
-                                        </tr>
-                                    );
-                                }, this)}
-                            </tbody>
-                        </table>
                         <ExportScheduleToExcelFile empSchedules={this.state.empSchedules} />
                     </div>
                 </div>

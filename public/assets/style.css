@@ -75,3 +75,9 @@
 	height: 54px;
 	line-height: 54px;
 }
+
+.p-datatable.p-component input[type=text] {
+	height: auto;
+    margin: 0;
+    box-sizing: inherit;
+}
