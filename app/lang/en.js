@@ -44,7 +44,9 @@ module.exports = {
     chooseFile: 'Choose file',
     uploadFile: 'Upload file',
     approve: 'Approve',
-    refuse: 'Refuse'
+    refuse: 'Refuse',
+    generateQrCode: 'Generate QR code',
+    removeQrCode: 'Remove QR code'
   },
   dayOfWeeks: {
     monday: 'Mon',

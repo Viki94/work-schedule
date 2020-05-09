@@ -38,7 +38,7 @@ class ScheduleView extends Component {
                             <Column field='saturday' header={<Translate content="dayOfWeeks.saturday" />} sortable={true} />
                             <Column field='sunday' header={<Translate content="dayOfWeeks.sunday" />} sortable={true} />
                         </DataTable>
-
+                        <div className="marginBottom"></div>
                         <ExportScheduleToExcelFile empSchedules={this.state.empSchedules} />
                     </div>
                 </div>

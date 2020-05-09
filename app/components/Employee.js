@@ -55,7 +55,7 @@ class Employee extends Component {
                         <ul className="right hide-on-med-and-down">
                             <li><a className="black-text" href="/employee/scheduleRequestChange"><i className="material-icons right">sms</i><Translate content="navMenu.request" /></a></li>
                             <li><a className="dropdown-button black-text width-140" href="#" data-activates="langDropdown" data-beloworigin="true" data-hover="true"><i className="material-icons right">language</i><Translate content="navMenu.language" /></a></li>
-                            <li><a className="dropdown-button black-text width-120" href="#" data-activates="dropdown1" data-beloworigin="true" data-hover="true">{this.state.username}<img className="circle circle-small" src={this.state.picture} /></a></li>
+                            <li><a className="dropdown-button black-text min-width-130" href="#" data-activates="dropdown1" data-beloworigin="true" data-hover="true">{this.state.username}<img className="circle circle-small" src={this.state.picture} /></a></li>
                         </ul>
                         <ul id="slide-out" className="side-nav collapsible">
                             <li>

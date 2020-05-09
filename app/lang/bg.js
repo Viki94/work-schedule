@@ -46,7 +46,9 @@ module.exports = {
     chooseFile: 'Избор на файл',
     uploadFile: 'Качи файл',
     approve: 'Одобри',
-    refuse: 'Откажи'
+    refuse: 'Откажи',
+    generateQrCode: 'Генериране на QR код',
+    removeQrCode: 'Премахване на QR код'
   },
   dayOfWeeks: {
     monday: 'Пн',
