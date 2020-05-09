@@ -94,7 +94,7 @@
 //LINKED IN AUTH
   app.get('/auth/linkedin', passport.authenticate('linkedin', {
      failureRedirect: '/',
-     scope: ['r_emailaddress', 'r_basicprofile']
+     scope: ['r_emailaddress', 'r_liteprofile']
   }));
 
   app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
