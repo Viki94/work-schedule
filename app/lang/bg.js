@@ -77,12 +77,15 @@ module.exports = {
     latestRequests: 'Последни заявки',
     postedAt: 'Публикувано в',
     postedFrom: 'Публикувано от',
+    status: 'Статус: ',
     selectRequestCount: 'Изберете брои заявки',
     all: 'Всички',
     filterRequests: 'Филтритайте заявките',
     approved: 'Одобрени',
     refused: 'Отказани',
-    notClassified : 'Без класификация'
+    notClassified : 'Без класификация',
+    approve: 'Одобрена',
+    refuse: 'Отказана'
   },
   toasts: {
     announcementAdded: 'Анонс беше добавен',

@@ -75,12 +75,15 @@ module.exports = {
     latestRequests: 'Latest requests',
     postedAt: 'Posted at',
     postedFrom: 'Posted from',
+    status: 'Status: ',
     selectRequestCount: 'Select request count',
     all: 'All',
     filterRequests: 'Filter requests',
     approved: 'Approved',
     refused: 'Refused',
-    notClassified : 'Not classified'
+    notClassified : 'Not classified',
+    approve: 'Approved',
+    refuse: 'Refused'
   },
   toasts: {
     announcementAdded: 'Announcement added',

@@ -235,6 +235,11 @@ class ScheduleRequestChange extends Component {
                                     <p>{scheduleRequestChange.content}</p>
                                     <p><Translate content="requests.postedAt" />: {scheduleRequestChange.date}</p>
                                     <p><Translate content="requests.postedFrom" />: {scheduleRequestChange.username}</p>
+                                    <p><Translate content="requests.status" />
+                                    {scheduleRequestChange.approved == 1 ? <Translate content="requests.approve" /> :
+                                            (scheduleRequestChange.approved == 2 ? <Translate content="requests.refuse" /> :
+                                                <Translate content="requests.notClassified" />)}
+                                    </p>
                                 </div>
                                 {(() => {
                                     if (this.props.route.isAdmin) {
