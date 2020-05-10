@@ -66,7 +66,8 @@ module.exports = {
     postedAt: 'Posted at',
     postedFrom: 'Posted from',
     selectAnnouncementCount: 'Select announcement count',
-    all: 'All'
+    all: 'All',
+    noInformation: 'No information'
   },
   requests: {
     makeARequest: 'Make a request',
@@ -83,7 +84,8 @@ module.exports = {
     refused: 'Refused',
     notClassified : 'Not classified',
     approve: 'Approved',
-    refuse: 'Refused'
+    refuse: 'Refused',
+    noInformation: 'No information'
   },
   toasts: {
     announcementAdded: 'Announcement added',

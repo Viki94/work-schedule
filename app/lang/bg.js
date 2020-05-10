@@ -68,7 +68,8 @@ module.exports = {
     postedAt: 'Публикувано в',
     postedFrom: 'Публикувано от',
     selectAnnouncementCount: 'Изберете брои анонси',
-    all: 'Всички'
+    all: 'Всички',
+    noInformation: 'Няма информация'
   },
   requests: {
     makeARequest: 'Напишете заявка',
@@ -85,7 +86,8 @@ module.exports = {
     refused: 'Отказани',
     notClassified : 'Без класификация',
     approve: 'Одобрена',
-    refuse: 'Отказана'
+    refuse: 'Отказана',
+    noInformation: 'Няма информация'
   },
   toasts: {
     announcementAdded: 'Анонс беше добавен',

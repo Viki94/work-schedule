@@ -93,66 +93,75 @@ class AnnouncementsView extends Component {
                         <Translate component="option" content="announcements.all" value="0" />
                     </select>
                 </div>
-                {this.props.allAnnouncements.map((announcement, i) => {
-                    return (
-                        <div key={i} className="row">
-                            <div className="col s12">
-                                <h5>{announcement.title}</h5>
-                                <p>{announcement.content}</p>
-                                <p><Translate content="announcements.postedAt" />: {announcement.date}</p>
-                                <p><Translate content="announcements.postedFrom" />: {announcement.username}</p>
-                            </div>
-                            <div id={"print-this-" + announcement._id} className="hide">
-                                <br />
-                                <div id="qr-code">
-                                    <QRCode
-                                        id="qr-code-value"
-                                        bgColor="#FFFFFF"
-                                        fgColor="#000000"
-                                        level="L"
-                                        value={this.state.qrData}
-                                    />
+                {this.props.allAnnouncements.length ?
+                    this.props.allAnnouncements.map((announcement, i) => {
+                        return (
+                            <div key={i} className="row">
+                                <div className="col s12">
+                                    <h5>{announcement.title}</h5>
+                                    <p>{announcement.content}</p>
+                                    <p><Translate content="announcements.postedAt" />: {announcement.date}</p>
+                                    <p><Translate content="announcements.postedFrom" />: {announcement.username}</p>
                                 </div>
+                                <div id={"print-this-" + announcement._id} className="hide">
+                                    <br />
+                                    <div id="qr-code">
+                                        <QRCode
+                                            id="qr-code-value"
+                                            bgColor="#FFFFFF"
+                                            fgColor="#000000"
+                                            level="L"
+                                            value={this.state.qrData}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col s12">
+                                    <a id={announcement._id}
+                                        className={"btn btn-large waves-effect waves-light green accent-3 fullWidth add-" + announcement._id}
+                                        onClick={() => { this.generateQrCode(announcement._id) }}
+                                    >
+                                        <Translate content="buttons.generateQrCode" />
+                                        <i className="material-icons right">add</i>
+                                    </a>
+                                </div>
+                                <div className="col s12 hide">
+                                    <a id={announcement._id}
+                                        className={"btn btn-large waves-effect waves-light amber accent-3 fullWidth remove-" + announcement._id}
+                                        onClick={() => { this.hideQrCode(announcement._id) }}
+                                    >
+                                        <Translate content="buttons.removeQrCode" />
+                                        <i className="material-icons right">remove</i>
+                                    </a>
+                                </div>
+                                <div className="marginBottom"></div>
+                                {(() => {
+                                    if (this.props.isAdmin) {
+                                        return (
+                                            <div className="col s12">
+                                                <a id={announcement._id}
+                                                    className="btn btn-large waves-effect waves-light red accent-3 fullWidth"
+                                                    onClick={this.handleRemoveAnnouncement}
+                                                >
+                                                    <Translate content="buttons.remove" />
+                                                    <i className="material-icons right">delete_forever</i>
+                                                </a>
+                                                <div className="marginBottom"></div>
+                                            </div>
+                                        )
+                                    }
+                                })()}
+                                <hr />
                             </div>
-                            <div className="col s12">
-                                <a id={announcement._id}
-                                    className={"btn btn-large waves-effect waves-light green accent-3 fullWidth add-" + announcement._id}
-                                    onClick={() => { this.generateQrCode(announcement._id) }}
-                                >
-                                    <Translate content="buttons.generateQrCode" />
-                                    <i className="material-icons right">add</i>
-                                </a>
-                            </div>
-                            <div className="col s12 hide">
-                                <a id={announcement._id}
-                                    className={"btn btn-large waves-effect waves-light amber accent-3 fullWidth remove-" + announcement._id}
-                                    onClick={() => { this.hideQrCode(announcement._id) }}
-                                >
-                                    <Translate content="buttons.removeQrCode" />
-                                    <i className="material-icons right">remove</i>
-                                </a>
-                            </div>
-                            <div className="marginBottom"></div>
-                            {(() => {
-                                if (this.props.isAdmin) {
-                                    return (
-                                        <div className="col s12">
-                                            <a id={announcement._id}
-                                                className="btn btn-large waves-effect waves-light red accent-3 fullWidth"
-                                                onClick={this.handleRemoveAnnouncement}
-                                            >
-                                                <Translate content="buttons.remove" />
-                                                <i className="material-icons right">delete_forever</i>
-                                            </a>
-                                            <div className="marginBottom"></div>
-                                        </div>
-                                    )
-                                }
-                            })()}
-                            <hr />
+                        );
+                    }, this) :
+                    <div className="row">
+                        <div className="col s12">
+                            <b>
+                                <Translate content="requests.noInformation" />
+                            </b>
                         </div>
-                    );
-                }, this)}
+                    </div>
+                }
 
                 <Translate content="toasts.announcementRemoved" className="hide announcementRemoved" />
             </div>

@@ -227,58 +227,63 @@ class ScheduleRequestChange extends Component {
                             <Translate component="option" content="requests.refused" value="2" />
                         </select>
                     </div>
-                    {this.state.allScheduleRequestChanges.map((scheduleRequestChange, i) => {
-                        return (
-                            <div key={i} className="row">
-                                <div className="col s12">
-                                    <h5>{scheduleRequestChange.title}</h5>
-                                    <p>{scheduleRequestChange.content}</p>
-                                    <p><Translate content="requests.postedAt" />: {scheduleRequestChange.date}</p>
-                                    <p><Translate content="requests.postedFrom" />: {scheduleRequestChange.username}</p>
-                                    <p><Translate content="requests.status" />
-                                    {scheduleRequestChange.approved == 1 ? <Translate content="requests.approve" /> :
-                                            (scheduleRequestChange.approved == 2 ? <Translate content="requests.refuse" /> :
-                                                <Translate content="requests.notClassified" />)}
-                                    </p>
+                    {this.state.allScheduleRequestChanges.length ?
+                        this.state.allScheduleRequestChanges.map((scheduleRequestChange, i) => {
+                            return (
+                                <div key={i} className="row">
+                                    <div className="col s12">
+                                        <h5>{scheduleRequestChange.title}</h5>
+                                        <p>{scheduleRequestChange.content}</p>
+                                        <p><Translate content="requests.postedAt" />: {scheduleRequestChange.date}</p>
+                                        <p><Translate content="requests.postedFrom" />: {scheduleRequestChange.username}</p>
+                                        <p><Translate content="requests.status" />
+                                            {scheduleRequestChange.approved == 1 ? <Translate content="requests.approve" /> :
+                                                (scheduleRequestChange.approved == 2 ? <Translate content="requests.refuse" /> :
+                                                    <Translate content="requests.notClassified" />)}
+                                        </p>
+                                    </div>
+                                    {(() => {
+                                        if (this.props.route.isAdmin) {
+                                            return (
+                                                <div>
+                                                    <div className="col s6 center">
+                                                        <button id="approveRequest"
+                                                            className={"btn btn-large waves-effect waves-light green accent-3 " + (scheduleRequestChange.approved == 1 ? 'disabled' : '')}
+                                                            onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "approve")}><Translate content="buttons.approve" />
+                                                            <i className="material-icons right">event_available</i>
+                                                        </button>
+                                                    </div>
+                                                    <div className="col s6 center">
+                                                        <button id="refuseRequest"
+                                                            className={"btn btn-large waves-effect waves-light red accent-3 " + (scheduleRequestChange.approved == 2 ? 'disabled' : '')}
+                                                            onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "refuse")}><Translate content="buttons.refuse" />
+                                                            <i className="material-icons right">event_busy</i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                        else {
+                                            return (
+                                                <div className="col s12">
+                                                    <a id={scheduleRequestChange._id}
+                                                        className="btn btn-large waves-effect waves-light red accent-3 fullWidth"
+                                                        onClick={this.handleRemoveScheduleRequestChange}
+                                                    >
+                                                        <Translate content="buttons.remove" />
+                                                        <i className="material-icons right">delete_forever</i>
+                                                    </a>
+                                                </div>
+                                            )
+                                        }
+                                    })()}
                                 </div>
-                                {(() => {
-                                    if (this.props.route.isAdmin) {
-                                        return (
-                                            <div>
-                                                <div className="col s6 center">
-                                                    <button id="approveRequest"
-                                                        className={"btn btn-large waves-effect waves-light green accent-3 " + (scheduleRequestChange.approved == 1 ? 'disabled' : '')}
-                                                        onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "approve")}><Translate content="buttons.approve" />
-                                                        <i className="material-icons right">event_available</i>
-                                                    </button>
-                                                </div>
-                                                <div className="col s6 center">
-                                                    <button id="refuseRequest"
-                                                        className={"btn btn-large waves-effect waves-light red accent-3 " + (scheduleRequestChange.approved == 2 ? 'disabled' : '')}
-                                                        onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "refuse")}><Translate content="buttons.refuse" />
-                                                        <i className="material-icons right">event_busy</i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        )
-                                    }
-                                    else {
-                                        return (
-                                            <div className="col s12">
-                                                <a id={scheduleRequestChange._id}
-                                                    className="btn btn-large waves-effect waves-light red accent-3 fullWidth"
-                                                    onClick={this.handleRemoveScheduleRequestChange}
-                                                >
-                                                    <Translate content="buttons.remove" />
-                                                    <i className="material-icons right">delete_forever</i>
-                                                </a>
-                                            </div>
-                                        )
-                                    }
-                                })()}
-                            </div>
-                        );
-                    }, this)}
+                            );
+                        }, this) :
+                        <b>
+                            <Translate content="requests.noInformation" />
+                        </b>
+                    }
                 </div>
 
                 <Translate content="toasts.requestAdded" className="hide requestAdded" />
