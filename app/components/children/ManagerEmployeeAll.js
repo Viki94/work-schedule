@@ -58,7 +58,9 @@ class ManagerEmployeeAll extends Component {
             }.bind(this));
 
         }.bind(this));
-        Materialize.toast('Employee added', 3000);
+
+        let employeeAdded = $('.employeeAdded').text();
+        Materialize.toast(employeeAdded, 3000);
         this.clearForm();
         this.getEmployees();
     }
@@ -71,7 +73,9 @@ class ManagerEmployeeAll extends Component {
         helpers.updateEmpName(this.state.emp_id, this.state.firstName, this.state.lastName).then(function (response) {
             this.clearStates();
         }.bind(this));
-        Materialize.toast("Employee updated", 3000);
+
+        let employeeUpdated = $('.employeeUpdated').text();
+        Materialize.toast(employeeUpdated, 3000);
         this.clearForm();
         this.getEmployees();
     }
@@ -83,7 +87,9 @@ class ManagerEmployeeAll extends Component {
         helpers.removeEmpSchedule(this.state.emp_id).then(function (response) {
             this.clearStates();
         }.bind(this));
-        Materialize.toast("Employee removed", 3000);
+
+        let employeeRemoved = $('.employeeRemoved').text();
+        Materialize.toast(employeeRemoved, 3000);
         this.clearForm();
         this.getEmployees();
     }
@@ -186,7 +192,14 @@ class ManagerEmployeeAll extends Component {
                     }.bind(this));
                 }
 
-                Materialize.toast(`Added ${allEmpoyees.length} empoyees`, 3000);
+                let oneEmployeeAdded = $('.oneEmployeeAdded').text();
+                let xEmployeesAddedWithCount = oneEmployeeAdded;
+                if (allEmpoyees.length > 1) {
+                    let xEmployeesAdded = $('.xEmployeesAdded').text();
+                    xEmployeesAddedWithCount = xEmployeesAdded.replace('0', allEmpoyees.length);
+                }
+
+                Materialize.toast(xEmployeesAddedWithCount, 3000);
                 this.getEmployees();
             }
         }.bind(this);
@@ -345,6 +358,12 @@ class ManagerEmployeeAll extends Component {
                                 </div>
                             </div>
                         </form>
+
+                        <Translate content="toasts.employeeAdded" className="hide employeeAdded" />
+                        <Translate content="toasts.employeeUpdated" className="hide employeeUpdated" />
+                        <Translate content="toasts.employeeRemoved" className="hide employeeRemoved" />
+                        <Translate content="toasts.oneEmployeeAdded" className="hide oneEmployeeAdded" />
+                        <Translate content="toasts.xEmployeesAdded" className="hide xEmployeesAdded" />
                     </div>
                 </div>
             </div>

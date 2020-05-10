@@ -32,7 +32,8 @@ class ManagerSchedulesCreate extends Component {
             }.bind(this));
         })
 
-        Materialize.toast("The schedule was updated", 3000);
+        let scheduleUpdated = $('.scheduleUpdated').text();
+        Materialize.toast(scheduleUpdated, 3000);
     }
 
     onEditorValueChange(props, value) {
@@ -75,8 +76,9 @@ class ManagerSchedulesCreate extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <Translate content="toasts.scheduleUpdated" className="hide scheduleUpdated" />
+            </div>
         );
     }
 }

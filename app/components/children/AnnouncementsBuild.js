@@ -48,7 +48,8 @@ class AnnouncementsBuild extends Component {
             this.clearStates();
         }.bind(this));
 
-        Materialize.toast('Announcement added', 3000);
+        let announcementAdded = $('.announcementAdded').text();
+        Materialize.toast(announcementAdded, 3000);
     }
 
     clearStates() {
@@ -96,6 +97,8 @@ class AnnouncementsBuild extends Component {
                         </div>
                     </div>
                 </form>
+
+                <Translate content="toasts.announcementAdded" className="hide announcementAdded" />
             </div>
         );
     }

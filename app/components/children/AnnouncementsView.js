@@ -41,7 +41,8 @@ class AnnouncementsView extends Component {
                         helpers.removeAnnouncement(this.state.selectedAnnouncement).then(function (response) {
                         }.bind(this));
 
-                        Materialize.toast("Announcement removed", 3000);
+                        let announcementRemoved = $('.announcementRemoved').text();
+                        Materialize.toast(announcementRemoved, 3000);
 
                         var updated = this.props.getAnnouncements()
                         this.props.getUpdatedAnnouncements(updated);
@@ -153,6 +154,7 @@ class AnnouncementsView extends Component {
                     );
                 }, this)}
 
+                <Translate content="toasts.announcementRemoved" className="hide announcementRemoved" />
             </div>
         );
     }

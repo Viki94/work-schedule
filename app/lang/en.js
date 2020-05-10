@@ -82,6 +82,19 @@ module.exports = {
     refused: 'Refused',
     notClassified : 'Not classified'
   },
+  toasts: {
+    announcementAdded: 'Announcement added',
+    announcementRemoved: 'Announcement removed',
+    employeeAdded: 'Employee added',
+    employeeUpdated: 'Employee updated',
+    employeeRemoved: 'Employee removed',
+    oneEmployeeAdded: '1 employее added',
+    xEmployeesAdded: '0 employees added',
+    scheduleUpdated: 'Schedule updated',
+    requestAdded: 'Request added',
+    requestRemoved: 'Request removed',
+    requestUpdated: 'Request updated'
+  },
   schedule: 'Shedule',
   scheduleEditor: 'Schedule Editor',
   weekOverview: 'Week overview',

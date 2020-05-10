@@ -101,7 +101,8 @@ class ScheduleRequestChange extends Component {
             this.clearStates();
         }.bind(this));
 
-        Materialize.toast('Schedule request change added', 3000);
+        let requestAdded = $('.requestAdded').text();
+        Materialize.toast(requestAdded, 3000);
     }
 
     handleRemoveScheduleRequestChange(event) {
@@ -116,7 +117,8 @@ class ScheduleRequestChange extends Component {
                         helpers.removeScheduleRequestChange(this.state.selectedScheduleRequestChange).then(function (response) {
                         }.bind(this));
 
-                        Materialize.toast("Schedule request change removed", 3000);
+                        let requestRemoved = $('.requestRemoved').text();
+                        Materialize.toast(requestRemoved, 3000);
 
                         this.filterScheduleRequestChangesByValue();
                     });
@@ -144,7 +146,8 @@ class ScheduleRequestChange extends Component {
                         this.filterScheduleRequestChangesByValue();
                     }.bind(this));
 
-                    Materialize.toast("Schedule request change updated", 3000);
+                    let requestUpdated = $('.requestUpdated').text();
+                    Materialize.toast(requestUpdated, 3000);
                 }
             }
         });
@@ -272,6 +275,10 @@ class ScheduleRequestChange extends Component {
                         );
                     }, this)}
                 </div>
+
+                <Translate content="toasts.requestAdded" className="hide requestAdded" />
+                <Translate content="toasts.requestUpdated" className="hide requestUpdated" />
+                <Translate content="toasts.requestRemoved" className="hide requestRemoved" />
             </div>
         );
     }

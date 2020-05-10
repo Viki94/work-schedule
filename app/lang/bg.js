@@ -84,6 +84,19 @@ module.exports = {
     refused: 'Отказани',
     notClassified : 'Без класификация'
   },
+  toasts: {
+    announcementAdded: 'Анонс беше добавен',
+    announcementRemoved: 'Анонс беше премахнат',
+    employeeAdded: 'Работник беше добавен',
+    employeeUpdated: 'Работник беше обновен',
+    employeeRemoved: 'Работник беше премахнат',
+    oneEmployeeAdded: '1 работник беше добавен',
+    xEmployeesAdded: '0 работника бяха добавени',
+    scheduleUpdated: 'График беше обновен',
+    requestAdded: 'Заявка беше добавена',
+    requestRemoved: 'Заявка беше премахната',
+    requestUpdated: 'Заявка беше обновена'
+  },
   schedule: 'График',
   scheduleEditor: 'Редакция на график',
   weekOverview: 'Преглед на седмицата',
