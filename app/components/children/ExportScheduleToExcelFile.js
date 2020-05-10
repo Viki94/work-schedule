@@ -42,7 +42,7 @@ class ExportScheduleToExcelFile extends Component {
 
     render() {
         return (
-            <button className="exportSchedule" onClick={this.handleExportEmpSchedule} className="btn btn-small waves-effect waves-light green accent-3"><Translate content="buttons.downloadFile" /><i className="material-icons right">file_download</i></button>
+            <a className="btn btn-small waves-effect waves-light green accent-3 exportSchedule" onClick={this.handleExportEmpSchedule} ><Translate content="buttons.downloadFile" /><i className="material-icons right">file_download</i></a>
         );
     }
 }

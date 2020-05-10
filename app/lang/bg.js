@@ -41,6 +41,7 @@ module.exports = {
     clear: 'Изчисти',
     downloadFile: 'Свали файл',
     create: 'Създай',
+    save: 'Запази',
     login: 'Влизане',
     register: 'Регистрация',
     chooseFile: 'Избор на файл',

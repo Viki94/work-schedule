@@ -39,6 +39,7 @@ module.exports = {
     clear: 'Clear',
     downloadFile: 'Download file',
     create: 'Create',
+    save: 'Save',
     login: 'Login',
     register: 'Register',
     chooseFile: 'Choose file',

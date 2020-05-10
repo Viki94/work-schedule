@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import helpers from './utils/helpers';
+import language from './utils/language';
 import Translate from 'react-translate-component';
-import counterpart from 'counterpart';
 
 class Manager extends Component {
     constructor(props) {
@@ -10,8 +10,6 @@ class Manager extends Component {
             username: '',
             picture: ''
         }
-
-        this.onLangChange = this.onLangChange.bind(this);
     }
 
     componentDidMount() {
@@ -22,14 +20,6 @@ class Manager extends Component {
         }.bind(this));
     }
 
-    onLangChange(selectedLanguage) {
-        $('.langContainer').find('img').removeClass('activeLang');
-        $('.' + selectedLanguage).addClass('activeLang');
-
-        localStorage.setItem('lang', selectedLanguage);
-        counterpart.setLocale(selectedLanguage);
-    }
-
     render() {
         return (
             <div>
@@ -38,12 +28,12 @@ class Manager extends Component {
                 </ul>
                 <ul id="langDropdown" className="dropdown-content">
                     <li className="langContainer">
-                        <span className="circle-small" onClick={() => this.onLangChange("bg")}>
+                        <span className="circle-small" onClick={() => language.onLangChange("bg")}>
                             <img className="activeLang bg" src="/assets/images/bulgaria-flag-xs.png" alt="Flag Bulgaria" width="48" height="24" />
                         </span>
                     </li>
                     <li className="langContainer">
-                        <span className="circle-small" onClick={() => this.onLangChange("en")}>
+                        <span className="circle-small" onClick={() => language.onLangChange("en")}>
                             <img className="en" src="/assets/images/united-kingdom-flag-xs.png" alt="Flag United Kingdom" width="48" height="24" />
                         </span>
                     </li>
@@ -79,10 +69,10 @@ class Manager extends Component {
                                 </a>
 
                                 <div className="collapsible-body langContainer">
-                                    <div className="circle-small mobile-flags" onClick={() => this.onLangChange("bg")}>
+                                    <div className="circle-small mobile-flags" onClick={() => language.onLangChange("bg")}>
                                         <img className="activeLang bg" src="/assets/images/bulgaria-flag-xs.png" alt="Flag Bulgaria" width="48" height="24" />
                                     </div>
-                                    <div className="circle-small mobile-flags" onClick={() => this.onLangChange("en")}>
+                                    <div className="circle-small mobile-flags" onClick={() => language.onLangChange("en")}>
                                         <img className="en" src="/assets/images/united-kingdom-flag-xs.png" alt="Flag United Kingdom" width="48" height="24" />
                                     </div>
                                 </div>

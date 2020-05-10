@@ -64,8 +64,15 @@ class ManagerSchedulesCreate extends Component {
                             <Column field='sunday' header={<Translate content="dayOfWeeks.sunday" />} sortable={true} editor={this.scheduleEditor} />
                         </DataTable>
                         <div className="marginBottom"></div>
-                        <button className="addSchedule" onClick={this.handleSaveEmpSchedule.bind(this)} className="btn btn-small waves-effect waves-light green accent-3"><Translate content="buttons.add" /></button>
-                        <ExportScheduleToExcelFile empSchedules={this.state.empSchedules} />
+                        <div className="col s12 center">
+                            <a className="btn btn-small waves-effect waves-light green accent-3 marginRight"
+                                onClick={this.handleSaveEmpSchedule.bind(this)}>
+                                <Translate content="buttons.save" />
+                                <i className="material-icons right">save</i>
+                            </a>
+
+                            <ExportScheduleToExcelFile empSchedules={this.state.empSchedules} />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import language from '../utils/language';
 import Translate from 'react-translate-component';
-import counterpart from 'counterpart';
 
 class Register extends Component {
     constructor(props) {
@@ -29,14 +29,6 @@ class Register extends Component {
         //        }.bind(this));
     }
 
-    onLangChange(selectedLanguage) {
-        $('.langContainer').find('img').removeClass('activeLang');
-        $('.' + selectedLanguage).addClass('activeLang');
-
-        localStorage.setItem('lang', selectedLanguage);
-        counterpart.setLocale(selectedLanguage);
-    }
-
     render() {
         return (
             <div className="container">
@@ -55,12 +47,12 @@ class Register extends Component {
                             <form action="/register" method="POST" onSubmit={this.handleLogin}>
                                 <ul id="langDropdown" className="dropdown-content">
                                     <li className="langContainer">
-                                        <span className="circle-small" onClick={() => this.onLangChange("bg")}>
+                                        <span className="circle-small" onClick={() => language.onLangChange("bg")}>
                                             <img className="activeLang bg" src="/assets/images/bulgaria-flag-xs.png" alt="Flag Bulgaria" width="48" height="24" />
                                         </span>
                                     </li>
                                     <li className="langContainer">
-                                        <span className="circle-small" onClick={() => this.onLangChange("en")}>
+                                        <span className="circle-small" onClick={() => language.onLangChange("en")}>
                                             <img className="en" src="/assets/images/united-kingdom-flag-xs.png" alt="Flag United Kingdom" width="48" height="24" />
                                         </span>
                                     </li>
