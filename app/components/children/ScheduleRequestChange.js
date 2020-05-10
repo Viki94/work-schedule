@@ -13,7 +13,7 @@ class ScheduleRequestChange extends Component {
             selectedScheduleRequestChange: '',
             scheduleRequestsCount: 5,
             selectedScheduleRequestId: '',
-            filterValue: 0
+            filterValue: '4'
         }
 
         this.handleScheduleRequestChange = this.handleScheduleRequestChange.bind(this);
@@ -24,6 +24,7 @@ class ScheduleRequestChange extends Component {
         this.clearForm = this.clearForm.bind(this);
         this.clearStates = this.clearStates.bind(this);
         this.handleScheduleRequest = this.handleScheduleRequest.bind(this);
+        this.filterScheduleRequestChangesByValue = this.filterScheduleRequestChangesByValue.bind(this);
     }
 
     componentDidMount() {
@@ -38,31 +39,35 @@ class ScheduleRequestChange extends Component {
 
         $("#scheduleRequestCount").on('change', function (event) {
             this.setState({ scheduleRequestsCount: event.target.value }, function () {
-                this.getScheduleRequestChanges();
+                this.filterScheduleRequestChangesByValue();
             });
         }.bind(this))
 
         $("#scheduleRequestFilter").on('change', function (event) {
             this.setState({ filterValue: event.target.value }, function () {
-                if (this.state.filterValue === '4') {
-                    this.getScheduleRequestChanges();
-                }
-                else {
-                    if (this.props.route.isAdmin) {
-                        helpers.filterScheduleRequestChanges(this.state.filterValue).then(function (response) {
-                            this.setState({ allScheduleRequestChanges: response.data }, function () {
-                            });
-                        }.bind(this));
-                    }
-                    else {
-                        helpers.filterScheduleRequestChangesForNotAdminUser(this.state.filterValue, this.state.username).then(function (response) {
-                            this.setState({ allScheduleRequestChanges: response.data }, function () {
-                            });
-                        }.bind(this));
-                    }
-                }
+                this.filterScheduleRequestChangesByValue();
             });
         }.bind(this))
+    }
+
+    filterScheduleRequestChangesByValue() {
+        if (this.state.filterValue === '4') {
+            this.getScheduleRequestChanges();
+        }
+        else {
+            if (this.props.route.isAdmin) {
+                helpers.filterScheduleRequestChanges(this.state.filterValue).then(function (response) {
+                    this.setState({ allScheduleRequestChanges: response.data }, function () {
+                    });
+                }.bind(this));
+            }
+            else {
+                helpers.filterScheduleRequestChangesForNotAdminUser(this.state.filterValue, this.state.username).then(function (response) {
+                    this.setState({ allScheduleRequestChanges: response.data }, function () {
+                    });
+                }.bind(this));
+            }
+        }
     }
 
     handleScheduleRequestChange(event) {
@@ -71,7 +76,7 @@ class ScheduleRequestChange extends Component {
 
     onRequestsCountChange(count) {
         this.setState({ scheduleRequestsCount: count }, function () {
-            this.getScheduleRequestChanges();
+            this.filterScheduleRequestChangesByValue();
         });
     }
 
@@ -90,10 +95,10 @@ class ScheduleRequestChange extends Component {
     }
 
     addScheduleRequestChange(event) {
-        event.preventDefault(event);
+        event.preventDefault();
         helpers.addScheduleRequestChange(this.state.title, this.state.content, new Date().toUTCString(), this.state.username).then(function (response) {
             this.state.scheduleRequestChangeId = response.data._id;
-            this.getScheduleRequestChanges();
+            this.filterScheduleRequestChangesByValue();
             this.clearStates();
         }.bind(this));
 
@@ -114,7 +119,8 @@ class ScheduleRequestChange extends Component {
                         }.bind(this));
 
                         Materialize.toast("Schedule request change removed", 3000);
-                        this.getScheduleRequestChanges();
+
+                        this.filterScheduleRequestChangesByValue();
                     });
                 }
             }
@@ -145,10 +151,10 @@ class ScheduleRequestChange extends Component {
             for (let i = 0; i < this.state.allScheduleRequestChanges.length; i++) {
                 if (this.state.allScheduleRequestChanges[i]._id == this.state.selectedScheduleRequestId) {
                     helpers.updateScheduleRequestChange(this.state.selectedScheduleRequestId, clickedButtonValue).then(function (response) {
+                        this.filterScheduleRequestChangesByValue();
                     }.bind(this));
 
                     Materialize.toast("Schedule request change updated", 3000);
-                    this.getScheduleRequestChanges();
                 }
             }
         });
