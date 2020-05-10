@@ -15,7 +15,6 @@ class AnnouncementsBuild extends Component {
         this.handleAnnouncementBuild = this.handleAnnouncementBuild.bind(this);
         this.getAnnouncements = this.getAnnouncements.bind(this);
         this.addAnnouncements = this.addAnnouncements.bind(this);
-        this.clearForm = this.clearForm.bind(this);
         this.clearStates = this.clearStates.bind(this);
     }
 
@@ -50,15 +49,6 @@ class AnnouncementsBuild extends Component {
         }.bind(this));
 
         Materialize.toast('Announcement added', 3000);
-        this.clearForm();
-    }
-
-    clearForm() {
-        var elements = document.getElementsByTagName("input");
-        for (var i = 0; i < elements.length; i++) {
-            elements[i].value = "";
-            elements[i].classList.remove("valid");
-        };
     }
 
     clearStates() {

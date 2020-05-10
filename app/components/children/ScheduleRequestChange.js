@@ -21,7 +21,6 @@ class ScheduleRequestChange extends Component {
         this.getScheduleRequestChanges = this.getScheduleRequestChanges.bind(this);
         this.addScheduleRequestChange = this.addScheduleRequestChange.bind(this);
         this.handleRemoveScheduleRequestChange = this.handleRemoveScheduleRequestChange.bind(this);
-        this.clearForm = this.clearForm.bind(this);
         this.clearStates = this.clearStates.bind(this);
         this.handleScheduleRequest = this.handleScheduleRequest.bind(this);
         this.filterScheduleRequestChangesByValue = this.filterScheduleRequestChangesByValue.bind(this);
@@ -103,7 +102,6 @@ class ScheduleRequestChange extends Component {
         }.bind(this));
 
         Materialize.toast('Schedule request change added', 3000);
-        this.clearForm();
     }
 
     handleRemoveScheduleRequestChange(event) {
@@ -125,14 +123,6 @@ class ScheduleRequestChange extends Component {
                 }
             }
         });
-    }
-
-    clearForm() {
-        var elements = document.getElementsByTagName("input");
-        for (var i = 0; i < elements.length; i++) {
-            elements[i].value = "";
-            elements[i].classList.remove("valid");
-        };
     }
 
     clearStates() {
