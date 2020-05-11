@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import helpers from '../utils/helpers';
+import shared from '../utils/shared';
 import Translate from 'react-translate-component';
 
 class ScheduleRequestChange extends Component {
@@ -95,7 +96,7 @@ class ScheduleRequestChange extends Component {
 
     addScheduleRequestChange(event) {
         event.preventDefault();
-        helpers.addScheduleRequestChange(this.state.title, this.state.content, new Date().toUTCString(), this.state.username).then(function (response) {
+        helpers.addScheduleRequestChange(this.state.title, this.state.content, Date.parse(new Date), this.state.username).then(function (response) {
             this.state.scheduleRequestChangeId = response.data._id;
             this.filterScheduleRequestChangesByValue();
             this.clearStates();
@@ -234,7 +235,8 @@ class ScheduleRequestChange extends Component {
                                     <div className="col s12">
                                         <h5>{scheduleRequestChange.title}</h5>
                                         <p>{scheduleRequestChange.content}</p>
-                                        <p><Translate content="requests.postedAt" />: {scheduleRequestChange.date}</p>
+                                        {/* <p><Translate content="requests.postedAt" />: {new Date(Number(scheduleRequestChange.date)).toString()}</p> */}
+                                        <p><Translate content="requests.postedAt" />: { shared.publishedDate(scheduleRequestChange.date) }</p>
                                         <p><Translate content="requests.postedFrom" />: {scheduleRequestChange.username}</p>
                                         <p><Translate content="requests.status" />
                                             {scheduleRequestChange.approved == 1 ? <Translate content="requests.approve" /> :

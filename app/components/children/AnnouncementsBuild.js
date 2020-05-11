@@ -42,7 +42,7 @@ class AnnouncementsBuild extends Component {
 
     addAnnouncements(event) {
         event.preventDefault(event);
-        helpers.addAnnouncements(this.state.title, this.state.content, new Date().toUTCString(), this.state.username).then(function (response) {
+        helpers.addAnnouncements(this.state.title, this.state.content, Date.parse(new Date), this.state.username).then(function (response) {
             this.state.announcementId = response.data._id;
             this.getAnnouncements();
             this.clearStates();

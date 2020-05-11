@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import helpers from '../utils/helpers';
+import shared from '../utils/shared';
 import Translate from 'react-translate-component';
 import { QRCode } from "react-qr-svg";
 
@@ -58,7 +59,7 @@ class AnnouncementsView extends Component {
         let content = announcement.content;
         let date = announcement.date;
         let username = announcement.username;
-        let announcementText = `Title: ${title} \n Content: ${content} \n Date: ${date} \n Username: ${username}`;
+        let announcementText = `Title: ${title} \n Content: ${content} \n Date: ${ shared.publishedDate(date) } \n Username: ${username}`;
 
         this.setState({ qrData: announcementText }, () => {
             $('[id*="print-this"]').addClass('hide');
@@ -100,7 +101,7 @@ class AnnouncementsView extends Component {
                                 <div className="col s12">
                                     <h5>{announcement.title}</h5>
                                     <p>{announcement.content}</p>
-                                    <p><Translate content="announcements.postedAt" />: {announcement.date}</p>
+                                    <p><Translate content="announcements.postedAt" />: {shared.publishedDate(announcement.date)}</p>
                                     <p><Translate content="announcements.postedFrom" />: {announcement.username}</p>
                                 </div>
                                 <div id={"print-this-" + announcement._id} className="hide">

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import helpers from './utils/helpers';
-import language from './utils/language';
+import shared from './utils/shared';
 import Translate from 'react-translate-component';
 
 class Employee extends Component {
@@ -28,12 +28,12 @@ class Employee extends Component {
                 </ul>
                 <ul id="langDropdown" className="dropdown-content">
                     <li className="langContainer">
-                        <span className="circle-small" onClick={() => language.onLangChange("bg")}>
+                        <span className="circle-small" onClick={() => shared.onLangChange("bg")}>
                             <img className="activeLang bg" src="/assets/images/bulgaria-flag-xs.png" alt="Flag Bulgaria" width="48" height="24" />
                         </span>
                     </li>
                     <li className="langContainer">
-                        <span className="circle-small" onClick={() => language.onLangChange("en")}>
+                        <span className="circle-small" onClick={() => shared.onLangChange("en")}>
                             <img className="en" src="/assets/images/united-kingdom-flag-xs.png" alt="Flag United Kingdom" width="48" height="24" />
                         </span>
                     </li>
@@ -65,10 +65,10 @@ class Employee extends Component {
                                 </a>
 
                                 <div className="collapsible-body langContainer">
-                                    <div className="circle-small mobile-flags" onClick={() => language.onLangChange("bg")}>
+                                    <div className="circle-small mobile-flags" onClick={() => shared.onLangChange("bg")}>
                                         <img className="activeLang bg" src="/assets/images/bulgaria-flag-xs.png" alt="Flag Bulgaria" width="48" height="24" />
                                     </div>
-                                    <div className="circle-small mobile-flags" onClick={() => language.onLangChange("en")}>
+                                    <div className="circle-small mobile-flags" onClick={() => shared.onLangChange("en")}>
                                         <img className="en" src="/assets/images/united-kingdom-flag-xs.png" alt="Flag United Kingdom" width="48" height="24" />
                                     </div>
                                 </div>

@@ -1,7 +1,6 @@
 var axios = require("axios");
 
 var helper = {
-
   getAllEmployees: function () {
     return axios.get("/getAllEmployees");
   },
