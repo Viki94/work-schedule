@@ -1,85 +1,75 @@
 var axios = require("axios");
 
 var helper = {
-  getAllEmployees: function () {
-    return axios.get("/getAllEmployees");
+  getAllHalls() {
+    return axios.get("/getAllHalls");
   },
 
-  getCurrentUser: function () {
+  getCurrentUser() {
     return axios.get("/user");
   },
 
-  // errorMessage: function() {
-  //   return axios.get("/register");
-  // },
-
-  getEmployee: function (id) {
-    return axios.get("/getEmployee/" + id);
+  getHall(id) {
+    return axios.get("/getHall/" + id);
   },
 
-  getEmpSchedules: function () {
-    return axios.get('/getEmpSchedules')
+  getHallSchedules() {
+    return axios.get('/getHallSchedules')
       .then(function (response) {
         return response;
       })
   },
 
-  addEmpSchedule: function (emp_id, firstName, lastName) {
-    return axios.post('/addEmpSchedule', {
-      emp_id: emp_id,
-      firstName: firstName,
-      lastName: lastName
+  addHallSchedule(hall_id, name) {
+    return axios.post('/addHallSchedule', {
+      hall_id: hall_id,
+      name: name
     });
   },
 
-  updateEmpSchedule: function (empSchedule) {
-    return axios.put('/updateSchedule/' + empSchedule._id, {
-      employeeSchedule: empSchedule
+  updateHallSchedule(hallSchedule) {
+    return axios.put('/updateSchedule/' + hallSchedule._id, {
+      hallSchedule: hallSchedule
     });
   },
 
-  addEmployee: function (firstName, lastName, address, city, email, phone) {
-    return axios.post("/addEmployee", {
-      firstName: firstName,
-      lastName: lastName,
+  addHall: function (name, address, city, sittingPlaces) {
+    return axios.post("/addHall", {
+      name: name,
       address: address,
       city: city,
-      email: email,
-      phone: phone
+      sittingPlaces: sittingPlaces
     });
   },
 
-  updateEmployee: function (id, firstName, lastName, address, city, email, phone) {
-    return axios.put("/updateEmployee/" + id, {
-      firstName: firstName,
-      lastName: lastName,
+  updateHall: function (id, name, address, city, sittingPlaces) {
+    return axios.put("/updateHall/" + id, {
+      name: name,
       address: address,
       city: city,
-      email: email,
-      phone: phone
+      sittingPlaces: sittingPlaces
     });
   },
 
-  updateEmpName: function (emp_id, firstName, lastName) {
-    return axios.put("/updateEmpName/" + emp_id, {
-      firstName: firstName,
-      lastName: lastName
+  updateHallName(hall_id, name) {
+    return axios.put("/updateHallName/" + hall_id, {
+      name: name
     });
   },
 
-  removeEmployee: function (id) {
-    return axios.put("/removeEmployee/" + id);
+  removeHall(id) {
+    return axios.put("/removeHall/" + id);
   },
 
-  removeEmpSchedule: function (emp_id) {
-    return axios.put("/removeEmpSchedule/" + emp_id);
+  removeHallSchedule(hall_id) {
+    return axios.put("/removeHallSchedule/" + hall_id);
   },
 
-  getAnnouncements: function (announcementCount) {
+  getAnnouncements(announcementCount) {
     return axios.get("/getAnnouncements/" + announcementCount);
   },
 
-  addAnnouncements: function (title, content, date, username) {
+  addAnnouncements(title, content, date, username) {
     return axios.post("/addAnnouncements", {
       title: title,
       content: content,
@@ -88,19 +78,19 @@ var helper = {
     });
   },
 
-  removeAnnouncement: function (id) {
+  removeAnnouncement(id) {
     return axios.put("/removeAnnouncement/" + id);
   },
 
-  getScheduleRequestChanges: function (requestCount) {
+  getScheduleRequestChanges(requestCount) {
     return axios.get("/getScheduleRequestChanges/" + requestCount);
   },
 
-  getScheduleRequestChangesForNotAdminUser: function (requestCount, username) {
+  getScheduleRequestChangesForNotAdminUser(requestCount, username) {
     return axios.get("/getScheduleRequestChangesForNotAdminUser/" + requestCount + "/" + username);
   },
 
-  addScheduleRequestChange: function (title, content, date, username) {
+  addScheduleRequestChange(title, content, date, username) {
     return axios.post("/addScheduleRequestChange", {
       title: title,
       content: content,
@@ -109,21 +99,21 @@ var helper = {
     });
   },
 
-  removeScheduleRequestChange: function (id) {
+  removeScheduleRequestChange(id) {
     return axios.put("/removeScheduleRequestChange/" + id);
   },
 
-  updateScheduleRequestChange: function (id, approved) {
+  updateScheduleRequestChange(id, approved) {
     return axios.put("/updateScheduleRequestChange/" + id, {
       approved: approved
     });
   },
 
-  filterScheduleRequestChanges: function (filterValue) {
+  filterScheduleRequestChanges(filterValue) {
     return axios.get("/filterScheduleRequestChanges/" + filterValue);
   },
 
-  filterScheduleRequestChangesForNotAdminUser: function (filterValue, username) {
+  filterScheduleRequestChangesForNotAdminUser(filterValue, username) {
     return axios.get("/filterScheduleRequestChangesForNotAdminUser/" + filterValue + "/" + username);
   },
 };

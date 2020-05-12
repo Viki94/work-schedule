@@ -9,14 +9,14 @@ class ScheduleView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            empSchedules: []
+            hallSchedules: []
         }
     }
 
     componentDidMount() {
-        helpers.getEmpSchedules().then(function (response) {
-            if (response !== this.state.empSchedules) {
-                this.setState({ empSchedules: response.data });
+        helpers.getHallSchedules().then(function (response) {
+            if (response !== this.state.hallSchedules) {
+                this.setState({ hallSchedules: response.data });
             }
         }.bind(this));
     }
@@ -27,9 +27,8 @@ class ScheduleView extends Component {
                 <div className="col s12">
                     <div className="section">
                         <Translate component="h5" content="weekOverview" />
-                        <DataTable value={this.state.empSchedules} paginator={true} rows={3} first={this.state.first} onPage={(e) => this.setState({ first: e.first })} sortMode="multiple" responsive={true}>
-                            <Column field='firstName' header={<Translate content="employee.firstName" />} sortable={true} />
-                            <Column field='lastName' header={<Translate content="employee.lastName" />} sortable={true} />
+                        <DataTable value={this.state.hallSchedules} paginator={true} rows={3} first={this.state.first} onPage={(e) => this.setState({ first: e.first })} sortMode="multiple" responsive={true}>
+                            <Column field='name' header={<Translate content="hall.name" />} sortable={true} />
                             <Column field='monday' header={<Translate content="dayOfWeeks.monday" />} sortable={true} />
                             <Column field='tuesday' header={<Translate content="dayOfWeeks.tuesday" />} sortable={true} />
                             <Column field='wednesday' header={<Translate content="dayOfWeeks.wednesday" />} sortable={true} />
@@ -40,7 +39,7 @@ class ScheduleView extends Component {
                         </DataTable>
                         <div className="marginBottom"></div>
                         <div className="center">
-                            <ExportScheduleToExcelFile empSchedules={this.state.empSchedules} />
+                            <ExportScheduleToExcelFile hallSchedules={this.state.hallSchedules} />
                         </div>
                     </div>
                 </div>

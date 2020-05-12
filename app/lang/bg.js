@@ -14,25 +14,22 @@ module.exports = {
     manager: 'Мениджър'
   },
   navMenu: {
-    employeeManagement: 'Управление на служителите',
+    hallManagement: 'Управление на зали',
     schedules: 'Графици',
     logout: 'Изход',
     language: 'Език',
     request: 'Заявки'
   },
-
-  employees: {
-    employee: 'Работници',
-    newEmployee: 'Нов работник',
+  halls: {
+    hall: 'Зали',
+    newHall: 'Нова зала',
 
   },
-  employee: {
-    firstName: 'Име',
-    lastName: 'Фамилия',
+  hall: {
+    name: 'Име',
     address: 'Адрес',
     city: 'Град',
-    email: 'Имейл',
-    phone: 'Телефон'
+    sittingPlaces: 'Места за сядане'
   },
   buttons: {
     add: 'Добави',
@@ -84,7 +81,7 @@ module.exports = {
     filterRequests: 'Филтритайте заявките',
     approved: 'Одобрени',
     refused: 'Отказани',
-    notClassified : 'Без класификация',
+    notClassified: 'Без класификация',
     approve: 'Одобрена',
     refuse: 'Отказана',
     noInformation: 'Няма информация'
@@ -92,11 +89,11 @@ module.exports = {
   toasts: {
     announcementAdded: 'Анонс беше добавен',
     announcementRemoved: 'Анонс беше премахнат',
-    employeeAdded: 'Работник беше добавен',
-    employeeUpdated: 'Работник беше обновен',
-    employeeRemoved: 'Работник беше премахнат',
-    oneEmployeeAdded: '1 работник беше добавен',
-    xEmployeesAdded: '0 работника бяха добавени',
+    hallAdded: 'Зала беше добавена',
+    hallUpdated: 'Зала беше обновена',
+    hallRemoved: 'Зала беше премахната',
+    oneHallAdded: '1 зала беше добавена',
+    xHallsAdded: '0 зали бяха добавени',
     scheduleUpdated: 'График беше обновен',
     requestAdded: 'Заявка беше добавена',
     requestRemoved: 'Заявка беше премахната',

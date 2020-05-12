@@ -6,32 +6,32 @@ class ExportScheduleToExcelFile extends Component {
     constructor(props) {
         super(props);
 
-        this.handleExportEmpSchedule = this.handleExportEmpSchedule.bind(this);
+        this.handleExportHallSchedule = this.handleExportHallSchedule.bind(this);
     }
 
-    handleExportEmpSchedule() {
-        if (this.props.empSchedules !== "") {
-            let employeeSchedule = this.props.empSchedules.map((empSchedule) => {
-                var employee = {};
-                employee.name = empSchedule.firstName.concat(' ').concat(empSchedule.lastName);
-                employee.monday = empSchedule.monday;
-                employee.tuesday = empSchedule.tuesday;
-                employee.wednesday = empSchedule.wednesday;
-                employee.thursday = empSchedule.thursday;
-                employee.friday = empSchedule.friday;
-                employee.saturday = empSchedule.saturday;
-                employee.sunday = empSchedule.sunday;
+    handleExportHallSchedule() {
+        if (this.props.hallSchedules !== "") {
+            let hallSchedule = this.props.hallSchedules.map((schedule) => {
+                var hall = {};
+                hall.name = schedule.name;
+                hall.monday = schedule.monday;
+                hall.tuesday = schedule.tuesday;
+                hall.wednesday = schedule.wednesday;
+                hall.thursday = schedule.thursday;
+                hall.friday = schedule.friday;
+                hall.saturday = schedule.saturday;
+                hall.sunday = schedule.sunday;
 
-                return employee;
+                return hall;
             });
 
             var option = {};
             option.fileName = 'excel'
             option.datas = [
                 {
-                    sheetData: employeeSchedule,
+                    sheetData: hallSchedule,
                     sheetName: 'sheet1',
-                    sheetHeader: ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                    sheetHeader: ['Name', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
                 }
             ];
         }
@@ -42,7 +42,7 @@ class ExportScheduleToExcelFile extends Component {
 
     render() {
         return (
-            <a className="btn btn-small waves-effect waves-light green accent-3 exportSchedule" onClick={this.handleExportEmpSchedule} ><Translate content="buttons.downloadFile" /><i className="material-icons right">file_download</i></a>
+            <a className="btn btn-small waves-effect waves-light green accent-3 exportSchedule" onClick={this.handleExportHallSchedule} ><Translate content="buttons.downloadFile" /><i className="material-icons right">file_download</i></a>
         );
     }
 }

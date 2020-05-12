@@ -14,23 +14,21 @@ module.exports = {
     manager: 'Manager'
   },
   navMenu: {
-    employeeManagement: 'Employee management',
+    hallManagement: 'Hall management',
     schedules: 'Schedules',
     logout: 'Logout',
     language: 'Language',
     request: 'Requests'
   },
-  employees: {
-    employee: 'Employees',
-    newEmployee: 'New employee'
+  halls: {
+    hall: 'Halls',
+    newHall: 'New hall'
   },
-  employee: {
-    firstName: 'First name',
-    lastName: 'Last name',
+  hall: {
+    name: 'Name',
     address: 'Address',
     city: 'City',
-    email: 'Email',
-    phone: 'Phone'
+    sittingPlaces: 'Sitting places'
   },
   buttons: {
     add: 'Add',
@@ -82,7 +80,7 @@ module.exports = {
     filterRequests: 'Filter requests',
     approved: 'Approved',
     refused: 'Refused',
-    notClassified : 'Not classified',
+    notClassified: 'Not classified',
     approve: 'Approved',
     refuse: 'Refused',
     noInformation: 'No information'
@@ -90,11 +88,11 @@ module.exports = {
   toasts: {
     announcementAdded: 'Announcement added',
     announcementRemoved: 'Announcement removed',
-    employeeAdded: 'Employee added',
-    employeeUpdated: 'Employee updated',
-    employeeRemoved: 'Employee removed',
-    oneEmployeeAdded: '1 employее added',
-    xEmployeesAdded: '0 employees added',
+    hallAdded: 'Hall added',
+    hallUpdated: 'Hall updated',
+    hallRemoved: 'Hall removed',
+    oneHallAdded: '1 hall added',
+    xHallsAdded: '0 halls added',
     scheduleUpdated: 'Schedule updated',
     requestAdded: 'Request added',
     requestRemoved: 'Request removed',

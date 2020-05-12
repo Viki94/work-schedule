@@ -13,7 +13,7 @@ var Register = require("../components/children/Register");
 // manager components
 var Manager = require("../components/Manager");
 var ManagerHome = require("../components/children/ManagerHome");
-var ManagerEmployeeAll = require("../components/children/ManagerEmployeeAll");
+var ManagerHalls = require("../components/children/ManagerHalls");
 var ManagerSchedulesCreate = require("../components/children/ManagerSchedulesCreate");
 // employee components
 var Employee = require("../components/Employee");
@@ -27,7 +27,7 @@ module.exports = (
       <Route path="register" component={Register} />
       <IndexRoute component={Login} />
       <Route path="manager" component={Manager}>
-        <Route path="employeeAll" component={ManagerEmployeeAll} />
+        <Route path="halls" component={ManagerHalls} />
         <Route path="schedulesCreate" component={ManagerSchedulesCreate} />
         <Route path="scheduleRequestChange" component={ScheduleRequestChange} isAdmin={true} />
         <IndexRoute component={ManagerHome} />

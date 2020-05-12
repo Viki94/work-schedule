@@ -1,11 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var EmployeeSchema = new Schema({
-    firstName: {
-        type: String
-    },
-    lastName: {
+var HallSchema = new Schema({
+    name: {
         type: String
     },
     address: {
@@ -14,11 +11,12 @@ var EmployeeSchema = new Schema({
     city: {
         type: String
     },
-    email: {
+    sittingPlaces: {
         type: String
     },
-    phone: {
-        type: String
+    isAvailable: {
+        type: Number,
+        default: 1
     },
     active: {
         type: Number,
@@ -26,5 +24,5 @@ var EmployeeSchema = new Schema({
     }
 });
 
-var Employee = mongoose.model('Employee', EmployeeSchema);
-module.exports = Employee;
+var Hall = mongoose.model('Hall', HallSchema);
+module.exports = Hall;

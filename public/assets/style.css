@@ -31,7 +31,7 @@
 	margin-top: 20px;
 }
 
-#newEmployee {
+#newHall {
 	cursor: pointer;
 }
 
@@ -63,15 +63,15 @@
 	height: 40px;
 }
 
-#addManyEmployeesForm {
+#addManyHallsForm {
 	clear: both;
 }
 
-#addManyEmployeesForm .file-path  {
+#addManyHallsForm .file-path  {
 	margin-top: 11px;
 }
 
-#addManyEmployeesForm .customHeight {
+#addManyHallsForm .customHeight {
 	height: 54px;
 	line-height: 54px;
 }

@@ -3,14 +3,14 @@ var router = express.Router();
 var db = require("../db/db.js");
 var path = require("path");
 
-var employee = require("../models/employee");
-var EmployeeSchedule = require("../models/employeeSchedule");
+var hall = require("../models/hall");
+var hallSchedule = require("../models/hallSchedule");
 var announcements = require("../models/announcements")
 var scheduleRequestChange = require("../models/scheduleRequestChange")
 
-//Getting Employees from the database
-router.get("/getAllEmployees", function (req, res) {
-  employee.find({ "active": 1 }).exec(function (err, doc) {
+//Getting Halls from the database
+router.get("/getAllHalls", function (req, res) {
+  hall.find({ "active": 1 }).exec(function (err, doc) {
     if (err) {
       console.log(err);
     }
@@ -20,9 +20,9 @@ router.get("/getAllEmployees", function (req, res) {
   });
 });
 
-//Get employee schedules from database
-router.get("/getEmpSchedules", function (req, res) {
-  EmployeeSchedule.find({ "active": 1 }).exec(function (err, docs) {
+//Get hall schedules from database
+router.get("/getHallSchedules", function (req, res) {
+  hallSchedule.find({ "active": 1 }).exec(function (err, docs) {
     if (err) {
       console.log(err);
       res.send(err);
@@ -33,26 +33,25 @@ router.get("/getEmpSchedules", function (req, res) {
   });
 });
 
-//Posting Employee Schedule to the database
-router.post("/addEmpSchedule", function (req, res) {
-  EmployeeSchedule.create({
-    emp_id: req.body.emp_id,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName
+//Posting hall schedule to the database
+router.post("/addHallSchedule", function (req, res) {
+  hallSchedule.create({
+    hall_id: req.body.hall_id,
+    name: req.body.name,
   }, function (err) {
     if (err) {
       console.log(err);
     }
     else {
-      res.send("Employee Schedule Saved!");
+      res.send("Hall schedule saved!");
     }
   });
 });
 
-//Updating existing employee schedule
+//Updating existing hall schedule
 router.put("/updateSchedule/:id", function (req, res) {
-  var newSchedule = req.body.employeeSchedule;
-  EmployeeSchedule.findOneAndUpdate({ "_id": req.params.id }, {
+  var newSchedule = req.body.hallSchedule;
+  hallSchedule.findOneAndUpdate({ "_id": req.params.id }, {
     monday: newSchedule.monday,
     tuesday: newSchedule.tuesday,
     wednesday: newSchedule.wednesday,
@@ -64,20 +63,18 @@ router.put("/updateSchedule/:id", function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.send("Employee schedule updated");
+      res.send("Hall schedule updated");
     }
   });
 });
 
-//Posting new Employee to the database
-router.post("/addEmployee", function (req, res) {
-  employee.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
+//Posting new hall to the database
+router.post("/addHall", function (req, res) {
+  hall.create({
+    name: req.body.name,
     address: req.body.address,
     city: req.body.city,
-    email: req.body.email,
-    phone: req.body.phone
+    sittingPlaces: req.body.sittingPlaces
   }, function (err, doc) {
     if (err) {
       console.log(err);
@@ -88,41 +85,38 @@ router.post("/addEmployee", function (req, res) {
   });
 });
 
-//Updating existing employee
-router.put("/updateEmployee/:id", function (req, res) {
-  employee.findOneAndUpdate({ "_id": req.params.id }, {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
+//Updating existing hall
+router.put("/updateHall/:id", function (req, res) {
+  hall.findOneAndUpdate({ "_id": req.params.id }, {
+    name: req.body.name,
     address: req.body.address,
     city: req.body.city,
-    email: req.body.email,
-    phone: req.body.phone
+    sittingPlaces: req.body.sittingPlaces
   }, function (err) {
     if (err) {
       console.log(err);
     } else {
-      res.send("Employee updated");
+      res.send("Hall updated");
     }
   });
 });
 
-// Update employee's name in employee schedule collection
-router.put("/updateEmpName/:emp_id", function (req, res) {
-  EmployeeSchedule.findOneAndUpdate({ "emp_id": req.params.emp_id }, {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
+// Update hall's name in hall schedule collection
+router.put("/updateHallName/:hall_id", function (req, res) {
+  hallSchedule.findOneAndUpdate({ "hall_id": req.params.hall_id }, {
+    name: req.body.name
   }, function (err) {
     if (err) {
       console.log(err);
     } else {
-      res.send("Employee's name updated");
+      res.send("Hall's name updated");
     }
   });
 });
 
-// "Remove" existing employee
-router.put("/removeEmployee/:id", function (req, res) {
-  employee.findOneAndUpdate({ "_id": req.params.id }, { "active": 0 })
+// "Remove" existing hall
+router.put("/removeHall/:id", function (req, res) {
+  hall.findOneAndUpdate({ "_id": req.params.id }, { "active": 0 })
     .exec(function (err, doc) {
       if (err) {
         console.log(err);
@@ -132,9 +126,9 @@ router.put("/removeEmployee/:id", function (req, res) {
     })
 });
 
-// "Remove" existing employee schedule
-router.put("/removeEmpSchedule/:emp_id", function (req, res) {
-  EmployeeSchedule.findOneAndUpdate({ "emp_id": req.params.emp_id }, { "active": 0 })
+// "Remove" existing hall schedule
+router.put("/removeHallSchedule/:hall_id", function (req, res) {
+  hallSchedule.findOneAndUpdate({ "hall_id": req.params.hall_id }, { "active": 0 })
     .exec(function (err, doc) {
       if (err) {
         console.log(err);

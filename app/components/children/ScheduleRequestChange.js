@@ -235,7 +235,6 @@ class ScheduleRequestChange extends Component {
                                     <div className="col s12">
                                         <h5>{scheduleRequestChange.title}</h5>
                                         <p>{scheduleRequestChange.content}</p>
-                                        {/* <p><Translate content="requests.postedAt" />: {new Date(Number(scheduleRequestChange.date)).toString()}</p> */}
                                         <p><Translate content="requests.postedAt" />: { shared.publishedDate(scheduleRequestChange.date) }</p>
                                         <p><Translate content="requests.postedFrom" />: {scheduleRequestChange.username}</p>
                                         <p><Translate content="requests.status" />

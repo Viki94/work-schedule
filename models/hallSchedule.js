@@ -1,14 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var EmployeeScheduleSchema = new Schema({
-  emp_id: {
+var HallScheduleSchema = new Schema({
+  hall_id: {
     type: String
   },
-  firstName: {
-    type: String
-  },
-  lastName: {
+  name: {
     type: String
   },
   monday: {
@@ -45,5 +42,5 @@ var EmployeeScheduleSchema = new Schema({
   }
 });
 
-var EmployeeSchedule = mongoose.model('EmployeeSchedule', EmployeeScheduleSchema);
-module.exports = EmployeeSchedule;
+var HallSchedule = mongoose.model('HallSchedule', HallScheduleSchema);
+module.exports = HallSchedule;

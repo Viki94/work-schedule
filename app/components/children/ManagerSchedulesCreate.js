@@ -11,7 +11,7 @@ class ManagerSchedulesCreate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            empSchedules: []
+            hallSchedules: []
         }
 
         this.scheduleEditor = this.scheduleEditor.bind(this);
@@ -19,16 +19,16 @@ class ManagerSchedulesCreate extends Component {
     }
 
     componentDidMount() {
-        helpers.getEmpSchedules().then(function (response) {
-            if (response !== this.state.empSchedules) {
-                this.setState({ empSchedules: response.data });
+        helpers.getHallSchedules().then(function (response) {
+            if (response !== this.state.hallSchedules) {
+                this.setState({ hallSchedules: response.data });
             }
         }.bind(this));
     }
 
-    handleSaveEmpSchedule(event) {
-        this.state.empSchedules.map((empSchedule) => {
-            helpers.updateEmpSchedule(empSchedule).then(function (response) {
+    handleSaveHallSchedule(event) {
+        this.state.hallSchedules.map((hallSchedule) => {
+            helpers.updateHallSchedule(hallSchedule).then(function (response) {
             }.bind(this));
         })
 
@@ -37,13 +37,13 @@ class ManagerSchedulesCreate extends Component {
     }
 
     onEditorValueChange(props, value) {
-        let updatedSchedules = [...this.state.empSchedules];
+        let updatedSchedules = [...this.state.hallSchedules];
         updatedSchedules[props.rowIndex][props.field] = value;
-        this.setState({ empSchedules: updatedSchedules });
+        this.setState({ hallSchedules: updatedSchedules });
     }
 
     scheduleEditor(props) {
-        return <InputText type="text" value={this.state.empSchedules[props.rowIndex][props.field]} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
+        return <InputText type="text" value={this.state.hallSchedules[props.rowIndex][props.field]} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
     }
 
     render() {
@@ -53,9 +53,8 @@ class ManagerSchedulesCreate extends Component {
                 <div className="col m12" >
                     <div className="section">
                         <Translate component="h5" content="scheduleEditor" />
-                        <DataTable value={this.state.empSchedules} paginator={true} rows={3} first={this.state.first} onPage={(e) => this.setState({ first: e.first })} sortMode="multiple" responsive={true}>
-                            <Column field='firstName' header={<Translate content="employee.firstName" />} sortable={true} />
-                            <Column field='lastName' header={<Translate content="employee.lastName" />} sortable={true} />
+                        <DataTable value={this.state.hallSchedules} paginator={true} rows={3} first={this.state.first} onPage={(e) => this.setState({ first: e.first })} sortMode="multiple" responsive={true}>
+                            <Column field='name' header={<Translate content="hall.name" />} sortable={true} />
                             <Column field='monday' header={<Translate content="dayOfWeeks.monday" />} sortable={true} editor={this.scheduleEditor} />
                             <Column field='tuesday' header={<Translate content="dayOfWeeks.tuesday" />} sortable={true} editor={this.scheduleEditor} />
                             <Column field='wednesday' header={<Translate content="dayOfWeeks.wednesday" />} sortable={true} editor={this.scheduleEditor} />
@@ -67,12 +66,12 @@ class ManagerSchedulesCreate extends Component {
                         <div className="marginBottom"></div>
                         <div className="col s12 center">
                             <a className="btn btn-small waves-effect waves-light green accent-3 marginRight"
-                                onClick={this.handleSaveEmpSchedule.bind(this)}>
+                                onClick={this.handleSaveHallSchedule.bind(this)}>
                                 <Translate content="buttons.save" />
                                 <i className="material-icons right">save</i>
                             </a>
 
-                            <ExportScheduleToExcelFile empSchedules={this.state.empSchedules} />
+                            <ExportScheduleToExcelFile hallSchedules={this.state.hallSchedules} />
                         </div>
                     </div>
                 </div>
