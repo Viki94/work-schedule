@@ -13,7 +13,16 @@ module.exports = {
     employee: 'Работник',
     manager: 'Мениджър'
   },
+  users: {
+    users: 'Потребители',
+    username: 'Потребител',
+    userType: 'Вид на потребителя',
+    groups: 'Групи на потребителя',
+    search: 'Търсене',
+    choose: 'Избиране'
+  },
   navMenu: {
+    userManagement: 'Управление на потребители',
     hallManagement: 'Управление на зали',
     schedules: 'Графици',
     logout: 'Изход',
@@ -21,9 +30,8 @@ module.exports = {
     request: 'Заявки'
   },
   halls: {
-    hall: 'Зали',
-    newHall: 'Нова зала',
-
+    halls: 'Зали',
+    newHall: 'Нова зала'
   },
   hall: {
     name: 'Име',
@@ -97,7 +105,8 @@ module.exports = {
     scheduleUpdated: 'График беше обновен',
     requestAdded: 'Заявка беше добавена',
     requestRemoved: 'Заявка беше премахната',
-    requestUpdated: 'Заявка беше обновена'
+    requestUpdated: 'Заявка беше обновена',
+    userUpdated: 'Потребител беше обновен'
   },
   schedule: 'График',
   scheduleEditor: 'Редакция на график',

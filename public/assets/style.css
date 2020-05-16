@@ -95,3 +95,35 @@
 .marginRight {
 	margin-right: 20px;
 }
+
+#allUsers, #allHalls {
+	cursor: pointer;
+}
+
+#allUsers .active, #allHalls .active {
+	background-color: #f2f2f2;
+}
+
+.p-multiselect-label {
+	height: 3rem;
+    font-size: 1rem;
+    line-height: 2rem;
+}
+
+.p-multiselect-header .p-multiselect-filter-container input[type=text] {
+	height: auto;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+body .p-multiselect .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container {
+	width: 85%;
+}
+
+.p-multiselect-item label {
+	color: #333;
+} 
+
+.p-multiselect-item.p-highlight label {
+	color: #fff;
+}

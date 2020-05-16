@@ -9,6 +9,16 @@ var helper = {
     return axios.get("/user");
   },
 
+  getAllUsers() {
+    return axios.get("/getAllUsers");
+  },
+
+  updateUser: function (id, groups) {
+    return axios.put("/updateUser/" + id, {
+      groups: groups
+    });
+  },
+
   getHall(id) {
     return axios.get("/getHall/" + id);
   },

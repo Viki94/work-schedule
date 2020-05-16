@@ -20,7 +20,7 @@ class ManagerHalls extends Component {
         this.handleAddForm = this.handleAddForm.bind(this);
         this.handleUpdateForm = this.handleUpdateForm.bind(this);
         this.handleRemoveForm = this.handleRemoveForm.bind(this);
-        this.clickHall = this.clickHall.bind(this);
+        this.handleHallSelect = this.handleHallSelect.bind(this);
         this.newHall = this.newHall.bind(this);
         this.clearForm = this.clearForm.bind(this);
         this.clearStates = this.clearStates.bind(this);
@@ -65,7 +65,7 @@ class ManagerHalls extends Component {
 
     handleUpdateForm(event) {
         event.preventDefault();
-        
+
         helpers.updateHall(this.state.selectedHall, this.state.name, this.state.address, this.state.city, this.state.sittingPlaces).then(function (response) {
         }.bind(this));
 
@@ -93,10 +93,13 @@ class ManagerHalls extends Component {
         this.getHalls();
     }
 
-    clickHall(event) {
+    handleHallSelect(event) {
         this.setState({ selectedHall: event.target.id }, function () {
             for (var i = 0; i < this.state.allHalls.length; i++) {
                 if (this.state.allHalls[i]._id == this.state.selectedHall) {
+                    $('#allHalls').find('td').removeClass('active');
+                    $('#' + this.state.selectedHall).addClass('active');
+
                     this.setState({
                         name: this.state.allHalls[i].name,
                         address: this.state.allHalls[i].address,
@@ -209,7 +212,7 @@ class ManagerHalls extends Component {
                     <table className="highlight" id="allHalls">
                         <thead>
                             <tr>
-                                <th data-field="name"><Translate content="halls.hall" /></th>
+                                <th data-field="name"><Translate content="halls.halls" /></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -221,7 +224,7 @@ class ManagerHalls extends Component {
                             {this.state.allHalls.map((hall, i) => {
                                 return (
                                     <tr key={i}>
-                                        <td onClick={this.clickHall} id={this.state.allHalls[i]._id}>
+                                        <td onClick={this.handleHallSelect} id={this.state.allHalls[i]._id}>
                                             {hall.name}
                                         </td>
                                     </tr>
@@ -235,6 +238,7 @@ class ManagerHalls extends Component {
                         <form className="col m12" onSubmit={this.handleAddForm}>
                             <div className="row">
                                 <div className="input-field col m12 s12">
+                                    <Translate component="h6" content='hall.name' />
                                     <Translate
                                         component="input"
                                         type="text"
@@ -248,6 +252,7 @@ class ManagerHalls extends Component {
                             </div>
                             <div className="row">
                                 <div className="input-field col m12 s12">
+                                    <Translate component="h6" content='hall.address' />
                                     <Translate
                                         component="input"
                                         type="text"
@@ -261,6 +266,7 @@ class ManagerHalls extends Component {
                             </div>
                             <div className="row">
                                 <div className="input-field col m12 s12">
+                                    <Translate component="h6" content='hall.city' />
                                     <Translate
                                         component="input"
                                         type="text"
@@ -274,6 +280,7 @@ class ManagerHalls extends Component {
                             </div>
                             <div className="row">
                                 <div className="input-field col m12 s12">
+                                    <Translate component="h6" content='hall.sittingPlaces' />
                                     <Translate
                                         component="input"
                                         type="text"

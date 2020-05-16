@@ -13,7 +13,16 @@ module.exports = {
     employee: 'Employee',
     manager: 'Manager'
   },
+  users: {
+    users: 'Users',
+    username: 'Username',
+    userType: 'User type',
+    groups: 'User\'s groups',
+    search: 'Search',
+    choose: 'Choose'
+  },
   navMenu: {
+    userManagement: 'User management',
     hallManagement: 'Hall management',
     schedules: 'Schedules',
     logout: 'Logout',
@@ -21,7 +30,7 @@ module.exports = {
     request: 'Requests'
   },
   halls: {
-    hall: 'Halls',
+    halls: 'Halls',
     newHall: 'New hall'
   },
   hall: {
@@ -96,7 +105,8 @@ module.exports = {
     scheduleUpdated: 'Schedule updated',
     requestAdded: 'Request added',
     requestRemoved: 'Request removed',
-    requestUpdated: 'Request updated'
+    requestUpdated: 'Request updated',
+    userUpdated: 'User updated'
   },
   schedule: 'Shedule',
   scheduleEditor: 'Schedule Editor',

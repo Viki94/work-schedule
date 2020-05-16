@@ -1,0 +1,193 @@
+import React, { Component } from 'react';
+import helpers from '../utils/helpers';
+import Translate from 'react-translate-component';
+import { MultiSelect } from 'primereact/multiselect';
+
+class ManagerUsers extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            userType: '',
+            groups: [],
+            allUsers: [],
+            selectedUser: '',
+            user_id: '',
+        }
+
+        this.getUsers = this.getUsers.bind(this);
+        this.handleUserChange = this.handleUserChange.bind(this);
+        this.handleUpdateForm = this.handleUpdateForm.bind(this);
+        this.handleUserSelect = this.handleUserSelect.bind(this);
+        this.setSelectedUserState = this.setSelectedUserState.bind(this);
+    }
+
+    componentDidMount() {
+        this.getUsers();
+    }
+
+    getUsers() {
+        helpers.getAllUsers().then(function (response) {
+            if (response !== this.state.allUsers) {
+                this.setState({ allUsers: response.data }, function () {
+                    if (!$('#allUsers').find('td').hasClass('active')) {
+                        let firstUser = $('#allUsers').find('td').first().addClass('active');
+                        let userId = firstUser.attr('id');
+                        this.setSelectedUserState(userId);
+                    }
+                });
+            }
+        }.bind(this));
+    }
+
+    handleUserChange(event) {
+        this.setState({ [event.target.name]: event.target.value });
+    }
+
+    handleUpdateForm(event) {
+        event.preventDefault();
+
+        helpers.updateUser(this.state.selectedUser, this.state.groups).then(function (response) {
+        }.bind(this));
+
+        let userUpdated = $('.userUpdated').text();
+        Materialize.toast(userUpdated, 3000);
+
+        this.getUsers();
+    }
+
+    handleUserSelect(event) {
+        this.setSelectedUserState(event.target.id)
+    }
+
+    setSelectedUserState(userId) {
+        this.setState({ selectedUser: userId }, function () {
+            for (var i = 0; i < this.state.allUsers.length; i++) {
+                if (this.state.allUsers[i]._id == this.state.selectedUser) {
+                    $('#allUsers').find('td').removeClass('active');
+                    $('#' + this.state.selectedUser).addClass('active');
+
+                    this.setState({
+                        username: this.state.allUsers[i].username,
+                        userType: this.state.allUsers[i].userType,
+                        groups: this.state.allUsers[i].groups,
+                        user_id: this.state.selectedUser
+                    });
+                }
+            }
+        });
+    }
+
+    render() {
+        let search = $('.search').text();
+        let choose = $('.choose').text();
+        let allGroups = [
+            { label: ' Администратор', value: '1' },
+            { label: ' Преподавател', value: '2' },
+            { label: ' Студент', value: '3' },
+            { label: ' Прекъснал студент', value: '4' },
+            { label: ' Завършил студент', value: '5' },
+            { label: ' Инспектор', value: '6' },
+            { label: ' Декан', value: '7' },
+            { label: ' Заместник-декан', value: '8' },
+            { label: ' Факултативен съвет', value: '9' }
+        ];
+
+        let lang = localStorage.getItem('lang');
+
+        if (lang === 'en') { 
+            allGroups = [
+                { label: ' Administrator', value: '1' },
+                { label: ' University lecturer', value: '2' },
+                { label: ' Student', value: '3' },
+                { label: ' Interrupted student', value: '4' },
+                { label: ' Graduate student', value: '5' },
+                { label: ' Inspector', value: '6' },
+                { label: ' Dean', value: '7' },
+                { label: ' Vice dean', value: '8' },
+                { label: ' Faculty council', value: '9' }
+            ]; 
+        }
+
+        return (
+            <div className="row">
+                <div className="col m3">
+                    <table className="highlight" id="allUsers">
+                        <thead>
+                            <tr>
+                                <th data-field="name"><Translate content="users.users" /></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.allUsers.map((user, i) => {
+                                return (
+                                    <tr key={i}>
+                                        <td onClick={this.handleUserSelect} id={this.state.allUsers[i]._id}>
+                                            {user.username}
+                                        </td>
+                                    </tr>
+                                );
+                            }, this)}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="col m9">
+                    <div className="row">
+                        <form className="col m12">
+                            <div className="row">
+                                <div className="input-field col m12 s12">
+                                    <Translate component="h6" content='users.username' />
+                                    <Translate
+                                        component="input"
+                                        type="text"
+                                        name="username"
+                                        className="validate"
+                                        value={this.state.username}
+                                        onChange={this.handleUserChange}
+                                        required
+                                        disabled
+                                        attributes={{ placeholder: 'users.username' }} />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="input-field col m12 s12">
+                                    <Translate component="h6" content='users.userType' />
+                                    <Translate
+                                        component="input"
+                                        type="text"
+                                        name="userType"
+                                        className="validate"
+                                        value={this.state.userType}
+                                        onChange={this.handleUserChange}
+                                        required
+                                        disabled
+                                        attributes={{ placeholder: 'users.userType' }} />
+                                </div>
+                            </div>
+                            <Translate component="h6" content='users.groups' />
+                            <div className="row">
+                                <div className="col s12 content-section implementation multiselect-demo">
+                                    <MultiSelect className="col s12" value={this.state.groups} options={allGroups} onChange={(e) => this.setState({ groups: e.value })}
+                                        filter={true} filterPlaceholder={search} placeholder={choose} />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col s12 center">
+                                    <a id="updateUser" className="btn btn-large waves-effect waves-light blue accent-3" onClick={this.handleUpdateForm}><Translate content="buttons.update" />
+                                        <i className="material-icons right">edit</i>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+
+                        <Translate content="toasts.userUpdated" className="hide userUpdated" />
+                        <Translate content="users.search" className="hide search" />
+                        <Translate content="users.choose" className="hide choose" />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+
+module.exports = ManagerUsers;

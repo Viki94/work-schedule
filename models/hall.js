@@ -2,18 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var HallSchema = new Schema({
-    name: {
-        type: String
-    },
-    address: {
-        type: String
-    },
-    city: {
-        type: String
-    },
-    sittingPlaces: {
-        type: String
-    },
+    name: String,
+    address: String,
+    city: String,
+    sittingPlaces: String,
     isAvailable: {
         type: Number,
         default: 1

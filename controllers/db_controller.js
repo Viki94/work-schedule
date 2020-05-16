@@ -3,12 +3,12 @@ var router = express.Router();
 var db = require("../db/db.js");
 var path = require("path");
 
+var user = require("../models/user");
 var hall = require("../models/hall");
 var hallSchedule = require("../models/hallSchedule");
 var announcements = require("../models/announcements")
 var scheduleRequestChange = require("../models/scheduleRequestChange")
 
-//Getting Halls from the database
 router.get("/getAllHalls", function (req, res) {
   hall.find({ "active": 1 }).exec(function (err, doc) {
     if (err) {
@@ -20,7 +20,30 @@ router.get("/getAllHalls", function (req, res) {
   });
 });
 
-//Get hall schedules from database
+router.get("/getAllUsers", function (req, res) {
+  // user.find({ "active": 1 }).exec(function (err, doc) {
+    user.find().exec(function (err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+router.put("/updateUser/:id", function (req, res) {
+  user.findOneAndUpdate({ "_id": req.params.id }, {
+    groups: req.body.groups,
+  }, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("Hall updated");
+    }
+  });
+});
+
 router.get("/getHallSchedules", function (req, res) {
   hallSchedule.find({ "active": 1 }).exec(function (err, docs) {
     if (err) {
@@ -33,7 +56,6 @@ router.get("/getHallSchedules", function (req, res) {
   });
 });
 
-//Posting hall schedule to the database
 router.post("/addHallSchedule", function (req, res) {
   hallSchedule.create({
     hall_id: req.body.hall_id,
@@ -48,7 +70,6 @@ router.post("/addHallSchedule", function (req, res) {
   });
 });
 
-//Updating existing hall schedule
 router.put("/updateSchedule/:id", function (req, res) {
   var newSchedule = req.body.hallSchedule;
   hallSchedule.findOneAndUpdate({ "_id": req.params.id }, {
@@ -68,7 +89,6 @@ router.put("/updateSchedule/:id", function (req, res) {
   });
 });
 
-//Posting new hall to the database
 router.post("/addHall", function (req, res) {
   hall.create({
     name: req.body.name,
@@ -85,7 +105,6 @@ router.post("/addHall", function (req, res) {
   });
 });
 
-//Updating existing hall
 router.put("/updateHall/:id", function (req, res) {
   hall.findOneAndUpdate({ "_id": req.params.id }, {
     name: req.body.name,
@@ -101,7 +120,6 @@ router.put("/updateHall/:id", function (req, res) {
   });
 });
 
-// Update hall's name in hall schedule collection
 router.put("/updateHallName/:hall_id", function (req, res) {
   hallSchedule.findOneAndUpdate({ "hall_id": req.params.hall_id }, {
     name: req.body.name
@@ -114,7 +132,6 @@ router.put("/updateHallName/:hall_id", function (req, res) {
   });
 });
 
-// "Remove" existing hall
 router.put("/removeHall/:id", function (req, res) {
   hall.findOneAndUpdate({ "_id": req.params.id }, { "active": 0 })
     .exec(function (err, doc) {
@@ -126,7 +143,6 @@ router.put("/removeHall/:id", function (req, res) {
     })
 });
 
-// "Remove" existing hall schedule
 router.put("/removeHallSchedule/:hall_id", function (req, res) {
   hallSchedule.findOneAndUpdate({ "hall_id": req.params.hall_id }, { "active": 0 })
     .exec(function (err, doc) {
@@ -138,7 +154,6 @@ router.put("/removeHallSchedule/:hall_id", function (req, res) {
     })
 });
 
-//Getting announcements from the database
 router.get("/getAnnouncements/:announcementsCount", function (req, res) {
   announcements.find({ "active": 1 }).sort({ "date": -1 }).limit(Number(req.params.announcementsCount)).exec(function (err, doc) {
     if (err) {
@@ -150,7 +165,6 @@ router.get("/getAnnouncements/:announcementsCount", function (req, res) {
   });
 });
 
-//Put announcements to database
 router.post("/addAnnouncements", function (req, res) {
   announcements.create({
     title: req.body.title,
@@ -167,7 +181,6 @@ router.post("/addAnnouncements", function (req, res) {
   });
 });
 
-// "Remove" existing announcement
 router.put("/removeAnnouncement/:id", function (req, res) {
   announcements.findOneAndUpdate({ "_id": req.params.id }, { "active": 0 })
     .exec(function (err, doc) {
@@ -179,7 +192,6 @@ router.put("/removeAnnouncement/:id", function (req, res) {
     })
 });
 
-//Getting schedule request changes from the database
 router.get("/getScheduleRequestChanges/:requestCount", function (req, res) {
   scheduleRequestChange.find({ "active": 1 }).sort({ "date": -1 }).limit(Number(req.params.requestCount)).exec(function (err, doc) {
     if (err) {
@@ -202,7 +214,6 @@ router.get("/getScheduleRequestChangesForNotAdminUser/:requestCount/:username", 
   });
 });
 
-//Put schedule request changes to database
 router.post("/addScheduleRequestChange", function (req, res) {
   scheduleRequestChange.create({
     title: req.body.title,
@@ -219,7 +230,6 @@ router.post("/addScheduleRequestChange", function (req, res) {
   });
 });
 
-// "Remove" existing schedule request change
 router.put("/removeScheduleRequestChange/:id", function (req, res) {
   scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "active": 0 })
     .exec(function (err, doc) {
@@ -231,7 +241,6 @@ router.put("/removeScheduleRequestChange/:id", function (req, res) {
     })
 });
 
-// Update existing schedule request change
 router.put("/updateScheduleRequestChange/:id", function (req, res) {
   scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "approved": req.body.approved })
     .exec(function (err, doc) {
@@ -243,7 +252,6 @@ router.put("/updateScheduleRequestChange/:id", function (req, res) {
     })
 });
 
-// Fileter schedule request changes from the database
 router.get("/filterScheduleRequestChanges/:filterValue", function (req, res) {
   scheduleRequestChange.find({ "active": 1, "approved": Number(req.params.filterValue) }).exec(function (err, doc) {
     if (err) {
