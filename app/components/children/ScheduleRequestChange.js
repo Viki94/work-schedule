@@ -146,7 +146,7 @@ class ScheduleRequestChange extends Component {
         this.setState({ selectedScheduleRequestId: scheduleRequestId }, function () {
             for (let i = 0; i < this.state.allScheduleRequestChanges.length; i++) {
                 if (this.state.allScheduleRequestChanges[i]._id == this.state.selectedScheduleRequestId) {
-                    helpers.updateScheduleRequestApproval(this.state.selectedScheduleRequestId, clickedButtonValue).then(function (response) {
+                    helpers.updateScheduleRequestApproval(this.state.selectedScheduleRequestId, clickedButtonValue, Date.parse(new Date)).then(function (response) {
                         this.filterScheduleRequestChangesByValue();
                     }.bind(this));
 
@@ -169,7 +169,7 @@ class ScheduleRequestChange extends Component {
     }
 
     handleSaveUpdatedRequest() {
-        helpers.updateScheduleRequestGroups(this.state.selectedScheduleRequestId, this.state.selectedScheduleRequestGroups).then(function (response) {
+        helpers.updateScheduleRequestGroups(this.state.selectedScheduleRequestId, this.state.selectedScheduleRequestGroups, Date.parse(new Date)).then(function (response) {
             $('#container-' + this.state.selectedScheduleRequestId).addClass('hide');
             $('.save-' + this.state.selectedScheduleRequestId).parent().addClass('hide');
             $('.update-' + this.state.selectedScheduleRequestId).parent().removeClass('hide');
@@ -302,6 +302,7 @@ class ScheduleRequestChange extends Component {
                                         <h5>{scheduleRequestChange.title}</h5>
                                         <p>{scheduleRequestChange.content}</p>
                                         <p><Translate content="requests.postedAt" />: {shared.publishedDate(scheduleRequestChange.date)}</p>
+                                        <p><Translate content="requests.updatedAt" />: {scheduleRequestChange.lastUpdatedDate ? shared.publishedDate(scheduleRequestChange.lastUpdatedDate) : <Translate content="requests.noUpdatedDate" />}</p>
                                         <p><Translate content="requests.postedFrom" />: {scheduleRequestChange.username}</p>
                                         <p><Translate content="requests.status" />
                                             {scheduleRequestChange.approved == 1 ? <Translate content="requests.approve" /> :

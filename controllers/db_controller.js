@@ -242,8 +242,8 @@ router.put("/removeScheduleRequestChange/:id", function (req, res) {
     })
 });
 
-router.put("/updateScheduleRequestApproval/:id", function (req, res) {
-  scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "approved": req.body.approved })
+router.put("/updateScheduleRequestApproval/:id/:lastUpdatedDate", function (req, res) {
+  scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "approved": req.body.approved, "lastUpdatedDate": req.body.lastUpdatedDate })
     .exec(function (err, doc) {
       if (err) {
         console.log(err);
@@ -253,8 +253,8 @@ router.put("/updateScheduleRequestApproval/:id", function (req, res) {
     })
 });
 
-router.put("/updateScheduleRequestGroups/:id", function (req, res) {
-  scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "groups": req.body.groups })
+router.put("/updateScheduleRequestGroups/:id/:lastUpdatedDate", function (req, res) {
+  scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "groups": req.body.groups, "lastUpdatedDate": req.body.lastUpdatedDate  })
     .exec(function (err, doc) {
       if (err) {
         console.log(err);

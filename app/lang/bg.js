@@ -93,7 +93,9 @@ module.exports = {
     approve: 'Одобрена',
     refuse: 'Отказана',
     noInformation: 'Няма информация',
-    seenByUserGroups: 'Ще бъде видяно от следните групи потребители:'
+    seenByUserGroups: 'Ще бъде видяно от следните групи потребители:',
+    updatedAt: 'Обновено на',
+    noUpdatedDate: 'Няма дата на обновяване'
   },
   toasts: {
     announcementAdded: 'Анонс беше добавен',
