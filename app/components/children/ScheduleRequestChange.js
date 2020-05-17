@@ -99,7 +99,9 @@ class ScheduleRequestChange extends Component {
 
     addScheduleRequestChange(event) {
         event.preventDefault();
-        helpers.addScheduleRequestChange(this.state.title, this.state.content, Date.parse(new Date), this.state.username, this.state.groups).then(function (response) {
+        let allGroups = shared.addDefaultAdminValueToRequest(this.state.groups);
+
+        helpers.addScheduleRequestChange(this.state.title, this.state.content, Date.parse(new Date), this.state.username, allGroups).then(function (response) {
             this.state.scheduleRequestChangeId = response.data._id;
             this.filterScheduleRequestChangesByValue();
             this.clearStates();
@@ -169,18 +171,18 @@ class ScheduleRequestChange extends Component {
     }
 
     handleSaveUpdatedRequest() {
-        helpers.updateScheduleRequestGroups(this.state.selectedScheduleRequestId, this.state.selectedScheduleRequestGroups, Date.parse(new Date)).then(function (response) {
+        let allGroups = shared.addDefaultAdminValueToRequest(this.state.selectedScheduleRequestGroups);
+
+        helpers.updateScheduleRequestGroups(this.state.selectedScheduleRequestId, allGroups, Date.parse(new Date)).then(function (response) {
             $('#container-' + this.state.selectedScheduleRequestId).addClass('hide');
             $('.save-' + this.state.selectedScheduleRequestId).parent().addClass('hide');
             $('.update-' + this.state.selectedScheduleRequestId).parent().removeClass('hide');
 
-            let requestUpdated = $('.requestUpdated').text();
-            Materialize.toast(requestUpdated, 3000);
-
             this.filterScheduleRequestChangesByValue();
         }.bind(this));
 
-
+        let requestUpdated = $('.requestUpdated').text();
+        Materialize.toast(requestUpdated, 3000);
     }
 
     render() {
@@ -252,7 +254,7 @@ class ScheduleRequestChange extends Component {
                                                 attributes={{ placeholder: 'requests.makeARequest' }} />
                                         </div>
                                     </div>
-                                    <Translate component="h6" content='users.groups' />
+                                    <Translate component="h6" content="requests.seenByUserGroups" />
                                     <div className="row">
                                         <div className="col s12 content-section implementation multiselect-demo">
                                             <MultiSelect className="col s12" value={this.state.groups} options={allGroups} onChange={(e) => this.setState({ groups: e.value })}
@@ -334,13 +336,10 @@ class ScheduleRequestChange extends Component {
                                                 </button>
                                             </div>
                                         </div>
-
-
-
                                         <div className="hide">
                                             <div className="alignItems">
                                                 <Translate component="h6" content='users.groups' />
-                                                <div className="">
+                                                <div>
                                                     <div className="content-section implementation multiselect-demo">
                                                         <MultiSelect value={this.state.selectedScheduleRequestGroups} options={allGroups} onChange={(e) => this.setState({ selectedScheduleRequestGroups: e.value })}
                                                             filter={true} filterPlaceholder={search} placeholder={choose} />
