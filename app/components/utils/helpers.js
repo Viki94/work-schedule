@@ -114,9 +114,15 @@ var helper = {
     return axios.put("/removeScheduleRequestChange/" + id);
   },
 
-  updateScheduleRequestChange(id, approved) {
-    return axios.put("/updateScheduleRequestChange/" + id, {
+  updateScheduleRequestApproval(id, approved) {
+    return axios.put("/updateScheduleRequestApproval/" + id, {
       approved: approved
+    });
+  },
+
+  updateScheduleRequestGroups(id, groups) {
+    return axios.put("/updateScheduleRequestGroups/" + id, {
+      groups: groups
     });
   },
 

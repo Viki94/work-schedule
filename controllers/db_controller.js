@@ -242,8 +242,19 @@ router.put("/removeScheduleRequestChange/:id", function (req, res) {
     })
 });
 
-router.put("/updateScheduleRequestChange/:id", function (req, res) {
+router.put("/updateScheduleRequestApproval/:id", function (req, res) {
   scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "approved": req.body.approved })
+    .exec(function (err, doc) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(doc);
+      }
+    })
+});
+
+router.put("/updateScheduleRequestGroups/:id", function (req, res) {
+  scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "groups": req.body.groups })
     .exec(function (err, doc) {
       if (err) {
         console.log(err);

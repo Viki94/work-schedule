@@ -127,3 +127,17 @@ body .p-multiselect .p-multiselect-panel .p-multiselect-header .p-multiselect-fi
 .p-multiselect-item.p-highlight label {
 	color: #fff;
 }
+
+.alignItems {
+	width: 50%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.alignItems:last-child {
+	text-align: center;
+}
+
+.alignItems .p-multiselect.p-component {
+	width: 100%;
+}

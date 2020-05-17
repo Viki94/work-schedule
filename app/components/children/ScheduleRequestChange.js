@@ -17,7 +17,8 @@ class ScheduleRequestChange extends Component {
             selectedScheduleRequestId: '',
             filterValue: '4',
             groups: [],
-            currentUserGroups: []
+            currentUserGroups: [],
+            selectedScheduleRequestGroups: ''
         }
 
         this.handleScheduleRequestChange = this.handleScheduleRequestChange.bind(this);
@@ -145,7 +146,7 @@ class ScheduleRequestChange extends Component {
         this.setState({ selectedScheduleRequestId: scheduleRequestId }, function () {
             for (let i = 0; i < this.state.allScheduleRequestChanges.length; i++) {
                 if (this.state.allScheduleRequestChanges[i]._id == this.state.selectedScheduleRequestId) {
-                    helpers.updateScheduleRequestChange(this.state.selectedScheduleRequestId, clickedButtonValue).then(function (response) {
+                    helpers.updateScheduleRequestApproval(this.state.selectedScheduleRequestId, clickedButtonValue).then(function (response) {
                         this.filterScheduleRequestChangesByValue();
                     }.bind(this));
 
@@ -154,6 +155,32 @@ class ScheduleRequestChange extends Component {
                 }
             }
         });
+    }
+
+    handleUpdateRequest(scheduleRequestChange) {
+        this.setState({ selectedScheduleRequestId: scheduleRequestChange._id, selectedScheduleRequestGroups: scheduleRequestChange.groups }, function () {
+            $('[id*="container"]').addClass('hide');
+            $('[class*="save"]').parent().addClass('hide');
+            $('[class*="update"]').parent().removeClass('hide');
+            $('#container-' + scheduleRequestChange._id).removeClass('hide');
+            $('.save-' + scheduleRequestChange._id).parent().removeClass('hide');
+            $('.update-' + scheduleRequestChange._id).parent().addClass('hide');
+        });
+    }
+
+    handleSaveUpdatedRequest() {
+        helpers.updateScheduleRequestGroups(this.state.selectedScheduleRequestId, this.state.selectedScheduleRequestGroups).then(function (response) {
+            $('#container-' + this.state.selectedScheduleRequestId).addClass('hide');
+            $('.save-' + this.state.selectedScheduleRequestId).parent().addClass('hide');
+            $('.update-' + this.state.selectedScheduleRequestId).parent().removeClass('hide');
+
+            let requestUpdated = $('.requestUpdated').text();
+            Materialize.toast(requestUpdated, 3000);
+
+            this.filterScheduleRequestChangesByValue();
+        }.bind(this));
+
+
     }
 
     render() {
@@ -281,22 +308,51 @@ class ScheduleRequestChange extends Component {
                                                 (scheduleRequestChange.approved == 2 ? <Translate content="requests.refuse" /> :
                                                     <Translate content="requests.notClassified" />)}
                                         </p>
-                                        <div>
-                                            <Translate content="requests.seenByUserGroups" />
-                                            {scheduleRequestChange.groups.length ?
-                                                scheduleRequestChange.groups.map((groupValue, j) => {
+                                        <div id={"container-" + scheduleRequestChange._id}>
+                                            <div className="alignItems">
+                                                <Translate content="requests.seenByUserGroups" />
+                                                {scheduleRequestChange.groups.length ?
+                                                    scheduleRequestChange.groups.map((groupValue, j) => {
+                                                        let allGroupValues = [];
+                                                        allGroups.map(group => {
+                                                            if (group.value === groupValue) {
+                                                                allGroupValues.push(group.label)
+                                                            }
+                                                        })
 
-                                                    let allGroupValues = [];
-                                                    allGroups.map(group => {
-                                                        if (group.value === groupValue) {
-                                                            allGroupValues.push(group.label)
-                                                        }
-                                                    })
+                                                        return <p key={j}>- {allGroupValues}</p>
+                                                    }) :
+                                                    <p>- {allGroups[0].label}</p>
+                                                }
+                                            </div>
+                                            <div className={"alignItems update-" + scheduleRequestChange._id}>
+                                                <button id={scheduleRequestChange._id}
+                                                    className="btn btn-large waves-effect waves-light blue accent-3"
+                                                    onClick={() => this.handleUpdateRequest(scheduleRequestChange)}>
+                                                    <i className="material-icons right">edit</i>
+                                                </button>
+                                            </div>
+                                        </div>
 
-                                                    return <p key={j}>- {allGroupValues}</p>
-                                                }) :
-                                                <p>- {allGroups[0].label}</p>
-                                            }
+
+
+                                        <div className="hide">
+                                            <div className="alignItems">
+                                                <Translate component="h6" content='users.groups' />
+                                                <div className="">
+                                                    <div className="content-section implementation multiselect-demo">
+                                                        <MultiSelect value={this.state.selectedScheduleRequestGroups} options={allGroups} onChange={(e) => this.setState({ selectedScheduleRequestGroups: e.value })}
+                                                            filter={true} filterPlaceholder={search} placeholder={choose} />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className={"alignItems save-" + scheduleRequestChange._id}>
+                                                <button id={scheduleRequestChange._id}
+                                                    className="btn btn-large waves-effect waves-light blue accent-3"
+                                                    onClick={() => this.handleSaveUpdatedRequest()}>
+                                                    <i className="material-icons right">save</i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                     {
