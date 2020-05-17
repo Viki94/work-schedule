@@ -92,7 +92,8 @@ module.exports = {
     notClassified: 'Без класификация',
     approve: 'Одобрена',
     refuse: 'Отказана',
-    noInformation: 'Няма информация'
+    noInformation: 'Няма информация',
+    seenByUserGroups: 'Ще бъде видяно от следните групи потребители:'
   },
   toasts: {
     announcementAdded: 'Анонс беше добавен',

@@ -92,7 +92,8 @@ module.exports = {
     notClassified: 'Not classified',
     approve: 'Approved',
     refuse: 'Refused',
-    noInformation: 'No information'
+    noInformation: 'No information',
+    seenByUserGroups: 'It will be seen with the following user groups:'
   },
   toasts: {
     announcementAdded: 'Announcement added',

@@ -92,20 +92,21 @@ var helper = {
     return axios.put("/removeAnnouncement/" + id);
   },
 
-  getScheduleRequestChanges(requestCount) {
-    return axios.get("/getScheduleRequestChanges/" + requestCount);
+  getScheduleRequestChanges(requestCount, groups) {
+    return axios.get("/getScheduleRequestChanges/" + requestCount + "/" + groups);
   },
 
   getScheduleRequestChangesForNotAdminUser(requestCount, username) {
     return axios.get("/getScheduleRequestChangesForNotAdminUser/" + requestCount + "/" + username);
   },
 
-  addScheduleRequestChange(title, content, date, username) {
+  addScheduleRequestChange(title, content, date, username, groups) {
     return axios.post("/addScheduleRequestChange", {
       title: title,
       content: content,
       date: date,
-      username: username
+      username: username,
+      groups: groups
     });
   },
 

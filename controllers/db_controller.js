@@ -21,8 +21,7 @@ router.get("/getAllHalls", function (req, res) {
 });
 
 router.get("/getAllUsers", function (req, res) {
-  // user.find({ "active": 1 }).exec(function (err, doc) {
-    user.find().exec(function (err, doc) {
+  user.find().exec(function (err, doc) {
     if (err) {
       console.log(err);
     }
@@ -34,7 +33,7 @@ router.get("/getAllUsers", function (req, res) {
 
 router.put("/updateUser/:id", function (req, res) {
   user.findOneAndUpdate({ "_id": req.params.id }, {
-    groups: req.body.groups,
+    groups: req.body.groups
   }, function (err) {
     if (err) {
       console.log(err);
@@ -192,8 +191,9 @@ router.put("/removeAnnouncement/:id", function (req, res) {
     })
 });
 
-router.get("/getScheduleRequestChanges/:requestCount", function (req, res) {
-  scheduleRequestChange.find({ "active": 1 }).sort({ "date": -1 }).limit(Number(req.params.requestCount)).exec(function (err, doc) {
+router.get("/getScheduleRequestChanges/:requestCount/:groups", function (req, res) {
+  var allUserGroups = req.params.groups.split(',');
+  scheduleRequestChange.find({ $or: [{ groups: { $in: allUserGroups } }] }).sort({ "date": -1 }).limit(Number(req.params.requestCount)).exec(function (err, doc) {
     if (err) {
       console.log(err);
     }
@@ -219,7 +219,8 @@ router.post("/addScheduleRequestChange", function (req, res) {
     title: req.body.title,
     content: req.body.content,
     date: req.body.date,
-    username: req.body.username
+    username: req.body.username,
+    groups: req.body.groups
   }, function (err, doc) {
     if (err) {
       console.log(err);

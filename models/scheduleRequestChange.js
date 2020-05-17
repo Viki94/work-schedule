@@ -6,6 +6,7 @@ var ScheduleRequestChangeSchema = new Schema({
   content: String,
   date: String,
   username: String,
+  groups: Array,
   active: {
     type: Number,
     default: 1

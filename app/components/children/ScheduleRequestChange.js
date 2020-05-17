@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import helpers from '../utils/helpers';
 import shared from '../utils/shared';
 import Translate from 'react-translate-component';
+import { MultiSelect } from 'primereact/multiselect';
 
 class ScheduleRequestChange extends Component {
     constructor(props) {
@@ -14,7 +15,9 @@ class ScheduleRequestChange extends Component {
             selectedScheduleRequestChange: '',
             scheduleRequestsCount: 5,
             selectedScheduleRequestId: '',
-            filterValue: '4'
+            filterValue: '4',
+            groups: [],
+            currentUserGroups: []
         }
 
         this.handleScheduleRequestChange = this.handleScheduleRequestChange.bind(this);
@@ -30,12 +33,11 @@ class ScheduleRequestChange extends Component {
     componentDidMount() {
         helpers.getCurrentUser().then(function (response) {
             if (response !== this.state.username) {
-                this.setState({ username: response.data.username });
+                this.setState({ username: response.data.username, currentUserGroups: response.data.groups });
             }
 
             this.getScheduleRequestChanges();
         }.bind(this));
-
 
         $("#scheduleRequestCount").on('change', function (event) {
             this.setState({ scheduleRequestsCount: event.target.value }, function () {
@@ -82,7 +84,7 @@ class ScheduleRequestChange extends Component {
 
     getScheduleRequestChanges() {
         if (this.props.route.isAdmin) {
-            helpers.getScheduleRequestChanges(this.state.scheduleRequestsCount).then(function (response) {
+            helpers.getScheduleRequestChanges(this.state.scheduleRequestsCount, this.state.currentUserGroups).then(function (response) {
                 this.setState({ allScheduleRequestChanges: response.data });
             }.bind(this));
 
@@ -96,7 +98,7 @@ class ScheduleRequestChange extends Component {
 
     addScheduleRequestChange(event) {
         event.preventDefault();
-        helpers.addScheduleRequestChange(this.state.title, this.state.content, Date.parse(new Date), this.state.username).then(function (response) {
+        helpers.addScheduleRequestChange(this.state.title, this.state.content, Date.parse(new Date), this.state.username, this.state.groups).then(function (response) {
             this.state.scheduleRequestChangeId = response.data._id;
             this.filterScheduleRequestChangesByValue();
             this.clearStates();
@@ -129,7 +131,7 @@ class ScheduleRequestChange extends Component {
     }
 
     clearStates() {
-        this.setState({ title: "", content: "" });
+        this.setState({ title: "", content: "", groups: [] });
     }
 
     handleScheduleRequest(scheduleRequestId, clickedButton) {
@@ -155,6 +157,36 @@ class ScheduleRequestChange extends Component {
     }
 
     render() {
+        let search = $('.search').text();
+        let choose = $('.choose').text();
+        let allGroups = [
+            { label: ' Администратор', value: '1' },
+            { label: ' Преподавател', value: '2' },
+            { label: ' Студент', value: '3' },
+            { label: ' Прекъснал студент', value: '4' },
+            { label: ' Завършил студент', value: '5' },
+            { label: ' Инспектор', value: '6' },
+            { label: ' Декан', value: '7' },
+            { label: ' Заместник-декан', value: '8' },
+            { label: ' Факултативен съвет', value: '9' }
+        ];
+
+        let lang = localStorage.getItem('lang');
+
+        if (lang === 'en') {
+            allGroups = [
+                { label: ' Administrator', value: '1' },
+                { label: ' University lecturer', value: '2' },
+                { label: ' Student', value: '3' },
+                { label: ' Interrupted student', value: '4' },
+                { label: ' Graduate student', value: '5' },
+                { label: ' Inspector', value: '6' },
+                { label: ' Dean', value: '7' },
+                { label: ' Vice dean', value: '8' },
+                { label: ' Faculty council', value: '9' }
+            ];
+        }
+
         return (
             <div>
                 {(() => {
@@ -191,6 +223,13 @@ class ScheduleRequestChange extends Component {
                                                 onChange={this.handleScheduleRequestChange}
                                                 required
                                                 attributes={{ placeholder: 'requests.makeARequest' }} />
+                                        </div>
+                                    </div>
+                                    <Translate component="h6" content='users.groups' />
+                                    <div className="row">
+                                        <div className="col s12 content-section implementation multiselect-demo">
+                                            <MultiSelect className="col s12" value={this.state.groups} options={allGroups} onChange={(e) => this.setState({ groups: e.value })}
+                                                filter={true} filterPlaceholder={search} placeholder={choose} />
                                         </div>
                                     </div>
                                     <div className="row">
@@ -235,49 +274,68 @@ class ScheduleRequestChange extends Component {
                                     <div className="col s12">
                                         <h5>{scheduleRequestChange.title}</h5>
                                         <p>{scheduleRequestChange.content}</p>
-                                        <p><Translate content="requests.postedAt" />: { shared.publishedDate(scheduleRequestChange.date) }</p>
+                                        <p><Translate content="requests.postedAt" />: {shared.publishedDate(scheduleRequestChange.date)}</p>
                                         <p><Translate content="requests.postedFrom" />: {scheduleRequestChange.username}</p>
                                         <p><Translate content="requests.status" />
                                             {scheduleRequestChange.approved == 1 ? <Translate content="requests.approve" /> :
                                                 (scheduleRequestChange.approved == 2 ? <Translate content="requests.refuse" /> :
                                                     <Translate content="requests.notClassified" />)}
                                         </p>
+                                        <div>
+                                            <Translate content="requests.seenByUserGroups" />
+                                            {scheduleRequestChange.groups.length ?
+                                                scheduleRequestChange.groups.map((groupValue, j) => {
+
+                                                    let allGroupValues = [];
+                                                    allGroups.map(group => {
+                                                        if (group.value === groupValue) {
+                                                            allGroupValues.push(group.label)
+                                                        }
+                                                    })
+
+                                                    return <p key={j}>- {allGroupValues}</p>
+                                                }) :
+                                                <p>- {allGroups[0].label}</p>
+                                            }
+                                        </div>
                                     </div>
-                                    {(() => {
-                                        if (this.props.route.isAdmin) {
-                                            return (
-                                                <div>
-                                                    <div className="col s6 center">
-                                                        <button id="approveRequest"
-                                                            className={"btn btn-large waves-effect waves-light green accent-3 " + (scheduleRequestChange.approved == 1 ? 'disabled' : '')}
-                                                            onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "approve")}><Translate content="buttons.approve" />
-                                                            <i className="material-icons right">event_available</i>
-                                                        </button>
+                                    {
+                                        (() => {
+                                            if (this.props.route.isAdmin) {
+                                                return (
+                                                    <div>
+                                                        <div className="col s6 center">
+                                                            <button id="approveRequest"
+                                                                className={"btn btn-large waves-effect waves-light green accent-3 " + (scheduleRequestChange.approved == 1 ? 'disabled' : '')}
+                                                                onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "approve")}><Translate content="buttons.approve" />
+                                                                <i className="material-icons right">event_available</i>
+                                                            </button>
+                                                        </div>
+                                                        <div className="col s6 center">
+                                                            <button id="refuseRequest"
+                                                                className={"btn btn-large waves-effect waves-light red accent-3 " + (scheduleRequestChange.approved == 2 ? 'disabled' : '')}
+                                                                onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "refuse")}><Translate content="buttons.refuse" />
+                                                                <i className="material-icons right">event_busy</i>
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div className="col s6 center">
-                                                        <button id="refuseRequest"
-                                                            className={"btn btn-large waves-effect waves-light red accent-3 " + (scheduleRequestChange.approved == 2 ? 'disabled' : '')}
-                                                            onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "refuse")}><Translate content="buttons.refuse" />
-                                                            <i className="material-icons right">event_busy</i>
-                                                        </button>
+                                                )
+                                            }
+                                            else {
+                                                return (
+                                                    <div className="col s12">
+                                                        <a id={scheduleRequestChange._id}
+                                                            className="btn btn-large waves-effect waves-light red accent-3 fullWidth"
+                                                            onClick={this.handleRemoveScheduleRequestChange}
+                                                        >
+                                                            <Translate content="buttons.remove" />
+                                                            <i className="material-icons right">delete_forever</i>
+                                                        </a>
                                                     </div>
-                                                </div>
-                                            )
-                                        }
-                                        else {
-                                            return (
-                                                <div className="col s12">
-                                                    <a id={scheduleRequestChange._id}
-                                                        className="btn btn-large waves-effect waves-light red accent-3 fullWidth"
-                                                        onClick={this.handleRemoveScheduleRequestChange}
-                                                    >
-                                                        <Translate content="buttons.remove" />
-                                                        <i className="material-icons right">delete_forever</i>
-                                                    </a>
-                                                </div>
-                                            )
-                                        }
-                                    })()}
+                                                )
+                                            }
+                                        })()
+                                    }
                                 </div>
                             );
                         }, this) :
@@ -290,7 +348,9 @@ class ScheduleRequestChange extends Component {
                 <Translate content="toasts.requestAdded" className="hide requestAdded" />
                 <Translate content="toasts.requestUpdated" className="hide requestUpdated" />
                 <Translate content="toasts.requestRemoved" className="hide requestRemoved" />
-            </div>
+                <Translate content="users.search" className="hide search" />
+                <Translate content="users.choose" className="hide choose" />
+            </div >
         );
     }
 }
