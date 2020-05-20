@@ -6,12 +6,14 @@ import ExportScheduleToExcelFile from './ExportScheduleToExcelFile';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
 class ScheduleView extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            allHalls: [],
             hallSchedules: [],
             staticHallSchedules: [],
             displayBlockScroll: false,
@@ -27,15 +29,23 @@ class ScheduleView extends Component {
             allHalls: [],
             hallName: '',
             checkboxValue: null,
+            selectedSchedule: null,
+            visibleSelectedSchedule: false
         }
 
         this.showFilterDialog = this.showFilterDialog.bind(this);
         this.handleFilter = this.handleFilter.bind(this);
-        this.getHallSchedules = this.getHallSchedules.bind(this);
         this.handleUserChange = this.handleUserChange.bind(this);
         this.handleClearFilteresSchedule = this.handleClearFilteresSchedule.bind(this);
         this.renderCheckbox = this.renderCheckbox.bind(this);
         this.clearFilterState = this.clearFilterState.bind(this);
+        this.actionTemplate = this.actionTemplate.bind(this);
+        this.renderScheduleDialogContent = this.renderScheduleDialogContent.bind(this);
+    }
+
+    componentDidMount() {
+        this.getHallSchedules();
+        this.getAllHalls();
     }
 
     showFilterDialog(shouldShow) {
@@ -59,6 +69,30 @@ class ScheduleView extends Component {
                 });
             }
         }.bind(this));
+    }
+
+    renderScheduleDialogContent() {
+        var foundHallIndex = this.state.allHalls.findIndex(x => x._id === this.state.selectedSchedule);
+        if (this.state.selectedSchedule && foundHallIndex >= 0) {
+            return (
+                <div className="p-grid center">
+                    <div className="p-col-4"><Translate component="b" content="hall.hall" /></div>
+                    <div className="p-col-8">{this.state.allHalls[foundHallIndex].name}</div>
+
+                    <div className="p-col-4"><Translate component="b" content="hall.address" /></div>
+                    <div className="p-col-8">{this.state.allHalls[foundHallIndex].address}</div>
+
+                    <div className="p-col-4"><Translate component="b" content="hall.city" /></div>
+                    <div className="p-col-8">{this.state.allHalls[foundHallIndex].city}</div>
+
+                    <div className="p-col-4"><Translate component="b" content="hall.sittingPlaces" /></div>
+                    <div className="p-col-8">{this.state.allHalls[foundHallIndex].sittingPlaces}</div>
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
     }
 
     renderFooter() {
@@ -97,10 +131,6 @@ class ScheduleView extends Component {
         );
     }
 
-    componentDidMount() {
-        this.getHallSchedules();
-    }
-
     getHallSchedules() {
         helpers.getHallSchedules().then(function (response) {
             if (response !== this.state.hallSchedules) {
@@ -109,6 +139,14 @@ class ScheduleView extends Component {
                     staticHallSchedules: response.data
                 });
             }
+        }.bind(this));
+    }
+
+    getAllHalls() {
+        helpers.getAllHalls().then(function (response) {
+            this.setState({
+                allHalls: response.data,
+            });
         }.bind(this));
     }
 
@@ -137,6 +175,12 @@ class ScheduleView extends Component {
         this.setState({ [event.target.name]: event.target.value });
     }
 
+    actionTemplate(rowData, column) {
+        return <div className="center">
+            <Button type="button" icon="pi pi-search" className="p-button-success" onClick={(e) => this.setState({ selectedSchedule: rowData.hall_id, visibleSelectedSchedule: true })}></Button>
+        </div>;
+    }
+
     render() {
         return (
             <div className="row">
@@ -152,6 +196,7 @@ class ScheduleView extends Component {
                             <Column field='friday' header={<Translate content="dayOfWeeks.short.friday" />} sortable={true} />
                             <Column field='saturday' header={<Translate content="dayOfWeeks.short.saturday" />} sortable={true} />
                             <Column field='sunday' header={<Translate content="dayOfWeeks.short.sunday" />} sortable={true} />
+                            <Column body={this.actionTemplate} />
                         </DataTable>
                         <div className="marginBottom"></div>
                         <div className="col s12">
@@ -180,6 +225,9 @@ class ScheduleView extends Component {
                                         {this.renderCheckbox(this.state.filteredValues.saturday, "saturday")}
                                         {this.renderCheckbox(this.state.filteredValues.sunday, "sunday")}
                                     </div>
+                                </Dialog>
+                                <Dialog header={<Translate content="hallDetails" />} visible={this.state.visibleSelectedSchedule} width="225px" modal={true} onHide={() => this.setState({ visibleSelectedSchedule: false })}>
+                                    {this.renderScheduleDialogContent()}
                                 </Dialog>
 
                             </div>

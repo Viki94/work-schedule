@@ -123,6 +123,7 @@ module.exports = {
     requestUpdated: 'Request updated',
     userUpdated: 'User updated'
   },
+  hallDetails: 'Hall details',
   filter: 'Filter halls',
   chooseDay: 'Select a day on which you want to have or have no value',
   schedule: 'Shedule',

@@ -145,3 +145,7 @@ body .p-multiselect .p-multiselect-panel .p-multiselect-header .p-multiselect-fi
 .content-section.implementation .dayOfWeek {
 	margin-left: 15px;
 }
+
+.p-grid {
+	 padding: 30px;
+}
