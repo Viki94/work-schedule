@@ -31,7 +31,7 @@ class ExportScheduleToExcelFile extends Component {
                 {
                     sheetData: hallSchedule,
                     sheetName: 'sheet1',
-                    sheetHeader: ['Name', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                    sheetHeader: ['Hall', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
                 }
             ];
         }
@@ -42,7 +42,7 @@ class ExportScheduleToExcelFile extends Component {
 
     render() {
         return (
-            <a className="btn btn-small waves-effect waves-light green accent-3 exportSchedule" onClick={this.handleExportHallSchedule} ><Translate content="buttons.downloadFile" /><i className="material-icons right">file_download</i></a>
+            <a className="btn btn-large waves-effect waves-light green accent-3 exportSchedule" onClick={this.handleExportHallSchedule} ><Translate content="buttons.downloadFile" /><i className="material-icons right">file_download</i></a>
         );
     }
 }

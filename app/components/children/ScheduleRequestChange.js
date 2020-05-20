@@ -18,7 +18,7 @@ class ScheduleRequestChange extends Component {
             filterValue: '4',
             groups: [],
             currentUserGroups: [],
-            selectedScheduleRequestGroups: ''
+            selectedScheduleRequestGroups: []
         }
 
         this.handleScheduleRequestChange = this.handleScheduleRequestChange.bind(this);

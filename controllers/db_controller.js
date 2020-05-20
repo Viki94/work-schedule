@@ -20,6 +20,27 @@ router.get("/getAllHalls", function (req, res) {
   });
 });
 
+router.get("/getAllHallSchedulesWithConditions/:selectedUserConditions", function (req, res) {
+  var selectedUserConditions = JSON.parse(req.params.selectedUserConditions);
+  var findQuery = {}
+  findQuery.active = 1;
+
+  if (selectedUserConditions.name) {
+    findQuery.name = { '$regex': /.*selectedUserConditions.name.*/, '$options': 'gi' }
+  }
+
+  var combinedFindQuery = { ...findQuery, ...selectedUserConditions }
+
+  hallSchedule.find(combinedFindQuery).exec(function (err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
 router.get("/getAllUsers", function (req, res) {
   user.find().exec(function (err, doc) {
     if (err) {
@@ -254,7 +275,7 @@ router.put("/updateScheduleRequestApproval/:id/:lastUpdatedDate", function (req,
 });
 
 router.put("/updateScheduleRequestGroups/:id/:lastUpdatedDate", function (req, res) {
-  scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "groups": req.body.groups, "lastUpdatedDate": req.body.lastUpdatedDate  })
+  scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "groups": req.body.groups, "lastUpdatedDate": req.body.lastUpdatedDate })
     .exec(function (err, doc) {
       if (err) {
         console.log(err);

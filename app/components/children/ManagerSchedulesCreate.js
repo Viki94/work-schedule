@@ -54,18 +54,18 @@ class ManagerSchedulesCreate extends Component {
                     <div className="section">
                         <Translate component="h5" content="scheduleEditor" />
                         <DataTable value={this.state.hallSchedules} paginator={true} rows={3} first={this.state.first} onPage={(e) => this.setState({ first: e.first })} sortMode="multiple" responsive={true}>
-                            <Column field='name' header={<Translate content="hall.name" />} sortable={true} />
-                            <Column field='monday' header={<Translate content="dayOfWeeks.monday" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='tuesday' header={<Translate content="dayOfWeeks.tuesday" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='wednesday' header={<Translate content="dayOfWeeks.wednesday" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='thursday' header={<Translate content="dayOfWeeks.thursday" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='friday' header={<Translate content="dayOfWeeks.friday" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='saturday' header={<Translate content="dayOfWeeks.saturday" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='sunday' header={<Translate content="dayOfWeeks.sunday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='name' header={<Translate content="hall.hall" />} sortable={true} />
+                            <Column field='monday' header={<Translate content="dayOfWeeks.short.monday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='tuesday' header={<Translate content="dayOfWeeks.short.tuesday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='wednesday' header={<Translate content="dayOfWeeks.short.wednesday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='thursday' header={<Translate content="dayOfWeeks.short.thursday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='friday' header={<Translate content="dayOfWeeks.short.friday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='saturday' header={<Translate content="dayOfWeeks.short.saturday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='sunday' header={<Translate content="dayOfWeeks.short.sunday" />} sortable={true} editor={this.scheduleEditor} />
                         </DataTable>
                         <div className="marginBottom"></div>
                         <div className="col s12 center">
-                            <a className="btn btn-small waves-effect waves-light green accent-3 marginRight"
+                            <a className="btn btn-large waves-effect waves-light green accent-3 marginRight"
                                 onClick={this.handleSaveHallSchedule.bind(this)}>
                                 <Translate content="buttons.save" />
                                 <i className="material-icons right">save</i>

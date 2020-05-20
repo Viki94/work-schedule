@@ -26,6 +26,20 @@ let shared = {
     }
 
     return allGroups;
+  },
+
+  findSelectedUserConditions(filteredValues) {
+    let conditions = {};
+    for (var propName in filteredValues) {
+      if (filteredValues[propName] === true) {
+        conditions[propName] = { "$ne": "" }
+      }
+      else if (filteredValues[propName] === false) {
+        conditions[propName] = "";
+      }
+    }
+
+    return conditions;
   }
 };
 

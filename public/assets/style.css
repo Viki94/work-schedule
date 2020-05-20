@@ -141,3 +141,7 @@ body .p-multiselect .p-multiselect-panel .p-multiselect-header .p-multiselect-fi
 .alignItems .p-multiselect.p-component {
 	width: 100%;
 }
+
+.content-section.implementation .dayOfWeek {
+	margin-left: 15px;
+}

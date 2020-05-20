@@ -34,36 +34,48 @@ module.exports = {
     newHall: 'Нова зала'
   },
   hall: {
-    name: 'Име',
+    hall: 'Зала',
     address: 'Адрес',
     city: 'Град',
     sittingPlaces: 'Места за сядане'
   },
   buttons: {
-    add: 'Добави',
-    update: 'Обнови',
-    remove: 'Премахни',
-    clear: 'Изчисти',
-    downloadFile: 'Свали файл',
-    create: 'Създай',
-    save: 'Запази',
+    add: 'Добавяне',
+    update: 'Обновяване',
+    remove: 'Премахване',
+    clear: 'Изчистване',
+    downloadFile: 'Сваляне на файл',
+    create: 'Създаване',
+    save: 'Запазване',
     login: 'Влизане',
     register: 'Регистрация',
-    chooseFile: 'Избор на файл',
-    uploadFile: 'Качи файл',
-    approve: 'Одобри',
-    refuse: 'Откажи',
+    chooseFile: 'Избиране на файл',
+    uploadFile: 'Качване на файл',
+    approve: 'Одобряване',
+    refuse: 'Отказване',
     generateQrCode: 'Генериране на QR код',
-    removeQrCode: 'Премахване на QR код'
+    removeQrCode: 'Премахване на QR код',
+    filter: 'Филтриране'
   },
   dayOfWeeks: {
-    monday: 'Пн',
-    tuesday: 'Вт',
-    wednesday: 'Ср',
-    thursday: 'Чт',
-    friday: 'Пт',
-    saturday: 'Сб',
-    sunday: 'Нд'
+    short: {
+      monday: 'Пн',
+      tuesday: 'Вт',
+      wednesday: 'Ср',
+      thursday: 'Чт',
+      friday: 'Пт',
+      saturday: 'Сб',
+      sunday: 'Нд'
+    },
+    long: {
+      monday: 'Понеделник',
+      tuesday: 'Вторник',
+      wednesday: 'Сряда',
+      thursday: 'Четвъртък',
+      friday: 'Петък',
+      saturday: 'Събота',
+      sunday: 'Неделя'
+    }
   },
   announcements: {
     makeAnAnnouncement: 'Напишете съобщение',
@@ -111,8 +123,10 @@ module.exports = {
     requestUpdated: 'Заявка беше обновена',
     userUpdated: 'Потребител беше обновен'
   },
+  filter: 'Филтриране на зали',
+  chooseDay: 'Изберете ден, в който искате да има или да няма стойност',
   schedule: 'График',
   scheduleEditor: 'Редакция на график',
   weekOverview: 'Преглед на седмицата',
-  name: 'Име'
+  name: 'Име',
 }

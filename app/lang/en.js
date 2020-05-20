@@ -34,7 +34,7 @@ module.exports = {
     newHall: 'New hall'
   },
   hall: {
-    name: 'Name',
+    hall: 'Hall',
     address: 'Address',
     city: 'City',
     sittingPlaces: 'Sitting places'
@@ -54,16 +54,28 @@ module.exports = {
     approve: 'Approve',
     refuse: 'Refuse',
     generateQrCode: 'Generate QR code',
-    removeQrCode: 'Remove QR code'
+    removeQrCode: 'Remove QR code',
+    filter: 'Filter'
   },
   dayOfWeeks: {
-    monday: 'Mon',
-    tuesday: 'Tues',
-    wednesday: 'Wed',
-    thursday: 'Thur',
-    friday: 'Fri',
-    saturday: 'Sat',
-    sunday: 'Sun'
+    short: {
+      monday: 'Mon',
+      tuesday: 'Tues',
+      wednesday: 'Wed',
+      thursday: 'Thur',
+      friday: 'Fri',
+      saturday: 'Sat',
+      sunday: 'Sun'
+    },
+    long: {
+      monday: 'Monday',
+      tuesday: 'Tuesday',
+      wednesday: 'Wednesday',
+      thursday: 'Thursday',
+      friday: 'Friday',
+      saturday: 'Saturday',
+      sunday: 'Sunday '
+    }
   },
   announcements: {
     makeAnAnnouncement: 'Make an announcement',
@@ -111,6 +123,8 @@ module.exports = {
     requestUpdated: 'Request updated',
     userUpdated: 'User updated'
   },
+  filter: 'Filter halls',
+  chooseDay: 'Select a day on which you want to have or have no value',
   schedule: 'Shedule',
   scheduleEditor: 'Schedule Editor',
   weekOverview: 'Week overview',

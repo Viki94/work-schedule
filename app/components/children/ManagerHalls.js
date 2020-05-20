@@ -238,7 +238,7 @@ class ManagerHalls extends Component {
                         <form className="col m12" onSubmit={this.handleAddForm}>
                             <div className="row">
                                 <div className="input-field col m12 s12">
-                                    <Translate component="h6" content='hall.name' />
+                                    <Translate component="h6" content='hall.hall' />
                                     <Translate
                                         component="input"
                                         type="text"
@@ -247,7 +247,7 @@ class ManagerHalls extends Component {
                                         value={this.state.name}
                                         onChange={this.handleUserChange}
                                         required
-                                        attributes={{ placeholder: 'hall.name' }} />
+                                        attributes={{ placeholder: 'hall.hall' }} />
                                 </div>
                             </div>
                             <div className="row">

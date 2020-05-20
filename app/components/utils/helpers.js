@@ -5,6 +5,12 @@ var helper = {
     return axios.get("/getAllHalls");
   },
 
+  getAllHallSchedulesWithConditions(selectedUserConditions) {
+    return axios.get("/getAllHallSchedulesWithConditions/" + selectedUserConditions, {
+      selectedUserConditions: selectedUserConditions
+    });
+  },
+
   getCurrentUser() {
     return axios.get("/user");
   },
