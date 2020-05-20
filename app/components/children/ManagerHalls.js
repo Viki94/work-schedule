@@ -159,20 +159,27 @@ class ManagerHalls extends Component {
         var reader = new FileReader();
 
         reader.onload = function (event) {
-            var resultText = event.target.result;
-            var allDataFromFile = resultText.split(/\r?\n/);
-            var allHalls = [];
+            let resultText = event.target.result;
+            let allDataFromFile = resultText.split(/\r?\n/);
+            let allHalls = [];
+            let counterWithIgnoredHalls = 0
 
             allDataFromFile.forEach(item => {
-                var dataForCurrentHall = item.split(/,/);
-                var currentHall = {
+                let dataForCurrentHall = item.split(/,/);
+                let currentHall = {
                     name: dataForCurrentHall[0],
-                    address: dataForCurrentHall[2],
-                    city: dataForCurrentHall[3],
-                    sittingPlaces: dataForCurrentHall[4]
+                    address: dataForCurrentHall[1],
+                    city: dataForCurrentHall[2],
+                    sittingPlaces: dataForCurrentHall[3]
                 }
 
-                allHalls.push(currentHall);
+                let foundHallIndex = this.state.allHalls.findIndex(x => x.name === currentHall.name);
+                if (foundHallIndex === -1) {
+                    allHalls.push(currentHall);
+                }
+                else {
+                    counterWithIgnoredHalls++;
+                }
             });
 
             if (allHalls.length) {
@@ -197,12 +204,34 @@ class ManagerHalls extends Component {
                     xHallsAddedWithCount = xHallsAdded.replace('0', allHalls.length);
                 }
 
+                let xHallsNotAddedWithCount = '';
+
+                if (counterWithIgnoredHalls > 0) {
+                    xHallsNotAddedWithCount = this.getToastForNotAddedHalls(counterWithIgnoredHalls);
+                    xHallsAddedWithCount += ' & ' + xHallsNotAddedWithCount;
+                }
+
                 Materialize.toast(xHallsAddedWithCount, 3000);
                 this.getHalls();
+            }
+            else if (counterWithIgnoredHalls > 0) {
+                let xHallsNotAddedWithCount = this.getToastForNotAddedHalls(counterWithIgnoredHalls);
+                Materialize.toast(xHallsNotAddedWithCount, 3000);
             }
         }.bind(this);
 
         reader.readAsText(file);
+    }
+
+    getToastForNotAddedHalls(counterWithIgnoredHalls) {
+        let oneHallNotAdded = $('.oneHallNotAdded').text();
+        let xHallsNotAddedWithCount = oneHallNotAdded;
+        if (counterWithIgnoredHalls > 1) {
+            let xHallsNotAdded = $('.xHallsNotAdded').text();
+            xHallsNotAddedWithCount = xHallsNotAdded.replace('0', counterWithIgnoredHalls);
+        }
+
+        return xHallsNotAddedWithCount;
     }
 
     render() {
@@ -342,6 +371,8 @@ class ManagerHalls extends Component {
                         <Translate content="toasts.hallRemoved" className="hide hallRemoved" />
                         <Translate content="toasts.oneHallAdded" className="hide oneHallAdded" />
                         <Translate content="toasts.xHallsAdded" className="hide xHallsAdded" />
+                        <Translate content="toasts.oneHallNotAdded" className="hide oneHallNotAdded" />
+                        <Translate content="toasts.xHallsNotAdded" className="hide xHallsNotAdded" />
                     </div>
                 </div>
             </div>

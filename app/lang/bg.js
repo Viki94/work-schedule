@@ -117,6 +117,8 @@ module.exports = {
     hallRemoved: 'Зала беше премахната',
     oneHallAdded: '1 зала беше добавена',
     xHallsAdded: '0 зали бяха добавени',
+    oneHallNotAdded: '1 зала не беше добавена',
+    xHallsNotAdded: '0 зали не бяха добавени',
     scheduleUpdated: 'График беше обновен',
     requestAdded: 'Заявка беше добавена',
     requestRemoved: 'Заявка беше премахната',

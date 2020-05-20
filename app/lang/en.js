@@ -117,6 +117,8 @@ module.exports = {
     hallRemoved: 'Hall removed',
     oneHallAdded: '1 hall added',
     xHallsAdded: '0 halls added',
+    oneHallNotAdded: '1 hall not added',
+    xHallsNotAdded: '0 halls not added',
     scheduleUpdated: 'Schedule updated',
     requestAdded: 'Request added',
     requestRemoved: 'Request removed',
