@@ -110,7 +110,7 @@
     line-height: 2rem;
 }
 
-.p-multiselect-header .p-multiselect-filter-container input[type=text] {
+.p-multiselect-header .p-multiselect-filter-container input[type=text], .p-listbox.p-inputtext.p-component input[type=text] {
 	height: auto;
     margin: 0;
     box-sizing: inherit;
@@ -148,4 +148,14 @@ body .p-multiselect .p-multiselect-panel .p-multiselect-header .p-multiselect-fi
 
 .p-grid {
 	 padding: 30px;
+}
+
+.p-listbox.p-inputtext.p-component {
+	width: 85%;
+	margin: 0 auto;
+	min-width: auto;
+}
+
+.p-listbox.p-inputtext.p-component .p-listbox-list {
+	max-height: 350px;
 }

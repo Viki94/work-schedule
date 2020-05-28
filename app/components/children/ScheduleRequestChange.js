@@ -404,8 +404,8 @@ class ScheduleRequestChange extends Component {
                 <Translate content="toasts.requestAdded" className="hide requestAdded" />
                 <Translate content="toasts.requestUpdated" className="hide requestUpdated" />
                 <Translate content="toasts.requestRemoved" className="hide requestRemoved" />
-                <Translate content="users.search" className="hide search" />
-                <Translate content="users.choose" className="hide choose" />
+                <Translate content="search" className="hide search" />
+                <Translate content="choose" className="hide choose" />
             </div >
         );
     }

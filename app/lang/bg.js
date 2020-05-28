@@ -17,9 +17,7 @@ module.exports = {
     users: 'Потребители',
     username: 'Потребител',
     userType: 'Вид на потребителя',
-    groups: 'Групи на потребителя',
-    search: 'Търсене',
-    choose: 'Избиране'
+    groups: 'Групи на потребителя'
   },
   navMenu: {
     userManagement: 'Управление на потребители',
@@ -132,4 +130,6 @@ module.exports = {
   scheduleEditor: 'Редакция на график',
   weekOverview: 'Преглед на седмицата',
   name: 'Име',
+  search: 'Търсене',
+  choose: 'Избиране'
 }

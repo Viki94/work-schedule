@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import helpers from '../utils/helpers';
 import Translate from 'react-translate-component';
 import { MultiSelect } from 'primereact/multiselect';
+import { ListBox } from 'primereact/listbox';
 
 class ManagerUsers extends Component {
     constructor(props) {
@@ -57,16 +58,13 @@ class ManagerUsers extends Component {
     }
 
     handleUserSelect(event) {
-        this.setSelectedUserState(event.target.id)
+        this.setSelectedUserState(event.target.value)
     }
 
     setSelectedUserState(userId) {
         this.setState({ selectedUser: userId }, function () {
             for (var i = 0; i < this.state.allUsers.length; i++) {
                 if (this.state.allUsers[i]._id == this.state.selectedUser) {
-                    $('#allUsers').find('td').removeClass('active');
-                    $('#' + this.state.selectedUser).addClass('active');
-
                     this.setState({
                         username: this.state.allUsers[i].username,
                         userType: this.state.allUsers[i].userType,
@@ -95,7 +93,7 @@ class ManagerUsers extends Component {
 
         let lang = localStorage.getItem('lang');
 
-        if (lang === 'en') { 
+        if (lang === 'en') {
             allGroups = [
                 { label: ' Administrator', value: '1' },
                 { label: ' University lecturer', value: '2' },
@@ -106,30 +104,22 @@ class ManagerUsers extends Component {
                 { label: ' Dean', value: '7' },
                 { label: ' Vice dean', value: '8' },
                 { label: ' Faculty council', value: '9' }
-            ]; 
+            ];
         }
+
+        let users = [];
+        this.state.allUsers.map((user, i) => {
+            let usersInfo = {};
+            usersInfo.label = user.username;
+            usersInfo.value = user._id;
+            users.push(usersInfo)
+        })
 
         return (
             <div className="row">
-                <div className="col m3">
-                    <table className="highlight" id="allUsers">
-                        <thead>
-                            <tr>
-                                <th data-field="name"><Translate content="users.users" /></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.allUsers.map((user, i) => {
-                                return (
-                                    <tr key={i}>
-                                        <td onClick={this.handleUserSelect} id={this.state.allUsers[i]._id}>
-                                            {user.username}
-                                        </td>
-                                    </tr>
-                                );
-                            }, this)}
-                        </tbody>
-                    </table>
+                <div className="col m3 center">
+                    <h6><Translate component="b" content="users.users" /></h6>
+                    <ListBox value={this.state.selectedUser} filter={true} filterPlaceholder={search} options={users} onChange={(e) => this.handleUserSelect(e)} />
                 </div>
                 <div className="col m9">
                     <div className="row">
@@ -181,11 +171,11 @@ class ManagerUsers extends Component {
                         </form>
 
                         <Translate content="toasts.userUpdated" className="hide userUpdated" />
-                        <Translate content="users.search" className="hide search" />
-                        <Translate content="users.choose" className="hide choose" />
+                        <Translate content="search" className="hide search" />
+                        <Translate content="choose" className="hide choose" />
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import helpers from '../utils/helpers';
 import Translate from 'react-translate-component';
+import { ListBox } from 'primereact/listbox';
 
 class ManagerHalls extends Component {
     constructor(props) {
@@ -94,12 +95,9 @@ class ManagerHalls extends Component {
     }
 
     handleHallSelect(event) {
-        this.setState({ selectedHall: event.target.id }, function () {
+        this.setState({ selectedHall: event.target.value }, function () {
             for (var i = 0; i < this.state.allHalls.length; i++) {
                 if (this.state.allHalls[i]._id == this.state.selectedHall) {
-                    $('#allHalls').find('td').removeClass('active');
-                    $('#' + this.state.selectedHall).addClass('active');
-
                     this.setState({
                         name: this.state.allHalls[i].name,
                         address: this.state.allHalls[i].address,
@@ -235,32 +233,25 @@ class ManagerHalls extends Component {
     }
 
     render() {
+        let halls = [];
+        this.state.allHalls.map((hall, i) => {
+            let hallsInfo = {};
+            hallsInfo.label = hall.name;
+            hallsInfo.value = hall._id;
+            halls.push(hallsInfo)
+        })
+
+        let search = $('.search').text();
+
         return (
+
             <div className="row">
-                <div className="col m3">
-                    <table className="highlight" id="allHalls">
-                        <thead>
-                            <tr>
-                                <th data-field="name"><Translate content="halls.halls" /></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td id="newHall" onClick={this.newHall}>
-                                    <strong><Translate content="halls.newHall" /><i className="material-icons right">add</i></strong>
-                                </td>
-                            </tr>
-                            {this.state.allHalls.map((hall, i) => {
-                                return (
-                                    <tr key={i}>
-                                        <td onClick={this.handleHallSelect} id={this.state.allHalls[i]._id}>
-                                            {hall.name}
-                                        </td>
-                                    </tr>
-                                );
-                            }, this)}
-                        </tbody>
-                    </table>
+                <div className="col m3 center">
+                    <h6><Translate component="b" content="halls.halls" /></h6>
+                    <a id="newHall" className="btn btn-large waves-effect waves-light green accent-3 marginBottom" onClick={this.newHall}><Translate content="halls.newHall" />
+                        <i className="material-icons right">add</i>
+                    </a>
+                    <ListBox value={this.state.selectedHall} filter={true} filterPlaceholder={search} options={halls} onChange={(e) => this.handleHallSelect(e)} />
                 </div>
                 <div className="col m9">
                     <div className="row">
@@ -373,6 +364,7 @@ class ManagerHalls extends Component {
                         <Translate content="toasts.xHallsAdded" className="hide xHallsAdded" />
                         <Translate content="toasts.oneHallNotAdded" className="hide oneHallNotAdded" />
                         <Translate content="toasts.xHallsNotAdded" className="hide xHallsNotAdded" />
+                        <Translate content="search" className="hide search" />
                     </div>
                 </div>
             </div>

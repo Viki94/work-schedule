@@ -17,9 +17,7 @@ module.exports = {
     users: 'Users',
     username: 'Username',
     userType: 'User type',
-    groups: 'User\'s groups',
-    search: 'Search',
-    choose: 'Choose'
+    groups: 'User\'s groups'
   },
   navMenu: {
     userManagement: 'User management',
@@ -131,5 +129,7 @@ module.exports = {
   schedule: 'Shedule',
   scheduleEditor: 'Schedule Editor',
   weekOverview: 'Week overview',
-  name: 'Name'
+  name: 'Name',
+  search: 'Search',
+  choose: 'Choose'
 }
