@@ -3,6 +3,7 @@ import helpers from '../utils/helpers';
 import Translate from 'react-translate-component';
 import { MultiSelect } from 'primereact/multiselect';
 import { ListBox } from 'primereact/listbox';
+import { Dropdown } from 'primereact/dropdown';
 
 class ManagerUsers extends Component {
     constructor(props) {
@@ -24,17 +25,16 @@ class ManagerUsers extends Component {
     }
 
     componentDidMount() {
-        this.getUsers();
+        this.getUsers(true);
     }
 
-    getUsers() {
+    getUsers(shouldSelectFirstUser) {
         helpers.getAllUsers().then(function (response) {
             if (response !== this.state.allUsers) {
                 this.setState({ allUsers: response.data }, function () {
-                    if (!$('#allUsers').find('td').hasClass('active')) {
-                        let firstUser = $('#allUsers').find('td').first().addClass('active');
-                        let userId = firstUser.attr('id');
-                        this.setSelectedUserState(userId);
+                    if (shouldSelectFirstUser) {
+                        let firstUserId = this.state.allUsers[0]._id;
+                        this.setSelectedUserState(firstUserId);
                     }
                 });
             }
@@ -48,13 +48,13 @@ class ManagerUsers extends Component {
     handleUpdateForm(event) {
         event.preventDefault();
 
-        helpers.updateUser(this.state.selectedUser, this.state.groups).then(function (response) {
+        helpers.updateUser(this.state.selectedUser, this.state.userType, this.state.groups).then(function (response) {
         }.bind(this));
 
         let userUpdated = $('.userUpdated').text();
         Materialize.toast(userUpdated, 3000);
 
-        this.getUsers();
+        this.getUsers(false);
     }
 
     handleUserSelect(event) {
@@ -91,6 +91,12 @@ class ManagerUsers extends Component {
             { label: ' Факултативен съвет', value: '9' }
         ];
 
+        
+        this.userTypes = [
+            { name: 'Работник', value: 'employee' },
+            { name: 'Мениджър', value: 'manager' }
+        ]
+
         let lang = localStorage.getItem('lang');
 
         if (lang === 'en') {
@@ -105,6 +111,11 @@ class ManagerUsers extends Component {
                 { label: ' Vice dean', value: '8' },
                 { label: ' Faculty council', value: '9' }
             ];
+
+            this.userTypes = [
+                { name: 'Employee', value: 'employee' },
+                { name: 'Manager', value: 'manager' }
+            ]
         }
 
         let users = [];
@@ -141,17 +152,7 @@ class ManagerUsers extends Component {
                             </div>
                             <div className="row">
                                 <div className="input-field col m12 s12">
-                                    <Translate component="h6" content='users.userType' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="userType"
-                                        className="validate"
-                                        value={this.state.userType}
-                                        onChange={this.handleUserChange}
-                                        required
-                                        disabled
-                                        attributes={{ placeholder: 'users.userType' }} />
+                                    <Dropdown className="fullWidth" value={this.state.userType} options={this.userTypes} onChange={(e) => this.setState({ userType: e.value })} placeholder="Select a City" optionLabel="name" />
                                 </div>
                             </div>
                             <Translate component="h6" content='users.groups' />

@@ -54,6 +54,7 @@ router.get("/getAllUsers", function (req, res) {
 
 router.put("/updateUser/:id", function (req, res) {
   user.findOneAndUpdate({ "_id": req.params.id }, {
+    userType: req.body.userType,
     groups: req.body.groups
   }, function (err) {
     if (err) {

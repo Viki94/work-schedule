@@ -19,8 +19,9 @@ var helper = {
     return axios.get("/getAllUsers");
   },
 
-  updateUser: function (id, groups) {
+  updateUser: function (id, userType, groups) {
     return axios.put("/updateUser/" + id, {
+      userType: userType,
       groups: groups
     });
   },

@@ -104,10 +104,15 @@
 	background-color: #f2f2f2;
 }
 
-.p-multiselect-label {
+.p-multiselect-label, .p-dropdown.p-component {
 	height: 3rem;
     font-size: 1rem;
     line-height: 2rem;
+}
+
+.input-field .p-dropdown.p-component label{
+	top: 0;
+	width: auto;
 }
 
 .p-multiselect-header .p-multiselect-filter-container input[type=text], .p-listbox.p-inputtext.p-component input[type=text] {
