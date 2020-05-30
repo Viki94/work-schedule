@@ -101,8 +101,8 @@ class AnnouncementsView extends Component {
                                 <div className="col s12">
                                     <h5>{announcement.title}</h5>
                                     <p>{announcement.content}</p>
-                                    <p><Translate content="announcements.postedAt" />: {shared.publishedDate(announcement.date)}</p>
-                                    <p><Translate content="announcements.postedFrom" />: {announcement.username}</p>
+s                                    <p><b><Translate content="announcements.postedAt" />: </b>{shared.publishedDate(announcement.date)}</p>
+                                    <p><b><Translate content="announcements.postedFrom" />: </b>{announcement.username}</p>
                                 </div>
                                 <div id={"print-this-" + announcement._id} className="hide">
                                     <br />
