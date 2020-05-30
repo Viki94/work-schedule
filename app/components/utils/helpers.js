@@ -107,13 +107,14 @@ var helper = {
     return axios.get("/getScheduleRequestChangesForNotAdminUser/" + requestCount + "/" + username);
   },
 
-  addScheduleRequestChange(title, content, date, username, groups) {
+  addScheduleRequestChange(title, content, date, username, groups, keyWords) {
     return axios.post("/addScheduleRequestChange", {
       title: title,
       content: content,
       date: date,
       username: username,
-      groups: groups
+      groups: groups,
+      keyWords: keyWords
     });
   },
 
@@ -129,9 +130,10 @@ var helper = {
     });
   },
 
-  updateScheduleRequestGroups(id, groups, lastUpdatedDate, lastUpdatedUsername) {
+  updateScheduleRequestGroups(id, groups, keyWords, lastUpdatedDate, lastUpdatedUsername) {
     return axios.put("/updateScheduleRequestGroups/" + id + "/" + lastUpdatedDate + "/" + lastUpdatedUsername, {
       groups: groups,
+      keyWords: keyWords,
       lastUpdatedDate: lastUpdatedDate,
       lastUpdatedUsername: lastUpdatedUsername
     });

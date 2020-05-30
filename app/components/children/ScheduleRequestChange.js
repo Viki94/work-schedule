@@ -3,6 +3,7 @@ import helpers from '../utils/helpers';
 import shared from '../utils/shared';
 import Translate from 'react-translate-component';
 import { MultiSelect } from 'primereact/multiselect';
+import { Chips } from 'primereact/chips';
 
 class ScheduleRequestChange extends Component {
     constructor(props) {
@@ -18,7 +19,9 @@ class ScheduleRequestChange extends Component {
             filterValue: '6',
             groups: [],
             currentUserGroups: [],
-            selectedScheduleRequestGroups: []
+            selectedScheduleRequestGroups: [],
+            keyWords: [],
+            selectedKeyWords: [],
         }
 
         this.handleScheduleRequestChange = this.handleScheduleRequestChange.bind(this);
@@ -100,8 +103,8 @@ class ScheduleRequestChange extends Component {
     addScheduleRequestChange(event) {
         event.preventDefault();
         let allGroups = shared.addDefaultAdminValueToRequest(this.state.groups);
-
-        helpers.addScheduleRequestChange(this.state.title, this.state.content, Date.parse(new Date), this.state.username, allGroups).then(function (response) {
+        
+        helpers.addScheduleRequestChange(this.state.title, this.state.content, Date.parse(new Date), this.state.username, allGroups, this.state.keyWords).then(function (response) {
             this.state.scheduleRequestChangeId = response.data._id;
             this.filterScheduleRequestChangesByValue();
             this.clearStates();
@@ -134,7 +137,7 @@ class ScheduleRequestChange extends Component {
     }
 
     clearStates() {
-        this.setState({ title: "", content: "", groups: [] });
+        this.setState({ title: "", content: "", groups: [], keyWords: [] });
     }
 
     handleScheduleRequest(scheduleRequestId, clickedButtonValue) {
@@ -149,7 +152,6 @@ class ScheduleRequestChange extends Component {
                     clickedButtonValue = archivedWithStatusRefused
                 }
             }
-
         }
 
         this.setState({ selectedScheduleRequestId: scheduleRequestId }, function () {
@@ -167,11 +169,11 @@ class ScheduleRequestChange extends Component {
     }
 
     handleUpdateRequest(scheduleRequestChange) {
-        this.setState({ selectedScheduleRequestId: scheduleRequestChange._id, selectedScheduleRequestGroups: scheduleRequestChange.groups }, function () {
-            $('[id*="container"]').addClass('hide');
+        this.setState({ selectedScheduleRequestId: scheduleRequestChange._id, selectedScheduleRequestGroups: scheduleRequestChange.groups, selectedKeyWords: scheduleRequestChange.keyWords }, function () {
+            $('[class*="container-"]').addClass('hide');
             $('[class*="save"]').parent().addClass('hide');
             $('[class*="update"]').parent().removeClass('hide');
-            $('#container-' + scheduleRequestChange._id).removeClass('hide');
+            $('.container-' + scheduleRequestChange._id).removeClass('hide');
             $('.save-' + scheduleRequestChange._id).parent().removeClass('hide');
             $('.update-' + scheduleRequestChange._id).parent().addClass('hide');
         });
@@ -180,8 +182,10 @@ class ScheduleRequestChange extends Component {
     handleSaveUpdatedRequest() {
         let allGroups = shared.addDefaultAdminValueToRequest(this.state.selectedScheduleRequestGroups);
 
-        helpers.updateScheduleRequestGroups(this.state.selectedScheduleRequestId, allGroups, Date.parse(new Date), this.state.username).then(function (response) {
-            $('#container-' + this.state.selectedScheduleRequestId).addClass('hide');
+        helpers.updateScheduleRequestGroups(this.state.selectedScheduleRequestId, allGroups, this.state.selectedKeyWords, Date.parse(new Date), this.state.username).then(function (response) {
+            $('.container-' + this.state.selectedScheduleRequestId).each(function () {
+                $(this).addClass('hide');
+            });
             $('.save-' + this.state.selectedScheduleRequestId).parent().addClass('hide');
             $('.update-' + this.state.selectedScheduleRequestId).parent().removeClass('hide');
 
@@ -268,6 +272,10 @@ class ScheduleRequestChange extends Component {
                                                 filter={true} filterPlaceholder={search} placeholder={choose} />
                                         </div>
                                     </div>
+                                    <div className="p-fluid">
+                                        <Translate component="h6" content="requests.enterKeyWords" />
+                                        <Chips id="keyWords" value={this.state.keyWords} onChange={this.handleScheduleRequestChange} max={5} allowDuplicate={false}></Chips>
+                                    </div>
                                     <div className="row">
                                         <div className="col s12 center">
                                             <button className="btn waves-effect waves-light btn-large green accent-3" type="submit" value="Submit" name="action"><Translate content="buttons.create" /><i className="material-icons right">add</i></button>
@@ -328,9 +336,9 @@ class ScheduleRequestChange extends Component {
                                             }
 
                                         </p>
-                                        <div id={"container-" + scheduleRequestChange._id}>
+                                        <div className={"container-" + scheduleRequestChange._id}>
                                             <div className="alignItems">
-                                                <b> <Translate content="requests.seenByUserGroups" /></b>
+                                                <b><Translate content="requests.seenByUserGroups" /></b>
                                                 {scheduleRequestChange.groups.length ?
                                                     scheduleRequestChange.groups.map((groupValue, j) => {
                                                         let allGroupValues = [];
@@ -345,32 +353,45 @@ class ScheduleRequestChange extends Component {
                                                     <p>- {allGroups[0].label}</p>
                                                 }
                                             </div>
-                                            <div className={"alignItems update-" + scheduleRequestChange._id}>
+                                            <div className={"alignItems center update-" + scheduleRequestChange._id}>
                                                 <button id={scheduleRequestChange._id}
                                                     className={"btn btn-large waves-effect waves-light blue accent-3 " + (scheduleRequestChange.status == 2 || scheduleRequestChange.status == 3 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
                                                     onClick={() => this.handleUpdateRequest(scheduleRequestChange)}>
                                                     <i className="material-icons right">edit</i>
                                                 </button>
                                             </div>
+                                            <b><Translate content="requests.keyWords" />:</b>
+                                            {scheduleRequestChange.keyWords.length ?
+                                                <Chips id="keyWords" className="readOnlyView" value={scheduleRequestChange.keyWords} disabled={true}></Chips> :
+                                                <p><Translate content="requests.noKeyWords" /></p>
+                                            }
                                         </div>
                                         <div className="hide">
                                             <div className="alignItems">
-                                                <Translate component="h6" content='users.groups' />
                                                 <div>
-                                                    <div className="content-section implementation multiselect-demo">
-                                                        <MultiSelect value={this.state.selectedScheduleRequestGroups} options={allGroups} onChange={(e) => this.setState({ selectedScheduleRequestGroups: e.value })}
-                                                            filter={true} filterPlaceholder={search} placeholder={choose} />
+                                                    <b><Translate content='users.groups' />:</b>
+                                                    <div>
+                                                        <div className="content-section implementation multiselect-demo">
+                                                            <MultiSelect value={this.state.selectedScheduleRequestGroups} options={allGroups} onChange={(e) => this.setState({ selectedScheduleRequestGroups: e.value })}
+                                                                filter={true} filterPlaceholder={search} placeholder={choose} />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div className={"alignItems save-" + scheduleRequestChange._id}>
+                                            <div className={"alignItems center save-" + scheduleRequestChange._id}>
                                                 <button id={scheduleRequestChange._id}
                                                     className={"btn btn-large waves-effect waves-light blue accent-3 " + (scheduleRequestChange.status == 2 || scheduleRequestChange.status == 3 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
                                                     onClick={() => this.handleSaveUpdatedRequest()}>
                                                     <i className="material-icons right">save</i>
                                                 </button>
                                             </div>
+                                            <div className="p-fluid">
+                                                <b><Translate content="requests.enterKeyWords" /></b>
+                                                <Chips id="keyWords" value={this.state.selectedKeyWords} onChange={(e) => this.setState({ selectedKeyWords: e.value })} max={5} allowDuplicate={false}></Chips>
+                                            </div>
+                                        </div>
+                                        <div className={"container-" + scheduleRequestChange._id}>
+
                                         </div>
                                     </div>
                                     {

@@ -116,6 +116,9 @@ module.exports = {
     noUpdatedDate: 'No updated date',
     updatedFrom: 'Updated by',
     noUpdatedUsername: 'There is no user info',
+    keyWords : 'Key words',
+    enterKeyWords: 'Enter maximum 5 key words:',
+    noKeyWords: 'No key words'
   },
   toasts: {
     announcementAdded: 'Announcement added',

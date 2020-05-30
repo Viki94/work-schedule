@@ -115,7 +115,10 @@ module.exports = {
     updatedAt: 'Обновено на',
     noUpdatedDate: 'Няма дата на обновяване',
     updatedFrom: 'Обновено от',
-    noUpdatedUsername: 'Няма информация за потребител'
+    noUpdatedUsername: 'Няма информация за потребител',
+    keyWords: 'Ключови думи',
+    enterKeyWords: 'Въведете максимално 5 ключови думи:',
+    noKeyWords: 'Няма ключови думи'
   },
   toasts: {
     announcementAdded: 'Анонс беше добавен',

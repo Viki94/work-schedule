@@ -110,6 +110,22 @@
     line-height: 2rem;
 }
 
+.p-chips.p-component .p-chips-input-token {
+    height: 2.5rem;
+}
+
+.p-chips.p-component .p-chips-input-token input {
+    height: 2rem;
+}
+
+.readOnlyView .p-inputtext.p-disabled, .readOnlyView .p-inputtext.p-disabled .p-chips-input-token {
+	border: 0;
+}
+
+#keyWords.p-chips.p-component {
+	display: block;
+}
+
 .input-field .p-dropdown.p-component label{
 	top: 0;
 	width: auto;

@@ -242,7 +242,8 @@ router.post("/addScheduleRequestChange", function (req, res) {
     content: req.body.content,
     date: req.body.date,
     username: req.body.username,
-    groups: req.body.groups
+    groups: req.body.groups,
+    keyWords: req.body.keyWords
   }, function (err, doc) {
     if (err) {
       console.log(err);
@@ -282,6 +283,7 @@ router.put("/updateScheduleRequestApproval/:id/:lastUpdatedDate/:lastUpdatedUser
 router.put("/updateScheduleRequestGroups/:id/:lastUpdatedDate/:lastUpdatedUsername", function (req, res) {
   scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, {
     groups: req.body.groups,
+    keyWords: req.body.keyWords,
     lastUpdatedDate: req.body.lastUpdatedDate,
     lastUpdatedUsername: req.body.lastUpdatedUsername
   })
