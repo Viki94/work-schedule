@@ -13,7 +13,7 @@ var ScheduleRequestChangeSchema = new Schema({
     type: Number,
     default: 1
   },
-  approved: {
+  status: {
     type: Number,
     default: 0
   }

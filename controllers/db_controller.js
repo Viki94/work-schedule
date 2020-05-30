@@ -266,7 +266,7 @@ router.put("/removeScheduleRequestChange/:id", function (req, res) {
 
 router.put("/updateScheduleRequestApproval/:id/:lastUpdatedDate/:lastUpdatedUsername", function (req, res) {
   scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, {
-    approved: req.body.approved,
+    status: req.body.status,
     lastUpdatedDate: req.body.lastUpdatedDate,
     lastUpdatedUsername: req.body.lastUpdatedUsername
   })
@@ -295,7 +295,7 @@ router.put("/updateScheduleRequestGroups/:id/:lastUpdatedDate/:lastUpdatedUserna
 });
 
 router.get("/filterScheduleRequestChanges/:filterValue", function (req, res) {
-  scheduleRequestChange.find({ "active": 1, "approved": Number(req.params.filterValue) }).exec(function (err, doc) {
+  scheduleRequestChange.find({ "active": 1, status: Number(req.params.filterValue) }).exec(function (err, doc) {
     if (err) {
       console.log(err);
     }
@@ -306,7 +306,7 @@ router.get("/filterScheduleRequestChanges/:filterValue", function (req, res) {
 });
 
 router.get("/filterScheduleRequestChangesForNotAdminUser/:filterValue/:username", function (req, res) {
-  scheduleRequestChange.find({ "active": 1, "approved": Number(req.params.filterValue), "username": req.params.username }).exec(function (err, doc) {
+  scheduleRequestChange.find({ "active": 1, status: Number(req.params.filterValue), "username": req.params.username }).exec(function (err, doc) {
     if (err) {
       console.log(err);
     }

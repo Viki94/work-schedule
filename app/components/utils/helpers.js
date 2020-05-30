@@ -121,9 +121,9 @@ var helper = {
     return axios.put("/removeScheduleRequestChange/" + id);
   },
 
-  updateScheduleRequestApproval(id, approved, lastUpdatedDate, lastUpdatedUsername) {
+  updateScheduleRequestApproval(id, status, lastUpdatedDate, lastUpdatedUsername) {
     return axios.put("/updateScheduleRequestApproval/" + id + "/" + lastUpdatedDate + "/" + lastUpdatedUsername, {
-      approved: approved,
+      status: status,
       lastUpdatedDate: lastUpdatedDate,
       lastUpdatedUsername: lastUpdatedUsername
     });

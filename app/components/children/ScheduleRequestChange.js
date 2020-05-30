@@ -15,7 +15,7 @@ class ScheduleRequestChange extends Component {
             selectedScheduleRequestChange: '',
             scheduleRequestsCount: 5,
             selectedScheduleRequestId: '',
-            filterValue: '4',
+            filterValue: '5',
             groups: [],
             currentUserGroups: [],
             selectedScheduleRequestGroups: []
@@ -54,7 +54,7 @@ class ScheduleRequestChange extends Component {
     }
 
     filterScheduleRequestChangesByValue() {
-        if (this.state.filterValue === '4') {
+        if (this.state.filterValue === '5') {
             this.getScheduleRequestChanges();
         }
         else {
@@ -137,14 +137,7 @@ class ScheduleRequestChange extends Component {
         this.setState({ title: "", content: "", groups: [] });
     }
 
-    handleScheduleRequest(scheduleRequestId, clickedButton) {
-        const approvedValue = 1;
-        const refusedValue = 2;
-        let clickedButtonValue = approvedValue;
-        if (clickedButton === 'refuse') {
-            clickedButtonValue = refusedValue;
-        }
-
+    handleScheduleRequest(scheduleRequestId, clickedButtonValue) {
         this.setState({ selectedScheduleRequestId: scheduleRequestId }, function () {
             for (let i = 0; i < this.state.allScheduleRequestChanges.length; i++) {
                 if (this.state.allScheduleRequestChanges[i]._id == this.state.selectedScheduleRequestId) {
@@ -262,8 +255,8 @@ class ScheduleRequestChange extends Component {
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <div className="col s12">
-                                            <button className="btn waves-effect waves-light btn-large green accent-3 fullWidth" type="submit" value="Submit" name="action"><Translate content="buttons.create" /><i className="material-icons right">add</i></button>
+                                        <div className="col s12 center">
+                                            <button className="btn waves-effect waves-light btn-large green accent-3" type="submit" value="Submit" name="action"><Translate content="buttons.create" /><i className="material-icons right">add</i></button>
                                         </div>
                                     </div>
                                 </form>
@@ -290,10 +283,12 @@ class ScheduleRequestChange extends Component {
                     <div className="input-field col s12">
                         <div><Translate content="requests.filterRequests" /></div>
                         <select id="scheduleRequestFilter">
-                            <Translate component="option" content="requests.all" value="4" defaultValue="4" />
+                            <Translate component="option" content="requests.all" value="5" defaultValue="5" />
                             <Translate component="option" content="requests.notClassified" value="0" />
-                            <Translate component="option" content="requests.approved" value="1" />
-                            <Translate component="option" content="requests.refused" value="2" />
+                            <Translate component="option" content="requests.reviewed" value="1" />
+                            <Translate component="option" content="requests.approved" value="2" />
+                            <Translate component="option" content="requests.refused" value="3" />
+                            <Translate component="option" content="requests.archived" value="4" />
                         </select>
                     </div>
                     {this.state.allScheduleRequestChanges.length ?
@@ -303,18 +298,23 @@ class ScheduleRequestChange extends Component {
                                     <div className="col s12">
                                         <h5>{scheduleRequestChange.title}</h5>
                                         <p>{scheduleRequestChange.content}</p>
-                                        <p><Translate content="requests.postedFrom" />: {scheduleRequestChange.username}</p>
-                                        <p><Translate content="requests.postedAt" />: {shared.publishedDate(scheduleRequestChange.date)}</p>
-                                        <p><Translate content="requests.updatedFrom" />: {scheduleRequestChange.lastUpdatedUsername ? scheduleRequestChange.lastUpdatedUsername : <Translate content="requests.noUpdatedUsername" />}</p>
-                                        <p><Translate content="requests.updatedAt" />: {scheduleRequestChange.lastUpdatedDate ? shared.publishedDate(scheduleRequestChange.lastUpdatedDate) : <Translate content="requests.noUpdatedDate" />}</p>
-                                        <p><Translate content="requests.status" />
-                                            {scheduleRequestChange.approved == 1 ? <Translate content="requests.approve" /> :
-                                                (scheduleRequestChange.approved == 2 ? <Translate content="requests.refuse" /> :
-                                                    <Translate content="requests.notClassified" />)}
+                                        <b></b>
+                                        <p><b><Translate content="requests.postedFrom" />: </b>{scheduleRequestChange.username}</p>
+                                        <p><b><Translate content="requests.postedAt" />: </b>{shared.publishedDate(scheduleRequestChange.date)}</p>
+                                        <p><b><Translate content="requests.updatedFrom" />: </b>{scheduleRequestChange.lastUpdatedUsername ? scheduleRequestChange.lastUpdatedUsername : <Translate content="requests.noUpdatedUsername" />}</p>
+                                        <p><b><Translate content="requests.updatedAt" />: </b>{scheduleRequestChange.lastUpdatedDate ? shared.publishedDate(scheduleRequestChange.lastUpdatedDate) : <Translate content="requests.noUpdatedDate" />}</p>
+                                        <p><b><Translate content="requests.status" /> </b>
+                                            {scheduleRequestChange.status == 1 ? <Translate content="requests.review" /> :
+                                                (scheduleRequestChange.status == 2 ? <Translate content="requests.approve" /> :
+                                                    (scheduleRequestChange.status == 3 ? <Translate content="requests.refuse" /> :
+                                                        (scheduleRequestChange.status == 4 ? <Translate content="requests.archive" /> :
+                                                            <Translate content="requests.notClassified" />)))
+                                            }
+
                                         </p>
                                         <div id={"container-" + scheduleRequestChange._id}>
                                             <div className="alignItems">
-                                                <Translate content="requests.seenByUserGroups" />
+                                                <b> <Translate content="requests.seenByUserGroups" /></b>
                                                 {scheduleRequestChange.groups.length ?
                                                     scheduleRequestChange.groups.map((groupValue, j) => {
                                                         let allGroupValues = [];
@@ -331,7 +331,7 @@ class ScheduleRequestChange extends Component {
                                             </div>
                                             <div className={"alignItems update-" + scheduleRequestChange._id}>
                                                 <button id={scheduleRequestChange._id}
-                                                    className="btn btn-large waves-effect waves-light blue accent-3"
+                                                    className={"btn btn-large waves-effect waves-light blue accent-3 " + (scheduleRequestChange.status == 2 || scheduleRequestChange.status == 3 || scheduleRequestChange.status == 4 ? 'disabled' : '')}
                                                     onClick={() => this.handleUpdateRequest(scheduleRequestChange)}>
                                                     <i className="material-icons right">edit</i>
                                                 </button>
@@ -347,9 +347,10 @@ class ScheduleRequestChange extends Component {
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div className={"alignItems save-" + scheduleRequestChange._id}>
                                                 <button id={scheduleRequestChange._id}
-                                                    className="btn btn-large waves-effect waves-light blue accent-3"
+                                                    className={"btn btn-large waves-effect waves-light blue accent-3 " + (scheduleRequestChange.status == 2 || scheduleRequestChange.status == 3 || scheduleRequestChange.status == 4 ? 'disabled' : '')}
                                                     onClick={() => this.handleSaveUpdatedRequest()}>
                                                     <i className="material-icons right">save</i>
                                                 </button>
@@ -361,17 +362,35 @@ class ScheduleRequestChange extends Component {
                                             if (this.props.route.isAdmin) {
                                                 return (
                                                     <div>
-                                                        <div className="col s6 center">
+                                                        <div className="col s3 center">
+                                                            <button id="reviewRequest"
+                                                                className={"btn btn-large waves-effect waves-light blue accent-3 " + (scheduleRequestChange.status != 0 ? 'disabled' : '')}
+                                                                onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, 1)}>
+                                                                <Translate content="buttons.review" />
+                                                                <i className="material-icons right">event_busy</i>
+                                                            </button>
+                                                        </div>
+                                                        <div className="col s3 center">
                                                             <button id="approveRequest"
-                                                                className={"btn btn-large waves-effect waves-light green accent-3 " + (scheduleRequestChange.approved == 1 ? 'disabled' : '')}
-                                                                onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "approve")}><Translate content="buttons.approve" />
+                                                                className={"btn btn-large waves-effect waves-light green accent-3 " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 2 || scheduleRequestChange.status == 4 ? 'disabled' : '')}
+                                                                onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, 2)}>
+                                                                <Translate content="buttons.approve" />
                                                                 <i className="material-icons right">event_available</i>
                                                             </button>
                                                         </div>
-                                                        <div className="col s6 center">
+                                                        <div className="col s3 center">
                                                             <button id="refuseRequest"
-                                                                className={"btn btn-large waves-effect waves-light red accent-3 " + (scheduleRequestChange.approved == 2 ? 'disabled' : '')}
-                                                                onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, "refuse")}><Translate content="buttons.refuse" />
+                                                                className={"btn btn-large waves-effect waves-light red accent-3 " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 3 || scheduleRequestChange.status == 4 ? 'disabled' : '')}
+                                                                onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, 3)}>
+                                                                <Translate content="buttons.refuse" />
+                                                                <i className="material-icons right">event_busy</i>
+                                                            </button>
+                                                        </div>
+                                                        <div className="col s3 center">
+                                                            <button id="archiveRequest"
+                                                                className={"btn btn-large waves-effect waves-light teal accent-3 " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 1 || scheduleRequestChange.status == 4 ? 'disabled' : '')}
+                                                                onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, 4)}>
+                                                                <Translate content="buttons.archive" />
                                                                 <i className="material-icons right">event_busy</i>
                                                             </button>
                                                         </div>
@@ -380,9 +399,9 @@ class ScheduleRequestChange extends Component {
                                             }
                                             else {
                                                 return (
-                                                    <div className="col s12">
+                                                    <div className="col s12 center">
                                                         <a id={scheduleRequestChange._id}
-                                                            className="btn btn-large waves-effect waves-light red accent-3 fullWidth"
+                                                            className="btn btn-large waves-effect waves-light red accent-3"
                                                             onClick={this.handleRemoveScheduleRequestChange}
                                                         >
                                                             <Translate content="buttons.remove" />
