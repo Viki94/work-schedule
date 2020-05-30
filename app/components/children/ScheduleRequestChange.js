@@ -15,7 +15,7 @@ class ScheduleRequestChange extends Component {
             selectedScheduleRequestChange: '',
             scheduleRequestsCount: 5,
             selectedScheduleRequestId: '',
-            filterValue: '5',
+            filterValue: '6',
             groups: [],
             currentUserGroups: [],
             selectedScheduleRequestGroups: []
@@ -54,7 +54,7 @@ class ScheduleRequestChange extends Component {
     }
 
     filterScheduleRequestChangesByValue() {
-        if (this.state.filterValue === '5') {
+        if (this.state.filterValue === '6') {
             this.getScheduleRequestChanges();
         }
         else {
@@ -138,6 +138,20 @@ class ScheduleRequestChange extends Component {
     }
 
     handleScheduleRequest(scheduleRequestId, clickedButtonValue) {
+        const archivedStatus = 4;
+        if (clickedButtonValue === archivedStatus) {
+            const currentRequestStatus = this.state.allScheduleRequestChanges.find(x => x._id === scheduleRequestId).status;
+
+            if (currentRequestStatus) {
+                const refusedStatus = 3;
+                const archivedWithStatusRefused = 5;
+                if (currentRequestStatus == refusedStatus) {
+                    clickedButtonValue = archivedWithStatusRefused
+                }
+            }
+
+        }
+
         this.setState({ selectedScheduleRequestId: scheduleRequestId }, function () {
             for (let i = 0; i < this.state.allScheduleRequestChanges.length; i++) {
                 if (this.state.allScheduleRequestChanges[i]._id == this.state.selectedScheduleRequestId) {
@@ -283,12 +297,13 @@ class ScheduleRequestChange extends Component {
                     <div className="input-field col s12">
                         <div><Translate content="requests.filterRequests" /></div>
                         <select id="scheduleRequestFilter">
-                            <Translate component="option" content="requests.all" value="5" defaultValue="5" />
+                            <Translate component="option" content="requests.all" value="6" defaultValue="6" />
                             <Translate component="option" content="requests.notClassified" value="0" />
                             <Translate component="option" content="requests.reviewed" value="1" />
                             <Translate component="option" content="requests.approved" value="2" />
                             <Translate component="option" content="requests.refused" value="3" />
-                            <Translate component="option" content="requests.archived" value="4" />
+                            <Translate component="option" content="requests.archivedAsApproved" value="4" />
+                            <Translate component="option" content="requests.archivedAsRefused" value="5" />
                         </select>
                     </div>
                     {this.state.allScheduleRequestChanges.length ?
@@ -307,8 +322,9 @@ class ScheduleRequestChange extends Component {
                                             {scheduleRequestChange.status == 1 ? <Translate content="requests.review" /> :
                                                 (scheduleRequestChange.status == 2 ? <Translate content="requests.approve" /> :
                                                     (scheduleRequestChange.status == 3 ? <Translate content="requests.refuse" /> :
-                                                        (scheduleRequestChange.status == 4 ? <Translate content="requests.archive" /> :
-                                                            <Translate content="requests.notClassified" />)))
+                                                        (scheduleRequestChange.status == 4 ? <Translate content="requests.archiveAsApproved" /> :
+                                                            (scheduleRequestChange.status == 5 ? <Translate content="requests.archiveAsRefused" /> :
+                                                                <Translate content="requests.notClassified" />))))
                                             }
 
                                         </p>
@@ -331,7 +347,7 @@ class ScheduleRequestChange extends Component {
                                             </div>
                                             <div className={"alignItems update-" + scheduleRequestChange._id}>
                                                 <button id={scheduleRequestChange._id}
-                                                    className={"btn btn-large waves-effect waves-light blue accent-3 " + (scheduleRequestChange.status == 2 || scheduleRequestChange.status == 3 || scheduleRequestChange.status == 4 ? 'disabled' : '')}
+                                                    className={"btn btn-large waves-effect waves-light blue accent-3 " + (scheduleRequestChange.status == 2 || scheduleRequestChange.status == 3 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
                                                     onClick={() => this.handleUpdateRequest(scheduleRequestChange)}>
                                                     <i className="material-icons right">edit</i>
                                                 </button>
@@ -350,7 +366,7 @@ class ScheduleRequestChange extends Component {
 
                                             <div className={"alignItems save-" + scheduleRequestChange._id}>
                                                 <button id={scheduleRequestChange._id}
-                                                    className={"btn btn-large waves-effect waves-light blue accent-3 " + (scheduleRequestChange.status == 2 || scheduleRequestChange.status == 3 || scheduleRequestChange.status == 4 ? 'disabled' : '')}
+                                                    className={"btn btn-large waves-effect waves-light blue accent-3 " + (scheduleRequestChange.status == 2 || scheduleRequestChange.status == 3 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
                                                     onClick={() => this.handleSaveUpdatedRequest()}>
                                                     <i className="material-icons right">save</i>
                                                 </button>
@@ -372,7 +388,7 @@ class ScheduleRequestChange extends Component {
                                                         </div>
                                                         <div className="col s3 center">
                                                             <button id="approveRequest"
-                                                                className={"btn btn-large waves-effect waves-light green accent-3 " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 2 || scheduleRequestChange.status == 4 ? 'disabled' : '')}
+                                                                className={"btn btn-large waves-effect waves-light green accent-3 " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 2 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
                                                                 onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, 2)}>
                                                                 <Translate content="buttons.approve" />
                                                                 <i className="material-icons right">event_available</i>
@@ -380,7 +396,7 @@ class ScheduleRequestChange extends Component {
                                                         </div>
                                                         <div className="col s3 center">
                                                             <button id="refuseRequest"
-                                                                className={"btn btn-large waves-effect waves-light red accent-3 " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 3 || scheduleRequestChange.status == 4 ? 'disabled' : '')}
+                                                                className={"btn btn-large waves-effect waves-light red accent-3 " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 3 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
                                                                 onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, 3)}>
                                                                 <Translate content="buttons.refuse" />
                                                                 <i className="material-icons right">event_busy</i>
@@ -388,7 +404,7 @@ class ScheduleRequestChange extends Component {
                                                         </div>
                                                         <div className="col s3 center">
                                                             <button id="archiveRequest"
-                                                                className={"btn btn-large waves-effect waves-light teal accent-3 " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 1 || scheduleRequestChange.status == 4 ? 'disabled' : '')}
+                                                                className={"btn btn-large waves-effect waves-light teal accent-3 " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 1 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
                                                                 onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, 4)}>
                                                                 <Translate content="buttons.archive" />
                                                                 <i className="material-icons right">event_busy</i>
