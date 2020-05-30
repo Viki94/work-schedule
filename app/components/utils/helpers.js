@@ -121,17 +121,19 @@ var helper = {
     return axios.put("/removeScheduleRequestChange/" + id);
   },
 
-  updateScheduleRequestApproval(id, approved, lastUpdatedDate) {
-    return axios.put("/updateScheduleRequestApproval/" + id + "/" + lastUpdatedDate, {
+  updateScheduleRequestApproval(id, approved, lastUpdatedDate, lastUpdatedUsername) {
+    return axios.put("/updateScheduleRequestApproval/" + id + "/" + lastUpdatedDate + "/" + lastUpdatedUsername, {
       approved: approved,
-      lastUpdatedDate: lastUpdatedDate
+      lastUpdatedDate: lastUpdatedDate,
+      lastUpdatedUsername: lastUpdatedUsername
     });
   },
 
-  updateScheduleRequestGroups(id, groups, lastUpdatedDate) {
-    return axios.put("/updateScheduleRequestGroups/" + id + "/" + lastUpdatedDate, {
+  updateScheduleRequestGroups(id, groups, lastUpdatedDate, lastUpdatedUsername) {
+    return axios.put("/updateScheduleRequestGroups/" + id + "/" + lastUpdatedDate + "/" + lastUpdatedUsername, {
       groups: groups,
-      lastUpdatedDate: lastUpdatedDate
+      lastUpdatedDate: lastUpdatedDate,
+      lastUpdatedUsername: lastUpdatedUsername
     });
   },
 

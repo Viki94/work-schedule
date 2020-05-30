@@ -264,8 +264,12 @@ router.put("/removeScheduleRequestChange/:id", function (req, res) {
     })
 });
 
-router.put("/updateScheduleRequestApproval/:id/:lastUpdatedDate", function (req, res) {
-  scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "approved": req.body.approved, "lastUpdatedDate": req.body.lastUpdatedDate })
+router.put("/updateScheduleRequestApproval/:id/:lastUpdatedDate/:lastUpdatedUsername", function (req, res) {
+  scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, {
+    approved: req.body.approved,
+    lastUpdatedDate: req.body.lastUpdatedDate,
+    lastUpdatedUsername: req.body.lastUpdatedUsername
+  })
     .exec(function (err, doc) {
       if (err) {
         console.log(err);
@@ -275,8 +279,12 @@ router.put("/updateScheduleRequestApproval/:id/:lastUpdatedDate", function (req,
     })
 });
 
-router.put("/updateScheduleRequestGroups/:id/:lastUpdatedDate", function (req, res) {
-  scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, { "groups": req.body.groups, "lastUpdatedDate": req.body.lastUpdatedDate })
+router.put("/updateScheduleRequestGroups/:id/:lastUpdatedDate/:lastUpdatedUsername", function (req, res) {
+  scheduleRequestChange.findOneAndUpdate({ "_id": req.params.id }, {
+    groups: req.body.groups,
+    lastUpdatedDate: req.body.lastUpdatedDate,
+    lastUpdatedUsername: req.body.lastUpdatedUsername
+  })
     .exec(function (err, doc) {
       if (err) {
         console.log(err);

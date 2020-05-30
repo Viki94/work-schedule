@@ -105,7 +105,9 @@ module.exports = {
     noInformation: 'Няма информация',
     seenByUserGroups: 'Ще бъде видяно от следните групи потребители:',
     updatedAt: 'Обновено на',
-    noUpdatedDate: 'Няма дата на обновяване'
+    noUpdatedDate: 'Няма дата на обновяване',
+    updatedFrom: 'Обновено от',
+    noUpdatedUsername: 'Няма информация за потребител'
   },
   toasts: {
     announcementAdded: 'Анонс беше добавен',
