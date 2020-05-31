@@ -85,6 +85,10 @@ class ManagerUsers extends Component {
     }
 
     setSelectedUserState(userId) {
+        if (!userId) {
+            this.setState({ username: ''})
+        }
+
         this.clearState();
 
         this.setState({ selectedUser: userId }, function () {
@@ -183,7 +187,7 @@ class ManagerUsers extends Component {
                     <h6><Translate component="b" content="users.users" /></h6>
                     <ListBox value={this.state.selectedUser} filter={true} filterPlaceholder={search} options={users} onChange={(e) => this.handleUserSelect(e)} />
                 </div>
-                <div className="col m9 s12">
+                <div className={"col m9 s12 " + (!this.state.username ? "hide" : "")}>
                     <div className="row">
                         <form className="col s12">
                             <div className="row">
