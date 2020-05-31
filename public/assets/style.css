@@ -126,7 +126,12 @@
 	display: block;
 }
 
-.input-field .p-dropdown.p-component label{
+.input-field .p-inputtext.p-component {
+	margin: 0;
+	height: 2rem;
+}
+
+.input-field .p-dropdown.p-component label {
 	top: 0;
 	width: auto;
 }
@@ -179,4 +184,8 @@ body .p-multiselect .p-multiselect-panel .p-multiselect-header .p-multiselect-fi
 
 .p-listbox.p-inputtext.p-component .p-listbox-list {
 	max-height: 350px;
+}
+
+.row.saparator:not(:last-child) {
+	border-bottom: 1px solid #c8c8c8;
 }

@@ -144,5 +144,6 @@ module.exports = {
   weekOverview: 'Преглед на седмицата',
   name: 'Име',
   search: 'Търсене',
-  choose: 'Избиране'
+  choose: 'Избиране',
+  keyWord: "Ключова дума"
 }

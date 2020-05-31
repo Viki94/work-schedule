@@ -4,6 +4,8 @@ import shared from '../utils/shared';
 import Translate from 'react-translate-component';
 import { MultiSelect } from 'primereact/multiselect';
 import { Chips } from 'primereact/chips';
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
 
 class ScheduleRequestChange extends Component {
     constructor(props) {
@@ -12,6 +14,7 @@ class ScheduleRequestChange extends Component {
             title: '',
             content: '',
             allScheduleRequestChanges: [],
+            allScheduleRequestChangesDublicate: [],
             scheduleRequestChangeId: '',
             selectedScheduleRequestChange: '',
             scheduleRequestsCount: 5,
@@ -22,6 +25,7 @@ class ScheduleRequestChange extends Component {
             selectedScheduleRequestGroups: [],
             keyWords: [],
             selectedKeyWords: [],
+            search: ''
         }
 
         this.handleScheduleRequestChange = this.handleScheduleRequestChange.bind(this);
@@ -30,8 +34,10 @@ class ScheduleRequestChange extends Component {
         this.addScheduleRequestChange = this.addScheduleRequestChange.bind(this);
         this.handleRemoveScheduleRequestChange = this.handleRemoveScheduleRequestChange.bind(this);
         this.clearStates = this.clearStates.bind(this);
+        this.clearSearchState = this.clearSearchState.bind(this);
         this.handleScheduleRequest = this.handleScheduleRequest.bind(this);
         this.filterScheduleRequestChangesByValue = this.filterScheduleRequestChangesByValue.bind(this);
+        this.handleSearchClick = this.handleSearchClick.bind(this);
     }
 
     componentDidMount() {
@@ -57,19 +63,21 @@ class ScheduleRequestChange extends Component {
     }
 
     filterScheduleRequestChangesByValue() {
+        this.clearSearchState();
+
         if (this.state.filterValue === '6') {
             this.getScheduleRequestChanges();
         }
         else {
             if (this.props.route.isAdmin) {
                 helpers.filterScheduleRequestChanges(this.state.filterValue).then(function (response) {
-                    this.setState({ allScheduleRequestChanges: response.data }, function () {
+                    this.setState({ allScheduleRequestChanges: response.data, allScheduleRequestChangesDublicate: response.data }, function () {
                     });
                 }.bind(this));
             }
             else {
                 helpers.filterScheduleRequestChangesForNotAdminUser(this.state.filterValue, this.state.username).then(function (response) {
-                    this.setState({ allScheduleRequestChanges: response.data }, function () {
+                    this.setState({ allScheduleRequestChanges: response.data, allScheduleRequestChangesDublicate: response.data }, function () {
                     });
                 }.bind(this));
             }
@@ -87,15 +95,16 @@ class ScheduleRequestChange extends Component {
     }
 
     getScheduleRequestChanges() {
+        this.clearSearchState();
+
         if (this.props.route.isAdmin) {
             helpers.getScheduleRequestChanges(this.state.scheduleRequestsCount, this.state.currentUserGroups).then(function (response) {
-                this.setState({ allScheduleRequestChanges: response.data });
+                this.setState({ allScheduleRequestChanges: response.data, allScheduleRequestChangesDublicate: response.data });
             }.bind(this));
-
         }
         else {
             helpers.getScheduleRequestChangesForNotAdminUser(this.state.scheduleRequestsCount, this.state.username).then(function (response) {
-                this.setState({ allScheduleRequestChanges: response.data });
+                this.setState({ allScheduleRequestChanges: response.data, allScheduleRequestChangesDublicate: response.data });
             }.bind(this));
         }
     }
@@ -103,7 +112,7 @@ class ScheduleRequestChange extends Component {
     addScheduleRequestChange(event) {
         event.preventDefault();
         let allGroups = shared.addDefaultAdminValueToRequest(this.state.groups);
-        
+
         helpers.addScheduleRequestChange(this.state.title, this.state.content, Date.parse(new Date), this.state.username, allGroups, this.state.keyWords).then(function (response) {
             this.state.scheduleRequestChangeId = response.data._id;
             this.filterScheduleRequestChangesByValue();
@@ -137,7 +146,13 @@ class ScheduleRequestChange extends Component {
     }
 
     clearStates() {
-        this.setState({ title: "", content: "", groups: [], keyWords: [] });
+        this.setState({ title: '', content: '', groups: [], keyWords: [] });
+    }
+
+    clearSearchState() {
+        if (this.state.search) {
+            this.setState({ search: '' });
+        }
     }
 
     handleScheduleRequest(scheduleRequestId, clickedButtonValue) {
@@ -196,9 +211,29 @@ class ScheduleRequestChange extends Component {
         Materialize.toast(requestUpdated, 3000);
     }
 
+    handleSearchClick(event) {
+        event.preventDefault();
+
+        if (!this.state.search) {
+            this.setState({ allScheduleRequestChanges: this.state.allScheduleRequestChangesDublicate })
+            return;
+        }
+
+        let requestsContainingSearchText = [];
+        this.state.allScheduleRequestChangesDublicate.map(scheduleRequestChange => {
+            let valuesWithSearchedText = scheduleRequestChange.keyWords.filter(word => word.includes(this.state.search))
+            if (valuesWithSearchedText.length) {
+                requestsContainingSearchText.push(scheduleRequestChange)
+            }
+        })
+
+        this.setState({ allScheduleRequestChanges: requestsContainingSearchText })
+    }
+
     render() {
         let search = $('.search').text();
         let choose = $('.choose').text();
+        let keyWord = $('.keyWord').text();
         let allGroups = [
             { label: ' Администратор', value: '1' },
             { label: ' Преподавател', value: '2' },
@@ -314,10 +349,19 @@ class ScheduleRequestChange extends Component {
                             <Translate component="option" content="requests.archivedAsRefused" value="5" />
                         </select>
                     </div>
+                    <div className="input-field col s12">
+                        <div className="p-col-12 p-md-4">
+                            <div className="p-inputgroup">
+                                <InputText placeholder={keyWord} onChange={(e) => this.setState({ search: e.target.value })} />
+                                <Button icon="pi pi-search" className="p-button-info" onClick={this.handleSearchClick} />
+                                <Button icon="pi pi-times" className="p-button-danger" onClick={this.getScheduleRequestChanges} />
+                            </div>
+                        </div>
+                    </div>
                     {this.state.allScheduleRequestChanges.length ?
                         this.state.allScheduleRequestChanges.map((scheduleRequestChange, i) => {
                             return (
-                                <div key={i} className="row">
+                                <div key={i} className="row saparator">
                                     <div className="col s12">
                                         <h5>{scheduleRequestChange.title}</h5>
                                         <p>{scheduleRequestChange.content}</p>
@@ -390,9 +434,6 @@ class ScheduleRequestChange extends Component {
                                                 <Chips id="keyWords" value={this.state.selectedKeyWords} onChange={(e) => this.setState({ selectedKeyWords: e.value })} max={5} allowDuplicate={false}></Chips>
                                             </div>
                                         </div>
-                                        <div className={"container-" + scheduleRequestChange._id}>
-
-                                        </div>
                                     </div>
                                     {
                                         (() => {
@@ -449,6 +490,7 @@ class ScheduleRequestChange extends Component {
                                             }
                                         })()
                                     }
+                                    <div className="marginBottom"></div>
                                 </div>
                             );
                         }, this) :
@@ -463,6 +505,7 @@ class ScheduleRequestChange extends Component {
                 <Translate content="toasts.requestRemoved" className="hide requestRemoved" />
                 <Translate content="search" className="hide search" />
                 <Translate content="choose" className="hide choose" />
+                <Translate content="keyWord" className="hide keyWord" />
             </div >
         );
     }

@@ -144,5 +144,6 @@ module.exports = {
   weekOverview: 'Week overview',
   name: 'Name',
   search: 'Search',
-  choose: 'Choose'
+  choose: 'Choose',
+  keyWord: "Key word"
 }
