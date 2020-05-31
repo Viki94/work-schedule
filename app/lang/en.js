@@ -26,7 +26,13 @@ module.exports = {
     mobilePhone: 'Mobile phone',
     country: 'Country',
     city: 'City',
-    address: 'Address'
+    address: 'Address',
+    faculty: 'Faculty',
+    facultyNumber: 'Faculty number',
+    studyCourse: 'Study course',
+    studyGroup: 'Study group',
+    curriculum: 'Curriculum',
+    isActiveStudent: 'Active profile'
   },
   navMenu: {
     userManagement: 'User management',

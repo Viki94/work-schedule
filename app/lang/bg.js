@@ -26,7 +26,13 @@ module.exports = {
     mobilePhone: 'Мобилен телефон',
     country: 'Държава',
     city: 'Град',
-    address: 'Адрес'
+    address: 'Адрес',
+    faculty: 'Факултет',
+    facultyNumber: 'Факултетен номер',
+    studyCourse: 'Курс на обучение',
+    studyGroup: 'Група',
+    curriculum: 'Учебен план',
+    isActiveStudent: 'Активен профил'
   },
   navMenu: {
     userManagement: 'Управление на потребители',

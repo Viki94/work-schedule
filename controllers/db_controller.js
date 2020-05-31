@@ -55,7 +55,13 @@ router.get("/getAllUsers", function (req, res) {
 router.put("/updateUser/:id", function (req, res) {
   user.findOneAndUpdate({ "_id": req.params.id }, {
     userType: req.body.userType,
-    groups: req.body.groups
+    groups: req.body.groups,
+    faculty: req.body.faculty,
+    facultyNumber: req.body.facultyNumber,
+    studyCourse: req.body.studyCourse,
+    studyGroup: req.body.studyGroup,
+    curriculum: req.body.curriculum,
+    isActiveStudent: req.body.isActiveStudent
   }, function (err) {
     if (err) {
       console.log(err);

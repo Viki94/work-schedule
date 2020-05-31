@@ -4,6 +4,7 @@ import Translate from 'react-translate-component';
 import { MultiSelect } from 'primereact/multiselect';
 import { ListBox } from 'primereact/listbox';
 import { Dropdown } from 'primereact/dropdown';
+import { Checkbox } from 'primereact/checkbox';
 
 class ManagerUsers extends Component {
     constructor(props) {
@@ -15,6 +16,16 @@ class ManagerUsers extends Component {
             allUsers: [],
             selectedUser: '',
             user_id: '',
+            firstName: '',
+            lastName: '',
+            mobilePhone: '',
+            email: '',
+            faculty: '',
+            facultyNumber: '',
+            studyCourse: '',
+            studyGroup: '',
+            curriculum: '',
+            isActiveStudent: true
         }
 
         this.getUsers = this.getUsers.bind(this);
@@ -22,6 +33,7 @@ class ManagerUsers extends Component {
         this.handleUpdateForm = this.handleUpdateForm.bind(this);
         this.handleUserSelect = this.handleUserSelect.bind(this);
         this.setSelectedUserState = this.setSelectedUserState.bind(this);
+        this.clearState = this.clearState.bind(this);
     }
 
     componentDidMount() {
@@ -48,8 +60,19 @@ class ManagerUsers extends Component {
     handleUpdateForm(event) {
         event.preventDefault();
 
-        helpers.updateUser(this.state.selectedUser, this.state.userType, this.state.groups).then(function (response) {
-        }.bind(this));
+        helpers.updateUser(
+            this.state.selectedUser,
+            this.state.userType,
+            this.state.groups,
+            this.state.faculty,
+            this.state.facultyNumber,
+            this.state.studyCourse,
+            this.state.studyGroup,
+            this.state.curriculum,
+            this.state.isActiveStudent
+        )
+            .then(function (response) {
+            }.bind(this));
 
         let userUpdated = $('.userUpdated').text();
         Materialize.toast(userUpdated, 3000);
@@ -62,6 +85,8 @@ class ManagerUsers extends Component {
     }
 
     setSelectedUserState(userId) {
+        this.clearState();
+
         this.setState({ selectedUser: userId }, function () {
             for (var i = 0; i < this.state.allUsers.length; i++) {
                 if (this.state.allUsers[i]._id == this.state.selectedUser) {
@@ -69,11 +94,37 @@ class ManagerUsers extends Component {
                         username: this.state.allUsers[i].username,
                         userType: this.state.allUsers[i].userType,
                         groups: this.state.allUsers[i].groups,
-                        user_id: this.state.selectedUser
+                        user_id: this.state.selectedUser,
+                        firstName: this.state.allUsers[i].firstName,
+                        lastName: this.state.allUsers[i].lastName,
+                        mobilePhone: this.state.allUsers[i].mobilePhone,
+                        email: this.state.allUsers[i].email,
+                        faculty: this.state.allUsers[i].faculty,
+                        facultyNumber: this.state.allUsers[i].facultyNumber,
+                        studyCourse: this.state.allUsers[i].studyCourse,
+                        studyGroup: this.state.allUsers[i].studyGroup,
+                        curriculum: this.state.allUsers[i].curriculum,
+                        isActiveStudent: this.state.allUsers[i].isActiveStudent
                     });
                 }
             }
         });
+    }
+
+    clearState() {
+        this.setState({
+            groups: [],
+            firstName: '',
+            lastName: '',
+            mobilePhone: '',
+            email: '',
+            faculty: '',
+            facultyNumber: '',
+            studyCourse: '',
+            studyGroup: '',
+            curriculum: '',
+            isActiveStudent: true
+        })
     }
 
     render() {
@@ -91,7 +142,7 @@ class ManagerUsers extends Component {
             { label: ' Факултативен съвет', value: '9' }
         ];
 
-        
+
         this.userTypes = [
             { name: 'Работник', value: 'employee' },
             { name: 'Мениджър', value: 'manager' }
@@ -128,15 +179,15 @@ class ManagerUsers extends Component {
 
         return (
             <div className="row">
-                <div className="col m3 center">
+                <div className="col m3 s12 center">
                     <h6><Translate component="b" content="users.users" /></h6>
                     <ListBox value={this.state.selectedUser} filter={true} filterPlaceholder={search} options={users} onChange={(e) => this.handleUserSelect(e)} />
                 </div>
-                <div className="col m9">
+                <div className="col m9 s12">
                     <div className="row">
-                        <form className="col m12">
+                        <form className="col s12">
                             <div className="row">
-                                <div className="input-field col m12 s12">
+                                <div className="input-field col s12">
                                     <Translate component="h6" content='users.username' />
                                     <Translate
                                         component="input"
@@ -144,14 +195,131 @@ class ManagerUsers extends Component {
                                         name="username"
                                         className="validate"
                                         value={this.state.username}
-                                        onChange={this.handleUserChange}
-                                        required
                                         disabled
                                         attributes={{ placeholder: 'users.username' }} />
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="input-field col m12 s12">
+                                <div className="input-field col s6">
+                                    <Translate component="h6" content='users.firstName' />
+                                    <Translate
+                                        component="input"
+                                        type="text"
+                                        name="firstName"
+                                        className="validate"
+                                        value={this.state.firstName}
+                                        disabled
+                                        attributes={{ placeholder: 'users.firstName' }} />
+                                </div>
+                                <div className="input-field col s6">
+                                    <Translate component="h6" content='users.lastName' />
+                                    <Translate
+                                        component="input"
+                                        type="text"
+                                        name="lastName"
+                                        className="validate"
+                                        value={this.state.lastName}
+                                        disabled
+                                        attributes={{ placeholder: 'users.lastName' }} />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="input-field col s12">
+                                    <Translate component="h6" content='users.mobilePhone' />
+                                    <Translate
+                                        component="input"
+                                        type="text"
+                                        name="mobilePhone"
+                                        value={this.state.username}
+                                        disabled
+                                        attributes={{ placeholder: 'users.mobilePhone' }} />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="input-field col s12">
+                                    <Translate component="h6" content='users.email' />
+                                    <Translate
+                                        component="input"
+                                        type="text"
+                                        name="email"
+                                        value={this.state.email}
+                                        disabled
+                                        attributes={{ placeholder: 'users.email' }} />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="input-field col s12">
+                                    <Translate component="h6" content='users.faculty' />
+                                    <Translate
+                                        component="input"
+                                        type="text"
+                                        name="faculty"
+                                        className="validate"
+                                        value={this.state.faculty}
+                                        onChange={this.handleUserChange}
+                                        attributes={{ placeholder: 'users.faculty' }} />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="input-field col s12">
+                                    <Translate component="h6" content='users.facultyNumber' />
+                                    <Translate
+                                        component="input"
+                                        type="text"
+                                        name="facultyNumber"
+                                        className="validate"
+                                        value={this.state.facultyNumber}
+                                        onChange={this.handleUserChange}
+                                        attributes={{ placeholder: 'users.facultyNumber' }} />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="input-field col s12">
+                                    <Translate component="h6" content='users.studyCourse' />
+                                    <Translate
+                                        component="input"
+                                        type="text"
+                                        name="studyCourse"
+                                        className="validate"
+                                        value={this.state.studyCourse}
+                                        onChange={this.handleUserChange}
+                                        attributes={{ placeholder: 'users.studyCourse' }} />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="input-field col s12">
+                                    <Translate component="h6" content='users.studyGroup' />
+                                    <Translate
+                                        component="input"
+                                        type="text"
+                                        name="studyGroup"
+                                        className="validate"
+                                        value={this.state.studyGroup}
+                                        onChange={this.handleUserChange}
+                                        attributes={{ placeholder: 'users.studyGroup' }} />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="input-field col s12">
+                                    <Translate component="h6" content='users.curriculum' />
+                                    <Translate
+                                        component="input"
+                                        type="text"
+                                        name="curriculum"
+                                        className="validate"
+                                        value={this.state.curriculum}
+                                        onChange={this.handleUserChange}
+                                        attributes={{ placeholder: 'users.curriculum' }} />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="input-field col s12">
+                                    <Translate component="h6" content='users.isActiveStudent' />
+                                    <Checkbox checked={this.state.isActiveStudent} onChange={e => this.setState({ isActiveStudent: e.checked })} />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="input-field col s12">
                                     <Dropdown className="fullWidth" value={this.state.userType} options={this.userTypes} onChange={(e) => this.setState({ userType: e.value })} placeholder="Select a City" optionLabel="name" />
                                 </div>
                             </div>

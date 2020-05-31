@@ -20,7 +20,10 @@ var UserSchema = new mongoose.Schema({
 	studyCourse: Number,
 	studyGroup: Number,
 	curriculum: String,
-	isActiveStudent: Boolean
+	isActiveStudent: {
+		type: Boolean,
+		default: true
+	  },
 });
 
 UserSchema.plugin(passportLocalMongoose);

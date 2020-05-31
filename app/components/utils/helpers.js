@@ -19,10 +19,16 @@ var helper = {
     return axios.get("/getAllUsers");
   },
 
-  updateUser: function (id, userType, groups) {
+  updateUser: function (id, userType, groups, faculty, facultyNumber, studyCourse, studyGroup, curriculum, isActiveStudent) {
     return axios.put("/updateUser/" + id, {
       userType: userType,
-      groups: groups
+      groups: groups,
+      faculty: faculty,
+      facultyNumber: facultyNumber,
+      studyCourse: studyCourse,
+      studyGroup: studyGroup,
+      curriculum: curriculum,
+      isActiveStudent: isActiveStudent
     });
   },
 
