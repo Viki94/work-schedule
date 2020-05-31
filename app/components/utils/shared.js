@@ -19,7 +19,17 @@ let shared = {
     return datestring;
   },
 
-  addDefaultAdminValueToRequest(allGroups) {
+  addDefaultAdminValueToRequest(allGroups, isItGroupRequest) {
+    if (isItGroupRequest) {
+      var allGroupValue = allGroups.split(',');
+      allGroups = [];
+      allGroupValue.map(group => {
+        if (!isNaN(group) && (0 < Number(group) && Number(group) < 10)) {
+          allGroups.push(group);
+        }
+      })
+    }
+
     if (!allGroups.length) {
       const adminGroupValue = '1';
       allGroups.push(adminGroupValue);

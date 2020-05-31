@@ -63,15 +63,15 @@
 	height: 40px;
 }
 
-#addManyHallsForm {
+#addManyHallsForm, #addManyRequestsForm {
 	clear: both;
 }
 
-#addManyHallsForm .file-path  {
+#addManyHallsForm .file-path, #addManyRequestsForm .file-path  {
 	margin-top: 11px;
 }
 
-#addManyHallsForm .customHeight {
+#addManyHallsForm .customHeight, #addManyRequestsForm .customHeight {
 	height: 54px;
 	line-height: 54px;
 }

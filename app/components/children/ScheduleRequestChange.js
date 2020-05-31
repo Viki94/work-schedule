@@ -38,6 +38,7 @@ class ScheduleRequestChange extends Component {
         this.handleScheduleRequest = this.handleScheduleRequest.bind(this);
         this.filterScheduleRequestChangesByValue = this.filterScheduleRequestChangesByValue.bind(this);
         this.handleSearchClick = this.handleSearchClick.bind(this);
+        this.handleFileUpload = this.handleFileUpload.bind(this);
     }
 
     componentDidMount() {
@@ -230,6 +231,55 @@ class ScheduleRequestChange extends Component {
         this.setState({ allScheduleRequestChanges: requestsContainingSearchText })
     }
 
+    handleFileChosen(event) {
+        document.getElementById("uploadFile").className = "btn btn-large waves-effect waves-light teal lighten-1";
+    }
+
+    handleFileUpload(event) {
+        event.preventDefault();
+
+        var file = event.target[0].files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+            let resultText = event.target.result;
+            let allDataFromFile = resultText.split(/\r?\n/);
+            let allScheduleRequestChanges = [];
+
+            allDataFromFile.forEach(item => {
+                let dataForCurrentRequest = item.split(/;/);
+                let currentRequest = {
+                    title: dataForCurrentRequest[0],
+                    content: dataForCurrentRequest[1],
+                    groups: dataForCurrentRequest[2],
+                    keyWords: dataForCurrentRequest[3]
+                }
+
+                allScheduleRequestChanges.push(currentRequest);
+            });
+
+            if (allScheduleRequestChanges.length) {
+                for (let i = 0; i < allScheduleRequestChanges.length; i++) {
+                    let allGroups = shared.addDefaultAdminValueToRequest(allScheduleRequestChanges[i].groups, true);
+                    
+                    helpers.addScheduleRequestChange(allScheduleRequestChanges[i].title, allScheduleRequestChanges[i].content, Date.parse(new Date), this.state.username, allGroups, allScheduleRequestChanges[i].keyWords).then(function (response) {
+                        this.state.scheduleRequestChangeId = response.data._id;
+                        this.filterScheduleRequestChangesByValue();
+                        $('#inputFile, .file-path').val('');
+                        document.getElementById("uploadFile").className += " disabled";
+                    }.bind(this));
+
+                    let requestAdded = $('.requestAdded').text();
+                    Materialize.toast(requestAdded, 3000);
+                }
+
+                this.getScheduleRequestChanges();
+            }
+        }.bind(this);
+
+        reader.readAsText(file);
+    }
+
     render() {
         let search = $('.search').text();
         let choose = $('.choose').text();
@@ -314,6 +364,32 @@ class ScheduleRequestChange extends Component {
                                     <div className="row">
                                         <div className="col s12 center">
                                             <button className="btn waves-effect waves-light btn-large green accent-3" type="submit" value="Submit" name="action"><Translate content="buttons.create" /><i className="material-icons right">add</i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form onSubmit={this.handleFileUpload} id="addManyRequestsForm" action="#">
+                                    <div className="row">
+                                        <div className="col s8">
+                                            <div className="file-field">
+                                                <div className="btn btn-large waves-effect waves-light teal lighten-1 right customHeight">
+                                                    <Translate content="buttons.chooseFile" />
+                                                    <input
+                                                        id="inputFile"
+                                                        type="file"
+                                                        name="input-file"
+                                                        accept={['.csv']}
+                                                        onChange={this.handleFileChosen} />
+                                                    <i className="material-icons right">attach_file</i>
+                                                </div>
+                                                <div className="file-path-wrapper">
+                                                    <input className="file-path validate" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col s4">
+                                            <button id="uploadFile" className="btn btn-large waves-effect waves-light teal lighten-1 disabled" type="submit" value="Submit"><Translate content="buttons.uploadFile" />
+                                                <i className="material-icons right">file_upload</i>
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
