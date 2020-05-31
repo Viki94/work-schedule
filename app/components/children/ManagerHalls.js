@@ -246,18 +246,18 @@ class ManagerHalls extends Component {
         return (
 
             <div className="row">
-                <div className="col m3 center">
+                <div className="col m3 s12 center">
                     <h6><Translate component="b" content="halls.halls" /></h6>
                     <a id="newHall" className="btn btn-large waves-effect waves-light green accent-3 marginBottom" onClick={this.newHall}><Translate content="halls.newHall" />
                         <i className="material-icons right">add</i>
                     </a>
                     <ListBox value={this.state.selectedHall} filter={true} filterPlaceholder={search} options={halls} onChange={(e) => this.handleHallSelect(e)} />
                 </div>
-                <div className="col m9">
+                <div className="col m9 s12">
                     <div className="row">
-                        <form className="col m12" onSubmit={this.handleAddForm}>
+                        <form className="col s12" onSubmit={this.handleAddForm}>
                             <div className="row">
-                                <div className="input-field col m12 s12">
+                                <div className="input-field col s12">
                                     <Translate component="h6" content='hall.hall' />
                                     <Translate
                                         component="input"
@@ -271,7 +271,7 @@ class ManagerHalls extends Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="input-field col m12 s12">
+                                <div className="input-field col s12">
                                     <Translate component="h6" content='hall.address' />
                                     <Translate
                                         component="input"
@@ -285,7 +285,7 @@ class ManagerHalls extends Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="input-field col m12 s12">
+                                <div className="input-field col s12">
                                     <Translate component="h6" content='hall.city' />
                                     <Translate
                                         component="input"
@@ -299,7 +299,7 @@ class ManagerHalls extends Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="input-field col m12 s12">
+                                <div className="input-field col s12">
                                     <Translate component="h6" content='hall.sittingPlaces' />
                                     <Translate
                                         component="input"
