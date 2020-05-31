@@ -17,7 +17,16 @@ module.exports = {
     users: 'Потребители',
     username: 'Потребител',
     userType: 'Вид на потребителя',
-    groups: 'Групи на потребителя'
+    groups: 'Групи на потребителя',
+    updateProfile: 'Редактиране на профила',
+    email: 'Имейл',
+    firstName: 'Име',
+    lastName: 'Фамилия',
+    description: 'Описание',
+    mobilePhone: 'Мобилен телефон',
+    country: 'Държава',
+    city: 'Град',
+    address: 'Адрес'
   },
   navMenu: {
     userManagement: 'Управление на потребители',

@@ -60,7 +60,26 @@ router.put("/updateUser/:id", function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.send("Hall updated");
+      res.send("User updated");
+    }
+  });
+});
+
+router.put("/updateProfile/:id", function (req, res) {
+  user.findOneAndUpdate({ "_id": req.params.id }, {
+    email: req.body.email,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    description: req.body.description,
+    mobilePhone: req.body.mobilePhone,
+    country: req.body.country,
+    city: req.body.city,
+    address: req.body.address
+  }, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("Profile updated");
     }
   });
 });

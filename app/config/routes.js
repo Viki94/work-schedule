@@ -19,7 +19,9 @@ var ManagerSchedulesCreate = require("../components/children/ManagerSchedulesCre
 // employee components
 var Employee = require("../components/Employee");
 var EmployeeHome = require("../components/children/EmployeeHome");
+
 var ScheduleRequestChange = require("../components/children/ScheduleRequestChange");
+var UserProfile = require("../components/children/UserProfile");
 
 module.exports = (
   <Router history={browserHistory}>
@@ -32,10 +34,12 @@ module.exports = (
         <Route path="halls" component={ManagerHalls} />
         <Route path="schedulesCreate" component={ManagerSchedulesCreate} />
         <Route path="scheduleRequestChange" component={ScheduleRequestChange} isAdmin={true} />
+        <Route path="userProfile" component={UserProfile} />
         <IndexRoute component={ManagerHome} />
       </Route>
       <Route path="employee" component={Employee}>
         <Route path="scheduleRequestChange" component={ScheduleRequestChange} isAdmin={false} />
+        <Route path="userProfile" component={UserProfile} />
         <IndexRoute component={EmployeeHome} />
       </Route>
     </Route>

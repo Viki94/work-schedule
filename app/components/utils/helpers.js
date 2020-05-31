@@ -26,6 +26,19 @@ var helper = {
     });
   },
 
+  updateProfile: function (id, email, firstName, lastName, description, mobilePhone, country, city, address) {
+    return axios.put("/updateProfile/" + id, {
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      description: description,
+      mobilePhone: mobilePhone,
+      country: country,
+      city: city,
+      address: address
+    });
+  },
+
   getHall(id) {
     return axios.get("/getHall/" + id);
   },

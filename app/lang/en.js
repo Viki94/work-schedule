@@ -17,7 +17,16 @@ module.exports = {
     users: 'Users',
     username: 'Username',
     userType: 'User type',
-    groups: 'User\'s groups'
+    groups: 'User\'s groups',
+    updateProfile: 'Update profile',
+    email: 'Email',
+    firstName: 'First name',
+    lastName: 'Last name',
+    description: 'description',
+    mobilePhone: 'Mobile phone',
+    country: 'Country',
+    city: 'City',
+    address: 'Address'
   },
   navMenu: {
     userManagement: 'User management',
@@ -116,7 +125,7 @@ module.exports = {
     noUpdatedDate: 'No updated date',
     updatedFrom: 'Updated by',
     noUpdatedUsername: 'There is no user info',
-    keyWords : 'Key words',
+    keyWords: 'Key words',
     enterKeyWords: 'Enter maximum 5 key words:',
     noKeyWords: 'No key words'
   },
