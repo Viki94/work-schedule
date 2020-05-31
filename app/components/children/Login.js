@@ -19,7 +19,6 @@ class Login extends Component {
     }
 
     handleLogin() {
-        // just in case we need it
     }
 
     render() {
