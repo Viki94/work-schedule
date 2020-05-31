@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import helpers from '../utils/helpers';
 import Translate from 'react-translate-component';
-import { MultiSelect } from 'primereact/multiselect';
-import { ListBox } from 'primereact/listbox';
-import { Dropdown } from 'primereact/dropdown';
 
 class UserProfile extends Component {
     constructor(props) {
@@ -34,7 +31,6 @@ class UserProfile extends Component {
             this.setState({ user: response.data });
         }.bind(this));
     }
-
 
     handleUserChange(event) {
         this.setState({
