@@ -40,7 +40,8 @@ module.exports = {
     schedules: 'Schedules',
     logout: 'Logout',
     language: 'Language',
-    request: 'Requests'
+    request: 'Requests',
+    updateProfile: 'Update profile'
   },
   halls: {
     halls: 'Halls',

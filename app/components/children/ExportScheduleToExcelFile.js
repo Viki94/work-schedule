@@ -26,12 +26,20 @@ class ExportScheduleToExcelFile extends Component {
             });
 
             var option = {};
-            option.fileName = 'excel'
+            option.fileName = 'График'
+            let localizedSheetHeader = ['Зала', 'Понеделник', 'Вторник', 'Сряда', 'Четвъртък', 'Петък', 'Събота', 'Неделя']
+            let lang = localStorage.getItem('lang');
+
+            if (lang === 'en') {
+                localizedSheetHeader = ['Hall', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                option.fileName = 'Schedule'
+            }
+
             option.datas = [
                 {
                     sheetData: hallSchedule,
                     sheetName: 'sheet1',
-                    sheetHeader: ['Hall', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                    sheetHeader: localizedSheetHeader
                 }
             ];
         }

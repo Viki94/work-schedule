@@ -40,7 +40,8 @@ module.exports = {
     schedules: 'Графици',
     logout: 'Изход',
     language: 'Език',
-    request: 'Заявки'
+    request: 'Заявки',
+    updateProfile: 'Редактиране на профила'
   },
   halls: {
     halls: 'Зали',
