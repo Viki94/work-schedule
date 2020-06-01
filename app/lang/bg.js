@@ -139,6 +139,7 @@ module.exports = {
     announcementAdded: 'Анонс беше добавен',
     announcementRemoved: 'Анонс беше премахнат',
     hallAdded: 'Зала беше добавена',
+    hallNotUniuqe : 'Името на залата не е уникално',
     hallUpdated: 'Зала беше обновена',
     hallRemoved: 'Зала беше премахната',
     oneHallAdded: '1 зала беше добавена',

@@ -48,20 +48,33 @@ class ManagerHalls extends Component {
     }
 
     handleAddForm(event) {
-        event.preventDefault();
-        helpers.addHall(this.state.name, this.state.address, this.state.city, this.state.sittingPlaces).then(function (response) {
-            this.state.hall_id = response.data._id;
+        event.preventDefault()
+        let isHallNameUnique = true;
+        this.state.allHalls.map(hall => {
+            if (hall.name === this.state.name) {
+                isHallNameUnique = false;
+            }
+        });
 
-            helpers.addHallSchedule(this.state.hall_id, this.state.name).then(function (response) {
-                this.clearStates();
+        if (isHallNameUnique) {
+            helpers.addHall(this.state.name, this.state.address, this.state.city, this.state.sittingPlaces).then(function (response) {
+                this.state.hall_id = response.data._id;
+
+                helpers.addHallSchedule(this.state.hall_id, this.state.name).then(function (response) {
+                    this.clearStates();
+                }.bind(this));
+
             }.bind(this));
 
-        }.bind(this));
-
-        let hallAdded = $('.hallAdded').text();
-        Materialize.toast(hallAdded, 3000);
-        this.clearForm();
-        this.getHalls();
+            let hallAdded = $('.hallAdded').text();
+            Materialize.toast(hallAdded, 3000);
+            this.clearForm();
+            this.getHalls();
+        }
+        else {
+            let hallNotUniuqe = $('.hallNotUniuqe').text();
+            Materialize.toast(hallNotUniuqe, 3000);
+        }
     }
 
     handleUpdateForm(event) {
@@ -358,6 +371,7 @@ class ManagerHalls extends Component {
                         </form>
 
                         <Translate content="toasts.hallAdded" className="hide hallAdded" />
+                        <Translate content="toasts.hallNotUniuqe" className="hide hallNotUniuqe" />
                         <Translate content="toasts.hallUpdated" className="hide hallUpdated" />
                         <Translate content="toasts.hallRemoved" className="hide hallRemoved" />
                         <Translate content="toasts.oneHallAdded" className="hide oneHallAdded" />

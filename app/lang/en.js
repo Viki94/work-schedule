@@ -139,6 +139,7 @@ module.exports = {
     announcementAdded: 'Announcement added',
     announcementRemoved: 'Announcement removed',
     hallAdded: 'Hall added',
+    hallNotUniuqe : 'Hall name is not unique',
     hallUpdated: 'Hall updated',
     hallRemoved: 'Hall removed',
     oneHallAdded: '1 hall added',
