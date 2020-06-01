@@ -58,7 +58,6 @@ class Manager extends Component {
                                         <img src="http://materializecss.com/images/office.jpg" />
                                     </div>
                                     <a><img className="circle" src={this.state.picture} /></a>
-                                    <a><span className="white-text">Company Name</span></a>
                                     <a><span className="white-text name">{this.state.username}</span></a>
                                 </div>
                             </li>
