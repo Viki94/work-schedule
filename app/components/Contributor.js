@@ -24,7 +24,7 @@ class Contributor extends Component {
         return (
             <div>
                 <ul id="dropdown1" className="dropdown-content">
-                    <li><a className="black-text" href="/contributor/userProfile">Редактиране на профил<i className="material-icons right">person</i></a></li>
+                    <li><a className="black-text" href="/contributor/userProfile"><Translate content="navMenu.updateProfile" /><i className="material-icons right">person</i></a></li>
                     <li><a className="black-text" href="/logout"><Translate content="navMenu.logout" /><i className="material-icons right">exit_to_app</i></a></li>
                 </ul>
                 <ul id="langDropdown" className="dropdown-content">
@@ -73,7 +73,7 @@ class Contributor extends Component {
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="/contributor/userProfile" className="black-text"><i className="material-icons">person</i>Редактиране на профил</a></li>
+                            <li><a href="/contributor/userProfile" className="black-text"><i className="material-icons">person</i><Translate content="navMenu.updateProfile" /></a></li>
                             <li><a href="/logout" className="black-text"><i className="material-icons">exit_to_app</i><Translate content="navMenu.logout" /></a></li>
                         </ul>
                     </div>
