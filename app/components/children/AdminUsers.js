@@ -6,7 +6,7 @@ import { ListBox } from 'primereact/listbox';
 import { Dropdown } from 'primereact/dropdown';
 import { Checkbox } from 'primereact/checkbox';
 
-class ManagerUsers extends Component {
+class AdminUsers extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -148,8 +148,8 @@ class ManagerUsers extends Component {
 
 
         this.userTypes = [
-            { name: 'Работник', value: 'employee' },
-            { name: 'Мениджър', value: 'manager' }
+            { name: 'Сътрудник', value: 'contributor' },
+            { name: 'Администратор', value: 'admin' }
         ]
 
         let lang = localStorage.getItem('lang');
@@ -168,8 +168,8 @@ class ManagerUsers extends Component {
             ];
 
             this.userTypes = [
-                { name: 'Employee', value: 'employee' },
-                { name: 'Manager', value: 'manager' }
+                { name: 'Contributor', value: 'contributor' },
+                { name: 'Administrator', value: 'admin' }
             ]
         }
 
@@ -353,4 +353,4 @@ class ManagerUsers extends Component {
     }
 }
 
-module.exports = ManagerUsers;
+module.exports = AdminUsers;

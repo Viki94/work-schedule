@@ -3,7 +3,7 @@ import helpers from './utils/helpers';
 import shared from './utils/shared';
 import Translate from 'react-translate-component';
 
-class Manager extends Component {
+class Contributor extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,7 +24,7 @@ class Manager extends Component {
         return (
             <div>
                 <ul id="dropdown1" className="dropdown-content">
-                    <li><a className="black-text" href="/manager/userProfile">Редактиране на профил<i className="material-icons right">person</i></a></li>
+                    <li><a className="black-text" href="/contributor/userProfile">Редактиране на профил<i className="material-icons right">person</i></a></li>
                     <li><a className="black-text" href="/logout"><Translate content="navMenu.logout" /><i className="material-icons right">exit_to_app</i></a></li>
                 </ul>
                 <ul id="langDropdown" className="dropdown-content">
@@ -41,13 +41,10 @@ class Manager extends Component {
                 </ul>
                 <nav>
                     <div className="nav-wrapper grey lighten-5">
-                        <a href="/manager" className="brand-logo blue-text text-darken-1"><img id="logo" src="/assets/images/logo.png" /><span className="hide-on-med-and-down">Schedulr</span></a>
+                        <a href="/contributor" className="brand-logo blue-text text-darken-1"><img id="logo" src="/assets/images/logo.png" /><span className="hide-on-med-and-down">Schedulr</span></a>
                         <a href="/" data-activates="slide-out" className="button-collapse blue-text text-darken-1"><i className="material-icons">menu</i></a>
                         <ul className="right hide-on-med-and-down">
-                            <li><a className="black-text" href="/manager/users"><Translate content="navMenu.userManagement" /><i className="material-icons right">people</i></a></li>
-                            <li><a className="black-text" href="/manager/halls"><Translate content="navMenu.hallManagement" /><i className="material-icons right">school</i></a></li>
-                            <li><a className="black-text" href="/manager/schedulesCreate"><Translate content="navMenu.schedules" /><i className="material-icons right">access_time</i></a></li>
-                            <li><a className="black-text" href="/manager/scheduleRequestChange"><i className="material-icons right">sms</i><Translate content="navMenu.request" /></a></li>
+                            <li><a className="black-text" href="/contributor/scheduleRequestChange"><i className="material-icons right">sms</i><Translate content="navMenu.request" /></a></li>
                             <li><a className="dropdown-button black-text width-140" href="#" data-activates="langDropdown" data-beloworigin="true" data-hover="true"><i className="material-icons right">language</i><Translate content="navMenu.language" /></a></li>
                             <li><a className="dropdown-button black-text min-width-130" href="#" data-activates="dropdown1" data-beloworigin="true" data-hover="true">{this.state.username}<img className="circle circle-small" src={this.state.picture} /></a></li>
                         </ul>
@@ -61,10 +58,7 @@ class Manager extends Component {
                                     <a><span className="white-text name">{this.state.username}</span></a>
                                 </div>
                             </li>
-                            <li><a href="/manager/users" className="black-text"><i className="material-icons">people</i><Translate content="navMenu.userManagement" /></a></li>
-                            <li><a href="/manager/halls" className="black-text"><i className="material-icons">school</i><Translate content="navMenu.hallManagement" /></a></li>
-                            <li><a href="/manager/schedulesCreate" className="black-text"><i className="material-icons">access_time</i><Translate content="navMenu.schedules" /></a></li>
-                            <li><a href="/manager/scheduleRequestChange" className="black-text"><i className="material-icons">sms</i><Translate content="navMenu.request" /></a></li>
+                            <li><a href="/contributor/scheduleRequestChange" className="black-text"><i className="material-icons">sms</i><Translate content="navMenu.request" /></a></li>
                             <li>
                                 <a href="#" className="collapsible-header black-text">
                                     <i className="material-icons">language</i><Translate content="navMenu.language" />
@@ -79,7 +73,7 @@ class Manager extends Component {
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="/manager/userProfile" className="black-text"><i className="material-icons">person</i>Редактиране на профил</a></li>
+                            <li><a href="/contributor/userProfile" className="black-text"><i className="material-icons">person</i>Редактиране на профил</a></li>
                             <li><a href="/logout" className="black-text"><i className="material-icons">exit_to_app</i><Translate content="navMenu.logout" /></a></li>
                         </ul>
                     </div>
@@ -92,4 +86,4 @@ class Manager extends Component {
     }
 }
 
-module.exports = Manager;
+module.exports = Contributor;

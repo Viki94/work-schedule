@@ -10,8 +10,8 @@ module.exports = {
   },
   userType: {
     selectUserType: 'Изберете вид на потребителя',
-    employee: 'Работник',
-    manager: 'Мениджър'
+    contributor: 'Сътрудник',
+    admin: 'Администратор'
   },
   users: {
     users: 'Потребители',

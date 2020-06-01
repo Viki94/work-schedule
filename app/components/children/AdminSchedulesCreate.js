@@ -7,7 +7,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 
-class ManagerSchedulesCreate extends Component {
+class AdminSchedulesCreate extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -82,4 +82,4 @@ class ManagerSchedulesCreate extends Component {
     }
 }
 
-module.exports = ManagerSchedulesCreate;
+module.exports = AdminSchedulesCreate;

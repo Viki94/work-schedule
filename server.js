@@ -53,7 +53,7 @@ app.get('/auth/google/callback',
     failureRedirect: '/'
   }),
   function (req, res) {
-    res.redirect('/employee');
+    res.redirect('/contributor');
   });
 
 if (process.env.GOOGLE_CLIENT_ID) {
@@ -76,7 +76,7 @@ if (process.env.GOOGLE_CLIENT_ID) {
           var newUser = new User();
           newUser.username = profile.displayName;
           newUser.email = profile.emails[0].value
-          newUser.userType = "employee";
+          newUser.userType = "contributor";
           console.log("Storing new user to DB")
 
           newUser.save(function (err) {
@@ -98,7 +98,7 @@ app.get('/auth/linkedin', passport.authenticate('linkedin', {
 }));
 
 app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
-  successRedirect: '/employee',
+  successRedirect: '/contributor',
   failureRedirect: '/'
 }));
 
@@ -123,7 +123,7 @@ passport.use(new LinkedInStrategy({
         var newUser = new User();
         newUser.username = profile.name.givenName;
         newUser.email = profile.emailAddress;
-        newUser.userType = "employee";
+        newUser.userType = "contributor";
         newUser.picture = profile.photos[0].value;
         console.log("Storing new user to DB")
 
@@ -143,7 +143,7 @@ app.post("/register", function (req, res) {
     username: req.body.username,
     email: req.body.email,
     userType: req.body.userType,
-    picture: "./public/assets/images/logo.png"
+    picture: "./assets/images/logo.png"
   }),
 
     req.body.password, function (err, user) {
@@ -174,11 +174,11 @@ function isLoggedIn(req, res, next) {
 }
 
 function reRoute(req, res) {
-  if (req.user.userType === "manager") {
-    res.redirect("/manager");
+  if (req.user.userType === "admin") {
+    res.redirect("/admin");
   } 
   else {
-    res.redirect("/employee");
+    res.redirect("/contributor");
   }
 }
 
@@ -203,8 +203,8 @@ app.get("/register", function (req, res) {
   res.sendFile(path.resolve(__dirname, "public", "index.html"))
 });
 
-app.get("/manager", isLoggedIn, function (req, res) {
-  if (req.user.userType === "manager") {
+app.get("/admin", isLoggedIn, function (req, res) {
+  if (req.user.userType === "admin") {
     res.sendFile(path.resolve(__dirname, "public", "index.html"))
   } 
   else {
@@ -212,8 +212,8 @@ app.get("/manager", isLoggedIn, function (req, res) {
   }
 });
 
-app.get("/manager/*", isLoggedIn, function (req, res) {
-  if (req.user.userType === "manager") {
+app.get("/admin/*", isLoggedIn, function (req, res) {
+  if (req.user.userType === "admin") {
     res.sendFile(path.resolve(__dirname, "public", "index.html"))
   } 
   else {
@@ -221,21 +221,21 @@ app.get("/manager/*", isLoggedIn, function (req, res) {
   }
 });
 
-app.get("/employee", isLoggedIn, function (req, res) {
-  if (req.user.userType === "employee") {
+app.get("/contributor", isLoggedIn, function (req, res) {
+  if (req.user.userType === "contributor") {
     res.sendFile(path.resolve(__dirname, "public", "index.html"))
   } 
   else {
-    res.redirect("/manager");
+    res.redirect("/admin");
   }
 });
 
-app.get("/employee/*", isLoggedIn, function (req, res) {
-  if (req.user.userType === "employee") {
+app.get("/contributor/*", isLoggedIn, function (req, res) {
+  if (req.user.userType === "contributor") {
     res.sendFile(path.resolve(__dirname, "public", "index.html"))
   } 
   else {
-    res.redirect("/manager");
+    res.redirect("/admin");
   }
 });
 

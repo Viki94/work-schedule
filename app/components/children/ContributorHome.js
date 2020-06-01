@@ -3,7 +3,7 @@ import helpers from '../utils/helpers';
 import ScheduleView from './ScheduleView';
 import AnnouncementsView from './AnnouncementsView';
 
-class EmployeeHome extends Component {
+class ContributorHome extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,4 +41,4 @@ class EmployeeHome extends Component {
     }
 }
 
-module.exports = EmployeeHome;
+module.exports = ContributorHome;

@@ -123,12 +123,12 @@ class Register extends Component {
                                                 selected />
                                             <Translate
                                                 component="option"
-                                                content="userType.employee"
-                                                value="employee" />
+                                                content="userType.contributor"
+                                                value="contributor" />
                                             <Translate
                                                 component="option"
-                                                content="userType.manager"
-                                                value="manager" />
+                                                content="userType.admin"
+                                                value="admin" />
                                         </select>
                                     </div>
                                 </div>

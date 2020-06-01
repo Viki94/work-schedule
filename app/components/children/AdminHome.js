@@ -4,7 +4,7 @@ import ScheduleView from './ScheduleView';
 import AnnouncementsBuild from './AnnouncementsBuild';
 import AnnouncementsView from './AnnouncementsView';
 
-class ManagerHome extends Component {
+class AdminHome extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -54,4 +54,4 @@ class ManagerHome extends Component {
     }
 }
 
-module.exports = ManagerHome;
+module.exports = AdminHome;

@@ -3,7 +3,7 @@ import helpers from '../utils/helpers';
 import Translate from 'react-translate-component';
 import { ListBox } from 'primereact/listbox';
 
-class ManagerHalls extends Component {
+class AdminHalls extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -386,4 +386,4 @@ class ManagerHalls extends Component {
     }
 }
 
-module.exports = ManagerHalls;
+module.exports = AdminHalls;

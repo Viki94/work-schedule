@@ -10,15 +10,15 @@ var IndexRoute = router.IndexRoute;
 var Main = require("../components/Main");
 var Login = require("../components/children/Login");
 var Register = require("../components/children/Register");
-// manager components
-var Manager = require("../components/Manager");
-var ManagerHome = require("../components/children/ManagerHome");
-var ManagerUsers = require("../components/children/ManagerUsers");
-var ManagerHalls = require("../components/children/ManagerHalls");
-var ManagerSchedulesCreate = require("../components/children/ManagerSchedulesCreate");
-// employee components
-var Employee = require("../components/Employee");
-var EmployeeHome = require("../components/children/EmployeeHome");
+// admin components
+var Admin = require("../components/Admin");
+var AdminHome = require("../components/children/AdminHome");
+var AdminUsers = require("../components/children/AdminUsers");
+var AdminHalls = require("../components/children/AdminHalls");
+var AdminSchedulesCreate = require("../components/children/AdminSchedulesCreate");
+// contributor components
+var Contributor = require("../components/Contributor");
+var ContributorHome = require("../components/children/ContributorHome");
 
 var ScheduleRequestChange = require("../components/children/ScheduleRequestChange");
 var UserProfile = require("../components/children/UserProfile");
@@ -29,18 +29,18 @@ module.exports = (
       <Route path="login" component={Login} />
       <Route path="register" component={Register} />
       <IndexRoute component={Login} />
-      <Route path="manager" component={Manager}>
-        <Route path="users" component={ManagerUsers} />
-        <Route path="halls" component={ManagerHalls} />
-        <Route path="schedulesCreate" component={ManagerSchedulesCreate} />
+      <Route path="admin" component={Admin}>
+        <Route path="users" component={AdminUsers} />
+        <Route path="halls" component={AdminHalls} />
+        <Route path="schedulesCreate" component={AdminSchedulesCreate} />
         <Route path="scheduleRequestChange" component={ScheduleRequestChange} isAdmin={true} />
         <Route path="userProfile" component={UserProfile} />
-        <IndexRoute component={ManagerHome} />
+        <IndexRoute component={AdminHome} />
       </Route>
-      <Route path="employee" component={Employee}>
+      <Route path="contributor" component={Contributor}>
         <Route path="scheduleRequestChange" component={ScheduleRequestChange} isAdmin={false} />
         <Route path="userProfile" component={UserProfile} />
-        <IndexRoute component={EmployeeHome} />
+        <IndexRoute component={ContributorHome} />
       </Route>
     </Route>
   </Router>

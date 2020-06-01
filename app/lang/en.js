@@ -10,8 +10,8 @@ module.exports = {
   },
   userType: {
     selectUserType: 'Select user type',
-    employee: 'Employee',
-    manager: 'Manager'
+    contributor: 'Contributor',
+    admin: 'Administrator'
   },
   users: {
     users: 'Users',
