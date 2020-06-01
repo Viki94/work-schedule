@@ -25,10 +25,6 @@ router.get("/getAllHallSchedulesWithConditions/:selectedUserConditions", functio
   var findQuery = {}
   findQuery.active = 1;
 
-  if (selectedUserConditions.name) {
-    findQuery.name = { '$regex': /.*selectedUserConditions.name.*/, '$options': 'gi' }
-  }
-
   var combinedFindQuery = { ...findQuery, ...selectedUserConditions }
 
   hallSchedule.find(combinedFindQuery).exec(function (err, doc) {

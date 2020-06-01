@@ -56,15 +56,19 @@ class ScheduleView extends Component {
 
     handleFilter() {
         let selectedUserConditions = shared.findSelectedUserConditions(this.state.filteredValues)
-        if (this.state.hallName) {
-            selectedUserConditions.name = this.state.hallName;
-        }
-
+        
         selectedUserConditions = JSON.stringify(selectedUserConditions);
         helpers.getAllHallSchedulesWithConditions(selectedUserConditions).then(function (response) {
             if (response.data !== this.state.hallSchedules) {
+                let filteredValuesByDaysOfWeek = response.data;
+                if (this.state.hallName) {
+                    filteredValuesByDaysOfWeek = filteredValuesByDaysOfWeek.filter(hall => hall.name.toLowerCase()
+                        .includes(this.state.hallName.toLowerCase())
+                    )
+                }
+
                 this.setState({
-                    hallSchedules: response.data,
+                    hallSchedules: filteredValuesByDaysOfWeek,
                     displayBlockScroll: false
                 });
             }
