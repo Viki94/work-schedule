@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import helpers from '../utils/helpers';
 import Translate from 'react-translate-component';
 import { ListBox } from 'primereact/listbox';
+import * as config from '../../../public/assets/config';
 
 class AdminHalls extends Component {
     constructor(props) {
@@ -176,7 +177,7 @@ class AdminHalls extends Component {
             let counterWithIgnoredHalls = 0
 
             allDataFromFile.forEach(item => {
-                let dataForCurrentHall = item.split(/,/);
+                let dataForCurrentHall = item.split(config.CSV_SAPARATOR);
                 let currentHall = {
                     name: dataForCurrentHall[0],
                     address: dataForCurrentHall[1],

@@ -6,6 +6,7 @@ import { MultiSelect } from 'primereact/multiselect';
 import { Chips } from 'primereact/chips';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import * as config from '../../../public/assets/config';
 
 class ScheduleRequestChange extends Component {
     constructor(props) {
@@ -247,7 +248,7 @@ class ScheduleRequestChange extends Component {
             let allScheduleRequestChanges = [];
 
             allDataFromFile.forEach(item => {
-                let dataForCurrentRequest = item.split(/;/);
+                let dataForCurrentRequest = item.split(config.CSV_SAPARATOR);
                 let currentRequest = {
                     title: dataForCurrentRequest[0],
                     content: dataForCurrentRequest[1],
