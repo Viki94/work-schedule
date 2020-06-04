@@ -136,7 +136,8 @@
 	width: auto;
 }
 
-.p-multiselect-header .p-multiselect-filter-container input[type=text], .p-listbox.p-inputtext.p-component input[type=text] {
+.p-multiselect-header .p-multiselect-filter-container input[type=text], .p-listbox.p-inputtext.p-component input[type=text],
+.p-inputtext.p-component.p-inputtext input[type=text] {
 	height: auto;
     margin: 0;
     box-sizing: inherit;
@@ -144,6 +145,25 @@
 
 body .p-multiselect .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container {
 	width: 85%;
+}
+
+.p-dialog.p-component.p-dialog-enter-done.createNewVirtualMeeting {
+	width: 60%;
+	height: 90%;
+}
+
+ .p-inputtext.p-component.p-inputtext.p-component {
+	width: 100%;
+	padding: 0;
+}
+
+.createNewVirtualMeeting .p-calendar {
+	display: block;
+}
+
+.p-datatable-wrapper .p-datatable-tbody .p-datatable-row .p-button.p-component {
+	display: block;
+	margin: 0 auto;
 }
 
 .p-multiselect-item label {
@@ -193,4 +213,12 @@ body .p-multiselect .p-multiselect-panel .p-multiselect-header .p-multiselect-fi
 .descriptionSize {
 	resize: none;
 	height: 50px;
+}
+
+.p-grid a {
+	word-break: break-all;
+}
+
+.borderTop {
+	border-top: 1px solid #c8c8c8;
 }

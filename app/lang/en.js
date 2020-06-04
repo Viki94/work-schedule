@@ -51,7 +51,13 @@ module.exports = {
     hall: 'Hall',
     address: 'Address',
     city: 'City',
-    sittingPlaces: 'Sitting places'
+    sittingPlaces: 'Sitting places',
+    meetingId: 'Meeting id',
+    meetingJoinUrl: 'Meeting\'s join link',
+    meetingPassword: 'Meeting password',
+    meetingStartTime: 'Meeting\'s start time',
+    meetingStartUrl: 'Meeting\'s start link',
+    meetingTopic: 'Meeting topic'
   },
   buttons: {
     add: 'Add',
@@ -92,6 +98,14 @@ module.exports = {
       saturday: 'Saturday',
       sunday: 'Sunday '
     }
+  },
+  meeting: {
+    createNewVirtualMeeting: 'Create new virtual meeting',
+    name: 'Meeting\'s name',
+    password: 'Meeting\'s password',
+    dateAndHour: 'Meeting\'s date and hour',
+    removeVirtualMeeting: 'Remove virtual meeting',
+    areYouSure: 'Are you sure you want to remove the virtual meeting'
   },
   announcements: {
     makeAnAnnouncement: 'Make an announcement',

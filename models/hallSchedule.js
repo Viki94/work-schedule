@@ -28,7 +28,7 @@ var HallScheduleSchema = new Schema({
     type: String,
     default: ""
   },
-  saturday:{
+  saturday: {
     type: String,
     default: ""
   },
@@ -39,6 +39,30 @@ var HallScheduleSchema = new Schema({
   active: {
     type: Number,
     default: 1,
+  },
+  meetingId: {
+    type: Number,
+    default: 0
+  },
+  meetingJoinUrl: {
+    type: String,
+    default: ""
+  },
+  meetingPassword: {
+    type: String,
+    default: ""
+  },
+  meetingStartTime: {
+    type: String,
+    default: ""
+  },
+  meetingStartUrl: {
+    type: String,
+    default: ""
+  },
+  meetingTopic: {
+    type: String,
+    default: ""
   }
 });
 

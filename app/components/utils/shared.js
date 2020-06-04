@@ -11,10 +11,18 @@ let shared = {
   },
 
   publishedDate(timestamp) {
-    var date = new Date(Number(timestamp));
-    var datestring = ("0" + date.getDate()).slice(-2) + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" +
+    let date = new Date(Number(timestamp));
+    let datestring = ("0" + date.getDate()).slice(-2) + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" +
       date.getFullYear() + " " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) + ":" +
       ("0" + date.getSeconds()).slice(-2);
+
+    return datestring;
+  },
+
+  formattedDateForZoomStartTime(startTime) {
+    let datestring = startTime.getFullYear() + "-" + ("0" + (startTime.getMonth() + 1)).slice(-2) + "-" + ("0" + startTime.getDate()).slice(-2) +
+      "T" + ("0" + startTime.getHours()).slice(-2) + ":" + ("0" + startTime.getMinutes()).slice(-2) + ":" +
+      ("0" + startTime.getSeconds()).slice(-2);
 
     return datestring;
   },

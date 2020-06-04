@@ -40,7 +40,7 @@ class AdminHome extends Component {
     render() {
         return (
             <div>
-                <ScheduleView />
+                <ScheduleView isAdmin={true} />
                 <div className="row">
                     <div className="col m6">
                         <AnnouncementsView getUpdatedAnnouncements={this.getUpdatedAnnouncements} getAnnouncements={this.getAnnouncements} updatedAnnouncementsCount={this.updatedAnnouncementsCount} allAnnouncements={this.state.allAnnouncements} isAdmin={true} />

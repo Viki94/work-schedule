@@ -11,6 +11,9 @@ var path = require("path");
 var db = require("./db/db.js")
 var User = require("./models/user")
 
+const jwt = require('jsonwebtoken');
+const rp = require('request-promise');
+
 var app = express();
 var PORT = process.env.PORT || 8080;
 
@@ -71,7 +74,7 @@ if (process.env.GOOGLE_CLIENT_ID) {
 
         if (user) {
           return done(null, user);
-        } 
+        }
         else {
           var newUser = new User();
           newUser.username = profile.displayName;
@@ -118,7 +121,7 @@ passport.use(new LinkedInStrategy({
 
       if (user) {
         return done(null, user);
-      } 
+      }
       else {
         var newUser = new User();
         newUser.username = profile.name.givenName;
@@ -131,7 +134,7 @@ passport.use(new LinkedInStrategy({
           if (err) {
             throw err;
           }
-          
+
           return done(null, newUser);
         });
       }
@@ -150,7 +153,7 @@ app.post("/register", function (req, res) {
       if (err) {
         res.sendFile(path.resolve(__dirname, "public", "error.html"));
         console.log(err);
-      } 
+      }
       else {
         passport.authenticate("local")(req, res, function () {
           res.redirect("/");
@@ -176,7 +179,7 @@ function isLoggedIn(req, res, next) {
 function reRoute(req, res) {
   if (req.user.userType === "admin") {
     res.redirect("/admin");
-  } 
+  }
   else {
     res.redirect("/contributor");
   }
@@ -185,7 +188,7 @@ function reRoute(req, res) {
 function autoRedirect(req, res, next) {
   if (req.isAuthenticated()) {
     reRoute(req, res);
-  } 
+  }
   else {
     res.sendFile(path.resolve(__dirname, "public", "index.html"));
   }
@@ -206,7 +209,7 @@ app.get("/register", function (req, res) {
 app.get("/admin", isLoggedIn, function (req, res) {
   if (req.user.userType === "admin") {
     res.sendFile(path.resolve(__dirname, "public", "index.html"))
-  } 
+  }
   else {
     res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
   }
@@ -215,7 +218,7 @@ app.get("/admin", isLoggedIn, function (req, res) {
 app.get("/admin/*", isLoggedIn, function (req, res) {
   if (req.user.userType === "admin") {
     res.sendFile(path.resolve(__dirname, "public", "index.html"))
-  } 
+  }
   else {
     res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
   }
@@ -224,7 +227,7 @@ app.get("/admin/*", isLoggedIn, function (req, res) {
 app.get("/contributor", isLoggedIn, function (req, res) {
   if (req.user.userType === "contributor") {
     res.sendFile(path.resolve(__dirname, "public", "index.html"))
-  } 
+  }
   else {
     res.redirect("/admin");
   }
@@ -233,10 +236,65 @@ app.get("/contributor", isLoggedIn, function (req, res) {
 app.get("/contributor/*", isLoggedIn, function (req, res) {
   if (req.user.userType === "contributor") {
     res.sendFile(path.resolve(__dirname, "public", "index.html"))
-  } 
+  }
   else {
     res.redirect("/admin");
   }
+});
+
+app.use(express.urlencoded({ extended: true }));
+let topic;
+let password;
+let startTime;
+
+const payload = {
+  iss: process.env.ZOOM_API_KEY,
+  exp: ((new Date()).getTime() + 5000)
+};
+
+const token = jwt.sign(payload, process.env.ZOOM_API_SECRET);
+
+app.post('/admin', (req, res) => {
+  topic = req.body.topic;
+  password = req.body.password;
+  startTime = req.body.startTime;
+  var userId = process.env.ZOOM_USER_ID;
+
+  var options = {
+    method: 'POST',
+    uri: "https://api.zoom.us/v2/users/" + userId + "/meetings",
+    body: {
+      topic: topic,
+      type: 2,
+      start_time: startTime,
+      duration: 60,
+      timezone: "Europe/Sofia",
+      password: password
+    },
+    auth: { 'bearer': token },
+    headers: {
+      'User-Agent': 'Zoom-api-Jwt-Request',
+      'content-type': 'application/json'
+    },
+    json: true
+  };
+
+  rp(options)
+    .then(function (response) {
+      var result = {
+        id: response.id,
+        join_url: response.join_url,
+        password: response.password,
+        start_time: response.start_time,
+        start_url: response.start_url,
+        topic: response.topic,
+        timezone : response.timezone
+      }
+      res.send(result);
+    })
+    .catch(function (err) {
+      console.log('API call failed, reason ', err);
+    });
 });
 
 app.get("/logout", function (req, res) {

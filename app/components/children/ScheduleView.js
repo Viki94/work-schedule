@@ -56,7 +56,7 @@ class ScheduleView extends Component {
 
     handleFilter() {
         let selectedUserConditions = shared.findSelectedUserConditions(this.state.filteredValues)
-        
+
         selectedUserConditions = JSON.stringify(selectedUserConditions);
         helpers.getAllHallSchedulesWithConditions(selectedUserConditions).then(function (response) {
             if (response.data !== this.state.hallSchedules) {
@@ -78,20 +78,52 @@ class ScheduleView extends Component {
     renderScheduleDialogContent() {
         var foundHallIndex = this.state.allHalls.findIndex(x => x._id === this.state.selectedSchedule);
         if (this.state.selectedSchedule && foundHallIndex >= 0) {
+            var foundScheduleIndex = this.state.hallSchedules.findIndex(x => x.hall_id === this.state.selectedSchedule);
             return (
                 <div className="p-grid center">
-                    <div className="p-col-4"><Translate component="b" content="hall.hall" /></div>
-                    <div className="p-col-8">{this.state.allHalls[foundHallIndex].name}</div>
+                    <div><Translate component="b" content="hall.hall" /></div>
+                    <div>{this.state.allHalls[foundHallIndex].name}</div>
 
-                    <div className="p-col-4"><Translate component="b" content="hall.address" /></div>
-                    <div className="p-col-8">{this.state.allHalls[foundHallIndex].address}</div>
+                    <div><Translate component="b" content="hall.address" /></div>
+                    <div>{this.state.allHalls[foundHallIndex].address}</div>
 
-                    <div className="p-col-4"><Translate component="b" content="hall.city" /></div>
-                    <div className="p-col-8">{this.state.allHalls[foundHallIndex].city}</div>
+                    <div><Translate component="b" content="hall.city" /></div>
+                    <div>{this.state.allHalls[foundHallIndex].city}</div>
 
-                    <div className="p-col-4"><Translate component="b" content="hall.sittingPlaces" /></div>
-                    <div className="p-col-8">{this.state.allHalls[foundHallIndex].sittingPlaces}</div>
-                </div>
+                    <div><Translate component="b" content="hall.sittingPlaces" /></div>
+                    <div>{this.state.allHalls[foundHallIndex].sittingPlaces}</div>
+                    {
+                        foundScheduleIndex >= 0 && this.state.hallSchedules[foundScheduleIndex].meetingStartUrl.length ?
+                            <div className="borderTop">
+                                <div><Translate component="b" content="hall.meetingTopic" /></div>
+                                <div>{this.state.hallSchedules[foundHallIndex].meetingTopic}</div>
+                                {this.props.isAdmin ?
+                                    <div>
+                                        <div><Translate component="b" content="hall.meetingStartUrl" /></div>
+                                        <div>
+                                            <a href={this.state.hallSchedules[foundHallIndex].meetingStartUrl}>
+                                                {this.state.hallSchedules[foundHallIndex].meetingStartUrl}
+                                            </a>
+                                        </div>
+                                    </div> : ""}
+                                <div> <Translate component="b" content="hall.meetingJoinUrl" /></div>
+                                <div>
+                                    <a href={this.state.hallSchedules[foundHallIndex].meetingJoinUrl}>
+                                        {this.state.hallSchedules[foundHallIndex].meetingJoinUrl}
+                                    </a>
+                                </div>
+
+                                <div><Translate component="b" content="hall.meetingId" /></div>
+                                <div>{this.state.hallSchedules[foundHallIndex].meetingId}</div>
+
+                                <div><Translate component="b" content="hall.meetingPassword" /></div>
+                                <div>{this.state.hallSchedules[foundHallIndex].meetingPassword}</div>
+
+                                <div><Translate component="b" content="hall.meetingStartTime" /></div>
+                                <div>{shared.publishedDate(this.state.hallSchedules[foundHallIndex].meetingStartTime)}</div>
+                            </div> : ''
+                    }
+                </div >
             );
         }
         else {
@@ -181,7 +213,7 @@ class ScheduleView extends Component {
 
     actionTemplate(rowData, column) {
         return <div className="center">
-            <Button type="button" icon="pi pi-search" className="p-button-success" onClick={(e) => this.setState({ selectedSchedule: rowData.hall_id, visibleSelectedSchedule: true })}></Button>
+            <Button type="button" icon="pi pi-search" className="p-button-warning" onClick={(e) => this.setState({ selectedSchedule: rowData.hall_id, visibleSelectedSchedule: true })}></Button>
         </div>;
     }
 
@@ -233,7 +265,7 @@ class ScheduleView extends Component {
                                 <Dialog header={<Translate content="hallDetails" />} visible={this.state.visibleSelectedSchedule} width="225px" modal={true} onHide={() => this.setState({ visibleSelectedSchedule: false })}>
                                     {this.renderScheduleDialogContent()}
                                 </Dialog>
-
+                                
                             </div>
                             <div className="center">
                                 <div className="row">

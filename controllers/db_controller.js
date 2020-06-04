@@ -131,6 +131,23 @@ router.put("/updateSchedule/:id", function (req, res) {
   });
 });
 
+router.put("/updateScheduleMeeting/:hall_id", function (req, res) {
+  hallSchedule.findOneAndUpdate({ "hall_id":  req.params.hall_id }, {
+    meetingId: req.body.id,
+    meetingJoinUrl: req.body.joinUrl,
+    meetingPassword: req.body.password,
+    meetingStartTime: req.body.startTime,
+    meetingStartUrl: req.body.startUrl,
+    meetingTopic: req.body.topic
+  }, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("Hall schedule updated");
+    }
+  });
+});
+
 router.post("/addHall", function (req, res) {
   hall.create({
     name: req.body.name,

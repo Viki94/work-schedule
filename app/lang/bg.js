@@ -51,7 +51,13 @@ module.exports = {
     hall: 'Зала',
     address: 'Адрес',
     city: 'Град',
-    sittingPlaces: 'Места за сядане'
+    sittingPlaces: 'Места за сядане',
+    meetingId: 'Номер на срещата',
+    meetingJoinUrl: 'Линк за присъединяване към срещата',
+    meetingPassword: 'Парола за срещата',
+    meetingStartTime: 'Начало за срещата',
+    meetingStartUrl: 'Линк за стратиране за срещата',
+    meetingTopic: 'Заглавие на срещата'
   },
   buttons: {
     add: 'Добавяне',
@@ -92,6 +98,14 @@ module.exports = {
       saturday: 'Събота',
       sunday: 'Неделя'
     }
+  },
+  meeting: {
+    createNewVirtualMeeting: 'Създаване на нова виртуална среща',
+    name: 'Име на срещата',
+    password: 'Парола на срещата',
+    dateAndHour: 'Дата и час на срещата',
+    removeVirtualMeeting: 'Премахване на виртуална среща',
+    areYouSure: 'Сигурни ли сте, че искате да премахнете срещата?'
   },
   announcements: {
     makeAnAnnouncement: 'Напишете съобщение',
@@ -140,7 +154,7 @@ module.exports = {
     announcementAdded: 'Анонс беше добавен',
     announcementRemoved: 'Анонс беше премахнат',
     hallAdded: 'Зала беше добавена',
-    hallNotUniuqe : 'Името на залата не е уникално',
+    hallNotUniuqe: 'Името на залата не е уникално',
     hallUpdated: 'Зала беше обновена',
     hallRemoved: 'Зала беше премахната',
     oneHallAdded: '1 зала беше добавена',

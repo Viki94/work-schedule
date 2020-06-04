@@ -69,6 +69,17 @@ var helper = {
     });
   },
 
+  updateScheduleMeeting(_id, updateScheduleMeeting) {
+    return axios.put('/updateScheduleMeeting/' + _id, {
+      id: updateScheduleMeeting.id,
+      joinUrl:  updateScheduleMeeting.join_url,
+      password:  updateScheduleMeeting.password,
+      startTime:  updateScheduleMeeting.start_time,
+      startUrl:  updateScheduleMeeting.start_url,
+      topic:  updateScheduleMeeting.topic
+    });
+  },
+
   addHall: function (name, address, city, sittingPlaces) {
     return axios.post("/addHall", {
       name: name,
