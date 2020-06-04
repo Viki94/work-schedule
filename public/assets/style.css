@@ -152,11 +152,6 @@ body .p-multiselect .p-multiselect-panel .p-multiselect-header .p-multiselect-fi
 	height: 90%;
 }
 
- .p-inputtext.p-component.p-inputtext.p-component {
-	width: 100%;
-	padding: 0;
-}
-
 .createNewVirtualMeeting .p-calendar {
 	display: block;
 }
