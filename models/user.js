@@ -16,14 +16,23 @@ var UserSchema = new mongoose.Schema({
 	city: String,
 	address: String,
 	faculty: String,
-	facultyNumber: Number,
-	studyCourse: Number,
-	studyGroup: Number,
+	facultyNumber: {
+		type: Number,
+		default: 0
+	},
+	studyCourse: {
+		type: Number,
+		default: 0
+	},
+	studyGroup: {
+		type: Number,
+		default: 0
+	},
 	curriculum: String,
 	isActiveStudent: {
 		type: Boolean,
 		default: true
-	  },
+	},
 });
 
 UserSchema.plugin(passportLocalMongoose);
