@@ -35,13 +35,13 @@ module.exports = {
     isActiveStudent: 'Активен профил'
   },
   navMenu: {
-    userManagement: 'Управление на потребители',
-    hallManagement: 'Управление на зали',
+    userManagement: 'Потребители',
+    hallManagement: 'Зали',
     schedules: 'Графици',
     logout: 'Изход',
     language: 'Език',
     request: 'Заявки',
-    updateProfile: 'Редактиране на профила'
+    updateProfile: 'Профил'
   },
   halls: {
     halls: 'Зали',
