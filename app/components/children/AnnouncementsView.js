@@ -59,7 +59,7 @@ class AnnouncementsView extends Component {
         let content = announcement.content;
         let date = announcement.date;
         let username = announcement.username;
-        let announcementText = `Title: ${title} \n Content: ${content} \n Date: ${ shared.publishedDate(date) } \n Username: ${username}`;
+        let announcementText = `Title: ${title} \n Content: ${content} \n Date: ${shared.publishedDate(date)} \n Username: ${username}`;
 
         this.setState({ qrData: announcementText }, () => {
             $('[id*="print-this"]').addClass('hide');
@@ -94,7 +94,7 @@ class AnnouncementsView extends Component {
                         <Translate component="option" content="announcements.all" value="0" />
                     </select>
                 </div>
-                {this.props.allAnnouncements.length ?
+                {this.props.allAnnouncements ?
                     this.props.allAnnouncements.map((announcement, i) => {
                         return (
                             <div key={i} className="row">
