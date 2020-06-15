@@ -135,11 +135,11 @@ class ScheduleView extends Component {
         return (
             <div className="row">
                 <div className="col s12 center">
-                    <div className="col s6">
-                        <a className="btn btn-large waves-effect waves-light green accent-3" onClick={() => this.handleFilter()} >{<Translate content="buttons.filter" />}
+                    <div className="col s12 l6">
+                        <a className="btn btn-large waves-effect waves-light green accent-3 " onClick={() => this.handleFilter()} >{<Translate content="buttons.filter" />}
                             <i className="material-icons right">check</i></a>
                     </div>
-                    <div className="col s6">
+                    <div className="col s12 l6">
                         <a className="btn btn-large waves-effect waves-light red accent-3" onClick={() => this.clearFilterState(true)}>{<Translate content="buttons.clear" />}
                             <i className="material-icons right">clear</i>
                         </a>
@@ -270,11 +270,11 @@ class ScheduleView extends Component {
                             <div className="center">
                                 <div className="row">
                                     <div className="col s12">
-                                        <div className="col s6">
-                                            <a id="showConditions" className="btn btn-large waves-effect waves-light blue accent-3" onClick={() => this.showFilterDialog(true)}><Translate content="buttons.filter" /><i className="material-icons right">open_in_new</i></a>
+                                        <div className="col s12 m6">
+                                            <a id="showConditions" className="btn btn-large waves-effect waves-light blue accent-3 controllerWidth" onClick={() => this.showFilterDialog(true)}><Translate content="buttons.filter" /><i className="material-icons right">open_in_new</i></a>
                                         </div>
-                                        <div className="col s6">
-                                            <a id="hideConditions" className={"btn btn-large waves-effect waves-light red accent-3 " + (JSON.stringify(this.state.hallSchedules) == JSON.stringify(this.state.staticHallSchedules) ? "disabled" : "")} onClick={this.handleClearFilteresSchedule}><Translate content="buttons.remove" />
+                                        <div className="col s12 m6">
+                                            <a id="hideConditions" className={"btn btn-large waves-effect waves-light red accent-3 controllerWidth " + (JSON.stringify(this.state.hallSchedules) == JSON.stringify(this.state.staticHallSchedules) ? "disabled" : "")} onClick={this.handleClearFilteresSchedule}><Translate content="buttons.remove" />
                                                 <i className="material-icons right">remove</i>
                                             </a>
                                         </div>
