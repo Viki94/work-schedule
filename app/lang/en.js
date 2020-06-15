@@ -170,7 +170,7 @@ module.exports = {
   hallDetails: 'Hall details',
   filter: 'Filter halls',
   chooseDay: 'Select a day on which you want to have or have no value',
-  schedule: 'Shedule',
+  schedule: 'Schedule',
   scheduleEditor: 'Schedule Editor',
   weekOverview: 'Week overview',
   name: 'Name',
