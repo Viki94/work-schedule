@@ -80,6 +80,7 @@ if (process.env.GOOGLE_CLIENT_ID) {
           newUser.username = profile.displayName;
           newUser.email = profile.emails[0].value
           newUser.userType = "contributor";
+          newUser.groups = ["10"];
           console.log("Storing new user to DB")
 
           newUser.save(function (err) {
@@ -127,6 +128,7 @@ passport.use(new LinkedInStrategy({
         newUser.username = profile.name.givenName;
         newUser.email = profile.emailAddress;
         newUser.userType = "contributor";
+        newUser.groups = ["10"];
         newUser.picture = profile.photos[0].value;
         console.log("Storing new user to DB")
 
@@ -147,7 +149,7 @@ app.post("/register", function (req, res) {
     email: req.body.email,
     userType: req.body.userType,
     groups: ["10"],
-    picture: "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+    picture: "/assets/images/default-picture-profile.png"
   }),
 
     req.body.password, function (err, user) {
@@ -289,7 +291,7 @@ app.post('/admin', (req, res) => {
         start_time: response.start_time,
         start_url: response.start_url,
         topic: response.topic,
-        timezone : response.timezone
+        timezone: response.timezone
       }
       res.send(result);
     })
