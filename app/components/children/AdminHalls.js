@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import helpers from '../utils/helpers';
-import shared from '../utils/shared';
 import Translate from 'react-translate-component';
 import { ListBox } from 'primereact/listbox';
 import * as config from '../../../public/assets/config';
@@ -255,8 +254,6 @@ class AdminHalls extends Component {
             hallsInfo.value = hall._id;
             halls.push(hallsInfo)
         })
-
-        halls.sort(shared.compareArrayElements);
 
         let search = $('.search').text();
 
