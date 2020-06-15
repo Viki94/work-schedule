@@ -41,7 +41,7 @@ class Contributor extends Component {
                 </ul>
                 <nav>
                     <div className="nav-wrapper grey lighten-5">
-                        <a href="/contributor" className="brand-logo blue-text text-darken-1"><img id="logo" src="/assets/images/logo.png" /><span className="hide-on-med-and-down">Schedulr</span></a>
+                        <a href="/contributor" className="brand-logo blue-text text-darken-1"><img id="logo" src="/assets/images/logo.png" /><span className="hide-on-med-and-down">Scheduler</span></a>
                         <a href="/" data-activates="slide-out" className="button-collapse blue-text text-darken-1"><i className="material-icons">menu</i></a>
                         <ul className="right hide-on-med-and-down">
                             <li><a className="black-text" href="/contributor/scheduleRequestChange"><i className="material-icons right">sms</i><Translate content="navMenu.request" /></a></li>

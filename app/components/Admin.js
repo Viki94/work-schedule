@@ -41,7 +41,7 @@ class Admin extends Component {
                 </ul>
                 <nav>
                     <div className="nav-wrapper grey lighten-5">
-                        <a href="/admin" className="brand-logo blue-text text-darken-1"><img id="logo" src="/assets/images/logo.png" /><span className="hide-on-med-and-down">Schedulr</span></a>
+                        <a href="/admin" className="brand-logo blue-text text-darken-1"><img id="logo" src="/assets/images/logo.png" /><span className="hide-on-med-and-down">Scheduler</span></a>
                         <a href="/" data-activates="slide-out" className="button-collapse blue-text text-darken-1"><i className="material-icons">menu</i></a>
                         <ul className="right hide-on-med-and-down">
                             <li><a className="black-text" href="/admin/users"><Translate content="navMenu.userManagement" /><i className="material-icons right">people</i></a></li>
