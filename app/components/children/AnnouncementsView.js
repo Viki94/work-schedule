@@ -13,7 +13,8 @@ class AnnouncementsView extends Component {
             announcementsCount: 5,
             allAnnouncements: [],
             isAdmin: false,
-            qrData: "Invalid data"
+            qrData: "Invalid data",
+            username: ''
         }
 
         this.handleRemoveAnnouncement = this.handleRemoveAnnouncement.bind(this);
@@ -28,6 +29,12 @@ class AnnouncementsView extends Component {
                 this.props.getUpdatedAnnouncements(this.state.allAnnouncements);
             });
         }.bind(this))
+
+        helpers.getCurrentUser().then(function (response) {
+            if (response !== this.state.username) {
+                this.setState({ username: response.data.username });
+            }
+        }.bind(this));
     }
 
     handleRemoveAnnouncement(event) {
@@ -136,7 +143,7 @@ class AnnouncementsView extends Component {
                                 </div>
                                 <div className="marginBottom"></div>
                                 {(() => {
-                                    if (this.props.isAdmin) {
+                                    if (this.props.isAdmin && announcement.username === this.state.username) {
                                         return (
                                             <div className="col s12">
                                                 <a id={announcement._id}
