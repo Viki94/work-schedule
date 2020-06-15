@@ -143,7 +143,8 @@ class AdminUsers extends Component {
             { label: ' Инспектор', value: '6' },
             { label: ' Декан', value: '7' },
             { label: ' Заместник-декан', value: '8' },
-            { label: ' Факултативен съвет', value: '9' }
+            { label: ' Факултативен съвет', value: '9' },
+            { label: ' Неопределен', value: '10' }
         ];
 
 
@@ -164,7 +165,8 @@ class AdminUsers extends Component {
                 { label: ' Inspector', value: '6' },
                 { label: ' Dean', value: '7' },
                 { label: ' Vice dean', value: '8' },
-                { label: ' Faculty council', value: '9' }
+                { label: ' Faculty council', value: '9' },
+                { label: ' Indefinite', value: '10' }
             ];
 
             this.userTypes = [
