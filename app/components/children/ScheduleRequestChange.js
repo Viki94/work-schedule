@@ -517,33 +517,33 @@ class ScheduleRequestChange extends Component {
                                             if (this.props.route.isAdmin) {
                                                 return (
                                                     <div>
-                                                        <div className="col s3 center">
+                                                        <div className="col s12 m6 l3 center">
                                                             <button id="reviewRequest"
-                                                                className={"btn btn-large waves-effect waves-light blue accent-3 " + (scheduleRequestChange.status != 0 ? 'disabled' : '')}
+                                                                className={"btn btn-large waves-effect waves-light blue accent-3 controllerWidth " + (scheduleRequestChange.status != 0 ? 'disabled' : '')}
                                                                 onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, 1)}>
                                                                 <Translate content="buttons.review" />
                                                                 <i className="material-icons right">event_busy</i>
                                                             </button>
                                                         </div>
-                                                        <div className="col s3 center">
+                                                        <div className="col s12 m6 l3 center">
                                                             <button id="approveRequest"
-                                                                className={"btn btn-large waves-effect waves-light green accent-3 " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 2 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
+                                                                className={"btn btn-large waves-effect waves-light green accent-3 controllerWidth " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 2 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
                                                                 onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, 2)}>
                                                                 <Translate content="buttons.approve" />
                                                                 <i className="material-icons right">event_available</i>
                                                             </button>
                                                         </div>
-                                                        <div className="col s3 center">
+                                                        <div className="col s12 m6 l3 center">
                                                             <button id="refuseRequest"
-                                                                className={"btn btn-large waves-effect waves-light red accent-3 " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 3 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
+                                                                className={"btn btn-large waves-effect waves-light red accent-3 controllerWidth " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 3 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
                                                                 onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, 3)}>
                                                                 <Translate content="buttons.refuse" />
                                                                 <i className="material-icons right">event_busy</i>
                                                             </button>
                                                         </div>
-                                                        <div className="col s3 center">
+                                                        <div className="col s12 m6 l3 center">
                                                             <button id="archiveRequest"
-                                                                className={"btn btn-large waves-effect waves-light teal accent-3 " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 1 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
+                                                                className={"btn btn-large waves-effect waves-light teal accent-3 controllerWidth " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 1 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
                                                                 onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, 4)}>
                                                                 <Translate content="buttons.archive" />
                                                                 <i className="material-icons right">event_busy</i>

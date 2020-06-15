@@ -101,14 +101,14 @@ class ScheduleView extends Component {
                                     <div>
                                         <div><Translate component="b" content="hall.meetingStartUrl" /></div>
                                         <div>
-                                            <a href={this.state.hallSchedules[foundHallIndex].meetingStartUrl}>
+                                            <a href={this.state.hallSchedules[foundHallIndex].meetingStartUrl} target="_blank">
                                                 {this.state.hallSchedules[foundHallIndex].meetingStartUrl}
                                             </a>
                                         </div>
                                     </div> : ""}
                                 <div> <Translate component="b" content="hall.meetingJoinUrl" /></div>
                                 <div>
-                                    <a href={this.state.hallSchedules[foundHallIndex].meetingJoinUrl}>
+                                    <a href={this.state.hallSchedules[foundHallIndex].meetingJoinUrl} target="_blank">
                                         {this.state.hallSchedules[foundHallIndex].meetingJoinUrl}
                                     </a>
                                 </div>

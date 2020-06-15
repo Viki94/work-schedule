@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import helpers from '../utils/helpers';
+import shared from '../utils/shared';
 import Translate from 'react-translate-component';
 import { ListBox } from 'primereact/listbox';
 import * as config from '../../../public/assets/config';
@@ -150,13 +151,13 @@ class AdminHalls extends Component {
 
     activeButtons() {
         if (this.state.selectedHall == "") {
-            document.getElementById("addHall").className = "btn btn-large waves-effect waves-light green accent-3";
+            document.getElementById("addHall").className = "btn btn-large waves-effect waves-light green accent-3 controllerWidth";
             document.getElementById("updateHall").className += " disabled";
             document.getElementById("removeHall").className += " disabled";
         } else {
             document.getElementById("addHall").className += " disabled";
-            document.getElementById("updateHall").className = "btn btn-large waves-effect waves-light blue accent-3";
-            document.getElementById("removeHall").className = "btn btn-large waves-effect waves-light red accent-3";
+            document.getElementById("updateHall").className = "btn btn-large waves-effect waves-light blue accent-3 controllerWidth";
+            document.getElementById("removeHall").className = "btn btn-large waves-effect waves-light red accent-3 controllerWidth";
         }
     }
 
@@ -255,6 +256,8 @@ class AdminHalls extends Component {
             halls.push(hallsInfo)
         })
 
+        halls.sort(shared.compareArrayElements);
+
         let search = $('.search').text();
 
         return (
@@ -327,18 +330,18 @@ class AdminHalls extends Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col s4">
-                                    <button id="addHall" className="btn btn-large waves-effect waves-light green accent-3" type="submit" value="Submit"><Translate content="buttons.add" />
+                                <div className="col s12 l4 center">
+                                    <button id="addHall" className="btn btn-large waves-effect waves-light green accent-3 controllerWidth" type="submit" value="Submit"><Translate content="buttons.add" />
                                         <i className="material-icons right">add</i>
                                     </button>
                                 </div>
-                                <div className="col s4">
-                                    <a id="updateHall" className="btn btn-large waves-effect waves-light blue accent-3" onClick={this.handleUpdateForm}><Translate content="buttons.update" />
+                                <div className="col s12 l4 center">
+                                    <a id="updateHall" className="btn btn-large waves-effect waves-light blue accent-3 controllerWidth" onClick={this.handleUpdateForm}><Translate content="buttons.update" />
                                         <i className="material-icons right">edit</i>
                                     </a>
                                 </div>
-                                <div className="col s4">
-                                    <a id="removeHall" className="btn btn-large waves-effect waves-light red accent-3" onClick={this.handleRemoveForm}><Translate content="buttons.remove" />
+                                <div className="col s12 l4 center">
+                                    <a id="removeHall" className="btn btn-large waves-effect waves-light red accent-3 controllerWidth" onClick={this.handleRemoveForm}><Translate content="buttons.remove" />
                                         <i className="material-icons right">remove</i>
                                     </a>
                                 </div>
@@ -346,9 +349,9 @@ class AdminHalls extends Component {
                         </form>
                         <form onSubmit={this.handleFileUpload} id="addManyHallsForm" action="#">
                             <div className="row">
-                                <div className="col s8">
+                                <div className="col s12 l8 center">
                                     <div className="file-field">
-                                        <div className="btn btn-large waves-effect waves-light teal lighten-1 right customHeight">
+                                        <div className="btn btn-large waves-effect waves-light teal lighten-1 right customHeight controllerWidth">
                                             <Translate content="buttons.chooseFile" />
                                             <input
                                                 id="inputFile"
@@ -363,8 +366,8 @@ class AdminHalls extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col s4">
-                                    <button id="uploadFile" className="btn btn-large waves-effect waves-light teal lighten-1 disabled" type="submit" value="Submit"><Translate content="buttons.uploadFile" />
+                                <div className="col s12 l4 center">
+                                    <button id="uploadFile" className="btn btn-large waves-effect waves-light teal lighten-1 controllerWidth disabled " type="submit" value="Submit"><Translate content="buttons.uploadFile" />
                                         <i className="material-icons right">file_upload</i>
                                     </button>
                                 </div>

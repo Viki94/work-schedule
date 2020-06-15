@@ -217,3 +217,7 @@ body .p-multiselect .p-multiselect-panel .p-multiselect-header .p-multiselect-fi
 .borderTop {
 	border-top: 1px solid #c8c8c8;
 }
+
+.btn.btn-large.waves-effect.controllerWidth {
+	min-width: 200px;
+}
