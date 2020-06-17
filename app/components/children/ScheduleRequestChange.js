@@ -522,7 +522,7 @@ class ScheduleRequestChange extends Component {
                                                                 className={"btn btn-large waves-effect waves-light blue accent-3 controllerWidth " + (scheduleRequestChange.status != 0 ? 'disabled' : '')}
                                                                 onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, 1)}>
                                                                 <Translate content="buttons.review" />
-                                                                <i className="material-icons right">event_busy</i>
+                                                                <i className="material-icons right">rate_review</i>
                                                             </button>
                                                         </div>
                                                         <div className="col s12 m6 l3 center">
@@ -546,7 +546,7 @@ class ScheduleRequestChange extends Component {
                                                                 className={"btn btn-large waves-effect waves-light teal accent-3 controllerWidth " + (scheduleRequestChange.status == 0 || scheduleRequestChange.status == 1 || scheduleRequestChange.status == 4 || scheduleRequestChange.status == 5 ? 'disabled' : '')}
                                                                 onClick={() => this.handleScheduleRequest(scheduleRequestChange._id, 4)}>
                                                                 <Translate content="buttons.archive" />
-                                                                <i className="material-icons right">event_busy</i>
+                                                                <i className="material-icons right">archive</i>
                                                             </button>
                                                         </div>
                                                     </div>
