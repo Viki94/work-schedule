@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import shared from '../utils/shared';
 import Translate from 'react-translate-component';
+import * as config from '../../../public/assets/config';
 
 class Register extends Component {
     constructor(props) {
@@ -9,12 +10,22 @@ class Register extends Component {
             username: '',
             password: '',
             email: '',
+            userType: 'contributor',
+            selectedUserType: '',
             passwordConfirmation: '',
-            error: ''
+            adminPassword: '',
+            error: '',
+            isAdminRegistrationEnabled: config.IS_ADMIN_REGISTRATION_ENABLED
         }
 
         this.handleUserChange = this.handleUserChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
+    }
+
+    componentDidMount() {
+        $("#userType").on('change', function (event) {
+            this.setState({ selectedUserType: event.target.value });
+        }.bind(this))
     }
 
     handleUserChange(event) {
@@ -22,11 +33,6 @@ class Register extends Component {
     }
 
     handleLogin() {
-
-        // helpers.errorMessage().then(function(response) {
-        //      console.log(response)
-        //          this.setState({ error: response.data});
-        //        }.bind(this));
     }
 
     render() {
@@ -112,26 +118,37 @@ class Register extends Component {
                                             attributes={{ placeholder: 'userLogin.confirmPassword' }} />
                                     </div>
                                 </div>
-                                <div className="row">
-                                    <div className="input-field col s12">
-                                        <select name="userType">
+                                {this.state.isAdminRegistrationEnabled ?
+                                    <div className="row">
+                                        <div className="input-field col s12">
+                                            <select id="userType" name="userType">
+                                                <Translate
+                                                    component="option"
+                                                    content="userType.contributor"
+                                                    value="contributor"
+                                                    selected />
+                                                <Translate
+                                                    component="option"
+                                                    content="userType.admin"
+                                                    value="admin" />
+                                            </select>
+                                        </div>
+                                    </div> : ""
+                                }
+                                {this.state.selectedUserType === "admin" ?
+                                    <div className="row">
+                                        <div className="col s12">
                                             <Translate
-                                                component="option"
-                                                content="userType.selectUserType"
-                                                defaultValue=""
-                                                disabled
-                                                selected />
-                                            <Translate
-                                                component="option"
-                                                content="userType.contributor"
-                                                value="contributor" />
-                                            <Translate
-                                                component="option"
-                                                content="userType.admin"
-                                                value="admin" />
-                                        </select>
-                                    </div>
-                                </div>
+                                                component="input"
+                                                type="text"
+                                                name="adminPassword"
+                                                className="validate"
+                                                value={this.state.adminPassword}
+                                                onChange={this.handleUserChange}
+                                                attributes={{ placeholder: 'userLogin.adminPassword' }} />
+                                        </div>
+                                    </div> : ""
+                                }
                                 <div className="row">
                                     <div className="col s12">
                                         <button className="btn waves-effect waves-light btn-large blue accent-3 fullWidth" type="submit" value="Submit" name="action"><Translate content="buttons.register" /><i className="material-icons right">person_add</i></button>
@@ -141,7 +158,7 @@ class Register extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 };

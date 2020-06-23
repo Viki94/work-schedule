@@ -6,7 +6,8 @@ module.exports = {
     email: 'Имейл',
     orLoginWith: 'Или влезте с',
     donHaveAnAccount: 'Нямате акаунт?',
-    register: 'Регистрация'
+    register: 'Регистрация',
+    adminPassword: 'Въведете парола за администратор'
   },
   userType: {
     selectUserType: 'Изберете вид на потребителя',

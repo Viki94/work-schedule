@@ -6,7 +6,8 @@ module.exports = {
     email: 'Email',
     orLoginWith: 'Or login with',
     donHaveAnAccount: 'Don\'t have an account?',
-    register: 'Register'
+    register: 'Register',
+    adminPassword: 'Enter password for administrator'
   },
   userType: {
     selectUserType: 'Select user type',

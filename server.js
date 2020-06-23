@@ -144,10 +144,21 @@ passport.use(new LinkedInStrategy({
   }));
 
 app.post("/register", function (req, res) {
+  let userType = req.body.userType;
+  const contributor = "contributor";
+  if (process.env.ADMIN_PASSWORD && req.body.adminPassword) {
+    if (req.body.adminPassword.toLowerCase() != process.env.ADMIN_PASSWORD.toLowerCase()) {
+      userType = contributor;
+    }
+  }
+  else if(!req.body.adminPassword) {
+    userType = contributor;
+  }
+
   User.register(new User({
     username: req.body.username,
     email: req.body.email,
-    userType: req.body.userType,
+    userType: userType,
     groups: ["10"],
     picture: "/assets/images/default-picture-profile.png"
   }),
