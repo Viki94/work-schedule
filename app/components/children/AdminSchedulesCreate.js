@@ -352,6 +352,8 @@ class AdminSchedulesCreate extends Component {
                             <Dialog header={<Translate content="meeting.removeVirtualMeeting" />} visible={this.state.visibleRemoveMeeting} width="225px" modal={true} onHide={() => this.setState({ visibleRemoveMeeting: false })}>
                                 {this.renderRemoveMeeting()}
                             </Dialog>
+                            
+                            <div className="marginBottom"></div>
 
                             <form onSubmit={this.handleFileUpload} id="addManyHallsForm" action="#">
                                 <div className="row">
