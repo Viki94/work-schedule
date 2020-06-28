@@ -115,7 +115,7 @@ module.exports = {
     latestAnnouncements: 'Последни анонси',
     postedAt: 'Публикувано на',
     postedFrom: 'Публикувано от',
-    selectAnnouncementCount: 'Изберете брои анонси',
+    selectAnnouncementCount: 'Изберете брой анонси',
     all: 'Всички',
     noInformation: 'Няма информация'
   },
@@ -127,7 +127,7 @@ module.exports = {
     postedAt: 'Публикувано на',
     postedFrom: 'Публикувано от',
     status: 'Статус: ',
-    selectRequestCount: 'Изберете брои заявки',
+    selectRequestCount: 'Изберете брой заявки',
     all: 'Всички',
     filterRequests: 'Филтритайте заявките',
     reviewed: 'Прегледани',
