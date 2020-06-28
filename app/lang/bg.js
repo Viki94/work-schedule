@@ -82,22 +82,26 @@ module.exports = {
   },
   dayOfWeeks: {
     short: {
-      monday: 'Пн',
-      tuesday: 'Вт',
-      wednesday: 'Ср',
-      thursday: 'Чт',
-      friday: 'Пт',
-      saturday: 'Сб',
-      sunday: 'Нд'
+      disciplineType: '',
+      disciplineName: 'Дисц',
+      department: 'Кат',
+      course: 'Курс',
+      hoursPerWeek: 'Хорар',
+      typeOfOccupation: 'Тип',
+      lecterer: 'Лектор',
+      references: 'Връзка',
+      schedule: 'Разпис'
     },
     long: {
-      monday: 'Понеделник',
-      tuesday: 'Вторник',
-      wednesday: 'Сряда',
-      thursday: 'Четвъртък',
-      friday: 'Петък',
-      saturday: 'Събота',
-      sunday: 'Неделя'
+      disciplineType: 'Тип дисциплона',
+      disciplineName: 'Име ма дисциплината',
+      department: 'Катедра',
+      course: 'Курс',
+      hoursPerWeek: 'Хорариум',
+      typeOfOccupation: 'Тип на занятието',
+      lecterer: 'Лектор',
+      references: 'Връзка',
+      schedule: 'Разписание'
     }
   },
   meeting: {

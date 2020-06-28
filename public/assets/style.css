@@ -82,6 +82,11 @@
     box-sizing: inherit;
 }
 
+.p-datatable-row td {
+	word-break: break-all;
+	text-align: center;
+}
+
 #qr-code-value {
 	width: 100%;
 	height: 150px;

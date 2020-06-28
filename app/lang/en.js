@@ -82,22 +82,26 @@ module.exports = {
   },
   dayOfWeeks: {
     short: {
-      monday: 'Mon',
-      tuesday: 'Tues',
-      wednesday: 'Wed',
-      thursday: 'Thur',
-      friday: 'Fri',
-      saturday: 'Sat',
-      sunday: 'Sun'
+      disciplineType: '',
+      disciplineName: 'Disc',
+      department: 'Depart',
+      course: 'Course',
+      hoursPerWeek: 'Hours',
+      typeOfOccupation: 'Type',
+      lecterer: 'Lect',
+      references: 'Refer',
+      schedule: 'Sched'
     },
     long: {
-      monday: 'Monday',
-      tuesday: 'Tuesday',
-      wednesday: 'Wednesday',
-      thursday: 'Thursday',
-      friday: 'Friday',
-      saturday: 'Saturday',
-      sunday: 'Sunday '
+      disciplineType: 'Discipline type',
+      disciplineName: 'Discipline name',
+      department: 'Department',
+      course: 'Course',
+      hoursPerWeek: 'Hours per week',
+      typeOfOccupation: 'Type of occupation',
+      lecterer: 'Lecterer',
+      references: 'References',
+      schedule: 'Schedule'
     }
   },
   meeting: {

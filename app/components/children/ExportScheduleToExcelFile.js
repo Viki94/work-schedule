@@ -14,24 +14,26 @@ class ExportScheduleToExcelFile extends Component {
             let hallSchedule = this.props.hallSchedules.map((schedule) => {
                 var hall = {};
                 hall.name = schedule.name;
-                hall.monday = schedule.monday;
-                hall.tuesday = schedule.tuesday;
-                hall.wednesday = schedule.wednesday;
-                hall.thursday = schedule.thursday;
-                hall.friday = schedule.friday;
-                hall.saturday = schedule.saturday;
-                hall.sunday = schedule.sunday;
+                hall.disciplineType = schedule.disciplineType;
+                hall.disciplineName = schedule.disciplineName;
+                hall.department = schedule.department;
+                hall.course = schedule.course;
+                hall.hoursPerWeek = schedule.hoursPerWeek;
+                hall.typeOfOccupation = schedule.typeOfOccupation;
+                hall.lecterer = schedule.lecterer;
+                hall.references = schedule.references;
+                hall.schedule = schedule.schedule;
 
                 return hall;
             });
 
             var option = {};
             option.fileName = 'График'
-            let localizedSheetHeader = ['Зала', 'Понеделник', 'Вторник', 'Сряда', 'Четвъртък', 'Петък', 'Събота', 'Неделя']
+            let localizedSheetHeader = ['Зала', 'Тип на дисциплината', 'Наименование на дискциплината', 'Катедра', 'Курс', 'Хорариум', 'Тип занятие', 'Преподавател', 'Връзка', 'Разписание']
             let lang = localStorage.getItem('lang');
 
             if (lang === 'en') {
-                localizedSheetHeader = ['Hall', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                localizedSheetHeader = ['Hall', 'Discipline type', 'Discipline name', 'Department', 'Course', 'Hours per week', 'Type of occupation', 'Lecterer', 'References', 'Schedule']
                 option.fileName = 'Schedule'
             }
 

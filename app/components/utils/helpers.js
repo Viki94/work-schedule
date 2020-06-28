@@ -69,6 +69,13 @@ var helper = {
     });
   },
 
+  
+  uploadHallSchedule(hallSchedule) {
+    return axios.put('/uploadSchedule/' + hallSchedule.name, {
+      hallSchedule: hallSchedule
+    });
+  },
+
   updateScheduleMeeting(_id, updateScheduleMeeting) {
     return axios.put('/updateScheduleMeeting/' + _id, {
       id: updateScheduleMeeting.id,

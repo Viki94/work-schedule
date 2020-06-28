@@ -115,13 +115,36 @@ router.post("/addHallSchedule", function (req, res) {
 router.put("/updateSchedule/:id", function (req, res) {
   var newSchedule = req.body.hallSchedule;
   hallSchedule.findOneAndUpdate({ "_id": req.params.id }, {
-    monday: newSchedule.monday,
-    tuesday: newSchedule.tuesday,
-    wednesday: newSchedule.wednesday,
-    thursday: newSchedule.thursday,
-    friday: newSchedule.friday,
-    saturday: newSchedule.saturday,
-    sunday: newSchedule.sunday
+    disciplineType: newSchedule.disciplineType,
+    disciplineName: newSchedule.disciplineName,
+    department: newSchedule.department,
+    course: newSchedule.course,
+    hoursPerWeek: newSchedule.hoursPerWeek,
+    typeOfOccupation: newSchedule.typeOfOccupation,
+    lecterer: newSchedule.lecterer,
+    references: newSchedule.references,
+    schedule: newSchedule.schedule
+  }, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("Hall schedule updated");
+    }
+  });
+});
+
+router.put("/uploadSchedule/:name", function (req, res) {
+  var newSchedule = req.body.hallSchedule;
+  hallSchedule.findOneAndUpdate({ "name": req.params.name, "active": 1 }, {
+    disciplineType: newSchedule.disciplineType,
+    disciplineName: newSchedule.disciplineName,
+    department: newSchedule.department,
+    course: newSchedule.course,
+    hoursPerWeek: newSchedule.hoursPerWeek,
+    typeOfOccupation: newSchedule.typeOfOccupation,
+    lecterer: newSchedule.lecterer,
+    references: newSchedule.references,
+    schedule: newSchedule.schedule
   }, function (err) {
     if (err) {
       console.log(err);
@@ -132,7 +155,7 @@ router.put("/updateSchedule/:id", function (req, res) {
 });
 
 router.put("/updateScheduleMeeting/:hall_id", function (req, res) {
-  hallSchedule.findOneAndUpdate({ "hall_id":  req.params.hall_id }, {
+  hallSchedule.findOneAndUpdate({ "hall_id": req.params.hall_id }, {
     meetingId: req.body.id,
     meetingJoinUrl: req.body.joinUrl,
     meetingPassword: req.body.password,

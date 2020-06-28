@@ -8,31 +8,39 @@ var HallScheduleSchema = new Schema({
   name: {
     type: String
   },
-  monday: {
+  disciplineType: {
     type: String,
     default: ""
   },
-  tuesday: {
+  disciplineName: {
     type: String,
     default: ""
   },
-  wednesday: {
+  department: {
     type: String,
     default: ""
   },
-  thursday: {
+  course: {
     type: String,
     default: ""
   },
-  friday: {
+  hoursPerWeek: {
     type: String,
     default: ""
   },
-  saturday: {
+  typeOfOccupation: {
     type: String,
     default: ""
   },
-  sunday: {
+  lecterer: {
+    type: String,
+    default: ""
+  },
+  references: {
+    type: String,
+    default: ""
+  },
+  schedule: {
     type: String,
     default: ""
   },

@@ -3,6 +3,7 @@ import helpers from '../utils/helpers';
 import shared from '../utils/shared';
 import Translate from 'react-translate-component';
 import ExportScheduleToExcelFile from './ExportScheduleToExcelFile';
+import * as config from '../../../public/assets/config';
 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -41,6 +42,8 @@ class AdminSchedulesCreate extends Component {
         this.handleCreateMeeting = this.handleCreateMeeting.bind(this);
         this.handleRemoveMeeting = this.handleRemoveMeeting.bind(this);
         this.updateScheduleMeeting = this.updateScheduleMeeting.bind(this);
+        this.handleFileChosen = this.handleFileChosen.bind(this);
+        this.handleFileUpload = this.handleFileUpload.bind(this);
     }
 
     componentDidMount() {
@@ -64,7 +67,7 @@ class AdminSchedulesCreate extends Component {
         }.bind(this));
     }
 
-    handleSaveHallSchedule(event) {
+    handleSaveHallSchedule() {
         this.state.hallSchedules.map((hallSchedule) => {
             helpers.updateHallSchedule(hallSchedule).then(function (response) {
             }.bind(this));
@@ -231,7 +234,7 @@ class AdminSchedulesCreate extends Component {
         let http = new XMLHttpRequest();
         let url = '/admin';
         let data = `topic=${topic}&password=${password}&startTime=${startTime}`
-        
+
         http.open('POST', url, true);
         http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         http.onreadystatechange = function () {
@@ -260,6 +263,57 @@ class AdminSchedulesCreate extends Component {
         });
     }
 
+    handleFileChosen(event) {
+        document.getElementById("uploadFile").className = "btn btn-large waves-effect waves-light teal lighten-1";
+    }
+
+    handleFileUpload(event) {
+        event.preventDefault();
+
+        var file = event.target[0].files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+            let resultText = event.target.result;
+            let allDataFromFile = resultText.split(/\r?\n/);
+            let allSchedules = [];
+
+            allDataFromFile.forEach(item => {
+                let dataForCurrentHall = item.split(config.CSV_SAPARATOR);
+                let currentSchedule = {
+                    name: dataForCurrentHall[0],
+                    disciplineType: dataForCurrentHall[1],
+                    disciplineName: dataForCurrentHall[2],
+                    department: dataForCurrentHall[3],
+                    course: dataForCurrentHall[4],
+                    hoursPerWeek: dataForCurrentHall[5],
+                    typeOfOccupation: dataForCurrentHall[6],
+                    lecterer: dataForCurrentHall[7],
+                    references: dataForCurrentHall[8],
+                    schedule: dataForCurrentHall[9]
+                }
+
+                allSchedules.push(currentSchedule);
+            });
+
+            if (allSchedules.length) {
+                for (let i = 0; i < allSchedules.length; i++) {
+                    helpers.uploadHallSchedule(allSchedules[i]).then(function (response) {
+                        $('#inputFile, .file-path').val('');
+                        document.getElementById("uploadFile").className += " disabled";
+                    }.bind(this));
+                }
+
+                this.getHallSchedules();
+                this.getAllHalls();
+                let scheduleUpdated = $('.scheduleUpdated').text();
+                Materialize.toast(scheduleUpdated, 3000);
+            }
+        }.bind(this);
+
+        reader.readAsText(file);
+    }
+
     render() {
         return (
             <div className="row">
@@ -268,13 +322,15 @@ class AdminSchedulesCreate extends Component {
                         <Translate component="h5" content="scheduleEditor" />
                         <DataTable value={this.state.hallSchedules} paginator={true} rows={10} first={this.state.first} onPage={(e) => this.setState({ first: e.first })} sortMode="multiple" responsive={true}>
                             <Column field='name' header={<Translate content="hall.hall" />} sortable={true} />
-                            <Column field='monday' header={<Translate content="dayOfWeeks.short.monday" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='tuesday' header={<Translate content="dayOfWeeks.short.tuesday" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='wednesday' header={<Translate content="dayOfWeeks.short.wednesday" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='thursday' header={<Translate content="dayOfWeeks.short.thursday" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='friday' header={<Translate content="dayOfWeeks.short.friday" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='saturday' header={<Translate content="dayOfWeeks.short.saturday" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='sunday' header={<Translate content="dayOfWeeks.short.sunday" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='disciplineType' header={<Translate content="dayOfWeeks.short.disciplineType" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='disciplineName' header={<Translate content="dayOfWeeks.short.disciplineName" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='department' header={<Translate content="dayOfWeeks.short.department" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='course' header={<Translate content="dayOfWeeks.short.course" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='hoursPerWeek' header={<Translate content="dayOfWeeks.short.hoursPerWeek" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='typeOfOccupation' header={<Translate content="dayOfWeeks.short.typeOfOccupation" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='lecterer' header={<Translate content="dayOfWeeks.short.lecterer" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='references' header={<Translate content="dayOfWeeks.short.references" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='schedule' header={<Translate content="dayOfWeeks.short.schedule" />} sortable={true} editor={this.scheduleEditor} />
                             <Column body={this.renderTableButtons} />
                         </DataTable>
                         <div className="marginBottom"></div>
@@ -296,6 +352,33 @@ class AdminSchedulesCreate extends Component {
                             <Dialog header={<Translate content="meeting.removeVirtualMeeting" />} visible={this.state.visibleRemoveMeeting} width="225px" modal={true} onHide={() => this.setState({ visibleRemoveMeeting: false })}>
                                 {this.renderRemoveMeeting()}
                             </Dialog>
+
+                            <form onSubmit={this.handleFileUpload} id="addManyHallsForm" action="#">
+                                <div className="row">
+                                    <div className="col s12 l8 center">
+                                        <div className="file-field">
+                                            <div className="btn btn-large waves-effect waves-light teal lighten-1 right customHeight controllerWidth">
+                                                <Translate content="buttons.chooseFile" />
+                                                <input
+                                                    id="inputFile"
+                                                    type="file"
+                                                    name="input-file"
+                                                    accept={['.csv']}
+                                                    onChange={this.handleFileChosen} />
+                                                <i className="material-icons right">attach_file</i>
+                                            </div>
+                                            <div className="file-path-wrapper">
+                                                <input className="file-path validate" type="text" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col s12 l4 center">
+                                        <button id="uploadFile" className="btn btn-large waves-effect waves-light teal lighten-1 controllerWidth disabled " type="submit" value="Submit"><Translate content="buttons.uploadFile" />
+                                            <i className="material-icons right">file_upload</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
 
                         </div>
                     </div>
