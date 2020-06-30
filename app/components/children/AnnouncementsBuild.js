@@ -58,7 +58,7 @@ class AnnouncementsBuild extends Component {
 
     render() {
         return (
-            <div className="card-panel">
+            <div className="card-panel minHeight">
                 <div className="row">
                     <div className="col s12">
                         <h5><Translate content="announcements.makeAnAnnouncement" /></h5>

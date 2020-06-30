@@ -76,6 +76,9 @@
 	line-height: 54px;
 }
 
+.card-panel.minHeight {
+	min-height: 200px;
+}
 .p-datatable.p-component input[type=text] {
 	height: auto;
     margin: 0;
@@ -83,7 +86,7 @@
 }
 
 .p-datatable-row td {
-	word-break: break-all;
+	word-break: break-word;
 	text-align: center;
 }
 
