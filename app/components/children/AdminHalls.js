@@ -258,128 +258,129 @@ class AdminHalls extends Component {
         let search = $('.search').text();
 
         return (
-
-            <div className="row">
-                <div className="col m3 s12 center">
-                    <h6><Translate component="b" content="halls.halls" /></h6>
-                    <a id="newHall" className="btn btn-large waves-effect waves-light green accent-3 marginBottom" onClick={this.newHall}><Translate content="halls.newHall" />
-                        <i className="material-icons right">add</i>
-                    </a>
-                    <ListBox value={this.state.selectedHall} filter={true} filterPlaceholder={search} options={halls} onChange={(e) => this.handleHallSelect(e)} />
-                </div>
-                <div className="col m9 s12">
-                    <div className="row">
-                        <form className="col s12" onSubmit={this.handleAddForm}>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Translate component="h6" content='hall.hall' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="name"
-                                        className="validate"
-                                        value={this.state.name}
-                                        onChange={this.handleUserChange}
-                                        required
-                                        attributes={{ placeholder: 'hall.hall' }} />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Translate component="h6" content='hall.address' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="address"
-                                        className="validate"
-                                        value={this.state.address}
-                                        onChange={this.handleUserChange}
-                                        required
-                                        attributes={{ placeholder: 'hall.address' }} />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Translate component="h6" content='hall.city' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="city"
-                                        className="validate"
-                                        value={this.state.city}
-                                        onChange={this.handleUserChange}
-                                        required
-                                        attributes={{ placeholder: 'hall.city' }} />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Translate component="h6" content='hall.sittingPlaces' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="sittingPlaces"
-                                        className="validate"
-                                        value={this.state.sittingPlaces}
-                                        onChange={this.handleUserChange}
-                                        required
-                                        attributes={{ placeholder: 'hall.sittingPlaces' }} />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col s12 l4 center">
-                                    <button id="addHall" className="btn btn-large waves-effect waves-light green accent-3 controllerWidth" type="submit" value="Submit"><Translate content="buttons.add" />
-                                        <i className="material-icons right">add</i>
-                                    </button>
-                                </div>
-                                <div className="col s12 l4 center">
-                                    <a id="updateHall" className="btn btn-large waves-effect waves-light blue accent-3 controllerWidth" onClick={this.handleUpdateForm}><Translate content="buttons.update" />
-                                        <i className="material-icons right">edit</i>
-                                    </a>
-                                </div>
-                                <div className="col s12 l4 center">
-                                    <a id="removeHall" className="btn btn-large waves-effect waves-light red accent-3 controllerWidth" onClick={this.handleRemoveForm}><Translate content="buttons.remove" />
-                                        <i className="material-icons right">remove</i>
-                                    </a>
-                                </div>
-                            </div>
-                        </form>
-                        <form onSubmit={this.handleFileUpload} id="addManyHallsForm" action="#">
-                            <div className="row">
-                                <div className="col s12 l8 center">
-                                    <div className="file-field">
-                                        <div className="btn btn-large waves-effect waves-light teal lighten-1 right customHeight controllerWidth">
-                                            <Translate content="buttons.chooseFile" />
-                                            <input
-                                                id="inputFile"
-                                                type="file"
-                                                name="input-file"
-                                                accept={['.csv']}
-                                                onChange={this.handleFileChosen} />
-                                            <i className="material-icons right">attach_file</i>
-                                        </div>
-                                        <div className="file-path-wrapper">
-                                            <input className="file-path validate" type="text" />
-                                        </div>
+            <div className="container">
+                <div className="row">
+                    <div className="col m3 s12 center">
+                        <h6><Translate component="b" content="halls.halls" /></h6>
+                        <a id="newHall" className="btn btn-large waves-effect waves-light green accent-3 marginBottom" onClick={this.newHall}><Translate content="halls.newHall" />
+                            <i className="material-icons right">add</i>
+                        </a>
+                        <ListBox value={this.state.selectedHall} filter={true} filterPlaceholder={search} options={halls} onChange={(e) => this.handleHallSelect(e)} />
+                    </div>
+                    <div className="col m9 s12">
+                        <div className="row">
+                            <form className="col s12" onSubmit={this.handleAddForm}>
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='hall.hall' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="name"
+                                            className="validate"
+                                            value={this.state.name}
+                                            onChange={this.handleUserChange}
+                                            required
+                                            attributes={{ placeholder: 'hall.hall' }} />
                                     </div>
                                 </div>
-                                <div className="col s12 l4 center">
-                                    <button id="uploadFile" className="btn btn-large waves-effect waves-light teal lighten-1 controllerWidth disabled " type="submit" value="Submit"><Translate content="buttons.uploadFile" />
-                                        <i className="material-icons right">file_upload</i>
-                                    </button>
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='hall.address' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="address"
+                                            className="validate"
+                                            value={this.state.address}
+                                            onChange={this.handleUserChange}
+                                            required
+                                            attributes={{ placeholder: 'hall.address' }} />
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='hall.city' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="city"
+                                            className="validate"
+                                            value={this.state.city}
+                                            onChange={this.handleUserChange}
+                                            required
+                                            attributes={{ placeholder: 'hall.city' }} />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='hall.sittingPlaces' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="sittingPlaces"
+                                            className="validate"
+                                            value={this.state.sittingPlaces}
+                                            onChange={this.handleUserChange}
+                                            required
+                                            attributes={{ placeholder: 'hall.sittingPlaces' }} />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col s12 l4 center">
+                                        <button id="addHall" className="btn btn-large waves-effect waves-light green accent-3 controllerWidth" type="submit" value="Submit"><Translate content="buttons.add" />
+                                            <i className="material-icons right">add</i>
+                                        </button>
+                                    </div>
+                                    <div className="col s12 l4 center">
+                                        <a id="updateHall" className="btn btn-large waves-effect waves-light blue accent-3 controllerWidth" onClick={this.handleUpdateForm}><Translate content="buttons.update" />
+                                            <i className="material-icons right">edit</i>
+                                        </a>
+                                    </div>
+                                    <div className="col s12 l4 center">
+                                        <a id="removeHall" className="btn btn-large waves-effect waves-light red accent-3 controllerWidth" onClick={this.handleRemoveForm}><Translate content="buttons.remove" />
+                                            <i className="material-icons right">remove</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                            <form onSubmit={this.handleFileUpload} id="addManyHallsForm" action="#">
+                                <div className="row">
+                                    <div className="col s12 l8 center">
+                                        <div className="file-field">
+                                            <div className="btn btn-large waves-effect waves-light teal lighten-1 right customHeight controllerWidth">
+                                                <Translate content="buttons.chooseFile" />
+                                                <input
+                                                    id="inputFile"
+                                                    type="file"
+                                                    name="input-file"
+                                                    accept={['.csv']}
+                                                    onChange={this.handleFileChosen} />
+                                                <i className="material-icons right">attach_file</i>
+                                            </div>
+                                            <div className="file-path-wrapper">
+                                                <input className="file-path validate" type="text" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col s12 l4 center">
+                                        <button id="uploadFile" className="btn btn-large waves-effect waves-light teal lighten-1 controllerWidth disabled " type="submit" value="Submit"><Translate content="buttons.uploadFile" />
+                                            <i className="material-icons right">file_upload</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
 
-                        <Translate content="toasts.hallAdded" className="hide hallAdded" />
-                        <Translate content="toasts.hallNotUniuqe" className="hide hallNotUniuqe" />
-                        <Translate content="toasts.hallUpdated" className="hide hallUpdated" />
-                        <Translate content="toasts.hallRemoved" className="hide hallRemoved" />
-                        <Translate content="toasts.oneHallAdded" className="hide oneHallAdded" />
-                        <Translate content="toasts.xHallsAdded" className="hide xHallsAdded" />
-                        <Translate content="toasts.oneHallNotAdded" className="hide oneHallNotAdded" />
-                        <Translate content="toasts.xHallsNotAdded" className="hide xHallsNotAdded" />
-                        <Translate content="search" className="hide search" />
+                            <Translate content="toasts.hallAdded" className="hide hallAdded" />
+                            <Translate content="toasts.hallNotUniuqe" className="hide hallNotUniuqe" />
+                            <Translate content="toasts.hallUpdated" className="hide hallUpdated" />
+                            <Translate content="toasts.hallRemoved" className="hide hallRemoved" />
+                            <Translate content="toasts.oneHallAdded" className="hide oneHallAdded" />
+                            <Translate content="toasts.xHallsAdded" className="hide xHallsAdded" />
+                            <Translate content="toasts.oneHallNotAdded" className="hide oneHallNotAdded" />
+                            <Translate content="toasts.xHallsNotAdded" className="hide xHallsNotAdded" />
+                            <Translate content="search" className="hide search" />
+                        </div>
                     </div>
                 </div>
             </div>

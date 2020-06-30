@@ -83,14 +83,14 @@ module.exports = {
   dayOfWeeks: {
     short: {
       disciplineType: '',
-      disciplineName: 'Disc',
-      department: 'Depart',
+      disciplineName: 'Discipline',
+      department: 'Department',
       course: 'Course',
       hoursPerWeek: 'Hours',
       typeOfOccupation: 'Type',
-      lecterer: 'Lect',
-      references: 'Refer',
-      schedule: 'Sched'
+      lecterer: 'Lecterer',
+      references: 'References',
+      schedule: 'Schedule'
     },
     long: {
       disciplineType: 'Discipline type',

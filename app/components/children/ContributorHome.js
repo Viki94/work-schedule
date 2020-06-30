@@ -34,8 +34,10 @@ class ContributorHome extends Component {
     render() {
         return (
             <div>
-                <ScheduleView  isAdmin={false}/>
-                <AnnouncementsView updatedAnnouncementsCount={this.updatedAnnouncementsCount} allAnnouncements={this.state.allAnnouncements} isAdmin={false} />
+                <ScheduleView isAdmin={false} />
+                <div className="container">
+                    <AnnouncementsView updatedAnnouncementsCount={this.updatedAnnouncementsCount} allAnnouncements={this.state.allAnnouncements} isAdmin={false} />
+                </div>
             </div>
         );
     }

@@ -41,12 +41,14 @@ class AdminHome extends Component {
         return (
             <div>
                 <ScheduleView isAdmin={true} />
-                <div className="row">
-                    <div className="col m6">
-                        <AnnouncementsView getUpdatedAnnouncements={this.getUpdatedAnnouncements} getAnnouncements={this.getAnnouncements} updatedAnnouncementsCount={this.updatedAnnouncementsCount} allAnnouncements={this.state.allAnnouncements} isAdmin={true} />
-                    </div>
-                    <div className="col m6 fullWidth">
-                        <AnnouncementsBuild getUpdatedAnnouncements={this.getUpdatedAnnouncements} allAnnouncements={this.state.allAnnouncements} isAdmin={true} />
+                <div className="container">
+                    <div className="row">
+                        <div className="col m6">
+                            <AnnouncementsView getUpdatedAnnouncements={this.getUpdatedAnnouncements} getAnnouncements={this.getAnnouncements} updatedAnnouncementsCount={this.updatedAnnouncementsCount} allAnnouncements={this.state.allAnnouncements} isAdmin={true} />
+                        </div>
+                        <div className="col m6 fullWidth">
+                            <AnnouncementsBuild getUpdatedAnnouncements={this.getUpdatedAnnouncements} allAnnouncements={this.state.allAnnouncements} isAdmin={true} />
+                        </div>
                     </div>
                 </div>
             </div>

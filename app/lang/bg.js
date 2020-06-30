@@ -83,10 +83,10 @@ module.exports = {
   dayOfWeeks: {
     short: {
       disciplineType: '',
-      disciplineName: 'Дисц',
-      department: 'Кат',
+      disciplineName: 'Дисциплината',
+      department: 'Катедра',
       course: 'Курс',
-      hoursPerWeek: 'Хорар',
+      hoursPerWeek: 'Хорариум',
       typeOfOccupation: 'Тип',
       lecterer: 'Лектор',
       references: 'Връзка',
@@ -94,7 +94,7 @@ module.exports = {
     },
     long: {
       disciplineType: 'Тип дисциплона',
-      disciplineName: 'Име ма дисциплината',
+      disciplineName: 'Име на дисциплината',
       department: 'Катедра',
       course: 'Курс',
       hoursPerWeek: 'Хорариум',

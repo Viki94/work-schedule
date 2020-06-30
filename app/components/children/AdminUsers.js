@@ -86,7 +86,7 @@ class AdminUsers extends Component {
 
     setSelectedUserState(userId) {
         if (!userId) {
-            this.setState({ username: ''})
+            this.setState({ username: '' })
         }
 
         this.clearState();
@@ -184,173 +184,175 @@ class AdminUsers extends Component {
         })
 
         return (
-            <div className="row">
-                <div className="col m3 s12 center">
-                    <h6><Translate component="b" content="users.users" /></h6>
-                    <ListBox value={this.state.selectedUser} filter={true} filterPlaceholder={search} options={users} onChange={(e) => this.handleUserSelect(e)} />
-                </div>
-                <div className={"col m9 s12 " + (!this.state.username ? "hide" : "")}>
-                    <div className="row">
-                        <form className="col s12">
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Translate component="h6" content='users.username' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="username"
-                                        className="validate"
-                                        value={this.state.username}
-                                        disabled
-                                        attributes={{ placeholder: 'users.username' }} />
+            <div className="container">
+                <div className="row">
+                    <div className="col m3 s12 center">
+                        <h6><Translate component="b" content="users.users" /></h6>
+                        <ListBox value={this.state.selectedUser} filter={true} filterPlaceholder={search} options={users} onChange={(e) => this.handleUserSelect(e)} />
+                    </div>
+                    <div className={"col m9 s12 " + (!this.state.username ? "hide" : "")}>
+                        <div className="row">
+                            <form className="col s12">
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='users.username' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="username"
+                                            className="validate"
+                                            value={this.state.username}
+                                            disabled
+                                            attributes={{ placeholder: 'users.username' }} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s6">
-                                    <Translate component="h6" content='users.firstName' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="firstName"
-                                        className="validate"
-                                        value={this.state.firstName}
-                                        disabled
-                                        attributes={{ placeholder: 'users.firstName' }} />
+                                <div className="row">
+                                    <div className="input-field col s6">
+                                        <Translate component="h6" content='users.firstName' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="firstName"
+                                            className="validate"
+                                            value={this.state.firstName}
+                                            disabled
+                                            attributes={{ placeholder: 'users.firstName' }} />
+                                    </div>
+                                    <div className="input-field col s6">
+                                        <Translate component="h6" content='users.lastName' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="lastName"
+                                            className="validate"
+                                            value={this.state.lastName}
+                                            disabled
+                                            attributes={{ placeholder: 'users.lastName' }} />
+                                    </div>
                                 </div>
-                                <div className="input-field col s6">
-                                    <Translate component="h6" content='users.lastName' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="lastName"
-                                        className="validate"
-                                        value={this.state.lastName}
-                                        disabled
-                                        attributes={{ placeholder: 'users.lastName' }} />
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='users.mobilePhone' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="mobilePhone"
+                                            value={this.state.username}
+                                            disabled
+                                            attributes={{ placeholder: 'users.mobilePhone' }} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Translate component="h6" content='users.mobilePhone' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="mobilePhone"
-                                        value={this.state.username}
-                                        disabled
-                                        attributes={{ placeholder: 'users.mobilePhone' }} />
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='users.email' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="email"
+                                            value={this.state.email}
+                                            disabled
+                                            attributes={{ placeholder: 'users.email' }} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Translate component="h6" content='users.email' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="email"
-                                        value={this.state.email}
-                                        disabled
-                                        attributes={{ placeholder: 'users.email' }} />
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='users.faculty' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="faculty"
+                                            className="validate"
+                                            value={this.state.faculty}
+                                            onChange={this.handleUserChange}
+                                            attributes={{ placeholder: 'users.faculty' }} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Translate component="h6" content='users.faculty' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="faculty"
-                                        className="validate"
-                                        value={this.state.faculty}
-                                        onChange={this.handleUserChange}
-                                        attributes={{ placeholder: 'users.faculty' }} />
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='users.facultyNumber' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="facultyNumber"
+                                            className="validate"
+                                            value={this.state.facultyNumber}
+                                            onChange={this.handleUserChange}
+                                            attributes={{ placeholder: 'users.facultyNumber' }} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Translate component="h6" content='users.facultyNumber' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="facultyNumber"
-                                        className="validate"
-                                        value={this.state.facultyNumber}
-                                        onChange={this.handleUserChange}
-                                        attributes={{ placeholder: 'users.facultyNumber' }} />
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='users.studyCourse' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="studyCourse"
+                                            className="validate"
+                                            value={this.state.studyCourse}
+                                            onChange={this.handleUserChange}
+                                            attributes={{ placeholder: 'users.studyCourse' }} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Translate component="h6" content='users.studyCourse' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="studyCourse"
-                                        className="validate"
-                                        value={this.state.studyCourse}
-                                        onChange={this.handleUserChange}
-                                        attributes={{ placeholder: 'users.studyCourse' }} />
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='users.studyGroup' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="studyGroup"
+                                            className="validate"
+                                            value={this.state.studyGroup}
+                                            onChange={this.handleUserChange}
+                                            attributes={{ placeholder: 'users.studyGroup' }} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Translate component="h6" content='users.studyGroup' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="studyGroup"
-                                        className="validate"
-                                        value={this.state.studyGroup}
-                                        onChange={this.handleUserChange}
-                                        attributes={{ placeholder: 'users.studyGroup' }} />
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='users.curriculum' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="curriculum"
+                                            className="validate"
+                                            value={this.state.curriculum}
+                                            onChange={this.handleUserChange}
+                                            attributes={{ placeholder: 'users.curriculum' }} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Translate component="h6" content='users.curriculum' />
-                                    <Translate
-                                        component="input"
-                                        type="text"
-                                        name="curriculum"
-                                        className="validate"
-                                        value={this.state.curriculum}
-                                        onChange={this.handleUserChange}
-                                        attributes={{ placeholder: 'users.curriculum' }} />
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='users.isActiveStudent' />
+                                        <Checkbox checked={this.state.isActiveStudent} onChange={e => this.setState({ isActiveStudent: e.checked })} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Translate component="h6" content='users.isActiveStudent' />
-                                    <Checkbox checked={this.state.isActiveStudent} onChange={e => this.setState({ isActiveStudent: e.checked })} />
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Dropdown className="fullWidth" value={this.state.userType} options={this.userTypes} onChange={(e) => this.setState({ userType: e.value })} placeholder="Select a City" optionLabel="name" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="input-field col s12">
-                                    <Dropdown className="fullWidth" value={this.state.userType} options={this.userTypes} onChange={(e) => this.setState({ userType: e.value })} placeholder="Select a City" optionLabel="name" />
+                                <Translate component="h6" content='users.groups' />
+                                <div className="row">
+                                    <div className="col s12 content-section implementation multiselect-demo">
+                                        <MultiSelect className="col s12" value={this.state.groups} options={allGroups} onChange={(e) => this.setState({ groups: e.value })}
+                                            filter={true} filterPlaceholder={search} placeholder={choose} />
+                                    </div>
                                 </div>
-                            </div>
-                            <Translate component="h6" content='users.groups' />
-                            <div className="row">
-                                <div className="col s12 content-section implementation multiselect-demo">
-                                    <MultiSelect className="col s12" value={this.state.groups} options={allGroups} onChange={(e) => this.setState({ groups: e.value })}
-                                        filter={true} filterPlaceholder={search} placeholder={choose} />
+                                <div className="row">
+                                    <div className="col s12 center">
+                                        <a id="updateUser" className="btn btn-large waves-effect waves-light blue accent-3" onClick={this.handleUpdateForm}><Translate content="buttons.update" />
+                                            <i className="material-icons right">edit</i>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="col s12 center">
-                                    <a id="updateUser" className="btn btn-large waves-effect waves-light blue accent-3" onClick={this.handleUpdateForm}><Translate content="buttons.update" />
-                                        <i className="material-icons right">edit</i>
-                                    </a>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
 
-                        <Translate content="toasts.userUpdated" className="hide userUpdated" />
-                        <Translate content="search" className="hide search" />
-                        <Translate content="choose" className="hide choose" />
+                            <Translate content="toasts.userUpdated" className="hide userUpdated" />
+                            <Translate content="search" className="hide search" />
+                            <Translate content="choose" className="hide choose" />
+                        </div>
                     </div>
                 </div>
-            </div >
+            </div>
         );
     }
 }
