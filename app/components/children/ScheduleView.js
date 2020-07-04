@@ -22,11 +22,12 @@ class ScheduleView extends Component {
                 disciplineName: null,
                 department: null,
                 course: null,
-                hoursPerWeek: null,
                 typeOfOccupation: null,
                 lecterer: null,
                 references: null,
-                schedule: null
+                dayOfWeek: null,
+                startHour: null,
+                endHour: null
             },
             allHalls: [],
             hallName: '',
@@ -197,11 +198,12 @@ class ScheduleView extends Component {
                 disciplineName: null,
                 department: null,
                 course: null,
-                hoursPerWeek: null,
                 typeOfOccupation: null,
                 lecterer: null,
                 references: null,
-                schedule: null
+                dayOfWeek: null,
+                startHour: null,
+                endHour: null
             },
         });
     }
@@ -233,11 +235,12 @@ class ScheduleView extends Component {
                             <Column field='disciplineName' header={<Translate content="dayOfWeeks.short.disciplineName" />} sortable={true} />
                             <Column field='department' header={<Translate content="dayOfWeeks.short.department" />} sortable={true} />
                             <Column field='course' header={<Translate content="dayOfWeeks.short.course" />} sortable={true} />
-                            <Column field='hoursPerWeek' header={<Translate content="dayOfWeeks.short.hoursPerWeek" />} sortable={true} />
                             <Column field='typeOfOccupation' header={<Translate content="dayOfWeeks.short.typeOfOccupation" />} sortable={true} />
                             <Column field='lecterer' header={<Translate content="dayOfWeeks.short.lecterer" />} sortable={true} />
                             <Column field='references' header={<Translate content="dayOfWeeks.short.references" />} sortable={true} />
-                            <Column field='schedule' header={<Translate content="dayOfWeeks.short.schedule" />} sortable={true} />
+                            <Column field='dayOfWeek' header={<Translate content="dayOfWeeks.short.dayOfWeek" />} sortable={true} />
+                            <Column field='startHour' header={<Translate content="dayOfWeeks.short.startHour" />} sortable={true} />
+                            <Column field='endHour' header={<Translate content="dayOfWeeks.short.endHour" />} sortable={true} />
                             <Column body={this.actionTemplate} />
                         </DataTable>
                         <div className="marginBottom"></div>
@@ -263,11 +266,12 @@ class ScheduleView extends Component {
                                         {this.renderCheckbox(this.state.filteredValues.disciplineName, "disciplineName")}
                                         {this.renderCheckbox(this.state.filteredValues.department, "department")}
                                         {this.renderCheckbox(this.state.filteredValues.course, "course")}
-                                        {this.renderCheckbox(this.state.filteredValues.hoursPerWeek, "hoursPerWeek")}
                                         {this.renderCheckbox(this.state.filteredValues.typeOfOccupation, "typeOfOccupation")}
                                         {this.renderCheckbox(this.state.filteredValues.lecterer, "lecterer")}
                                         {this.renderCheckbox(this.state.filteredValues.references, "references")}
-                                        {this.renderCheckbox(this.state.filteredValues.schedule, "schedule")}
+                                        {this.renderCheckbox(this.state.filteredValues.dayOfWeek, "dayOfWeek")}
+                                        {this.renderCheckbox(this.state.filteredValues.startHour, "startHour")}
+                                        {this.renderCheckbox(this.state.filteredValues.endHour, "endHour")}
                                     </div>
                                 </Dialog>
                                 <Dialog header={<Translate content="hallDetails" />} visible={this.state.visibleSelectedSchedule} width="225px" modal={true} onHide={() => this.setState({ visibleSelectedSchedule: false })}>

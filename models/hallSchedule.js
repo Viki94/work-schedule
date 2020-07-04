@@ -24,10 +24,6 @@ var HallScheduleSchema = new Schema({
     type: String,
     default: ""
   },
-  hoursPerWeek: {
-    type: String,
-    default: ""
-  },
   typeOfOccupation: {
     type: String,
     default: ""
@@ -40,7 +36,15 @@ var HallScheduleSchema = new Schema({
     type: String,
     default: ""
   },
-  schedule: {
+  dayOfWeek: {
+    type: String,
+    default: ""
+  },
+  startHour: {
+    type: String,
+    default: ""
+  },
+  endHour: {
     type: String,
     default: ""
   },

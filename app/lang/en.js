@@ -87,22 +87,24 @@ module.exports = {
       disciplineName: 'Discipline',
       department: 'Department',
       course: 'Course',
-      hoursPerWeek: 'Hours',
       typeOfOccupation: 'Type',
       lecterer: 'Lecterer',
       references: 'References',
-      schedule: 'Schedule'
+      dayOfWeek: 'Day',
+      startHour: 'Start',
+      endHour: 'End'
     },
     long: {
       disciplineType: 'Discipline type',
       disciplineName: 'Discipline name',
       department: 'Department',
       course: 'Course',
-      hoursPerWeek: 'Hours per week',
       typeOfOccupation: 'Type of occupation',
       lecterer: 'Lecterer',
       references: 'References',
-      schedule: 'Schedule'
+      dayOfWeek: 'Day of week',
+      startHour: 'Start hour',
+      endHour: 'End hour'
     }
   },
   meeting: {

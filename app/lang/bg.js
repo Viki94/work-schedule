@@ -87,22 +87,24 @@ module.exports = {
       disciplineName: 'Дисциплина',
       department: 'Катедра',
       course: 'Курс',
-      hoursPerWeek: 'Хорариум',
       typeOfOccupation: 'Тип',
       lecterer: 'Лектор',
       references: 'Връзка',
-      schedule: 'Разпис'
+      dayOfWeek: 'Ден',
+      startHour: 'Начало',
+      endHour: 'Край'
     },
     long: {
       disciplineType: 'Тип дисциплона',
       disciplineName: 'Име на дисциплината',
       department: 'Катедра',
       course: 'Курс',
-      hoursPerWeek: 'Хорариум',
       typeOfOccupation: 'Тип на занятието',
       lecterer: 'Лектор',
       references: 'Връзка',
-      schedule: 'Разписание'
+      dayOfWeek: 'Ден от седмицата',
+      startHour: 'Начален час',
+      endHour: 'Краен час'
     }
   },
   meeting: {

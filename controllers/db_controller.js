@@ -119,11 +119,12 @@ router.put("/updateSchedule/:id", function (req, res) {
     disciplineName: newSchedule.disciplineName,
     department: newSchedule.department,
     course: newSchedule.course,
-    hoursPerWeek: newSchedule.hoursPerWeek,
     typeOfOccupation: newSchedule.typeOfOccupation,
     lecterer: newSchedule.lecterer,
     references: newSchedule.references,
-    schedule: newSchedule.schedule
+    dayOfWeek: newSchedule.dayOfWeek,
+    startHour: newSchedule.startHour,
+    endHour: newSchedule.endHour
   }, function (err) {
     if (err) {
       console.log(err);
@@ -140,11 +141,12 @@ router.put("/uploadSchedule/:name", function (req, res) {
     disciplineName: newSchedule.disciplineName,
     department: newSchedule.department,
     course: newSchedule.course,
-    hoursPerWeek: newSchedule.hoursPerWeek,
     typeOfOccupation: newSchedule.typeOfOccupation,
     lecterer: newSchedule.lecterer,
     references: newSchedule.references,
-    schedule: newSchedule.schedule
+    dayOfWeek: newSchedule.dayOfWeek,
+    startHour: newSchedule.startHour,
+    endHour: newSchedule.endHour
   }, function (err) {
     if (err) {
       console.log(err);

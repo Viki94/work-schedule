@@ -18,12 +18,13 @@ class ExportScheduleToExcelFile extends Component {
                 hall.disciplineName = schedule.disciplineName;
                 hall.department = schedule.department;
                 hall.course = schedule.course;
-                hall.hoursPerWeek = schedule.hoursPerWeek;
                 hall.typeOfOccupation = schedule.typeOfOccupation;
                 hall.lecterer = schedule.lecterer;
                 hall.references = schedule.references;
-                hall.schedule = schedule.schedule;
-
+                hall.dayOfWeek = schedule.dayOfWeek;
+                hall.startHour = schedule.startHour;
+                hall.endHour = schedule.endHour;
+                
                 return hall;
             });
 

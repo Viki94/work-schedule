@@ -286,11 +286,12 @@ class AdminSchedulesCreate extends Component {
                     disciplineName: dataForCurrentHall[2],
                     department: dataForCurrentHall[3],
                     course: dataForCurrentHall[4],
-                    hoursPerWeek: dataForCurrentHall[5],
-                    typeOfOccupation: dataForCurrentHall[6],
-                    lecterer: dataForCurrentHall[7],
-                    references: dataForCurrentHall[8],
-                    schedule: dataForCurrentHall[9]
+                    typeOfOccupation: dataForCurrentHall[5],
+                    lecterer: dataForCurrentHall[6],
+                    references: dataForCurrentHall[7],
+                    dayOfWeek: dataForCurrentHall[8],
+                    startHour: dataForCurrentHall[9],
+                    endHour: dataForCurrentHall[10]
                 }
 
                 allSchedules.push(currentSchedule);
@@ -320,12 +321,13 @@ class AdminSchedulesCreate extends Component {
             hallSchedule.disciplineName = '';
             hallSchedule.department = '';
             hallSchedule.course = '';
-            hallSchedule.hoursPerWeek = '';
             hallSchedule.typeOfOccupation = '';
-            hallSchedule.lecterer = ''; 
+            hallSchedule.lecterer = '';
             hallSchedule.references = '';
-            hallSchedule.schedule = '';
-
+            hallSchedule.dayOfWeek = '';
+            hallSchedule.startHour = '';
+            hallSchedule.endHour = '';
+            
             return hallSchedule;
         });
 
@@ -346,11 +348,12 @@ class AdminSchedulesCreate extends Component {
                             <Column field='disciplineName' header={<Translate content="dayOfWeeks.short.disciplineName" />} sortable={true} editor={this.scheduleEditor} />
                             <Column field='department' header={<Translate content="dayOfWeeks.short.department" />} sortable={true} editor={this.scheduleEditor} />
                             <Column field='course' header={<Translate content="dayOfWeeks.short.course" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='hoursPerWeek' header={<Translate content="dayOfWeeks.short.hoursPerWeek" />} sortable={true} editor={this.scheduleEditor} />
                             <Column field='typeOfOccupation' header={<Translate content="dayOfWeeks.short.typeOfOccupation" />} sortable={true} editor={this.scheduleEditor} />
                             <Column field='lecterer' header={<Translate content="dayOfWeeks.short.lecterer" />} sortable={true} editor={this.scheduleEditor} />
                             <Column field='references' header={<Translate content="dayOfWeeks.short.references" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='schedule' header={<Translate content="dayOfWeeks.short.schedule" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='dayOfWeek' header={<Translate content="dayOfWeeks.short.dayOfWeek" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='startHour' header={<Translate content="dayOfWeeks.short.startHour" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='endHour' header={<Translate content="dayOfWeeks.short.endHour" />} sortable={true} editor={this.scheduleEditor} />
                             <Column body={this.renderTableButtons} />
                         </DataTable>
                         <div className="marginBottom"></div>
