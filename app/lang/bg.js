@@ -66,6 +66,7 @@ module.exports = {
     remove: 'Премахване',
     clear: 'Изчистване',
     downloadFile: 'Сваляне на файл',
+    downloadFileAndClear: 'Изтриване и сваляне на файл',
     create: 'Създаване',
     save: 'Запазване',
     login: 'Влизане',
@@ -83,7 +84,7 @@ module.exports = {
   dayOfWeeks: {
     short: {
       disciplineType: '',
-      disciplineName: 'Дисциплината',
+      disciplineName: 'Дисциплина',
       department: 'Катедра',
       course: 'Курс',
       hoursPerWeek: 'Хорариум',

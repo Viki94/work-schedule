@@ -66,6 +66,7 @@ module.exports = {
     remove: 'Remove',
     clear: 'Clear',
     downloadFile: 'Download file',
+    downloadFileAndClear: 'Clear and download file',
     create: 'Create',
     save: 'Save',
     login: 'Login',

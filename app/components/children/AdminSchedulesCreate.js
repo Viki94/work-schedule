@@ -314,6 +314,26 @@ class AdminSchedulesCreate extends Component {
         reader.readAsText(file);
     }
 
+    handleClearHallSchedule() {
+        let updatedHallSchedules = this.state.hallSchedules.map((hallSchedule, j) => {
+            hallSchedule.disciplineType = '';
+            hallSchedule.disciplineName = '';
+            hallSchedule.department = '';
+            hallSchedule.course = '';
+            hallSchedule.hoursPerWeek = '';
+            hallSchedule.typeOfOccupation = '';
+            hallSchedule.lecterer = ''; 
+            hallSchedule.references = '';
+            hallSchedule.schedule = '';
+
+            return hallSchedule;
+        });
+
+        this.setState({ hallSchedules: updatedHallSchedules }, () => {
+            this.handleSaveHallSchedule();
+        });
+    }
+
     render() {
         return (
             <div className="row">
@@ -341,7 +361,8 @@ class AdminSchedulesCreate extends Component {
                                 <i className="material-icons right">save</i>
                             </a>
 
-                            <ExportScheduleToExcelFile hallSchedules={this.state.hallSchedules} />
+                            <ExportScheduleToExcelFile hallSchedules={this.state.hallSchedules} clearHallScheduleData={false} />
+                            <ExportScheduleToExcelFile hallSchedules={this.state.hallSchedules} clearHallScheduleData={true} handleClearHallSchedule={this.handleClearHallSchedule.bind(this)} />
 
                             <Dialog header={<Translate content="hallDetails" />} visible={this.state.visibleSelectedSchedule} width="225px" modal={true} onHide={() => this.setState({ visibleSelectedSchedule: false })}>
                                 {this.renderScheduleDialogContent()}
@@ -352,7 +373,7 @@ class AdminSchedulesCreate extends Component {
                             <Dialog header={<Translate content="meeting.removeVirtualMeeting" />} visible={this.state.visibleRemoveMeeting} width="225px" modal={true} onHide={() => this.setState({ visibleRemoveMeeting: false })}>
                                 {this.renderRemoveMeeting()}
                             </Dialog>
-                            
+
                             <div className="marginBottom"></div>
 
                             <form onSubmit={this.handleFileUpload} id="addManyHallsForm" action="#">

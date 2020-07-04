@@ -48,11 +48,17 @@ class ExportScheduleToExcelFile extends Component {
 
         var toExcel = new ExportJsonExcel(option);
         toExcel.saveExcel();
+
+        if (this.props.clearHallScheduleData) {
+            this.props.handleClearHallSchedule();
+        }
     }
 
     render() {
         return (
-            <a className="btn btn-large waves-effect waves-light green accent-3 exportSchedule" onClick={this.handleExportHallSchedule} ><Translate content="buttons.downloadFile" /><i className="material-icons right">file_download</i></a>
+            this.props.clearHallScheduleData ?
+                <a className="btn btn-large waves-effect waves-light red accent-3 exportSchedule" onClick={this.handleExportHallSchedule} ><Translate content="buttons.downloadFileAndClear" /><i className="material-icons right">file_download</i></a> :
+                <a className="btn btn-large waves-effect waves-light green accent-3 marginRight exportSchedule" onClick={this.handleExportHallSchedule} ><Translate content="buttons.downloadFile" /><i className="material-icons right">file_download</i></a>
         );
     }
 }
