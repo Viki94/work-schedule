@@ -23,6 +23,12 @@ GOOGLE_CALLBACK_URL=http://YOUR_DOMAIN/auth/google/callback
 LINKEDIN_ID=
 LINKEDIN_SECRET=
 LINKEDIN_CALLBACK=http://YOUR_DOMAIN/auth/linkedin/callback
+
+ZOOM_API_KEY=
+ZOOM_API_SECRET=
+ZOOM_USER_ID=
+
+ADMIN_PASSWORD=
 ```
 
 If you dont want to go through the trouble of creating the API keys, put in dummy numbers/text and the app should still work, however passport social login will not.
