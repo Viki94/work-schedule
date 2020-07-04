@@ -31,7 +31,7 @@ ZOOM_USER_ID=
 ADMIN_PASSWORD=
 ```
 
-If you dont want to go through the trouble of creating the API keys, put in dummy numbers/text and the app should still work, however passport social login will not.
+Can be added some values as numbers/text but social login and zoom meetings will not work.
 
 ### Run App
 
