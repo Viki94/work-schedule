@@ -8,6 +8,7 @@ import { Column } from 'primereact/column';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
+import * as config from '../../../public/assets/config';
 
 class ScheduleView extends Component {
     constructor(props) {
@@ -220,7 +221,7 @@ class ScheduleView extends Component {
     actionTemplate(rowData, column) {
         return <div className="center">
             <Button type="button" icon="pi pi-search" className="p-button-warning" onClick={(e) => this.setState({ selectedSchedule: rowData.hall_id, visibleSelectedSchedule: true })}></Button>
-        </div>;
+        </div>
     }
 
     render() {
@@ -229,7 +230,7 @@ class ScheduleView extends Component {
                 <div className="col s12">
                     <div className="section">
                         <Translate component="h5" content="weekOverview" />
-                        <DataTable value={this.state.hallSchedules} paginator={true} rows={10} first={this.state.first} onPage={(e) => this.setState({ first: e.first })} sortMode="multiple" responsive={true}>
+                        <DataTable value={this.state.hallSchedules} paginator={true} rows={config.VIEW_SCHEDULE_ROW_COUNT} first={this.state.first} onPage={(e) => this.setState({ first: e.first })} sortMode="multiple" responsive={true}>
                             <Column field='name' header={<Translate content="hall.hall" />} sortable={true} />
                             <Column field='disciplineType' header={<Translate content="dayOfWeeks.short.disciplineType" />} sortable={true} />
                             <Column field='disciplineName' header={<Translate content="dayOfWeeks.short.disciplineName" />} sortable={true} />

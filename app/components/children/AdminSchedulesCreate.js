@@ -327,7 +327,7 @@ class AdminSchedulesCreate extends Component {
             hallSchedule.dayOfWeek = '';
             hallSchedule.startHour = '';
             hallSchedule.endHour = '';
-            
+
             return hallSchedule;
         });
 
@@ -342,7 +342,7 @@ class AdminSchedulesCreate extends Component {
                 <div className="col m12" >
                     <div className="section">
                         <Translate component="h5" content="scheduleEditor" />
-                        <DataTable value={this.state.hallSchedules} paginator={true} rows={10} first={this.state.first} onPage={(e) => this.setState({ first: e.first })} sortMode="multiple" responsive={true}>
+                        <DataTable value={this.state.hallSchedules} paginator={true} rows={config.CREATE_SCHEDULE_ROW_COUNT} first={this.state.first} onPage={(e) => this.setState({ first: e.first })} sortMode="multiple" responsive={true}>
                             <Column field='name' header={<Translate content="hall.hall" />} sortable={true} />
                             <Column field='disciplineType' header={<Translate content="dayOfWeeks.short.disciplineType" />} sortable={true} editor={this.scheduleEditor} />
                             <Column field='disciplineName' header={<Translate content="dayOfWeeks.short.disciplineName" />} sortable={true} editor={this.scheduleEditor} />
