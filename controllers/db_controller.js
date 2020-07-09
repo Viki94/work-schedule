@@ -134,6 +134,18 @@ router.put("/updateSchedule/:id", function (req, res) {
   });
 });
 
+router.put("/updateScheduleDescription/:id", function (req, res) {
+  hallSchedule.findOneAndUpdate({ "_id": req.params.id }, {
+    description: req.body.description
+  }, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("Hall schedule updated");
+    }
+  });
+});
+
 router.put("/uploadSchedule/:name", function (req, res) {
   var newSchedule = req.body.hallSchedule;
   hallSchedule.findOneAndUpdate({ "name": req.params.name, "active": 1 }, {

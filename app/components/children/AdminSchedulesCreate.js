@@ -30,7 +30,8 @@ class AdminSchedulesCreate extends Component {
                 start_url: '',
                 topic: ''
             },
-            meetingDate: null
+            meetingDate: null,
+            description: ''
         }
 
         this.getHallSchedules = this.getHallSchedules.bind(this);
@@ -54,7 +55,10 @@ class AdminSchedulesCreate extends Component {
     getHallSchedules() {
         helpers.getHallSchedules().then(function (response) {
             if (response !== this.state.hallSchedules) {
-                this.setState({ hallSchedules: response.data });
+                this.setState({
+                    hallSchedules: response.data,
+                    description: response.data[0].description
+                });
             }
         }.bind(this));
     }
@@ -118,7 +122,7 @@ class AdminSchedulesCreate extends Component {
 
                     <div><Translate component="b" content="hall.gpsCoordinates" /></div>
                     <div>{this.state.allHalls[foundHallIndex].gpsCoordinates}</div>
-                    
+
                     {
                         foundScheduleIndex >= 0 && this.state.hallSchedules[foundScheduleIndex].meetingStartUrl.length ?
                             <div className="borderTop">
@@ -340,12 +344,65 @@ class AdminSchedulesCreate extends Component {
         });
     }
 
+    handleEditScheduleDescription() {
+        $('#description').removeClass('hide');
+        $('#descriptionText').addClass('hide');
+        $('#saveDescription').removeClass('hide');
+        $('#editDescription').addClass('hide');
+    }
+
+    handleSaveScheduleDescription() {
+        $('#description').addClass('hide');
+        $('#descriptionText').removeClass('hide');
+        $('#saveDescription').addClass('hide');
+        $('#editDescription').removeClass('hide');
+
+        this.state.hallSchedules.map((hallSchedule) => {
+            helpers.updateHallScheduleDescription(hallSchedule._id, this.state.description).then(function (response) {
+            }.bind(this));
+        })
+
+        let scheduleUpdated = $('.scheduleUpdated').text();
+        Materialize.toast(scheduleUpdated, 3000);
+    }
+
     render() {
         return (
             <div className="row">
                 <div className="col m12" >
                     <div className="section">
                         <Translate component="h5" content="scheduleEditor" />
+                        <div className="row">
+                            <div id="descriptionText" className="input-field col s4">
+                                <Translate
+                                    component="input"
+                                    type="text"
+                                    name="description"
+                                    value={this.state.description}
+                                    readonly="readonly"
+                                    onChange={(event) => { this.setState({ description: event.target.value }) }}
+                                    attributes={{ placeholder: 'scheduleDescription' }} />
+                            </div>
+                            <div id="description" className="input-field col s4 center hide">
+                                <Translate
+                                    component="input"
+                                    type="text"
+                                    name="description"
+                                    value={this.state.description}
+                                    onChange={(event) => { this.setState({ description: event.target.value }) }}
+                                    attributes={{ placeholder: 'scheduleDescription' }} />
+                            </div>
+                            <button id="editDescription"
+                                className="btn btn-large waves-effect waves-light green accent-3"
+                                onClick={() => this.handleEditScheduleDescription()}>
+                                <i className="material-icons right">edit</i>
+                            </button>
+                            <button id="saveDescription"
+                                className="btn btn-large waves-effect waves-light blue accent-3 hide"
+                                onClick={() => this.handleSaveScheduleDescription()}>
+                                <i className="material-icons right">save</i>
+                            </button>
+                        </div>
                         <DataTable value={this.state.hallSchedules} paginator={true} rows={config.CREATE_SCHEDULE_ROW_COUNT} first={this.state.first} onPage={(e) => this.setState({ first: e.first })} sortMode="multiple" responsive={true}>
                             <Column field='name' header={<Translate content="hall.hall" />} sortable={true} />
                             <Column field='disciplineType' header={<Translate content="dayOfWeeks.short.disciplineType" />} sortable={true} editor={this.scheduleEditor} />

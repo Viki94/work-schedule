@@ -181,6 +181,7 @@ module.exports = {
   chooseDay: 'Изберете ден, в който искате да има или да няма стойност',
   schedule: 'График',
   scheduleEditor: 'Редакция на график',
+  scheduleDescription: 'Описание на график',
   weekOverview: 'Преглед на седмицата',
   name: 'Име',
   search: 'Търсене',

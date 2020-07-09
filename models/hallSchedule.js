@@ -48,6 +48,10 @@ var HallScheduleSchema = new Schema({
     type: String,
     default: ""
   },
+  description: {
+    type: String,
+    default: ""
+  },
   active: {
     type: Number,
     default: 1,

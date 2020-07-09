@@ -69,6 +69,11 @@ var helper = {
     });
   },
 
+  updateHallScheduleDescription(id, description) {
+    return axios.put('/updateScheduleDescription/' + id, {
+      description: description
+    });
+  },
 
   uploadHallSchedule(hallSchedule) {
     return axios.put('/uploadSchedule/' + hallSchedule.name, {

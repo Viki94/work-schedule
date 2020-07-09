@@ -34,7 +34,8 @@ class ScheduleView extends Component {
             hallName: '',
             checkboxValue: null,
             selectedSchedule: null,
-            visibleSelectedSchedule: false
+            visibleSelectedSchedule: false,
+            description: ''
         }
 
         this.showFilterDialog = this.showFilterDialog.bind(this);
@@ -99,7 +100,7 @@ class ScheduleView extends Component {
 
                     <div><Translate component="b" content="hall.gpsCoordinates" /></div>
                     <div>{this.state.allHalls[foundHallIndex].gpsCoordinates}</div>
-                    
+
                     {
                         foundScheduleIndex >= 0 && this.state.hallSchedules[foundScheduleIndex].meetingStartUrl.length ?
                             <div className="borderTop">
@@ -180,7 +181,8 @@ class ScheduleView extends Component {
             if (response !== this.state.hallSchedules) {
                 this.setState({
                     hallSchedules: response.data,
-                    staticHallSchedules: response.data
+                    staticHallSchedules: response.data,
+                    description:  response.data[0].description
                 });
             }
         }.bind(this));
@@ -234,6 +236,8 @@ class ScheduleView extends Component {
                 <div className="col s12">
                     <div className="section">
                         <Translate component="h5" content="weekOverview" />
+                        <div id="descriptionText" className="col s4">{this.state.description}</div>
+                        <div className="marginBottom"></div>
                         <DataTable value={this.state.hallSchedules} paginator={true} rows={config.VIEW_SCHEDULE_ROW_COUNT} first={this.state.first} onPage={(e) => this.setState({ first: e.first })} sortMode="multiple" responsive={true}>
                             <Column field='name' header={<Translate content="hall.hall" />} sortable={true} />
                             <Column field='disciplineType' header={<Translate content="dayOfWeeks.short.disciplineType" />} sortable={true} />
