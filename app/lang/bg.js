@@ -53,6 +53,7 @@ module.exports = {
     address: 'Адрес',
     city: 'Град',
     sittingPlaces: 'Места за сядане',
+    gpsCoordinates: 'GPS координати',
     meetingId: 'Номер на срещата',
     meetingJoinUrl: 'Линк за присъединяване към срещата',
     meetingPassword: 'Парола за срещата',

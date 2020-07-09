@@ -53,6 +53,7 @@ module.exports = {
     address: 'Address',
     city: 'City',
     sittingPlaces: 'Sitting places',
+    gpsCoordinates: 'GPS coordinates',
     meetingId: 'Meeting id',
     meetingJoinUrl: 'Meeting\'s join link',
     meetingPassword: 'Meeting password',

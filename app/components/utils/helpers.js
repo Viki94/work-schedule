@@ -69,7 +69,7 @@ var helper = {
     });
   },
 
-  
+
   uploadHallSchedule(hallSchedule) {
     return axios.put('/uploadSchedule/' + hallSchedule.name, {
       hallSchedule: hallSchedule
@@ -79,29 +79,31 @@ var helper = {
   updateScheduleMeeting(_id, updateScheduleMeeting) {
     return axios.put('/updateScheduleMeeting/' + _id, {
       id: updateScheduleMeeting.id,
-      joinUrl:  updateScheduleMeeting.join_url,
-      password:  updateScheduleMeeting.password,
-      startTime:  updateScheduleMeeting.start_time,
-      startUrl:  updateScheduleMeeting.start_url,
-      topic:  updateScheduleMeeting.topic
+      joinUrl: updateScheduleMeeting.join_url,
+      password: updateScheduleMeeting.password,
+      startTime: updateScheduleMeeting.start_time,
+      startUrl: updateScheduleMeeting.start_url,
+      topic: updateScheduleMeeting.topic
     });
   },
 
-  addHall: function (name, address, city, sittingPlaces) {
+  addHall: function (name, address, city, sittingPlaces, gpsCoordinates) {
     return axios.post("/addHall", {
       name: name,
       address: address,
       city: city,
-      sittingPlaces: sittingPlaces
+      sittingPlaces: sittingPlaces,
+      gpsCoordinates: gpsCoordinates
     });
   },
 
-  updateHall: function (id, name, address, city, sittingPlaces) {
+  updateHall: function (id, name, address, city, sittingPlaces, gpsCoordinates) {
     return axios.put("/updateHall/" + id, {
       name: name,
       address: address,
       city: city,
-      sittingPlaces: sittingPlaces
+      sittingPlaces: sittingPlaces,
+      gpsCoordinates: gpsCoordinates
     });
   },
 

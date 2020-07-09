@@ -178,7 +178,8 @@ router.post("/addHall", function (req, res) {
     name: req.body.name,
     address: req.body.address,
     city: req.body.city,
-    sittingPlaces: req.body.sittingPlaces
+    sittingPlaces: req.body.sittingPlaces,
+    gpsCoordinates: req.body.gpsCoordinates
   }, function (err, doc) {
     if (err) {
       console.log(err);
@@ -194,7 +195,8 @@ router.put("/updateHall/:id", function (req, res) {
     name: req.body.name,
     address: req.body.address,
     city: req.body.city,
-    sittingPlaces: req.body.sittingPlaces
+    sittingPlaces: req.body.sittingPlaces,
+    gpsCoordinates: req.body.gpsCoordinates
   }, function (err) {
     if (err) {
       console.log(err);

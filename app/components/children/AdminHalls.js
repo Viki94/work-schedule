@@ -12,6 +12,7 @@ class AdminHalls extends Component {
             address: '',
             city: '',
             sittingPlaces: '',
+            gpsCoordinates: '',
             allHalls: [],
             selectedHall: '',
             hall_id: ''
@@ -58,7 +59,7 @@ class AdminHalls extends Component {
         });
 
         if (isHallNameUnique) {
-            helpers.addHall(this.state.name, this.state.address, this.state.city, this.state.sittingPlaces).then(function (response) {
+            helpers.addHall(this.state.name, this.state.address, this.state.city, this.state.sittingPlaces, this.state.gpsCoordinates).then(function (response) {
                 this.state.hall_id = response.data._id;
 
                 helpers.addHallSchedule(this.state.hall_id, this.state.name).then(function (response) {
@@ -81,7 +82,7 @@ class AdminHalls extends Component {
     handleUpdateForm(event) {
         event.preventDefault();
 
-        helpers.updateHall(this.state.selectedHall, this.state.name, this.state.address, this.state.city, this.state.sittingPlaces).then(function (response) {
+        helpers.updateHall(this.state.selectedHall, this.state.name, this.state.address, this.state.city, this.state.sittingPlaces, this.state.gpsCoordinates).then(function (response) {
         }.bind(this));
 
         helpers.updateHallName(this.state.hall_id, this.state.name).then(function (response) {
@@ -117,6 +118,7 @@ class AdminHalls extends Component {
                         address: this.state.allHalls[i].address,
                         city: this.state.allHalls[i].city,
                         sittingPlaces: this.state.allHalls[i].sittingPlaces,
+                        gpsCoordinates: this.state.allHalls[i].gpsCoordinates,
                         hall_id: this.state.selectedHall
                     });
 
@@ -145,7 +147,7 @@ class AdminHalls extends Component {
     }
 
     clearStates() {
-        this.setState({ name: "", address: "", city: "", sittingPlaces: "", selectedHall: "" });
+        this.setState({ name: "", address: "", city: "", sittingPlaces: "", gpsCoordinates: "", selectedHall: "" });
     }
 
     activeButtons() {
@@ -182,7 +184,8 @@ class AdminHalls extends Component {
                     name: dataForCurrentHall[0],
                     address: dataForCurrentHall[1],
                     city: dataForCurrentHall[2],
-                    sittingPlaces: dataForCurrentHall[3]
+                    sittingPlaces: dataForCurrentHall[3],
+                    gpsCoordinates: dataForCurrentHall[4]
                 }
 
                 let foundHallIndex = this.state.allHalls.findIndex(x => x.name === currentHall.name);
@@ -196,7 +199,7 @@ class AdminHalls extends Component {
 
             if (allHalls.length) {
                 for (let i = 0; i < allHalls.length; i++) {
-                    helpers.addHall(allHalls[i].name, allHalls[i].address, allHalls[i].city, allHalls[i].sittingPlaces).then(function (response) {
+                    helpers.addHall(allHalls[i].name, allHalls[i].address, allHalls[i].city, allHalls[i].sittingPlaces, allHalls[i].gpsCoordinates).then(function (response) {
                         this.state.hall_id = response.data._id;
 
                         helpers.addHallSchedule(this.state.hall_id, allHalls[i].name).then(function (response) {
@@ -324,6 +327,19 @@ class AdminHalls extends Component {
                                             onChange={this.handleUserChange}
                                             required
                                             attributes={{ placeholder: 'hall.sittingPlaces' }} />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <Translate component="h6" content='hall.gpsCoordinates' />
+                                        <Translate
+                                            component="input"
+                                            type="text"
+                                            name="gpsCoordinates"
+                                            className="validate"
+                                            value={this.state.gpsCoordinates}
+                                            onChange={this.handleUserChange}
+                                            attributes={{ placeholder: 'hall.gpsCoordinates' }} />
                                     </div>
                                 </div>
                                 <div className="row">

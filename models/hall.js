@@ -6,6 +6,7 @@ var HallSchema = new Schema({
     address: String,
     city: String,
     sittingPlaces: String,
+    gpsCoordinates: String,
     isAvailable: {
         type: Number,
         default: 1

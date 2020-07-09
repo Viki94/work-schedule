@@ -96,6 +96,10 @@ class ScheduleView extends Component {
 
                     <div><Translate component="b" content="hall.sittingPlaces" /></div>
                     <div>{this.state.allHalls[foundHallIndex].sittingPlaces}</div>
+
+                    <div><Translate component="b" content="hall.gpsCoordinates" /></div>
+                    <div>{this.state.allHalls[foundHallIndex].gpsCoordinates}</div>
+                    
                     {
                         foundScheduleIndex >= 0 && this.state.hallSchedules[foundScheduleIndex].meetingStartUrl.length ?
                             <div className="borderTop">
