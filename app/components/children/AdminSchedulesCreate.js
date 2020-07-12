@@ -295,7 +295,7 @@ class AdminSchedulesCreate extends Component {
                     department: dataForCurrentHall[3],
                     course: dataForCurrentHall[4],
                     typeOfOccupation: dataForCurrentHall[5],
-                    lecterer: dataForCurrentHall[6],
+                    lecturer: dataForCurrentHall[6],
                     references: dataForCurrentHall[7],
                     dayOfWeek: dataForCurrentHall[8],
                     startHour: dataForCurrentHall[9],
@@ -330,7 +330,7 @@ class AdminSchedulesCreate extends Component {
             hallSchedule.department = '';
             hallSchedule.course = '';
             hallSchedule.typeOfOccupation = '';
-            hallSchedule.lecterer = '';
+            hallSchedule.lecturer = '';
             hallSchedule.references = '';
             hallSchedule.dayOfWeek = '';
             hallSchedule.startHour = '';
@@ -410,7 +410,7 @@ class AdminSchedulesCreate extends Component {
                             <Column field='department' header={<Translate content="dayOfWeeks.short.department" />} sortable={true} editor={this.scheduleEditor} />
                             <Column field='course' header={<Translate content="dayOfWeeks.short.course" />} sortable={true} editor={this.scheduleEditor} />
                             <Column field='typeOfOccupation' header={<Translate content="dayOfWeeks.short.typeOfOccupation" />} sortable={true} editor={this.scheduleEditor} />
-                            <Column field='lecterer' header={<Translate content="dayOfWeeks.short.lecterer" />} sortable={true} editor={this.scheduleEditor} />
+                            <Column field='lecturer' header={<Translate content="dayOfWeeks.short.lecturer" />} sortable={true} editor={this.scheduleEditor} />
                             <Column field='references' header={<Translate content="dayOfWeeks.short.references" />} sortable={true} editor={this.scheduleEditor} />
                             <Column field='dayOfWeek' header={<Translate content="dayOfWeeks.short.dayOfWeek" />} sortable={true} editor={this.scheduleEditor} />
                             <Column field='startHour' header={<Translate content="dayOfWeeks.short.startHour" />} sortable={true} editor={this.scheduleEditor} />

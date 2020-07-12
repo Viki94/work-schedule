@@ -24,7 +24,7 @@ class ScheduleView extends Component {
                 department: null,
                 course: null,
                 typeOfOccupation: null,
-                lecterer: null,
+                lecturer: null,
                 references: null,
                 dayOfWeek: null,
                 startHour: null,
@@ -182,7 +182,7 @@ class ScheduleView extends Component {
                 this.setState({
                     hallSchedules: response.data,
                     staticHallSchedules: response.data,
-                    description:  response.data[0].description
+                    description: response.data[0].description
                 });
             }
         }.bind(this));
@@ -206,7 +206,7 @@ class ScheduleView extends Component {
                 department: null,
                 course: null,
                 typeOfOccupation: null,
-                lecterer: null,
+                lecturer: null,
                 references: null,
                 dayOfWeek: null,
                 startHour: null,
@@ -222,6 +222,21 @@ class ScheduleView extends Component {
 
     handleUserChange(event) {
         this.setState({ [event.target.name]: event.target.value });
+    }
+
+    actionTemplateLecturer(rowData, column) {
+        let lecturer = rowData.lecturer.replace(/\s+/g, '+');
+        let link = 'https://www.google.com/search?q=' + lecturer;
+
+        return <div className="center">
+            <a href={link} target="_blank">{rowData.lecturer}</a>
+        </div>
+    }
+
+    actionTemplateReferences(rowData, column) {
+        return <div className="center">
+            <a href="https://www.fmi.uni-sofia.bg/bg/node/8776" target="_blank">{rowData.references}</a>
+        </div>
     }
 
     actionTemplate(rowData, column) {
@@ -245,8 +260,8 @@ class ScheduleView extends Component {
                             <Column field='department' header={<Translate content="dayOfWeeks.short.department" />} sortable={true} />
                             <Column field='course' header={<Translate content="dayOfWeeks.short.course" />} sortable={true} />
                             <Column field='typeOfOccupation' header={<Translate content="dayOfWeeks.short.typeOfOccupation" />} sortable={true} />
-                            <Column field='lecterer' header={<Translate content="dayOfWeeks.short.lecterer" />} sortable={true} />
-                            <Column field='references' header={<Translate content="dayOfWeeks.short.references" />} sortable={true} />
+                            <Column header={<Translate content="dayOfWeeks.short.lecturer" />} sortable={true} body={this.actionTemplateLecturer} />
+                            <Column header={<Translate content="dayOfWeeks.short.references" />} sortable={true} body={this.actionTemplateReferences} />
                             <Column field='dayOfWeek' header={<Translate content="dayOfWeeks.short.dayOfWeek" />} sortable={true} />
                             <Column field='startHour' header={<Translate content="dayOfWeeks.short.startHour" />} sortable={true} />
                             <Column field='endHour' header={<Translate content="dayOfWeeks.short.endHour" />} sortable={true} />
@@ -276,7 +291,7 @@ class ScheduleView extends Component {
                                         {this.renderCheckbox(this.state.filteredValues.department, "department")}
                                         {this.renderCheckbox(this.state.filteredValues.course, "course")}
                                         {this.renderCheckbox(this.state.filteredValues.typeOfOccupation, "typeOfOccupation")}
-                                        {this.renderCheckbox(this.state.filteredValues.lecterer, "lecterer")}
+                                        {this.renderCheckbox(this.state.filteredValues.lecturer, "lecturer")}
                                         {this.renderCheckbox(this.state.filteredValues.references, "references")}
                                         {this.renderCheckbox(this.state.filteredValues.dayOfWeek, "dayOfWeek")}
                                         {this.renderCheckbox(this.state.filteredValues.startHour, "startHour")}
@@ -286,7 +301,6 @@ class ScheduleView extends Component {
                                 <Dialog header={<Translate content="hallDetails" />} visible={this.state.visibleSelectedSchedule} width="225px" modal={true} onHide={() => this.setState({ visibleSelectedSchedule: false })}>
                                     {this.renderScheduleDialogContent()}
                                 </Dialog>
-
                             </div>
                             <div className="center">
                                 <div className="row">

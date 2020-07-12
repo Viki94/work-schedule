@@ -19,7 +19,7 @@ class ExportScheduleToExcelFile extends Component {
                 hall.department = schedule.department;
                 hall.course = schedule.course;
                 hall.typeOfOccupation = schedule.typeOfOccupation;
-                hall.lecterer = schedule.lecterer;
+                hall.lecturer = schedule.lecturer;
                 hall.references = schedule.references;
                 hall.dayOfWeek = schedule.dayOfWeek;
                 hall.startHour = schedule.startHour;
@@ -34,7 +34,7 @@ class ExportScheduleToExcelFile extends Component {
             let lang = localStorage.getItem('lang');
 
             if (lang === 'en') {
-                localizedSheetHeader = ['Hall', 'Discipline type', 'Discipline name', 'Department', 'Course', 'Hours per week', 'Type of occupation', 'Lecterer', 'References', 'Schedule']
+                localizedSheetHeader = ['Hall', 'Discipline type', 'Discipline name', 'Department', 'Course', 'Hours per week', 'Type of occupation', 'Lecturer', 'References', 'Schedule']
                 option.fileName = 'Schedule'
             }
 

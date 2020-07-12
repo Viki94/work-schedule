@@ -28,7 +28,7 @@ var HallScheduleSchema = new Schema({
     type: String,
     default: ""
   },
-  lecterer: {
+  lecturer: {
     type: String,
     default: ""
   },
