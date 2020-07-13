@@ -32,7 +32,15 @@ var HallScheduleSchema = new Schema({
     type: String,
     default: ""
   },
+  lecturerLink: {
+    type: String,
+    default: ""
+  },
   references: {
+    type: String,
+    default: ""
+  },
+  referencesLink: {
     type: String,
     default: ""
   },

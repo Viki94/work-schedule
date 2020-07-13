@@ -299,12 +299,14 @@ class AdminSchedulesCreate extends Component {
                     references: dataForCurrentHall[7],
                     dayOfWeek: dataForCurrentHall[8],
                     startHour: dataForCurrentHall[9],
-                    endHour: dataForCurrentHall[10]
+                    endHour: dataForCurrentHall[10],
+                    lecturerLink: dataForCurrentHall[11],
+                    referencesLink: dataForCurrentHall[12]
                 }
 
                 allSchedules.push(currentSchedule);
             });
-
+            
             if (allSchedules.length) {
                 for (let i = 0; i < allSchedules.length; i++) {
                     helpers.uploadHallSchedule(allSchedules[i]).then(function (response) {
@@ -335,6 +337,8 @@ class AdminSchedulesCreate extends Component {
             hallSchedule.dayOfWeek = '';
             hallSchedule.startHour = '';
             hallSchedule.endHour = '';
+            hallSchedule.lecturerLink = '';
+            hallSchedule.referencesLink = '';
 
             return hallSchedule;
         });
@@ -379,7 +383,7 @@ class AdminSchedulesCreate extends Component {
                                     type="text"
                                     name="description"
                                     value={this.state.description}
-                                    readonly="readonly"
+                                    readOnly="readOnly"
                                     onChange={(event) => { this.setState({ description: event.target.value }) }}
                                     attributes={{ placeholder: 'scheduleDescription' }} />
                             </div>

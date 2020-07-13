@@ -124,7 +124,9 @@ router.put("/updateSchedule/:id", function (req, res) {
     references: newSchedule.references,
     dayOfWeek: newSchedule.dayOfWeek,
     startHour: newSchedule.startHour,
-    endHour: newSchedule.endHour
+    endHour: newSchedule.endHour,
+    lecturerLink: newSchedule.lecturerLink,
+    referencesLink: newSchedule.referencesLink
   }, function (err) {
     if (err) {
       console.log(err);
@@ -158,7 +160,9 @@ router.put("/uploadSchedule/:name", function (req, res) {
     references: newSchedule.references,
     dayOfWeek: newSchedule.dayOfWeek,
     startHour: newSchedule.startHour,
-    endHour: newSchedule.endHour
+    endHour: newSchedule.endHour,
+    lecturerLink: newSchedule.lecturerLink,
+    referencesLink: newSchedule.referencesLink
   }, function (err) {
     if (err) {
       console.log(err);

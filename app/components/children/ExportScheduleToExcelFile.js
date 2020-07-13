@@ -24,17 +24,19 @@ class ExportScheduleToExcelFile extends Component {
                 hall.dayOfWeek = schedule.dayOfWeek;
                 hall.startHour = schedule.startHour;
                 hall.endHour = schedule.endHour;
-                
+                hall.lecturerLink = schedule.lecturerLink;
+                hall.referencesLink = schedule.referencesLink;
+
                 return hall;
             });
 
             var option = {};
             option.fileName = 'График'
-            let localizedSheetHeader = ['Зала', 'Тип на дисциплината', 'Наименование на дискциплината', 'Катедра', 'Курс', 'Хорариум', 'Тип занятие', 'Преподавател', 'Връзка', 'Разписание']
+            let localizedSheetHeader = ['Зала', 'Тип на дисциплината', 'Наименование на дискциплината', 'Катедра', 'Курс', 'Тип занятие', 'Преподавател', 'Връзка', 'Ден от седмицата', 'Начален час', 'Краен час', 'Линк за преподавател', 'Линк за връзка']
             let lang = localStorage.getItem('lang');
 
             if (lang === 'en') {
-                localizedSheetHeader = ['Hall', 'Discipline type', 'Discipline name', 'Department', 'Course', 'Hours per week', 'Type of occupation', 'Lecturer', 'References', 'Schedule']
+                localizedSheetHeader = ['Hall', 'Discipline type', 'Discipline name', 'Department', 'Course', 'Type of occupation', 'Lecturer', 'References', 'Day of week', 'Start hour', 'End hour', 'Lecturer\'s link', 'References\'s link']
                 option.fileName = 'Schedule'
             }
 

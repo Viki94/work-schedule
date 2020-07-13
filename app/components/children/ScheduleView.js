@@ -28,7 +28,9 @@ class ScheduleView extends Component {
                 references: null,
                 dayOfWeek: null,
                 startHour: null,
-                endHour: null
+                endHour: null,
+                lecturerLink: null,
+                referencesLink: null
             },
             allHalls: [],
             hallName: '',
@@ -210,7 +212,9 @@ class ScheduleView extends Component {
                 references: null,
                 dayOfWeek: null,
                 startHour: null,
-                endHour: null
+                endHour: null,
+                lecturerLink: null,
+                referencesLink: null
             },
         });
     }
@@ -225,17 +229,20 @@ class ScheduleView extends Component {
     }
 
     actionTemplateLecturer(rowData, column) {
-        let lecturer = rowData.lecturer.replace(/\s+/g, '+');
-        let link = 'https://www.google.com/search?q=' + lecturer;
-
         return <div className="center">
-            <a href={link} target="_blank">{rowData.lecturer}</a>
+            {rowData.lecturerLink ?
+                <a href={rowData.lecturerLink} target="_blank">{rowData.lecturer}</a> :
+                rowData.lecturer
+            }
         </div>
     }
 
     actionTemplateReferences(rowData, column) {
         return <div className="center">
-            <a href="https://www.fmi.uni-sofia.bg/bg/node/8776" target="_blank">{rowData.references}</a>
+            {rowData.referencesLink ?
+                <a href={rowData.referencesLink} target="_blank">{rowData.references}</a> :
+                rowData.references
+            }
         </div>
     }
 
